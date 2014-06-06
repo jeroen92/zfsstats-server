@@ -3,7 +3,7 @@ During the last half year I incidentally worked on this project out of personal 
 
 ## Overview
 
-In order to use this server application, you'll need the client scripts too. 
+In order to use this server application, you'll need the [client scripts](https://github.com/jeroen92/zfsstats-clientscripts) too. 
 
 *So far, the clientscripts are tested and developed only for OpenIndiana. In case there's enough interest I might port it to FreeBSD and/or Linux too.*
 
@@ -25,7 +25,7 @@ The following software should be installed:
 	
 2. Install required Ruby gems
 
-	`cd zfsstats-server && bundle install`
+	`cd zfsstats-server && bundle install --deployment`
 	
 3. Review production database configuration
 
@@ -33,10 +33,16 @@ The following software should be installed:
 	
 4. Seed the database
 
-	`rake db:seed`
+	`RAILS_ENV=production rake db:seed`
 	
-5. Install a webserver to `server` static content. Best way to do this is by installing Passenger
+5. Install a webserver to server static content. Best way to do this is by installing Passenger
 
+	Install prerequisites
+	
+	`apt-get install libcurl4-openssl-dev apache2-mpm-worker apache2-threaded-dev libapr1-dev libaprutil1-dev`
+	
+	Start Passenger installation
+	
 	`sudo gem install passenger && sudo passenger-install-apache2-module`
 
 	Then, follow the instructions shown.
@@ -51,4 +57,4 @@ The following software should be installed:
 	
 	`sudo service apache2 reload`
 
-That's all so far. Now you can start to setup your ZFS servers with the client scripts.
+That's all so far. Now you can start to setup your ZFS servers with the [client scripts](https://github.com/jeroen92/zfsstats-clientscripts).
