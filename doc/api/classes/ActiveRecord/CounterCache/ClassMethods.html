@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::CounterCache::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::CounterCache::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/counter_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/counter_cache.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-decrement_counter">decrement_counter</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-increment_counter">increment_counter</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset_counters">reset_counters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update_counters">update_counters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-decrement_counter">
+            
+              <b>decrement_counter</b>(counter_name, id)
+            
+            <a href="../../../classes/ActiveRecord/CounterCache/ClassMethods.html#method-i-decrement_counter" name="method-i-decrement_counter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Decrement a numeric field by one, via a direct SQL update.</p>
+
+<p>This works the same as <a
+href="ClassMethods.html#method-i-increment_counter">#increment_counter</a>
+but reduces the column value by 1 instead of increasing it.</p>
+
+<h4 id="method-i-decrement_counter-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>counter_name</code> - The name of the field that should be
+decremented.</p>
+</li><li>
+<p><code>id</code> - The id of the object that should be decremented or an <a
+href="../../Array.html">Array</a> of ids.</p>
+</li></ul>
+
+<h4 id="method-i-decrement_counter-label-Examples">Examples</h4>
+
+<pre># Decrement the post_count column for the record with an id of 5
+DiscussionBoard.decrement_counter(:post_count, 5)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-decrement_counter_source')" id="l_method-i-decrement_counter_source">show</a>
+                
+              </p>
+              <div id="method-i-decrement_counter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/counter_cache.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">decrement_counter</span>(<span class="ruby-identifier">counter_name</span>, <span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">update_counters</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">counter_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">-1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-increment_counter">
+            
+              <b>increment_counter</b>(counter_name, id)
+            
+            <a href="../../../classes/ActiveRecord/CounterCache/ClassMethods.html#method-i-increment_counter" name="method-i-increment_counter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Increment a numeric field by one, via a direct SQL update.</p>
+
+<p>This method is used primarily for maintaining counter_cache columns used to
+store aggregate values. For example, a DiscussionBoard may cache
+posts_count and comments_count to avoid running an SQL query to calculate
+the number of posts and comments there are each time it is displayed.</p>
+
+<h4 id="method-i-increment_counter-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>counter_name</code> - The name of the field that should be
+incremented.</p>
+</li><li>
+<p><code>id</code> - The id of the object that should be incremented or an <a
+href="../../Array.html">Array</a> of ids.</p>
+</li></ul>
+
+<h4 id="method-i-increment_counter-label-Examples">Examples</h4>
+
+<pre># Increment the post_count column for the record with an id of 5
+DiscussionBoard.increment_counter(:post_count, 5)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-increment_counter_source')" id="l_method-i-increment_counter_source">show</a>
+                
+              </p>
+              <div id="method-i-increment_counter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/counter_cache.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">increment_counter</span>(<span class="ruby-identifier">counter_name</span>, <span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">update_counters</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">counter_name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset_counters">
+            
+              <b>reset_counters</b>(id, *counters)
+            
+            <a href="../../../classes/ActiveRecord/CounterCache/ClassMethods.html#method-i-reset_counters" name="method-i-reset_counters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Resets one or more counter caches to their correct value using an SQL count
+query. This is useful when adding new counter caches, or if the counter has
+been corrupted or modified directly by SQL.</p>
+
+<h4 id="method-i-reset_counters-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>id</code> - The id of the object you wish to reset a counter on.</p>
+</li><li>
+<p><code>counters</code> - One or more association counters to reset</p>
+</li></ul>
+
+<h4 id="method-i-reset_counters-label-Examples">Examples</h4>
+
+<pre># For Post with id #1 records reset the comments_count
+Post.reset_counters(1, :comments)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset_counters_source')" id="l_method-i-reset_counters_source">show</a>
+                
+              </p>
+              <div id="method-i-reset_counters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/counter_cache.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset_counters</span>(<span class="ruby-identifier">id</span>, *<span class="ruby-identifier">counters</span>)
+  <span class="ruby-identifier">object</span> = <span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">counters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">association</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">has_many_association</span> = <span class="ruby-identifier">reflect_on_association</span>(<span class="ruby-identifier">association</span>.<span class="ruby-identifier">to_sym</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;&#39;#{self.name}&#39; has no association called &#39;#{association}&#39;&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">has_many_association</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_many_association</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Reflection</span><span class="ruby-operator">::</span><span class="ruby-constant">ThroughReflection</span>
+      <span class="ruby-identifier">has_many_association</span> = <span class="ruby-identifier">has_many_association</span>.<span class="ruby-identifier">through_reflection</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">foreign_key</span>  = <span class="ruby-identifier">has_many_association</span>.<span class="ruby-identifier">foreign_key</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">child_class</span>  = <span class="ruby-identifier">has_many_association</span>.<span class="ruby-identifier">klass</span>
+    <span class="ruby-identifier">belongs_to</span>   = <span class="ruby-identifier">child_class</span>.<span class="ruby-identifier">reflect_on_all_associations</span>(<span class="ruby-value">:belongs_to</span>)
+    <span class="ruby-identifier">reflection</span>   = <span class="ruby-identifier">belongs_to</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">foreign_key</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">foreign_key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">options</span>[<span class="ruby-value">:counter_cache</span>].<span class="ruby-identifier">present?</span> }
+    <span class="ruby-identifier">counter_name</span> = <span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">counter_cache_column</span>
+
+    <span class="ruby-identifier">stmt</span> = <span class="ruby-identifier">unscoped</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">eq</span>(<span class="ruby-identifier">object</span>.<span class="ruby-identifier">id</span>)).<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">compile_update</span>({
+      <span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">counter_name</span>] =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">association</span>).<span class="ruby-identifier">count</span>
+    })
+    <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">stmt</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_counters">
+            
+              <b>update_counters</b>(id, counters)
+            
+            <a href="../../../classes/ActiveRecord/CounterCache/ClassMethods.html#method-i-update_counters" name="method-i-update_counters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A generic “counter updater” implementation, intended primarily to be used
+by <a
+href="ClassMethods.html#method-i-increment_counter">#increment_counter</a>
+and <a
+href="ClassMethods.html#method-i-decrement_counter">#decrement_counter</a>,
+but which may also be useful on its own. It simply does a direct SQL update
+for the record with the given ID, altering the given hash of counters by
+the amount given by the corresponding value:</p>
+
+<h4 id="method-i-update_counters-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>id</code> - The id of the object you wish to update a counter on or
+an <a href="../../Array.html">Array</a> of ids.</p>
+</li><li>
+<p><code>counters</code> - An <a href="../../Array.html">Array</a> of Hashes
+containing the names of the fields to update as keys and the amount to
+update the field by as values.</p>
+</li></ul>
+
+<h4 id="method-i-update_counters-label-Examples">Examples</h4>
+
+<pre># For the Post with id of 5, decrement the comment_count by 1, and
+# increment the action_count by 1
+Post.update_counters 5, comment_count: -1, action_count: 1
+# Executes the following SQL:
+# UPDATE posts
+#    SET comment_count = COALESCE(comment_count, 0) - 1,
+#        action_count = COALESCE(action_count, 0) + 1
+#  WHERE id = 5
+
+# For the Posts with id of 10 and 15, increment the comment_count by 1
+Post.update_counters [10, 15], comment_count: 1
+# Executes the following SQL:
+# UPDATE posts
+#    SET comment_count = COALESCE(comment_count, 0) + 1
+#  WHERE id IN (10, 15)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_counters_source')" id="l_method-i-update_counters_source">show</a>
+                
+              </p>
+              <div id="method-i-update_counters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/counter_cache.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update_counters</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">counters</span>)
+  <span class="ruby-identifier">updates</span> = <span class="ruby-identifier">counters</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">counter_name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">operator</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">&lt;</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;+&#39;</span>
+    <span class="ruby-identifier">quoted_column</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">counter_name</span>)
+    <span class="ruby-node">&quot;#{quoted_column} = COALESCE(#{quoted_column}, 0) #{operator} #{value.abs}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">where</span>(<span class="ruby-identifier">primary_key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id</span>).<span class="ruby-identifier">update_all</span> <span class="ruby-identifier">updates</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

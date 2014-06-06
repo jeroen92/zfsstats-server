@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::QueryCache</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::QueryCache 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/query_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cache">cache</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-clear_query_cache">clear_query_cache</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-dirties_query_cache">dirties_query_cache</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-disable_query_cache-21">disable_query_cache!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-enable_query_cache-21">enable_query_cache!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-select_all">select_all</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-uncached">uncached</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>query_cache</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>query_cache_enabled</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-dirties_query_cache">
+            
+              <b>dirties_query_cache</b>(base, *method_names)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-c-dirties_query_cache" name="method-c-dirties_query_cache" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-dirties_query_cache_source')" id="l_method-c-dirties_query_cache_source">show</a>
+                
+              </p>
+              <div id="method-c-dirties_query_cache_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 9</span>
+        <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dirties_query_cache</span>(<span class="ruby-identifier">base</span>, *<span class="ruby-identifier">method_names</span>)
+          <span class="ruby-identifier">method_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">method_name</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">base</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-string">&quot;              def #{method_name}(*)                         # def update_with_query_dirty(*)
+                clear_query_cache if @query_cache_enabled   #   clear_query_cache if @query_cache_enabled
+                super                                       #   super
+              end                                           # end
+&quot;</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cache">
+            
+              <b>cache</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-i-cache" name="method-i-cache" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Enable the query cache within the block.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_source')" id="l_method-i-cache_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache</span>
+  <span class="ruby-identifier">old</span>, <span class="ruby-ivar">@query_cache_enabled</span> = <span class="ruby-ivar">@query_cache_enabled</span>, <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">clear_query_cache</span>
+  <span class="ruby-ivar">@query_cache_enabled</span> = <span class="ruby-identifier">old</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear_query_cache">
+            
+              <b>clear_query_cache</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-i-clear_query_cache" name="method-i-clear_query_cache" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clears the query cache.</p>
+
+<p>One reason you may wish to call this method explicitly is between queries
+that ask the database to randomize results. Otherwise the cache would see
+the same SQL query and repeatedly return the same result each time,
+silently undermining the randomness you were expecting.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_query_cache_source')" id="l_method-i-clear_query_cache_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_query_cache_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear_query_cache</span>
+  <span class="ruby-ivar">@query_cache</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-disable_query_cache-21">
+            
+              <b>disable_query_cache!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-i-disable_query_cache-21" name="method-i-disable_query_cache-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-disable_query_cache-21_source')" id="l_method-i-disable_query_cache-21_source">show</a>
+                
+              </p>
+              <div id="method-i-disable_query_cache-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">disable_query_cache!</span>
+  <span class="ruby-ivar">@query_cache_enabled</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-enable_query_cache-21">
+            
+              <b>enable_query_cache!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-i-enable_query_cache-21" name="method-i-enable_query_cache-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-enable_query_cache-21_source')" id="l_method-i-enable_query_cache-21_source">show</a>
+                
+              </p>
+              <div id="method-i-enable_query_cache-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">enable_query_cache!</span>
+  <span class="ruby-ivar">@query_cache_enabled</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_all">
+            
+              <b>select_all</b>(arel, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-i-select_all" name="method-i-select_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_all_source')" id="l_method-i-select_all_source">show</a>
+                
+              </p>
+              <div id="method-i-select_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_all</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@query_cache_enabled</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">locked?</span>(<span class="ruby-identifier">arel</span>)
+    <span class="ruby-identifier">sql</span> = <span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">binds</span>)
+    <span class="ruby-identifier">cache_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span>) { <span class="ruby-keyword">super</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uncached">
+            
+              <b>uncached</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/QueryCache.html#method-i-uncached" name="method-i-uncached" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Disable the query cache within the block.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-uncached_source')" id="l_method-i-uncached_source">show</a>
+                
+              </p>
+              <div id="method-i-uncached_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">uncached</span>
+  <span class="ruby-identifier">old</span>, <span class="ruby-ivar">@query_cache_enabled</span> = <span class="ruby-ivar">@query_cache_enabled</span>, <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@query_cache_enabled</span> = <span class="ruby-identifier">old</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

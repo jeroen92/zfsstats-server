@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::ParamsWrapper::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::ParamsWrapper::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/params_wrapper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/params_wrapper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_set_wrapper_options">_set_wrapper_options</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inherited">inherited</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-wrap_parameters">wrap_parameters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_set_wrapper_options">
+            
+              <b>_set_wrapper_options</b>(options)
+            
+            <a href="../../../classes/ActionController/ParamsWrapper/ClassMethods.html#method-i-_set_wrapper_options" name="method-i-_set_wrapper_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_set_wrapper_options_source')" id="l_method-i-_set_wrapper_options_source">show</a>
+                
+              </p>
+              <div id="method-i-_set_wrapper_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/params_wrapper.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_set_wrapper_options</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_wrapper_options</span> = <span class="ruby-constant">Options</span>.<span class="ruby-identifier">from_hash</span>(<span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inherited">
+            
+              <b>inherited</b>(klass)
+            
+            <a href="../../../classes/ActionController/ParamsWrapper/ClassMethods.html#method-i-inherited" name="method-i-inherited" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the default wrapper key or model which will be used to determine
+wrapper key and attribute names. Will be called automatically when the
+module is inherited.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inherited_source')" id="l_method-i-inherited_source">show</a>
+                
+              </p>
+              <div id="method-i-inherited_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/params_wrapper.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inherited</span>(<span class="ruby-identifier">klass</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">_wrapper_options</span>.<span class="ruby-identifier">format</span>.<span class="ruby-identifier">any?</span>
+    <span class="ruby-identifier">params</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">_wrapper_options</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">klass</span> = <span class="ruby-identifier">klass</span>
+    <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">_wrapper_options</span> = <span class="ruby-identifier">params</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-wrap_parameters">
+            
+              <b>wrap_parameters</b>(name_or_model_or_options, options = {})
+            
+            <a href="../../../classes/ActionController/ParamsWrapper/ClassMethods.html#method-i-wrap_parameters" name="method-i-wrap_parameters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the name of the wrapper key, or the model which
+<code>ParamsWrapper</code> would use to determine the attribute names from.</p>
+
+<h4 id="method-i-wrap_parameters-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-identifier">wrap_parameters</span> <span class="ruby-identifier">format</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">xml</span>
+  <span class="ruby-comment"># enables the parameter wrapper for XML format</span>
+
+<span class="ruby-identifier">wrap_parameters</span> :<span class="ruby-identifier">person</span>
+  <span class="ruby-comment"># wraps parameters into +params[:person]+ hash</span>
+
+<span class="ruby-identifier">wrap_parameters</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-comment"># wraps parameters by determining the wrapper key from Person class</span>
+  (<span class="ruby-operator">+</span><span class="ruby-identifier">person</span><span class="ruby-operator">+</span>, <span class="ruby-keyword">in</span> <span class="ruby-identifier">this</span> <span class="ruby-keyword">case</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">list</span> <span class="ruby-identifier">of</span> <span class="ruby-identifier">attribute</span> <span class="ruby-identifier">names</span>
+
+<span class="ruby-identifier">wrap_parameters</span> <span class="ruby-identifier">include</span><span class="ruby-operator">:</span> [:<span class="ruby-identifier">username</span>, :<span class="ruby-identifier">title</span>]
+  <span class="ruby-comment"># wraps only +:username+ and +:title+ attributes from parameters.</span>
+
+<span class="ruby-identifier">wrap_parameters</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-comment"># disables parameters wrapping for this controller altogether.</span>
+</pre>
+
+<h4 id="method-i-wrap_parameters-label-Options">Options</h4>
+<ul><li>
+<p><code>:format</code> - The list of formats in which the parameters wrapper
+will be enabled.</p>
+</li><li>
+<p><code>:include</code> - The list of attribute names which parameters
+wrapper will wrap into a nested hash.</p>
+</li><li>
+<p><code>:exclude</code> - The list of attribute names which parameters
+wrapper will exclude from a nested hash.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-wrap_parameters_source')" id="l_method-i-wrap_parameters_source">show</a>
+                
+              </p>
+              <div id="method-i-wrap_parameters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/params_wrapper.rb, line 196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">wrap_parameters</span>(<span class="ruby-identifier">name_or_model_or_options</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">model</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">name_or_model_or_options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">name_or_model_or_options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:format</span> =<span class="ruby-operator">&gt;</span> [])
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span>, <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">name_or_model_or_options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">model</span> = <span class="ruby-identifier">name_or_model_or_options</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">opts</span>   = <span class="ruby-constant">Options</span>.<span class="ruby-identifier">from_hash</span> <span class="ruby-identifier">_wrapper_options</span>.<span class="ruby-identifier">to_h</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">:format</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">model</span> = <span class="ruby-identifier">model</span>
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_wrapper_options</span> = <span class="ruby-identifier">opts</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

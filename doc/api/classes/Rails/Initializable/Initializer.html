@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Initializable::Initializer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Initializable::Initializer 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/initializable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-after">after</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-before">before</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-belongs_to-3F">belongs_to?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-bind">bind</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-run">run</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>block</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>name</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(name, context, options, &amp;block)
+            
+            <a href="../../../classes/Rails/Initializable/Initializer.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">context</span>, <span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:group</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">:default</span>
+  <span class="ruby-ivar">@name</span>, <span class="ruby-ivar">@context</span>, <span class="ruby-ivar">@options</span>, <span class="ruby-ivar">@block</span> = <span class="ruby-identifier">name</span>, <span class="ruby-identifier">context</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-after">
+            
+              <b>after</b>()
+            
+            <a href="../../../classes/Rails/Initializable/Initializer.html#method-i-after" name="method-i-after" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-after_source')" id="l_method-i-after_source">show</a>
+                
+              </p>
+              <div id="method-i-after_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">after</span>
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:after</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-before">
+            
+              <b>before</b>()
+            
+            <a href="../../../classes/Rails/Initializable/Initializer.html#method-i-before" name="method-i-before" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-before_source')" id="l_method-i-before_source">show</a>
+                
+              </p>
+              <div id="method-i-before_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">before</span>
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:before</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-belongs_to-3F">
+            
+              <b>belongs_to?</b>(group)
+            
+            <a href="../../../classes/Rails/Initializable/Initializer.html#method-i-belongs_to-3F" name="method-i-belongs_to-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-belongs_to-3F_source')" id="l_method-i-belongs_to-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-belongs_to-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">belongs_to?</span>(<span class="ruby-identifier">group</span>)
+  <span class="ruby-ivar">@options</span>[<span class="ruby-value">:group</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">group</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:group</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:all</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-bind">
+            
+              <b>bind</b>(context)
+            
+            <a href="../../../classes/Rails/Initializable/Initializer.html#method-i-bind" name="method-i-bind" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-bind_source')" id="l_method-i-bind_source">show</a>
+                
+              </p>
+              <div id="method-i-bind_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">bind</span>(<span class="ruby-identifier">context</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@context</span>
+  <span class="ruby-constant">Initializer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@name</span>, <span class="ruby-identifier">context</span>, <span class="ruby-ivar">@options</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-run">
+            
+              <b>run</b>(*args)
+            
+            <a href="../../../classes/Rails/Initializable/Initializer.html#method-i-run" name="method-i-run" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-run_source')" id="l_method-i-run_source">show</a>
+                
+              </p>
+              <div id="method-i-run_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/initializable.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">run</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@context</span>.<span class="ruby-identifier">instance_exec</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

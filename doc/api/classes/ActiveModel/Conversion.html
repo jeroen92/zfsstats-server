@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveModel::Conversion</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveModel::Conversion 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/conversion_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/conversion.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Active+Model+Conversion">Active Model <a href="Conversion.html">Conversion</a></h2>
+
+<p>Handles default conversions: <a
+href="Conversion.html#method-i-to_model">#to_model</a>, <a
+href="Conversion.html#method-i-to_key">#to_key</a>, <a
+href="Conversion.html#method-i-to_param">#to_param</a>, and
+to_partial_path.</p>
+
+<p>Let&#39;s take for example this non-persisted object.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ContactMessage</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Conversion</span>
+
+  <span class="ruby-comment"># ContactMessage are never persisted in the DB</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">persisted?</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">cm</span> = <span class="ruby-constant">ContactMessage</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">cm</span>.<span class="ruby-identifier">to_model</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cm</span>  <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">cm</span>.<span class="ruby-identifier">to_key</span>          <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">cm</span>.<span class="ruby-identifier">to_param</span>        <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">cm</span>.<span class="ruby-identifier">to_partial_path</span> <span class="ruby-comment"># =&gt; &quot;contact_messages/contact_message&quot;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_key">to_key</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_model">to_model</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_param">to_param</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_partial_path">to_partial_path</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-to_key">
+            
+              <b>to_key</b>()
+            
+            <a href="../../classes/ActiveModel/Conversion.html#method-i-to_key" name="method-i-to_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an <a href="../Enumerable.html">Enumerable</a> of all key
+attributes if any is set, regardless if the object is persisted or not. If
+there no key attributes, returns <code>nil</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_key</span> <span class="ruby-comment"># =&gt; [1]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_key_source')" id="l_method-i-to_key_source">show</a>
+                
+              </p>
+              <div id="method-i-to_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/conversion.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_key</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:id</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">key</span> <span class="ruby-operator">?</span> [<span class="ruby-identifier">key</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_model">
+            
+              <b>to_model</b>()
+            
+            <a href="../../classes/ActiveModel/Conversion.html#method-i-to_model" name="method-i-to_model" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>If your object is already designed to implement all of the Active <a
+href="Model.html">Model</a> you can use the default <code>:to_model</code>
+implementation, which simply returns <code>self</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Conversion</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_model</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">person</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>If your model does not act like an Active <a href="Model.html">Model</a>
+object, then you should define <code>:to_model</code> yourself returning a
+proxy object that wraps your object with Active <a
+href="Model.html">Model</a> compliant methods.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_model_source')" id="l_method-i-to_model_source">show</a>
+                
+              </p>
+              <div id="method-i-to_model_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/conversion.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_model</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_param">
+            
+              <b>to_param</b>()
+            
+            <a href="../../classes/ActiveModel/Conversion.html#method-i-to_param" name="method-i-to_param" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <code>string</code> representing the object&#39;s key suitable
+for use in URLs, or <code>nil</code> if <code>persisted?</code> is
+<code>false</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_param</span> <span class="ruby-comment"># =&gt; &quot;1&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_param_source')" id="l_method-i-to_param_source">show</a>
+                
+              </p>
+              <div id="method-i-to_param_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/conversion.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_param</span>
+  <span class="ruby-identifier">persisted?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">to_key</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;-&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_partial_path">
+            
+              <b>to_partial_path</b>()
+            
+            <a href="../../classes/ActiveModel/Conversion.html#method-i-to_partial_path" name="method-i-to_partial_path" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <code>string</code> identifying the path associated with the
+object. ActionPack uses this to find a suitable partial to represent the
+object.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Conversion</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_partial_path</span> <span class="ruby-comment"># =&gt; &quot;people/person&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_partial_path_source')" id="l_method-i-to_partial_path_source">show</a>
+                
+              </p>
+              <div id="method-i-to_partial_path_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/conversion.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_partial_path</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">_to_partial_path</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

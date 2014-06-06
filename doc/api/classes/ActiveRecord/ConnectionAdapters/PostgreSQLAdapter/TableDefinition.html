@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::TableDefinition</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::TableDefinition 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../TableDefinition.html">ActiveRecord::ConnectionAdapters::TableDefinition</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-column">column</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-primary_key">primary_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>X</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-xml">xml</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="ColumnMethods.html">
+              ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::ColumnMethods
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-column">
+            
+              <b>column</b>(name, type = nil, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/TableDefinition.html#method-i-column" name="method-i-column" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-column_source')" id="l_method-i-column_source">show</a>
+                
+              </p>
+              <div id="method-i-column_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 369</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">column</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name</span>]
+  <span class="ruby-identifier">column</span>.<span class="ruby-identifier">array</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:array</span>]
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-primary_key">
+            
+              <b>primary_key</b>(name, type = :primary_key, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/TableDefinition.html#method-i-primary_key" name="method-i-primary_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines the primary key field. Use of the native PostgreSQL UUID type is
+supported, and can be used by defining your tables as such:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">stuffs</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">uuid</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> :<span class="ruby-identifier">content</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">timestamps</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>By default, this will use the +uuid_generate_v4()+ function from the
+<code>uuid-ossp</code> extension, which MUST be enabled on your databse. 
+To enable the <code>uuid-ossp</code> extension, you can use the
+<code>enable_extension</code> method in your migrations To use a UUID
+primary key without <code>uuid-ossp</code> enabled, you can set the
+<code>:default</code> option to nil:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">stuffs</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">primary_key</span> :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">uuid</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">uuid</span> :<span class="ruby-identifier">foo_id</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">timestamps</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You may also pass a different UUID generation function from
+<code>uuid-ossp</code> or another library.</p>
+
+<p>Note that setting the UUID primary key default value to <code>nil</code>
+will require you to assure that you always provide a UUID value before
+saving a record (as primary keys cannot be nil).  This might be done via
+the SecureRandom.uuid method and a <code>before_save</code> callback, for
+instance.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-primary_key_source')" id="l_method-i-primary_key_source">show</a>
+                
+              </p>
+              <div id="method-i-primary_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 362</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">primary_key</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:primary_key</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:uuid</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:default</span>] = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:default</span>, <span class="ruby-string">&#39;uuid_generate_v4()&#39;</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:primary_key</span>] = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">column</span> <span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xml">
+            
+              <b>xml</b>(options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/TableDefinition.html#method-i-xml" name="method-i-xml" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-xml_source')" id="l_method-i-xml_source">show</a>
+                
+              </p>
+              <div id="method-i-xml_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 377</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">xml</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">args</span>[<span class="ruby-number">0</span>], <span class="ruby-value">:text</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

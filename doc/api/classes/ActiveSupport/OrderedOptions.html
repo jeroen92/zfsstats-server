@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::OrderedOptions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::OrderedOptions 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Hash.html">Hash</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/ordered_options_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/ordered_options.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Usually key value pairs are handled something like this:</p>
+
+<pre class="ruby"><span class="ruby-identifier">h</span> = {}
+<span class="ruby-identifier">h</span>[:<span class="ruby-identifier">boy</span>] = <span class="ruby-string">&#39;John&#39;</span>
+<span class="ruby-identifier">h</span>[:<span class="ruby-identifier">girl</span>] = <span class="ruby-string">&#39;Mary&#39;</span>
+<span class="ruby-identifier">h</span>[:<span class="ruby-identifier">boy</span>]  <span class="ruby-comment"># =&gt; &#39;John&#39;</span>
+<span class="ruby-identifier">h</span>[:<span class="ruby-identifier">girl</span>] <span class="ruby-comment"># =&gt; &#39;Mary&#39;</span>
+</pre>
+
+<p>Using <code>OrderedOptions</code>, the above code could be reduced to:</p>
+
+<pre class="ruby"><span class="ruby-identifier">h</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderedOptions</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">h</span>.<span class="ruby-identifier">boy</span> = <span class="ruby-string">&#39;John&#39;</span>
+<span class="ruby-identifier">h</span>.<span class="ruby-identifier">girl</span> = <span class="ruby-string">&#39;Mary&#39;</span>
+<span class="ruby-identifier">h</span>.<span class="ruby-identifier">boy</span>  <span class="ruby-comment"># =&gt; &#39;John&#39;</span>
+<span class="ruby-identifier">h</span>.<span class="ruby-identifier">girl</span> <span class="ruby-comment"># =&gt; &#39;Mary&#39;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D">[]</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D-3D">[]=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-_get">_get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-method_missing">method_missing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to_missing-3F">respond_to_missing?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D">
+            
+              <b>[]</b>(key)
+            
+            <a href="../../classes/ActiveSupport/OrderedOptions.html#method-i-5B-5D" name="method-i-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="OrderedOptions.html#method-i-_get">_get</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D_source')" id="l_method-i-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/ordered_options.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">key</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D-3D">
+            
+              <b>[]=</b>(key, value)
+            
+            <a href="../../classes/ActiveSupport/OrderedOptions.html#method-i-5B-5D-3D" name="method-i-5B-5D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D-3D_source')" id="l_method-i-5B-5D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/ordered_options.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-keyword ruby-title">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>, <span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-_get">
+            
+              <b>_get</b>(key)
+            
+            <a href="../../classes/ActiveSupport/OrderedOptions.html#method-i-_get" name="method-i-_get" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-method_missing">
+            
+              <b>method_missing</b>(name, *args)
+            
+            <a href="../../classes/ActiveSupport/OrderedOptions.html#method-i-method_missing" name="method-i-method_missing" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-method_missing_source')" id="l_method-i-method_missing_source">show</a>
+                
+              </p>
+              <div id="method-i-method_missing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/ordered_options.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">method_missing</span>(<span class="ruby-identifier">name</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">name_string</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">name_string</span>.<span class="ruby-identifier">chomp!</span>(<span class="ruby-string">&#39;=&#39;</span>)
+    <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name_string</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to_missing-3F">
+            
+              <b>respond_to_missing?</b>(name, include_private)
+            
+            <a href="../../classes/ActiveSupport/OrderedOptions.html#method-i-respond_to_missing-3F" name="method-i-respond_to_missing-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_to_missing-3F_source')" id="l_method-i-respond_to_missing-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_to_missing-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/ordered_options.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_to_missing?</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">include_private</span>)
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

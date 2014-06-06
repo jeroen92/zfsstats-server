@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeMethods::Read::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods::Read::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/read_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cache_attribute-3F">cache_attribute?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cache_attributes">cache_attributes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cached_attributes">cached_attributes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-define_method_attribute">define_method_attribute</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cache_attribute-3F">
+            
+              <b>cache_attribute?</b>(attr_name)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/Read/ClassMethods.html#method-i-cache_attribute-3F" name="method-i-cache_attribute-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the provided attribute is being cached.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_attribute-3F_source')" id="l_method-i-cache_attribute-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_attribute-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache_attribute?</span>(<span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-identifier">cached_attributes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr_name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cache_attributes">
+            
+              <b>cache_attributes</b>(*attribute_names)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/Read/ClassMethods.html#method-i-cache_attributes" name="method-i-cache_attributes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><code>cache_attributes</code> allows you to declare which converted
+attribute values should be cached. Usually caching only pays off for
+attributes with expensive conversion methods, like time related columns
+(e.g. <code>created_at</code>, <code>updated_at</code>).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_attributes_source')" id="l_method-i-cache_attributes_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_attributes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache_attributes</span>(*<span class="ruby-identifier">attribute_names</span>)
+  <span class="ruby-identifier">cached_attributes</span>.<span class="ruby-identifier">merge</span> <span class="ruby-identifier">attribute_names</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">attr</span>.<span class="ruby-identifier">to_s</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cached_attributes">
+            
+              <b>cached_attributes</b>()
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/Read/ClassMethods.html#method-i-cached_attributes" name="method-i-cached_attributes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the attributes which are cached. By default time related columns
+with datatype <code>:datetime, :timestamp, :time, :date</code> are cached.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cached_attributes_source')" id="l_method-i-cached_attributes_source">show</a>
+                
+              </p>
+              <div id="method-i-cached_attributes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cached_attributes</span>
+  <span class="ruby-ivar">@cached_attributes</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cacheable_column?</span>(<span class="ruby-identifier">c</span>) }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span> <span class="ruby-identifier">col</span>.<span class="ruby-identifier">name</span> }.<span class="ruby-identifier">to_set</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-define_method_attribute">
+            
+              <b>define_method_attribute</b>(name)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/Read/ClassMethods.html#method-i-define_method_attribute" name="method-i-define_method_attribute" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>We want to generate the methods via module_eval rather than define_method,
+because define_method is slower on dispatch and uses more memory (because
+it creates a closure).</p>
+
+<p>But sometimes the database might return columns with characters that are
+not allowed in normal method names (like &#39;my_column(omg)&#39;. So to
+work around this we first define with the __temp__ identifier, and then use
+alias method to rename it to what we want.</p>
+
+<p>We are also defining a constant to hold the frozen string of the attribute
+name. Using a constant means that we do not have to allocate an object on
+each call to the attribute method. Making it frozen means that it
+doesn&#39;t get duped when used to key the @attributes_cache in
+read_attribute.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-define_method_attribute_source')" id="l_method-i-define_method_attribute_source">show</a>
+                
+              </p>
+              <div id="method-i-define_method_attribute_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb, line 50</span>
+        <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">define_method_attribute</span>(<span class="ruby-identifier">name</span>)
+          <span class="ruby-identifier">safe_name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&#39;h*&#39;</span>).<span class="ruby-identifier">first</span>
+          <span class="ruby-identifier">generated_attribute_methods</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-string">&quot;            def __temp__#{safe_name}
+              read_attribute(AttrNames::ATTR_#{safe_name}) { |n| missing_attribute(n, caller) }
+            end
+            alias_method #{name.inspect}, :__temp__#{safe_name}
+            undef_method :__temp__#{safe_name}
+&quot;</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>
+        <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

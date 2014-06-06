@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Caching</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Caching 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/caching_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/caching.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/caching/fragments_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/caching/fragments.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Caching is a cheap way of speeding up slow applications by keeping the
+result of calculations, renderings, and database calls around for
+subsequent requests.</p>
+
+<p>You can read more about each approach by clicking the modules below.</p>
+
+<p>Note: To turn off all caching, set</p>
+
+<pre>config.action_controller.perform_caching = false.</pre>
+
+<h2 id="label-Caching+stores">Caching stores</h2>
+
+<p>All the caching stores from <a
+href="../ActiveSupport/Cache.html">ActiveSupport::Cache</a> are available
+to be used as backends for Action Controller caching.</p>
+
+<p>Configuration examples (MemoryStore is the default):</p>
+
+<pre>config.action_controller.cache_store = :memory_store
+config.action_controller.cache_store = :file_store, &#39;/path/to/cache/directory&#39;
+config.action_controller.cache_store = :mem_cache_store, &#39;localhost&#39;
+config.action_controller.cache_store = :mem_cache_store, Memcached::Rails.new(&#39;localhost:11211&#39;)
+config.action_controller.cache_store = MyOwnStore.new(&#39;parameter&#39;)</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Caching/ClassMethods.html">ActionController::Caching::ClassMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Caching/ConfigMethods.html">ActionController::Caching::ConfigMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Caching/Fragments.html">ActionController::Caching::Fragments</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cache">cache</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-page_cache_extension">page_cache_extension</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-page_cache_extension-3D">page_cache_extension=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-view_cache_dependencies">view_cache_dependencies</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="RackDelegation.html">
+              ActionController::RackDelegation
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../AbstractController/Callbacks.html">
+              AbstractController::Callbacks
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Caching/ConfigMethods.html">
+              ActionController::Caching::ConfigMethods
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Caching/Fragments.html">
+              ActionController::Caching::Fragments
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-page_cache_extension">
+            
+              <b>page_cache_extension</b>()
+            
+            <a href="../../classes/ActionController/Caching.html#method-c-page_cache_extension" name="method-c-page_cache_extension" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-page_cache_extension_source')" id="l_method-c-page_cache_extension_source">show</a>
+                
+              </p>
+              <div id="method-c-page_cache_extension_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/caching.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">page_cache_extension</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">deprecation_warning</span>(<span class="ruby-value">:page_cache_extension</span>, <span class="ruby-value">:default_static_extension</span>)
+  <span class="ruby-identifier">default_static_extension</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-page_cache_extension-3D">
+            
+              <b>page_cache_extension=</b>(extension)
+            
+            <a href="../../classes/ActionController/Caching.html#method-c-page_cache_extension-3D" name="method-c-page_cache_extension-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-page_cache_extension-3D_source')" id="l_method-c-page_cache_extension-3D_source">show</a>
+                
+              </p>
+              <div id="method-c-page_cache_extension-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/caching.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">page_cache_extension=</span>(<span class="ruby-identifier">extension</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">deprecation_warning</span>(<span class="ruby-value">:page_cache_extension</span>, <span class="ruby-value">:default_static_extension</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_static_extension</span> = <span class="ruby-identifier">extension</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-view_cache_dependencies">
+            
+              <b>view_cache_dependencies</b>()
+            
+            <a href="../../classes/ActionController/Caching.html#method-i-view_cache_dependencies" name="method-i-view_cache_dependencies" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-view_cache_dependencies_source')" id="l_method-i-view_cache_dependencies_source">show</a>
+                
+              </p>
+              <div id="method-i-view_cache_dependencies_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/caching.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">view_cache_dependencies</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">_view_cache_dependencies</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">dep</span><span class="ruby-operator">|</span> <span class="ruby-identifier">instance_exec</span>(&amp;<span class="ruby-identifier">dep</span>) }.<span class="ruby-identifier">compact</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cache">
+            
+              <b>cache</b>(key, options = {}, &amp;block)
+            
+            <a href="../../classes/ActionController/Caching.html#method-i-cache" name="method-i-cache" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Convenience accessor.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_source')" id="l_method-i-cache_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/caching.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cache_configured?</span>
+    <span class="ruby-identifier">cache_store</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">expand_cache_key</span>(<span class="ruby-identifier">key</span>, <span class="ruby-value">:controller</span>), <span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

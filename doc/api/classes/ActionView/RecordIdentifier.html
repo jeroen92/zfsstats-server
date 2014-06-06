@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::RecordIdentifier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::RecordIdentifier 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/record_identifier_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/record_identifier.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The record identifier encapsulates a number of naming conventions for
+dealing with records, like Active Records or pretty much any other model
+type that has an id. These patterns are then used to try elevate the view
+actions to a higher logical level.</p>
+
+<pre># routes
+resources :posts
+
+# view
+&lt;%= div_for(post) do %&gt;    &lt;div id=&quot;post_45&quot; class=&quot;post&quot;&gt;
+  &lt;%= post.body %&gt;           What a wonderful world!
+&lt;% end %&gt;                  &lt;/div&gt;
+
+# controller
+def update
+  post = Post.find(params[:id])
+  post.update(params[:post])
+
+  redirect_to(post) # Calls polymorphic_url(post) which in turn calls post_url(post)
+end</pre>
+
+<p>As the example above shows, you can stop caring to a large extent what the
+actual id of the post is. You just know that one is being assigned and that
+the subsequent calls in redirect_to expect that same naming convention and
+allows you to write less code if you follow it.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-dom_class">dom_class</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-dom_id">dom_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-record_key_for_dom_id">record_key_for_dom_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="ModelNaming.html">
+              ActionView::ModelNaming
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">JOIN</td>
+            <td>=</td>
+            <td class="attr-value">&#39;_&#39;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">NEW</td>
+            <td>=</td>
+            <td class="attr-value">&#39;new&#39;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-dom_class">
+            
+              <b>dom_class</b>(record_or_class, prefix = nil)
+            
+            <a href="../../classes/ActionView/RecordIdentifier.html#method-i-dom_class" name="method-i-dom_class" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The DOM class convention is to use the singular form of an object or class.</p>
+
+<pre class="ruby"><span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">post</span>)   <span class="ruby-comment"># =&gt; &quot;post&quot;</span>
+<span class="ruby-identifier">dom_class</span>(<span class="ruby-constant">Person</span>) <span class="ruby-comment"># =&gt; &quot;person&quot;</span>
+</pre>
+
+<p>If you need to address multiple instances of the same class in the same
+view, you can prefix the <a
+href="RecordIdentifier.html#method-i-dom_class">#dom_class</a>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">edit</span>)   <span class="ruby-comment"># =&gt; &quot;edit_post&quot;</span>
+<span class="ruby-identifier">dom_class</span>(<span class="ruby-constant">Person</span>, :<span class="ruby-identifier">edit</span>) <span class="ruby-comment"># =&gt; &quot;edit_person&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dom_class_source')" id="l_method-i-dom_class_source">show</a>
+                
+              </p>
+              <div id="method-i-dom_class_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/record_identifier.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dom_class</span>(<span class="ruby-identifier">record_or_class</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">singular</span> = <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">param_key</span>
+  <span class="ruby-identifier">prefix</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;#{prefix}#{JOIN}#{singular}&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">singular</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-dom_id">
+            
+              <b>dom_id</b>(record, prefix = nil)
+            
+            <a href="../../classes/ActionView/RecordIdentifier.html#method-i-dom_id" name="method-i-dom_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The DOM id convention is to use the singular form of an object or class
+with the id following an underscore. If no id is found, prefix with “new_”
+instead.</p>
+
+<pre class="ruby"><span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">45</span>))       <span class="ruby-comment"># =&gt; &quot;post_45&quot;</span>
+<span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>)            <span class="ruby-comment"># =&gt; &quot;new_post&quot;</span>
+</pre>
+
+<p>If you need to address multiple instances of the same class in the same
+view, you can prefix the <a
+href="RecordIdentifier.html#method-i-dom_id">#dom_id</a>:</p>
+
+<pre class="ruby"><span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">45</span>), :<span class="ruby-identifier">edit</span>) <span class="ruby-comment"># =&gt; &quot;edit_post_45&quot;</span>
+<span class="ruby-identifier">dom_id</span>(<span class="ruby-constant">Post</span>.<span class="ruby-identifier">new</span>, :<span class="ruby-identifier">custom</span>)    <span class="ruby-comment"># =&gt; &quot;custom_post&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dom_id_source')" id="l_method-i-dom_id_source">show</a>
+                
+              </p>
+              <div id="method-i-dom_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/record_identifier.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">record_id</span> = <span class="ruby-identifier">record_key_for_dom_id</span>(<span class="ruby-identifier">record</span>)
+    <span class="ruby-node">&quot;#{dom_class(record, prefix)}#{JOIN}#{record_id}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> <span class="ruby-operator">||</span> <span class="ruby-constant">NEW</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-record_key_for_dom_id">
+            
+              <b>record_key_for_dom_id</b>(record)
+            
+            <a href="../../classes/ActionView/RecordIdentifier.html#method-i-record_key_for_dom_id" name="method-i-record_key_for_dom_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string representation of the key attribute(s) that is suitable
+for use in an <a href="../HTML.html">HTML</a> DOM id. This can be
+overwritten to customize the default generated string representation if
+desired. If you need to read back a key from a <a
+href="RecordIdentifier.html#method-i-dom_id">#dom_id</a> in order to query
+for the underlying database record, you should write a helper like
+&#39;person_record_from_dom_id&#39; that will extract the key either based
+on the default implementation (which just joins all key attributes with
+&#39;_&#39;) or on your own overwritten version of the method. By default,
+this implementation passes the key string through a method that replaces
+all characters that are invalid inside DOM ids, with valid ones. You need
+to make sure yourself that your dom ids are valid, in case you overwrite
+this method.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-record_key_for_dom_id_source')" id="l_method-i-record_key_for_dom_id_source">show</a>
+                
+              </p>
+              <div id="method-i-record_key_for_dom_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/record_identifier.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">record_key_for_dom_id</span>(<span class="ruby-identifier">record</span>)
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">convert_to_model</span>(<span class="ruby-identifier">record</span>).<span class="ruby-identifier">to_key</span>
+  <span class="ruby-identifier">key</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;_&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

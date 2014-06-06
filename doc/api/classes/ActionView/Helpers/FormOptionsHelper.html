@@ -1,0 +1,1380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::FormOptionsHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::FormOptionsHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/form_options_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Provides a number of methods for turning different kinds of containers into
+a set of option tags.</p>
+
+<p>The <code>collection_select</code>, <code>select</code> and
+<code>time_zone_select</code> methods take an <code>options</code>
+parameter, a hash:</p>
+<ul><li>
+<p><code>:include_blank</code> - set to true or a prompt string if the first
+option element of the select element is a blank. Useful if there is not a
+default value required for the select element.</p>
+
+<p>select(“post”, “category”, Post::CATEGORIES, {include_blank: true})</p>
+</li></ul>
+
+<p>could become:</p>
+
+<pre>&lt;select name=&quot;post[category]&quot;&gt;
+  &lt;option&gt;&lt;/option&gt;
+  &lt;option&gt;joke&lt;/option&gt;
+  &lt;option&gt;poem&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>Another common case is a select tag for a
+<code>belongs_to</code>-associated object.</p>
+
+<p>Example with @post.person_id =&gt; 2:</p>
+
+<pre class="ruby"><span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;post&quot;</span>, <span class="ruby-string">&quot;person_id&quot;</span>, <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span> ] }, {<span class="ruby-identifier">include_blank</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;None&#39;</span>})
+</pre>
+
+<p>could become:</p>
+
+<pre>&lt;select name=&quot;post[person_id]&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;None&lt;/option&gt;
+  &lt;option value=&quot;1&quot;&gt;David&lt;/option&gt;
+  &lt;option value=&quot;2&quot; selected=&quot;selected&quot;&gt;Sam&lt;/option&gt;
+  &lt;option value=&quot;3&quot;&gt;Tobias&lt;/option&gt;
+&lt;/select&gt;</pre>
+<ul><li>
+<p><code>:prompt</code> - set to true or a prompt string. When the select
+element doesn&#39;t have a value yet, this prepends an option with a
+generic prompt – “Please select” – or the given prompt string.</p>
+
+<p>select(“post”, “person_id”, Person.all.collect {|p| [ p.name, p.id ] },
+{prompt: &#39;Select Person&#39;})</p>
+</li></ul>
+
+<p>could become:</p>
+
+<pre>&lt;select name=&quot;post[person_id]&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;Select Person&lt;/option&gt;
+  &lt;option value=&quot;1&quot;&gt;David&lt;/option&gt;
+  &lt;option value=&quot;2&quot;&gt;Sam&lt;/option&gt;
+  &lt;option value=&quot;3&quot;&gt;Tobias&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>Like the other form helpers, <code>select</code> can accept an
+<code>:index</code> option to manually set the ID used in the resulting
+output. Unlike other helpers, <code>select</code> expects this option to be
+in the <code>html_options</code> parameter.</p>
+
+<pre>select(&quot;album[]&quot;, &quot;genre&quot;, %w[rap rock country], {}, { index: nil })</pre>
+
+<p>becomes:</p>
+
+<pre>&lt;select name=&quot;album[][genre]&quot; id=&quot;album__genre&quot;&gt;
+  &lt;option value=&quot;rap&quot;&gt;rap&lt;/option&gt;
+  &lt;option value=&quot;rock&quot;&gt;rock&lt;/option&gt;
+  &lt;option value=&quot;country&quot;&gt;country&lt;/option&gt;
+&lt;/select&gt;</pre>
+<ul><li>
+<p><code>:disabled</code> - can be a single value or an array of values that
+will be disabled options in the final output.</p>
+
+<p>select(“post”, “category”, Post::CATEGORIES, {disabled:
+&#39;restricted&#39;})</p>
+</li></ul>
+
+<p>could become:</p>
+
+<pre>&lt;select name=&quot;post[category]&quot;&gt;
+  &lt;option&gt;&lt;/option&gt;
+  &lt;option&gt;joke&lt;/option&gt;
+  &lt;option&gt;poem&lt;/option&gt;
+  &lt;option disabled=&quot;disabled&quot;&gt;restricted&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>When used with the <code>collection_select</code> helper,
+<code>:disabled</code> can also be a Proc that identifies those options
+that should be disabled.</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_select</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">category_id</span>, <span class="ruby-constant">Category</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name</span>, {<span class="ruby-identifier">disabled</span><span class="ruby-operator">:</span> <span class="ruby-identifier">lambda</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">category</span><span class="ruby-operator">|</span> <span class="ruby-identifier">category</span>.<span class="ruby-identifier">archived?</span> }})
+</pre>
+
+<p>If the categories “2008 stuff” and “Christmas” return true when the method
+<code>archived?</code> is called, this would return:</p>
+
+<pre>&lt;select name=&quot;post[category_id]&quot;&gt;
+  &lt;option value=&quot;1&quot; disabled=&quot;disabled&quot;&gt;2008 stuff&lt;/option&gt;
+  &lt;option value=&quot;2&quot; disabled=&quot;disabled&quot;&gt;Christmas&lt;/option&gt;
+  &lt;option value=&quot;3&quot;&gt;Jokes&lt;/option&gt;
+  &lt;option value=&quot;4&quot;&gt;Poems&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-collection_check_boxes">collection_check_boxes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-collection_radio_buttons">collection_radio_buttons</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-collection_select">collection_select</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-grouped_collection_select">grouped_collection_select</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-grouped_options_for_select">grouped_options_for_select</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-option_groups_from_collection_for_select">option_groups_from_collection_for_select</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-options_for_select">options_for_select</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-options_from_collection_for_select">options_from_collection_for_select</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-select">select</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-time_zone_options_for_select">time_zone_options_for_select</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-time_zone_select">time_zone_select</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="TextHelper.html">
+              ActionView::Helpers::TextHelper
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-collection_check_boxes">
+            
+              <b>collection_check_boxes</b>(object, method, collection, value_method, text_method, options = {}, html_options = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_check_boxes" name="method-i-collection_check_boxes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns check box tags for the collection of existing return values of
+<code>method</code> for <code>object</code>&#39;s class. The value returned
+from calling <code>method</code> on the instance <code>object</code> will
+be selected. If calling <code>method</code> returns <code>nil</code>, no
+selection is made.</p>
+
+<p>The <code>:value_method</code> and <code>:text_method</code> parameters are
+methods to be called on each member of <code>collection</code>. The return
+values are used as the <code>value</code> attribute and contents of each
+check box tag, respectively. They can also be any object that responds to
+<code>call</code>, such as a <code>proc</code>, that will be called for
+each member of the <code>collection</code> to retrieve the value/text.</p>
+
+<p>Example object structure for use with this method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_and_belongs_to_many</span> :<span class="ruby-identifier">author</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Author</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_and_belongs_to_many</span> :<span class="ruby-identifier">posts</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">name_with_initial</span>
+    <span class="ruby-node">&quot;#{first_name.first}. #{last_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Sample usage (selecting the associated Author for an instance of Post,
+<code>@post</code>):</p>
+
+<pre>collection_check_boxes(:post, :author_ids, Author.all, :id, :name_with_initial)</pre>
+
+<p>If <code>@post.author_ids</code> is already <code>[1]</code>, this would
+return:</p>
+
+<pre>&lt;input id=&quot;post_author_ids_1&quot; name=&quot;post[author_ids][]&quot; type=&quot;checkbox&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt;
+&lt;label for=&quot;post_author_ids_1&quot;&gt;D. Heinemeier Hansson&lt;/label&gt;
+&lt;input id=&quot;post_author_ids_2&quot; name=&quot;post[author_ids][]&quot; type=&quot;checkbox&quot; value=&quot;2&quot; /&gt;
+&lt;label for=&quot;post_author_ids_2&quot;&gt;D. Thomas&lt;/label&gt;
+&lt;input id=&quot;post_author_ids_3&quot; name=&quot;post[author_ids][]&quot; type=&quot;checkbox&quot; value=&quot;3&quot; /&gt;
+&lt;label for=&quot;post_author_ids_3&quot;&gt;M. Clark&lt;/label&gt;
+&lt;input name=&quot;post[author_ids][]&quot; type=&quot;hidden&quot; value=&quot;&quot; /&gt;</pre>
+
+<p>It is also possible to customize the way the elements will be shown by
+giving a block to the method:</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_check_boxes</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">author_ids</span>, <span class="ruby-constant">Author</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name_with_initial</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">label</span> { <span class="ruby-identifier">b</span>.<span class="ruby-identifier">check_box</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The argument passed to the block is a special kind of builder for this
+collection, which has the ability to generate the label and check box for
+the current item in the collection, with proper text and value. Using it,
+you can change the label and check box display order or even use the label
+as wrapper, as in the example above.</p>
+
+<p>The builder methods <code>label</code> and <code>check_box</code> also
+accept extra html options:</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_check_boxes</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">author_ids</span>, <span class="ruby-constant">Author</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name_with_initial</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">label</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;check_box&quot;</span>) { <span class="ruby-identifier">b</span>.<span class="ruby-identifier">check_box</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;check_box&quot;</span>) }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>There are also three special methods available: <code>object</code>,
+<code>text</code> and <code>value</code>, which are the current item being
+rendered, its text and value methods, respectively. You can use them like
+this:</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_check_boxes</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">author_ids</span>, <span class="ruby-constant">Author</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name_with_initial</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+   <span class="ruby-identifier">b</span>.<span class="ruby-identifier">label</span>(:<span class="ruby-string">&quot;data-value&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">value</span>) { <span class="ruby-identifier">b</span>.<span class="ruby-identifier">check_box</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">text</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-collection_check_boxes_source')" id="l_method-i-collection_check_boxes_source">show</a>
+                
+              </p>
+              <div id="method-i-collection_check_boxes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 702</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">collection_check_boxes</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">CollectionCheckBoxes</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>).<span class="ruby-identifier">render</span>(&amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-collection_radio_buttons">
+            
+              <b>collection_radio_buttons</b>(object, method, collection, value_method, text_method, options = {}, html_options = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_radio_buttons" name="method-i-collection_radio_buttons" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns radio button tags for the collection of existing return values of
+<code>method</code> for <code>object</code>&#39;s class. The value returned
+from calling <code>method</code> on the instance <code>object</code> will
+be selected. If calling <code>method</code> returns <code>nil</code>, no
+selection is made.</p>
+
+<p>The <code>:value_method</code> and <code>:text_method</code> parameters are
+methods to be called on each member of <code>collection</code>. The return
+values are used as the <code>value</code> attribute and contents of each
+radio button tag, respectively. They can also be any object that responds
+to <code>call</code>, such as a <code>proc</code>, that will be called for
+each member of the <code>collection</code> to retrieve the value/text.</p>
+
+<p>Example object structure for use with this method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">author</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Author</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">posts</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">name_with_initial</span>
+    <span class="ruby-node">&quot;#{first_name.first}. #{last_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Sample usage (selecting the associated Author for an instance of Post,
+<code>@post</code>):</p>
+
+<pre>collection_radio_buttons(:post, :author_id, Author.all, :id, :name_with_initial)</pre>
+
+<p>If <code>@post.author_id</code> is already <code>1</code>, this would
+return:</p>
+
+<pre>&lt;input id=&quot;post_author_id_1&quot; name=&quot;post[author_id]&quot; type=&quot;radio&quot; value=&quot;1&quot; checked=&quot;checked&quot; /&gt;
+&lt;label for=&quot;post_author_id_1&quot;&gt;D. Heinemeier Hansson&lt;/label&gt;
+&lt;input id=&quot;post_author_id_2&quot; name=&quot;post[author_id]&quot; type=&quot;radio&quot; value=&quot;2&quot; /&gt;
+&lt;label for=&quot;post_author_id_2&quot;&gt;D. Thomas&lt;/label&gt;
+&lt;input id=&quot;post_author_id_3&quot; name=&quot;post[author_id]&quot; type=&quot;radio&quot; value=&quot;3&quot; /&gt;
+&lt;label for=&quot;post_author_id_3&quot;&gt;M. Clark&lt;/label&gt;</pre>
+
+<p>It is also possible to customize the way the elements will be shown by
+giving a block to the method:</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_radio_buttons</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">author_id</span>, <span class="ruby-constant">Author</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name_with_initial</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">label</span> { <span class="ruby-identifier">b</span>.<span class="ruby-identifier">radio_button</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The argument passed to the block is a special kind of builder for this
+collection, which has the ability to generate the label and radio button
+for the current item in the collection, with proper text and value. Using
+it, you can change the label and radio button display order or even use the
+label as wrapper, as in the example above.</p>
+
+<p>The builder methods <code>label</code> and <code>radio_button</code> also
+accept extra html options:</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_radio_buttons</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">author_id</span>, <span class="ruby-constant">Author</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name_with_initial</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">b</span>.<span class="ruby-identifier">label</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;radio_button&quot;</span>) { <span class="ruby-identifier">b</span>.<span class="ruby-identifier">radio_button</span>(<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;radio_button&quot;</span>) }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>There are also three special methods available: <code>object</code>,
+<code>text</code> and <code>value</code>, which are the current item being
+rendered, its text and value methods, respectively. You can use them like
+this:</p>
+
+<pre class="ruby"><span class="ruby-identifier">collection_radio_buttons</span>(:<span class="ruby-identifier">post</span>, :<span class="ruby-identifier">author_id</span>, <span class="ruby-constant">Author</span>.<span class="ruby-identifier">all</span>, :<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name_with_initial</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+   <span class="ruby-identifier">b</span>.<span class="ruby-identifier">label</span>(:<span class="ruby-string">&quot;data-value&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">value</span>) { <span class="ruby-identifier">b</span>.<span class="ruby-identifier">radio_button</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">text</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-collection_radio_buttons_source')" id="l_method-i-collection_radio_buttons_source">show</a>
+                
+              </p>
+              <div id="method-i-collection_radio_buttons_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 639</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">collection_radio_buttons</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">CollectionRadioButtons</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>).<span class="ruby-identifier">render</span>(&amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-collection_select">
+            
+              <b>collection_select</b>(object, method, collection, value_method, text_method, options = {}, html_options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-collection_select" name="method-i-collection_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>&lt;select&gt;</code> and <code>&lt;option&gt;</code> tags
+for the collection of existing return values of <code>method</code> for
+<code>object</code>&#39;s class. The value returned from calling
+<code>method</code> on the instance <code>object</code> will be selected.
+If calling <code>method</code> returns <code>nil</code>, no selection is
+made without including <code>:prompt</code> or <code>:include_blank</code>
+in the <code>options</code> hash.</p>
+
+<p>The <code>:value_method</code> and <code>:text_method</code> parameters are
+methods to be called on each member of <code>collection</code>. The return
+values are used as the <code>value</code> attribute and contents of each
+<code>&lt;option&gt;</code> tag, respectively. They can also be any object
+that responds to <code>call</code>, such as a <code>proc</code>, that will
+be called for each member of the <code>collection</code> to retrieve the
+value/text.</p>
+
+<p>Example object structure for use with this method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">author</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Author</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">posts</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">name_with_initial</span>
+    <span class="ruby-node">&quot;#{first_name.first}. #{last_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Sample usage (selecting the associated Author for an instance of Post,
+<code>@post</code>):</p>
+
+<pre>collection_select(:post, :author_id, Author.all, :id, :name_with_initial, prompt: true)</pre>
+
+<p>If <code>@post.author_id</code> is already <code>1</code>, this would
+return:</p>
+
+<pre>&lt;select name=&quot;post[author_id]&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;Please select&lt;/option&gt;
+  &lt;option value=&quot;1&quot; selected=&quot;selected&quot;&gt;D. Heinemeier Hansson&lt;/option&gt;
+  &lt;option value=&quot;2&quot;&gt;D. Thomas&lt;/option&gt;
+  &lt;option value=&quot;3&quot;&gt;M. Clark&lt;/option&gt;
+&lt;/select&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-collection_select_source')" id="l_method-i-collection_select_source">show</a>
+                
+              </p>
+              <div id="method-i-collection_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">collection_select</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">CollectionSelect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-grouped_collection_select">
+            
+              <b>grouped_collection_select</b>(object, method, collection, group_method, group_label_method, option_key_method, option_value_method, options = {}, html_options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-grouped_collection_select" name="method-i-grouped_collection_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>&lt;select&gt;</code>, <code>&lt;optgroup&gt;</code> and
+<code>&lt;option&gt;</code> tags for the collection of existing return
+values of <code>method</code> for <code>object</code>&#39;s class. The
+value returned from calling <code>method</code> on the instance
+<code>object</code> will be selected. If calling <code>method</code>
+returns <code>nil</code>, no selection is made without including
+<code>:prompt</code> or <code>:include_blank</code> in the
+<code>options</code> hash.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>object</code> - The instance of the class to be used for the select
+tag</p>
+</li><li>
+<p><code>method</code> - The attribute of <code>object</code> corresponding to
+the select tag</p>
+</li><li>
+<p><code>collection</code> - An array of objects representing the
+<code>&lt;optgroup&gt;</code> tags.</p>
+</li><li>
+<p><code>group_method</code> - The name of a method which, when called on a
+member of <code>collection</code>, returns an array of child objects
+representing the <code>&lt;option&gt;</code> tags.</p>
+</li><li>
+<p><code>group_label_method</code> - The name of a method which, when called
+on a member of <code>collection</code>, returns a string to be used as the
+<code>label</code> attribute for its <code>&lt;optgroup&gt;</code> tag.</p>
+</li><li>
+<p><code>option_key_method</code> - The name of a method which, when called on
+a child object of a member of <code>collection</code>, returns a value to
+be used as the <code>value</code> attribute for its
+<code>&lt;option&gt;</code> tag.</p>
+</li><li>
+<p><code>option_value_method</code> - The name of a method which, when called
+on a child object of a member of <code>collection</code>, returns a value
+to be used as the contents of its <code>&lt;option&gt;</code> tag.</p>
+</li></ul>
+
+<p>Example object structure for use with this method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Continent</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">countries</span>
+  <span class="ruby-comment"># attribs: id, name</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Country</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">continent</span>
+  <span class="ruby-comment"># attribs: id, name, continent_id</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">City</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">country</span>
+  <span class="ruby-comment"># attribs: id, name, country_id</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Sample usage:</p>
+
+<pre>grouped_collection_select(:city, :country_id, @continents, :countries, :name, :id, :name)</pre>
+
+<p>Possible output:</p>
+
+<pre>&lt;select name=&quot;city[country_id]&quot;&gt;
+  &lt;optgroup label=&quot;Africa&quot;&gt;
+    &lt;option value=&quot;1&quot;&gt;South Africa&lt;/option&gt;
+    &lt;option value=&quot;3&quot;&gt;Somalia&lt;/option&gt;
+  &lt;/optgroup&gt;
+  &lt;optgroup label=&quot;Europe&quot;&gt;
+    &lt;option value=&quot;7&quot; selected=&quot;selected&quot;&gt;Denmark&lt;/option&gt;
+    &lt;option value=&quot;2&quot;&gt;Ireland&lt;/option&gt;
+  &lt;/optgroup&gt;
+&lt;/select&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-grouped_collection_select_source')" id="l_method-i-grouped_collection_select_source">show</a>
+                
+              </p>
+              <div id="method-i-grouped_collection_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 245</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">grouped_collection_select</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">group_method</span>, <span class="ruby-identifier">group_label_method</span>, <span class="ruby-identifier">option_key_method</span>, <span class="ruby-identifier">option_value_method</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">GroupedCollectionSelect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">collection</span>, <span class="ruby-identifier">group_method</span>, <span class="ruby-identifier">group_label_method</span>, <span class="ruby-identifier">option_key_method</span>, <span class="ruby-identifier">option_value_method</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-grouped_options_for_select">
+            
+              <b>grouped_options_for_select</b>(grouped_options, selected_key = nil, options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-grouped_options_for_select" name="method-i-grouped_options_for_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string of <code>&lt;option&gt;</code> tags, like
+<code>options_for_select</code>, but wraps them with
+<code>&lt;optgroup&gt;</code> tags.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>grouped_options</code> - Accepts a nested array or hash of strings.
+The first value serves as the <code>&lt;optgroup&gt;</code> label while the
+second value must be an array of options. The second value can be a nested
+array of text-value pairs. See <code>options_for_select</code> for more
+info.</p>
+
+<pre>Ex. [&quot;North America&quot;,[[&quot;United States&quot;,&quot;US&quot;],[&quot;Canada&quot;,&quot;CA&quot;]]]</pre>
+</li><li>
+<p><code>selected_key</code> - A value equal to the <code>value</code>
+attribute for one of the <code>&lt;option&gt;</code> tags, which will have
+the <code>selected</code> attribute set. Note: It is possible for this
+value to match multiple options as you might have the same option in
+multiple groups. Each will then get
+<code>selected=&quot;selected&quot;</code>.</p>
+</li></ul>
+
+<p>Options:</p>
+<ul><li>
+<p><code>:prompt</code> - set to true or a prompt string. When the select
+element doesn&#39;t have a value yet, this prepends an option with a
+generic prompt - “Please select” - or the given prompt string.</p>
+</li><li>
+<p><code>:divider</code> - the divider for the options groups.</p>
+
+<p>grouped_options = [</p>
+
+<pre>[&#39;North America&#39;,
+  [[&#39;United States&#39;,&#39;US&#39;],&#39;Canada&#39;]],
+[&#39;Europe&#39;,
+  [&#39;Denmark&#39;,&#39;Germany&#39;,&#39;France&#39;]]</pre>
+
+<p>] <a
+href="FormOptionsHelper.html#method-i-grouped_options_for_select">#grouped_options_for_select</a>(grouped_options)</p>
+
+<p>grouped_options = {</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;North America&#39;</span> =<span class="ruby-operator">&gt;</span> [[<span class="ruby-string">&#39;United States&#39;</span>,<span class="ruby-string">&#39;US&#39;</span>], <span class="ruby-string">&#39;Canada&#39;</span>],
+<span class="ruby-string">&#39;Europe&#39;</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-string">&#39;Denmark&#39;</span>,<span class="ruby-string">&#39;Germany&#39;</span>,<span class="ruby-string">&#39;France&#39;</span>]
+</pre>
+
+<p>} <a
+href="FormOptionsHelper.html#method-i-grouped_options_for_select">#grouped_options_for_select</a>(grouped_options)</p>
+</li></ul>
+
+<p>Possible output:</p>
+
+<pre>&lt;optgroup label=&quot;North America&quot;&gt;
+  &lt;option value=&quot;US&quot;&gt;United States&lt;/option&gt;
+  &lt;option value=&quot;Canada&quot;&gt;Canada&lt;/option&gt;
+&lt;/optgroup&gt;
+&lt;optgroup label=&quot;Europe&quot;&gt;
+  &lt;option value=&quot;Denmark&quot;&gt;Denmark&lt;/option&gt;
+  &lt;option value=&quot;Germany&quot;&gt;Germany&lt;/option&gt;
+  &lt;option value=&quot;France&quot;&gt;France&lt;/option&gt;
+&lt;/optgroup&gt;
+
+grouped_options = [
+  [[&#39;United States&#39;,&#39;US&#39;], &#39;Canada&#39;],
+  [&#39;Denmark&#39;,&#39;Germany&#39;,&#39;France&#39;]
+]
+grouped_options_for_select(grouped_options, nil, divider: &#39;---------&#39;)</pre>
+
+<p>Possible output:</p>
+
+<pre>&lt;optgroup label=&quot;---------&quot;&gt;
+  &lt;option value=&quot;US&quot;&gt;United States&lt;/option&gt;
+  &lt;option value=&quot;Canada&quot;&gt;Canada&lt;/option&gt;
+&lt;/optgroup&gt;
+&lt;optgroup label=&quot;---------&quot;&gt;
+  &lt;option value=&quot;Denmark&quot;&gt;Denmark&lt;/option&gt;
+  &lt;option value=&quot;Germany&quot;&gt;Germany&lt;/option&gt;
+  &lt;option value=&quot;France&quot;&gt;France&lt;/option&gt;
+&lt;/optgroup&gt;</pre>
+
+<p><strong>Note:</strong> Only the <code>&lt;optgroup&gt;</code> and
+<code>&lt;option&gt;</code> tags are returned, so you still have to wrap
+the output in an appropriate <code>&lt;select&gt;</code> tag.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-grouped_options_for_select_source')" id="l_method-i-grouped_options_for_select_source">show</a>
+                
+              </p>
+              <div id="method-i-grouped_options_for_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 512</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">grouped_options_for_select</span>(<span class="ruby-identifier">grouped_options</span>, <span class="ruby-identifier">selected_key</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-identifier">prompt</span>  = <span class="ruby-identifier">options</span>[<span class="ruby-value">:prompt</span>]
+    <span class="ruby-identifier">divider</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:divider</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">prompt</span>  = <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">options</span> = {}
+    <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;Passing the prompt to grouped_options_for_select as an argument is deprecated. &quot;</span>                      <span class="ruby-node">&quot;Please use an options hash like `{ prompt: #{prompt.inspect} }`.&quot;</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">body</span> = <span class="ruby-string">&quot;&quot;</span>.<span class="ruby-identifier">html_safe</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">prompt</span>
+    <span class="ruby-identifier">body</span>.<span class="ruby-identifier">safe_concat</span> <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:option</span>, <span class="ruby-identifier">prompt_text</span>(<span class="ruby-identifier">prompt</span>), <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">grouped_options</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">container</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">divider</span>
+      <span class="ruby-identifier">label</span> = <span class="ruby-identifier">divider</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">label</span>, <span class="ruby-identifier">container</span> = <span class="ruby-identifier">container</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">body</span>.<span class="ruby-identifier">safe_concat</span> <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:optgroup</span>, <span class="ruby-identifier">options_for_select</span>(<span class="ruby-identifier">container</span>, <span class="ruby-identifier">selected_key</span>), <span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">label</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">body</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-option_groups_from_collection_for_select">
+            
+              <b>option_groups_from_collection_for_select</b>(collection, group_method, group_label_method, option_key_method, option_value_method, selected_key = nil)
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-option_groups_from_collection_for_select" name="method-i-option_groups_from_collection_for_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string of <code>&lt;option&gt;</code> tags, like
+<code>options_from_collection_for_select</code>, but groups them by
+<code>&lt;optgroup&gt;</code> tags based on the object relationships of the
+arguments.</p>
+
+<p>Parameters:</p>
+<ul><li>
+<p><code>collection</code> - An array of objects representing the
+<code>&lt;optgroup&gt;</code> tags.</p>
+</li><li>
+<p><code>group_method</code> - The name of a method which, when called on a
+member of <code>collection</code>, returns an array of child objects
+representing the <code>&lt;option&gt;</code> tags.</p>
+</li><li>
+<p>group_label_method+ - The name of a method which, when called on a member
+of <code>collection</code>, returns a string to be used as the
+<code>label</code> attribute for its <code>&lt;optgroup&gt;</code> tag.</p>
+</li><li>
+<p><code>option_key_method</code> - The name of a method which, when called on
+a child object of a member of <code>collection</code>, returns a value to
+be used as the <code>value</code> attribute for its
+<code>&lt;option&gt;</code> tag.</p>
+</li><li>
+<p><code>option_value_method</code> - The name of a method which, when called
+on a child object of a member of <code>collection</code>, returns a value
+to be used as the contents of its <code>&lt;option&gt;</code> tag.</p>
+</li><li>
+<p><code>selected_key</code> - A value equal to the <code>value</code>
+attribute for one of the <code>&lt;option&gt;</code> tags, which will have
+the <code>selected</code> attribute set. Corresponds to the return value of
+one of the calls to <code>option_key_method</code>. If <code>nil</code>, no
+selection is made. Can also be a hash if disabled values are to be
+specified.</p>
+</li></ul>
+
+<p>Example object structure for use with this method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Continent</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">countries</span>
+  <span class="ruby-comment"># attribs: id, name</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Country</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">continent</span>
+  <span class="ruby-comment"># attribs: id, name, continent_id</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Sample usage:</p>
+
+<pre>option_groups_from_collection_for_select(@continents, :countries, :name, :id, :name, 3)</pre>
+
+<p>Possible output:</p>
+
+<pre>&lt;optgroup label=&quot;Africa&quot;&gt;
+  &lt;option value=&quot;1&quot;&gt;Egypt&lt;/option&gt;
+  &lt;option value=&quot;4&quot;&gt;Rwanda&lt;/option&gt;
+  ...
+&lt;/optgroup&gt;
+&lt;optgroup label=&quot;Asia&quot;&gt;
+  &lt;option value=&quot;3&quot; selected=&quot;selected&quot;&gt;China&lt;/option&gt;
+  &lt;option value=&quot;12&quot;&gt;India&lt;/option&gt;
+  &lt;option value=&quot;5&quot;&gt;Japan&lt;/option&gt;
+  ...
+&lt;/optgroup&gt;</pre>
+
+<p><strong>Note:</strong> Only the <code>&lt;optgroup&gt;</code> and
+<code>&lt;option&gt;</code> tags are returned, so you still have to wrap
+the output in an appropriate <code>&lt;select&gt;</code> tag.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-option_groups_from_collection_for_select_source')" id="l_method-i-option_groups_from_collection_for_select_source">show</a>
+                
+              </p>
+              <div id="method-i-option_groups_from_collection_for_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 442</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">option_groups_from_collection_for_select</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">group_method</span>, <span class="ruby-identifier">group_label_method</span>, <span class="ruby-identifier">option_key_method</span>, <span class="ruby-identifier">option_value_method</span>, <span class="ruby-identifier">selected_key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">option_tags</span> = <span class="ruby-identifier">options_from_collection_for_select</span>(
+      <span class="ruby-identifier">group</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">group_method</span>), <span class="ruby-identifier">option_key_method</span>, <span class="ruby-identifier">option_value_method</span>, <span class="ruby-identifier">selected_key</span>)
+
+    <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:optgroup</span>, <span class="ruby-identifier">option_tags</span>, <span class="ruby-value">:label</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">group</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">group_label_method</span>))
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>.<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-options_for_select">
+            
+              <b>options_for_select</b>(container, selected = nil)
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-options_for_select" name="method-i-options_for_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Accepts a container (hash, array, enumerable, your type) and returns a
+string of option tags. Given a container where the elements respond to
+first and last (such as a two-element array), the “lasts” serve as option
+values and the “firsts” as option text. Hashes are turned into this form
+automatically, so the keys become “firsts” and values become lasts. If
+<code>selected</code> is specified, the matching “last” or element will get
+the selected option-tag. <code>selected</code> may also be an array of
+values to be selected when using a multiple select.</p>
+
+<pre class="ruby"><span class="ruby-identifier">options_for_select</span>([[<span class="ruby-string">&quot;Dollar&quot;</span>, <span class="ruby-string">&quot;$&quot;</span>], [<span class="ruby-string">&quot;Kroner&quot;</span>, <span class="ruby-string">&quot;DKK&quot;</span>]])
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;$&quot;&gt;Dollar&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;DKK&quot;&gt;Kroner&lt;/option&gt;</span>
+
+<span class="ruby-identifier">options_for_select</span>([ <span class="ruby-string">&quot;VISA&quot;</span>, <span class="ruby-string">&quot;MasterCard&quot;</span> ], <span class="ruby-string">&quot;MasterCard&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;option&gt;VISA&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option selected=&quot;selected&quot;&gt;MasterCard&lt;/option&gt;</span>
+
+<span class="ruby-identifier">options_for_select</span>({ <span class="ruby-string">&quot;Basic&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;$20&quot;</span>, <span class="ruby-string">&quot;Plus&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;$40&quot;</span> }, <span class="ruby-string">&quot;$40&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;$20&quot;&gt;Basic&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;$40&quot; selected=&quot;selected&quot;&gt;Plus&lt;/option&gt;</span>
+
+<span class="ruby-identifier">options_for_select</span>([ <span class="ruby-string">&quot;VISA&quot;</span>, <span class="ruby-string">&quot;MasterCard&quot;</span>, <span class="ruby-string">&quot;Discover&quot;</span> ], [<span class="ruby-string">&quot;VISA&quot;</span>, <span class="ruby-string">&quot;Discover&quot;</span>])
+<span class="ruby-comment"># =&gt; &lt;option selected=&quot;selected&quot;&gt;VISA&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option&gt;MasterCard&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option selected=&quot;selected&quot;&gt;Discover&lt;/option&gt;</span>
+</pre>
+
+<p>You can optionally provide html attributes as the last element of the
+array.</p>
+
+<pre class="ruby"><span class="ruby-identifier">options_for_select</span>([ <span class="ruby-string">&quot;Denmark&quot;</span>, [<span class="ruby-string">&quot;USA&quot;</span>, {<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;bold&#39;</span>}], <span class="ruby-string">&quot;Sweden&quot;</span> ], [<span class="ruby-string">&quot;USA&quot;</span>, <span class="ruby-string">&quot;Sweden&quot;</span>])
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Denmark&quot;&gt;Denmark&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;USA&quot; class=&quot;bold&quot; selected=&quot;selected&quot;&gt;USA&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Sweden&quot; selected=&quot;selected&quot;&gt;Sweden&lt;/option&gt;</span>
+
+<span class="ruby-identifier">options_for_select</span>([[<span class="ruby-string">&quot;Dollar&quot;</span>, <span class="ruby-string">&quot;$&quot;</span>, {<span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;bold&quot;</span>}], [<span class="ruby-string">&quot;Kroner&quot;</span>, <span class="ruby-string">&quot;DKK&quot;</span>, {<span class="ruby-identifier">onclick</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;alert(&#39;HI&#39;);&quot;</span>}]])
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;$&quot; class=&quot;bold&quot;&gt;Dollar&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;DKK&quot; onclick=&quot;alert(&#39;HI&#39;);&quot;&gt;Kroner&lt;/option&gt;</span>
+</pre>
+
+<p>If you wish to specify disabled option tags, set <code>selected</code> to
+be a hash, with <code>:disabled</code> being either a value or array of
+values to be disabled. In this case, you can use <code>:selected</code> to
+specify selected option tags.</p>
+
+<pre class="ruby"><span class="ruby-identifier">options_for_select</span>([<span class="ruby-string">&quot;Free&quot;</span>, <span class="ruby-string">&quot;Basic&quot;</span>, <span class="ruby-string">&quot;Advanced&quot;</span>, <span class="ruby-string">&quot;Super Platinum&quot;</span>], <span class="ruby-identifier">disabled</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Super Platinum&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Free&quot;&gt;Free&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Basic&quot;&gt;Basic&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Advanced&quot;&gt;Advanced&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Super Platinum&quot; disabled=&quot;disabled&quot;&gt;Super Platinum&lt;/option&gt;</span>
+
+<span class="ruby-identifier">options_for_select</span>([<span class="ruby-string">&quot;Free&quot;</span>, <span class="ruby-string">&quot;Basic&quot;</span>, <span class="ruby-string">&quot;Advanced&quot;</span>, <span class="ruby-string">&quot;Super Platinum&quot;</span>], <span class="ruby-identifier">disabled</span><span class="ruby-operator">:</span> [<span class="ruby-string">&quot;Advanced&quot;</span>, <span class="ruby-string">&quot;Super Platinum&quot;</span>])
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Free&quot;&gt;Free&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Basic&quot;&gt;Basic&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Advanced&quot; disabled=&quot;disabled&quot;&gt;Advanced&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Super Platinum&quot; disabled=&quot;disabled&quot;&gt;Super Platinum&lt;/option&gt;</span>
+
+<span class="ruby-identifier">options_for_select</span>([<span class="ruby-string">&quot;Free&quot;</span>, <span class="ruby-string">&quot;Basic&quot;</span>, <span class="ruby-string">&quot;Advanced&quot;</span>, <span class="ruby-string">&quot;Super Platinum&quot;</span>], <span class="ruby-identifier">selected</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Free&quot;</span>, <span class="ruby-identifier">disabled</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Super Platinum&quot;</span>)
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Free&quot; selected=&quot;selected&quot;&gt;Free&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Basic&quot;&gt;Basic&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Advanced&quot;&gt;Advanced&lt;/option&gt;</span>
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;Super Platinum&quot; disabled=&quot;disabled&quot;&gt;Super Platinum&lt;/option&gt;</span>
+</pre>
+
+<p>NOTE: Only the option tags are returned, you have to wrap this call in a
+regular <a href="../../HTML.html">HTML</a> select tag.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-options_for_select_source')" id="l_method-i-options_for_select_source">show</a>
+                
+              </p>
+              <div id="method-i-options_for_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 338</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">options_for_select</span>(<span class="ruby-identifier">container</span>, <span class="ruby-identifier">selected</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">container</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">container</span>
+
+  <span class="ruby-identifier">selected</span>, <span class="ruby-identifier">disabled</span> = <span class="ruby-identifier">extract_selected_and_disabled</span>(<span class="ruby-identifier">selected</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Array</span>(<span class="ruby-identifier">r</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">container</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">html_attributes</span> = <span class="ruby-identifier">option_html_attributes</span>(<span class="ruby-identifier">element</span>)
+    <span class="ruby-identifier">text</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">option_text_and_value</span>(<span class="ruby-identifier">element</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">to_s</span> }
+
+    <span class="ruby-identifier">html_attributes</span>[<span class="ruby-value">:selected</span>] = <span class="ruby-string">&#39;selected&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">option_value_selected?</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">selected</span>)
+    <span class="ruby-identifier">html_attributes</span>[<span class="ruby-value">:disabled</span>] = <span class="ruby-string">&#39;disabled&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">disabled</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">option_value_selected?</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">disabled</span>)
+    <span class="ruby-identifier">html_attributes</span>[<span class="ruby-value">:value</span>] = <span class="ruby-identifier">value</span>
+
+    <span class="ruby-identifier">content_tag_string</span>(<span class="ruby-value">:option</span>, <span class="ruby-identifier">text</span>, <span class="ruby-identifier">html_attributes</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-options_from_collection_for_select">
+            
+              <b>options_from_collection_for_select</b>(collection, value_method, text_method, selected = nil)
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-options_from_collection_for_select" name="method-i-options_from_collection_for_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string of option tags that have been compiled by iterating over
+the <code>collection</code> and assigning the result of a call to the
+<code>value_method</code> as the option value and the
+<code>text_method</code> as the option text.</p>
+
+<pre class="ruby"><span class="ruby-identifier">options_from_collection_for_select</span>(<span class="ruby-ivar">@people</span>, <span class="ruby-string">&#39;id&#39;</span>, <span class="ruby-string">&#39;name&#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;option value=&quot;#{person.id}&quot;&gt;#{person.name}&lt;/option&gt;</span>
+</pre>
+
+<p>This is more often than not used inside a select_tag like this example:</p>
+
+<pre>select_tag &#39;person&#39;, options_from_collection_for_select(@people, &#39;id&#39;, &#39;name&#39;)</pre>
+
+<p>If <code>selected</code> is specified as a value or array of values, the
+element(s) returning a match on <code>value_method</code> will be selected
+option tag(s).</p>
+
+<p>If <code>selected</code> is specified as a Proc, those members of the
+collection that return true for the anonymous function are the selected
+values.</p>
+
+<p><code>selected</code> can also be a hash, specifying both
+<code>:selected</code> and/or <code>:disabled</code> values as required.</p>
+
+<p>Be sure to specify the same class as the <code>value_method</code> when
+specifying selected or disabled options. Failure to do this will produce
+undesired results. Example:</p>
+
+<pre>options_from_collection_for_select(@people, &#39;id&#39;, &#39;name&#39;, &#39;1&#39;)</pre>
+
+<p>Will not select a person with the id of 1 because 1 (an <a
+href="../../Integer.html">Integer</a>) is not the same as &#39;1&#39; (a
+string)</p>
+
+<pre>options_from_collection_for_select(@people, &#39;id&#39;, &#39;name&#39;, 1)</pre>
+
+<p>should produce the desired results.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-options_from_collection_for_select_source')" id="l_method-i-options_from_collection_for_select_source">show</a>
+                
+              </p>
+              <div id="method-i-options_from_collection_for_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 381</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">options_from_collection_for_select</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">text_method</span>, <span class="ruby-identifier">selected</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">collection</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span>
+    [<span class="ruby-identifier">value_for_collection</span>(<span class="ruby-identifier">element</span>, <span class="ruby-identifier">text_method</span>), <span class="ruby-identifier">value_for_collection</span>(<span class="ruby-identifier">element</span>, <span class="ruby-identifier">value_method</span>), <span class="ruby-identifier">option_html_attributes</span>(<span class="ruby-identifier">element</span>)]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">selected</span>, <span class="ruby-identifier">disabled</span> = <span class="ruby-identifier">extract_selected_and_disabled</span>(<span class="ruby-identifier">selected</span>)
+  <span class="ruby-identifier">select_deselect</span> = {
+    <span class="ruby-value">:selected</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">extract_values_from_collection</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">selected</span>),
+    <span class="ruby-value">:disabled</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">extract_values_from_collection</span>(<span class="ruby-identifier">collection</span>, <span class="ruby-identifier">value_method</span>, <span class="ruby-identifier">disabled</span>)
+  }
+
+  <span class="ruby-identifier">options_for_select</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">select_deselect</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select">
+            
+              <b>select</b>(object, method, choices, options = {}, html_options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-select" name="method-i-select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Create a select tag and a series of contained option tags for the provided
+object and method. The option currently held by the object will be
+selected, provided that the object is available.</p>
+
+<p>There are two possible formats for the choices parameter, corresponding to
+other helpers&#39; output:</p>
+
+<pre>* A flat collection: see options_for_select
+* A nested collection: see grouped_options_for_select</pre>
+
+<p>Example with @post.person_id =&gt; 1:</p>
+
+<pre class="ruby"><span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;post&quot;</span>, <span class="ruby-string">&quot;person_id&quot;</span>, <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">p</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">p</span>.<span class="ruby-identifier">id</span> ] }, { <span class="ruby-identifier">include_blank</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> })
+</pre>
+
+<p>could become:</p>
+
+<pre>&lt;select name=&quot;post[person_id]&quot;&gt;
+  &lt;option value=&quot;&quot;&gt;&lt;/option&gt;
+  &lt;option value=&quot;1&quot; selected=&quot;selected&quot;&gt;David&lt;/option&gt;
+  &lt;option value=&quot;2&quot;&gt;Sam&lt;/option&gt;
+  &lt;option value=&quot;3&quot;&gt;Tobias&lt;/option&gt;
+&lt;/select&gt;</pre>
+
+<p>This can be used to provide a default set of options in the standard way:
+before rendering the create form, a new model instance is assigned the
+default options and bound to @model_name. Usually this model is not saved
+to the database. Instead, a second model object is created when the create
+request is received. This allows the user to submit a form page more than
+once with the expected results of creating multiple records. In addition,
+this allows a single partial to be used to generate form inputs for both
+edit and create forms.</p>
+
+<p>By default, <code>post.person_id</code> is the selected option. Specify
+<code>selected: value</code> to use a different selection or
+<code>selected: nil</code> to leave all options unselected. Similarly, you
+can specify values to be disabled in the option tags by specifying the
+<code>:disabled</code> option. This can either be a single value or an
+array of values to be disabled.</p>
+
+<h4 id="method-i-select-label-Gotcha">Gotcha</h4>
+
+<p>The <a href="../../HTML.html">HTML</a> specification says when
+<code>multiple</code> parameter passed to select and all options got
+deselected web browsers do not send any value to server. Unfortunately this
+introduces a gotcha: if an <code>User</code> model has many
+<code>roles</code> and have <code>role_ids</code> accessor, and in the form
+that edits roles of the user the user deselects all roles from
+<code>role_ids</code> multiple select box, no <code>role_ids</code>
+parameter is sent. So, any mass-assignment idiom like</p>
+
+<pre>@user.update(params[:user])</pre>
+
+<p>wouldn&#39;t update roles.</p>
+
+<p>To prevent this the helper generates an auxiliary hidden field before every
+multiple select. The hidden field has the same name as multiple select and
+blank value.</p>
+
+<p>This way, the client either sends only the hidden field (representing the
+deselected multiple select box), or both fields. Since the <a
+href="../../HTML.html">HTML</a> specification says key/value pairs have to
+be sent in the same order they appear in the form, and parameters
+extraction gets the last occurrence of any repeated key in the query
+string, that works for ordinary forms.</p>
+
+<p>In case if you don&#39;t want the helper to generate this hidden field you
+can specify <code>include_hidden: false</code> option.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_source')" id="l_method-i-select_source">show</a>
+                
+              </p>
+              <div id="method-i-select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">choices</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">Select</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">choices</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-time_zone_options_for_select">
+            
+              <b>time_zone_options_for_select</b>(selected = nil, priority_zones = nil, model = ::ActiveSupport::TimeZone)
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-time_zone_options_for_select" name="method-i-time_zone_options_for_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string of option tags for pretty much any time zone in the world.
+Supply a <a
+href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a> name
+as <code>selected</code> to have it marked as the selected option tag. You
+can also supply an array of <a
+href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a>
+objects as <code>priority_zones</code>, so that they will be listed above
+the rest of the (long) list. (You can use <a
+href="../../ActiveSupport/TimeZone.html#method-c-us_zones">ActiveSupport::TimeZone.us_zones</a>
+as a convenience for obtaining a list of the US time zones, or a Regexp to
+select the zones of your choice)</p>
+
+<p>The <code>selected</code> parameter must be either <code>nil</code>, or a
+string that names a <a
+href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a>.</p>
+
+<p>By default, <code>model</code> is the <a
+href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a>
+constant (which can be obtained in Active Record as a value object). The
+only requirement is that the <code>model</code> parameter be an object that
+responds to <code>all</code>, and returns an array of objects that
+represent time zones.</p>
+
+<p>NOTE: Only the option tags are returned, you have to wrap this call in a
+regular <a href="../../HTML.html">HTML</a> select tag.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-time_zone_options_for_select_source')" id="l_method-i-time_zone_options_for_select_source">show</a>
+                
+              </p>
+              <div id="method-i-time_zone_options_for_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 560</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_zone_options_for_select</span>(<span class="ruby-identifier">selected</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">priority_zones</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">model</span> = <span class="ruby-operator">::</span><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeZone</span>)
+  <span class="ruby-identifier">zone_options</span> = <span class="ruby-string">&quot;&quot;</span>.<span class="ruby-identifier">html_safe</span>
+
+  <span class="ruby-identifier">zones</span> = <span class="ruby-identifier">model</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">convert_zones</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">list</span><span class="ruby-operator">|</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">z</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">z</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">z</span>.<span class="ruby-identifier">name</span> ] } }
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">priority_zones</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">priority_zones</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Regexp</span>)
+      <span class="ruby-identifier">priority_zones</span> = <span class="ruby-identifier">zones</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">z</span><span class="ruby-operator">|</span> <span class="ruby-identifier">z</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">priority_zones</span> }
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">zone_options</span>.<span class="ruby-identifier">safe_concat</span> <span class="ruby-identifier">options_for_select</span>(<span class="ruby-identifier">convert_zones</span>[<span class="ruby-identifier">priority_zones</span>], <span class="ruby-identifier">selected</span>)
+    <span class="ruby-identifier">zone_options</span>.<span class="ruby-identifier">safe_concat</span> <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:option</span>, <span class="ruby-string">&#39;-------------&#39;</span>, <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:disabled</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;disabled&#39;</span>)
+    <span class="ruby-identifier">zone_options</span>.<span class="ruby-identifier">safe_concat</span> <span class="ruby-string">&quot;\n&quot;</span>
+
+    <span class="ruby-identifier">zones</span> = <span class="ruby-identifier">zones</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">priority_zones</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">zone_options</span>.<span class="ruby-identifier">safe_concat</span> <span class="ruby-identifier">options_for_select</span>(<span class="ruby-identifier">convert_zones</span>[<span class="ruby-identifier">zones</span>], <span class="ruby-identifier">selected</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-time_zone_select">
+            
+              <b>time_zone_select</b>(object, method, priority_zones = nil, options = {}, html_options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/FormOptionsHelper.html#method-i-time_zone_select" name="method-i-time_zone_select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return select and option tags for the given object and method, using <a
+href="FormOptionsHelper.html#method-i-time_zone_options_for_select">time_zone_options_for_select</a>
+to generate the list of option tags.</p>
+
+<p>In addition to the <code>:include_blank</code> option documented above,
+this method also supports a <code>:model</code> option, which defaults to
+<a href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a>.
+This may be used by users to specify a different time zone model object.
+(See <code>time_zone_options_for_select</code> for more information.)</p>
+
+<p>You can also supply an array of <a
+href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a>
+objects as <code>priority_zones</code>, so that they will be listed above
+the rest of the (long) list. (You can use <a
+href="../../ActiveSupport/TimeZone.html#method-c-us_zones">ActiveSupport::TimeZone.us_zones</a>
+as a convenience for obtaining a list of the US time zones, or a Regexp to
+select the zones of your choice)</p>
+
+<p>Finally, this method supports a <code>:default</code> option, which selects
+a default <a
+href="../../ActiveSupport/TimeZone.html">ActiveSupport::TimeZone</a> if the
+object&#39;s time zone is <code>nil</code>.</p>
+
+<pre>time_zone_select( &quot;user&quot;, &quot;time_zone&quot;, nil, include_blank: true)
+
+time_zone_select( &quot;user&quot;, &quot;time_zone&quot;, nil, default: &quot;Pacific Time (US &amp; Canada)&quot; )
+
+time_zone_select( &quot;user&quot;, &#39;time_zone&#39;, ActiveSupport::TimeZone.us_zones, default: &quot;Pacific Time (US &amp; Canada)&quot;)
+
+time_zone_select( &quot;user&quot;, &#39;time_zone&#39;, [ ActiveSupport::TimeZone[&#39;Alaska&#39;], ActiveSupport::TimeZone[&#39;Hawaii&#39;] ])
+
+time_zone_select( &quot;user&quot;, &#39;time_zone&#39;, /Australia/)
+
+time_zone_select( &quot;user&quot;, &quot;time_zone&quot;, ActiveSupport::TimeZone.all.sort, model: ActiveSupport::TimeZone)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-time_zone_select_source')" id="l_method-i-time_zone_select_source">show</a>
+                
+              </p>
+              <div id="method-i-time_zone_select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/form_options_helper.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time_zone_select</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-identifier">priority_zones</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">html_options</span> = {})
+  <span class="ruby-constant">Tags</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeZoneSelect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">method</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">priority_zones</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">html_options</span>).<span class="ruby-identifier">render</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

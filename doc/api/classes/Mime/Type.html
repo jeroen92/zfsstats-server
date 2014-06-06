@@ -1,0 +1,1087 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Mime::Type</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Mime::Type 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/http/mime_type_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Encapsulates the notion of a mime type. Can be used at render time, for
+example, with:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+    <span class="ruby-ivar">@post</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">ics</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-identifier">post</span>.<span class="ruby-identifier">to_ics</span>, <span class="ruby-identifier">mime_type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>[<span class="ruby-string">&quot;text/calendar&quot;</span>]  }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@people</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-3D-3D">==</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-3D-3D-3D">===</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-3D-7E">=~</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-browser_generated_types">browser_generated_types</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-html-3F">html?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-lookup">lookup</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-lookup_by_extension">lookup_by_extension</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-parse">parse</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-parse_data_with_trailing_star">parse_data_with_trailing_star</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-parse_trailing_star">parse_trailing_star</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-ref">ref</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-register">register</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-register_alias">register_alias</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-register_callback">register_callback</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_str">to_str</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_sym">to_sym</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-unregister">unregister</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-verify_request-3F">verify_request?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">TRAILING_STAR_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/(text|application)\/\*/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">PARAMETER_SEPARATOR_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/;\s*\w+=&quot;?\w+&quot;?/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>symbol</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-browser_generated_types">
+            
+              <b>browser_generated_types</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-c-browser_generated_types" name="method-c-browser_generated_types" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-browser_generated_types_source')" id="l_method-c-browser_generated_types_source">show</a>
+                
+              </p>
+              <div id="method-c-browser_generated_types_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 282</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">browser_generated_types</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Mime::Type.browser_generated_types is deprecated and will be removed in Rails 4.1&quot;</span>
+  <span class="ruby-identifier">@@browser_generated_types</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-lookup">
+            
+              <b>lookup</b>(string)
+            
+            <a href="../../classes/Mime/Type.html#method-c-lookup" name="method-c-lookup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-lookup_source')" id="l_method-c-lookup_source">show</a>
+                
+              </p>
+              <div id="method-c-lookup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">lookup</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-constant">LOOKUP</span>[<span class="ruby-identifier">string</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-lookup_by_extension">
+            
+              <b>lookup_by_extension</b>(extension)
+            
+            <a href="../../classes/Mime/Type.html#method-c-lookup_by_extension" name="method-c-lookup_by_extension" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-lookup_by_extension_source')" id="l_method-c-lookup_by_extension_source">show</a>
+                
+              </p>
+              <div id="method-c-lookup_by_extension_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">lookup_by_extension</span>(<span class="ruby-identifier">extension</span>)
+  <span class="ruby-constant">EXTENSION_LOOKUP</span>[<span class="ruby-identifier">extension</span>.<span class="ruby-identifier">to_s</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(string, symbol = nil, synonyms = [])
+            
+            <a href="../../classes/Mime/Type.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 231</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">symbol</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">synonyms</span> = [])
+  <span class="ruby-ivar">@symbol</span>, <span class="ruby-ivar">@synonyms</span> = <span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">synonyms</span>
+  <span class="ruby-ivar">@string</span> = <span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-parse">
+            
+              <b>parse</b>(accept_header)
+            
+            <a href="../../classes/Mime/Type.html#method-c-parse" name="method-c-parse" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-parse_source')" id="l_method-c-parse_source">show</a>
+                
+              </p>
+              <div id="method-c-parse_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse</span>(<span class="ruby-identifier">accept_header</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">accept_header</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/,/</span>
+    <span class="ruby-identifier">accept_header</span> = <span class="ruby-identifier">accept_header</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">PARAMETER_SEPARATOR_REGEXP</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">parse_trailing_star</span>(<span class="ruby-identifier">accept_header</span>) <span class="ruby-operator">||</span> [<span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">accept_header</span>)]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">list</span>, <span class="ruby-identifier">index</span> = <span class="ruby-constant">AcceptList</span>.<span class="ruby-identifier">new</span>, <span class="ruby-number">0</span>
+    <span class="ruby-identifier">accept_header</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">header</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">params</span>, <span class="ruby-identifier">q</span> = <span class="ruby-identifier">header</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">PARAMETER_SEPARATOR_REGEXP</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">present?</span>
+        <span class="ruby-identifier">params</span>.<span class="ruby-identifier">strip!</span>
+
+        <span class="ruby-identifier">params</span> = <span class="ruby-identifier">parse_trailing_star</span>(<span class="ruby-identifier">params</span>) <span class="ruby-operator">||</span> [<span class="ruby-identifier">params</span>]
+
+        <span class="ruby-identifier">params</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">AcceptItem</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">index</span>, <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">q</span>)
+          <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">list</span>.<span class="ruby-identifier">assort!</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-parse_data_with_trailing_star">
+            
+              <b>parse_data_with_trailing_star</b>(input)
+            
+            <a href="../../classes/Mime/Type.html#method-c-parse_data_with_trailing_star" name="method-c-parse_data_with_trailing_star" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>For an input of <code>&#39;text&#39;</code>, returns <code>[Mime::JSON,
+Mime::XML, Mime::ICS, Mime::HTML, Mime::CSS, Mime::CSV, Mime::JS,
+Mime::YAML, Mime::TEXT]</code>.</p>
+
+<p>For an input of <code>&#39;application&#39;</code>, returns
+<code>[Mime::HTML, Mime::JS, Mime::XML, Mime::YAML, Mime::ATOM, Mime::JSON,
+Mime::RSS, Mime::URL_ENCODED_FORM]</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-parse_data_with_trailing_star_source')" id="l_method-c-parse_data_with_trailing_star_source">show</a>
+                
+              </p>
+              <div id="method-c-parse_data_with_trailing_star_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse_data_with_trailing_star</span>(<span class="ruby-identifier">input</span>)
+  <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">SET</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">input</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-parse_trailing_star">
+            
+              <b>parse_trailing_star</b>(accept_header)
+            
+            <a href="../../classes/Mime/Type.html#method-c-parse_trailing_star" name="method-c-parse_trailing_star" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-parse_trailing_star_source')" id="l_method-c-parse_trailing_star_source">show</a>
+                
+              </p>
+              <div id="method-c-parse_trailing_star_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse_trailing_star</span>(<span class="ruby-identifier">accept_header</span>)
+  <span class="ruby-identifier">parse_data_with_trailing_star</span>(<span class="ruby-node">$1</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">accept_header</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">TRAILING_STAR_REGEXP</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-register">
+            
+              <b>register</b>(string, symbol, mime_type_synonyms = [], extension_synonyms = [], skip_lookup = false)
+            
+            <a href="../../classes/Mime/Type.html#method-c-register" name="method-c-register" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-register_source')" id="l_method-c-register_source">show</a>
+                
+              </p>
+              <div id="method-c-register_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">register</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">mime_type_synonyms</span> = [], <span class="ruby-identifier">extension_synonyms</span> = [], <span class="ruby-identifier">skip_lookup</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-constant">Mime</span>.<span class="ruby-identifier">const_set</span>(<span class="ruby-identifier">symbol</span>.<span class="ruby-identifier">upcase</span>, <span class="ruby-constant">Type</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">mime_type_synonyms</span>))
+
+  <span class="ruby-identifier">new_mime</span> = <span class="ruby-constant">Mime</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">symbol</span>.<span class="ruby-identifier">upcase</span>)
+  <span class="ruby-constant">SET</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_mime</span>
+
+  ([<span class="ruby-identifier">string</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">mime_type_synonyms</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span> <span class="ruby-constant">LOOKUP</span>[<span class="ruby-identifier">str</span>] = <span class="ruby-constant">SET</span>.<span class="ruby-identifier">last</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">skip_lookup</span>
+  ([<span class="ruby-identifier">symbol</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">extension_synonyms</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ext</span><span class="ruby-operator">|</span> <span class="ruby-constant">EXTENSION_LOOKUP</span>[<span class="ruby-identifier">ext</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-constant">SET</span>.<span class="ruby-identifier">last</span> }
+
+  <span class="ruby-ivar">@register_callbacks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">callback</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">new_mime</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-register_alias">
+            
+              <b>register_alias</b>(string, symbol, extension_synonyms = [])
+            
+            <a href="../../classes/Mime/Type.html#method-c-register_alias" name="method-c-register_alias" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Registers an alias that&#39;s not used on mime type lookup, but can be
+referenced directly. Especially useful for rendering different <a
+href="../HTML.html">HTML</a> versions depending on the user agent, like an
+iPhone.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-register_alias_source')" id="l_method-c-register_alias_source">show</a>
+                
+              </p>
+              <div id="method-c-register_alias_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">register_alias</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">symbol</span>, <span class="ruby-identifier">extension_synonyms</span> = [])
+  <span class="ruby-identifier">register</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">symbol</span>, [], <span class="ruby-identifier">extension_synonyms</span>, <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-register_callback">
+            
+              <b>register_callback</b>(&amp;block)
+            
+            <a href="../../classes/Mime/Type.html#method-c-register_callback" name="method-c-register_callback" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-register_callback_source')" id="l_method-c-register_callback_source">show</a>
+                
+              </p>
+              <div id="method-c-register_callback_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">register_callback</span>(&amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@register_callbacks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-unregister">
+            
+              <b>unregister</b>(symbol)
+            
+            <a href="../../classes/Mime/Type.html#method-c-unregister" name="method-c-unregister" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This method is opposite of register method.</p>
+
+<p>Usage:</p>
+
+<pre>Mime::Type.unregister(:mobile)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-unregister_source')" id="l_method-c-unregister_source">show</a>
+                
+              </p>
+              <div id="method-c-unregister_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unregister</span>(<span class="ruby-identifier">symbol</span>)
+  <span class="ruby-identifier">symbol</span> = <span class="ruby-identifier">symbol</span>.<span class="ruby-identifier">upcase</span>
+  <span class="ruby-identifier">mime</span> = <span class="ruby-constant">Mime</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">symbol</span>)
+  <span class="ruby-constant">Mime</span>.<span class="ruby-identifier">instance_eval</span> { <span class="ruby-identifier">remove_const</span>(<span class="ruby-identifier">symbol</span>) }
+
+  <span class="ruby-constant">SET</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">mime</span>) }
+  <span class="ruby-constant">LOOKUP</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">mime</span>) }
+  <span class="ruby-constant">EXTENSION_LOOKUP</span>.<span class="ruby-identifier">delete_if</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">mime</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-3D-3D">
+            
+              <b>==</b>(mime_type)
+            
+            <a href="../../classes/Mime/Type.html#method-i-3D-3D" name="method-i-3D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3D-3D_source')" id="l_method-i-3D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-3D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 260</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-keyword ruby-title">mime_type</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mime_type</span>.<span class="ruby-identifier">blank?</span>
+  (<span class="ruby-ivar">@synonyms</span> <span class="ruby-operator">+</span> [ <span class="ruby-keyword">self</span> ]).<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">synonym</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">synonym</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">mime_type</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">synonym</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">mime_type</span>.<span class="ruby-identifier">to_sym</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-3D-3D-3D">
+            
+              <b>===</b>(list)
+            
+            <a href="../../classes/Mime/Type.html#method-i-3D-3D-3D" name="method-i-3D-3D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3D-3D-3D_source')" id="l_method-i-3D-3D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-3D-3D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">===</span>(<span class="ruby-keyword ruby-title">list</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    (<span class="ruby-ivar">@synonyms</span> <span class="ruby-operator">+</span> [ <span class="ruby-keyword">self</span> ]).<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">synonym</span><span class="ruby-operator">|</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">synonym</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-3D-7E">
+            
+              <b>=~</b>(mime_type)
+            
+            <a href="../../classes/Mime/Type.html#method-i-3D-7E" name="method-i-3D-7E" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3D-7E_source')" id="l_method-i-3D-7E_source">show</a>
+                
+              </p>
+              <div id="method-i-3D-7E_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">=~</span>(<span class="ruby-keyword ruby-title">mime_type</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mime_type</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-identifier">regexp</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">quote</span>(<span class="ruby-identifier">mime_type</span>.<span class="ruby-identifier">to_s</span>))
+  (<span class="ruby-ivar">@synonyms</span> <span class="ruby-operator">+</span> [ <span class="ruby-keyword">self</span> ]).<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">synonym</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">synonym</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">regexp</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-html-3F">
+            
+              <b>html?</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-i-html-3F" name="method-i-html-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-html-3F_source')" id="l_method-i-html-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-html-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 287</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">html?</span>
+  <span class="ruby-identifier">@@html_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">to_sym</span>) <span class="ruby-operator">||</span> <span class="ruby-ivar">@string</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/html/</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ref">
+            
+              <b>ref</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-i-ref" name="method-i-ref" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ref_source')" id="l_method-i-ref_source">show</a>
+                
+              </p>
+              <div id="method-i-ref_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 248</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ref</span>
+  <span class="ruby-identifier">to_sym</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_s_source')" id="l_method-i-to_s_source">show</a>
+                
+              </p>
+              <div id="method-i-to_s_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 236</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_s</span>
+  <span class="ruby-ivar">@string</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_str">
+            
+              <b>to_str</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-i-to_str" name="method-i-to_str" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_str_source')" id="l_method-i-to_str_source">show</a>
+                
+              </p>
+              <div id="method-i-to_str_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 240</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_str</span>
+  <span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_sym">
+            
+              <b>to_sym</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-i-to_sym" name="method-i-to_sym" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_sym_source')" id="l_method-i-to_sym_source">show</a>
+                
+              </p>
+              <div id="method-i-to_sym_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_sym</span>
+  <span class="ruby-ivar">@symbol</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-verify_request-3F">
+            
+              <b>verify_request?</b>()
+            
+            <a href="../../classes/Mime/Type.html#method-i-verify_request-3F" name="method-i-verify_request-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if Action Pack should check requests using this <a
+href="../Mime.html">Mime</a> <a href="Type.html">Type</a> for possible
+request forgery. See <a
+href="../ActionController/RequestForgeryProtection.html">ActionController::RequestForgeryProtection</a>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-verify_request-3F_source')" id="l_method-i-verify_request-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-verify_request-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/mime_type.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">verify_request?</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;Mime::Type#verify_request? is deprecated and will be removed in Rails 4.1&quot;</span>
+  <span class="ruby-identifier">@@browser_generated_types</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">to_sym</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::ConditionalGet::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::ConditionalGet::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/conditional_get_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-etag">etag</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-etag">
+            
+              <b>etag</b>(&amp;etagger)
+            
+            <a href="../../../classes/ActionController/ConditionalGet/ClassMethods.html#method-i-etag" name="method-i-etag" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows you to consider additional controller-wide information when
+generating an etag. For example, if you serve pages tailored depending on
+who&#39;s logged in at the moment, you may want to add the current user id
+to be part of the etag to prevent authorized displaying of cached pages.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">InvoicesController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">etag</span> { <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">try</span> :<span class="ruby-identifier">id</span> }
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+    <span class="ruby-comment"># Etag will differ even for the same invoice when it&#39;s viewed by a different current_user</span>
+    <span class="ruby-ivar">@invoice</span> = <span class="ruby-constant">Invoice</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+    <span class="ruby-identifier">fresh_when</span>(<span class="ruby-ivar">@invoice</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-etag_source')" id="l_method-i-etag_source">show</a>
+                
+              </p>
+              <div id="method-i-etag_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">etag</span>(&amp;<span class="ruby-identifier">etagger</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">etaggers</span> <span class="ruby-operator">+=</span> [<span class="ruby-identifier">etagger</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::TaggedLogging</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::TaggedLogging 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/tagged_logging_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Wraps any standard <a href="Logger.html">Logger</a> object to provide
+tagging capabilities.</p>
+
+<pre>logger = ActiveSupport::TaggedLogging.new(Logger.new(STDOUT))
+logger.tagged(&#39;BCX&#39;) { logger.info &#39;Stuff&#39; }                            # Logs &quot;[BCX] Stuff&quot;
+logger.tagged(&#39;BCX&#39;, &quot;Jason&quot;) { logger.info &#39;Stuff&#39; }                   # Logs &quot;[BCX] [Jason] Stuff&quot;
+logger.tagged(&#39;BCX&#39;) { logger.tagged(&#39;Jason&#39;) { logger.info &#39;Stuff&#39; } } # Logs &quot;[BCX] [Jason] Stuff&quot;</pre>
+
+<p>This is used by the default <a
+href="../Rails.html#attribute-c-logger">Rails.logger</a> as configured by
+Railties to make it easy to stamp log lines with subdomains, request ids,
+and anything else to aid debugging of multi-user production applications.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-flush">flush</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-tagged">tagged</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(logger)
+            
+            <a href="../../classes/ActiveSupport/TaggedLogging.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">logger</span>)
+  <span class="ruby-comment"># Ensure we set a default formatter so we aren&#39;t extending nil!</span>
+  <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">formatter</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">SimpleFormatter</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Formatter</span>
+  <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-flush">
+            
+              <b>flush</b>()
+            
+            <a href="../../classes/ActiveSupport/TaggedLogging.html#method-i-flush" name="method-i-flush" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-flush_source')" id="l_method-i-flush_source">show</a>
+                
+              </p>
+              <div id="method-i-flush_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flush</span>
+  <span class="ruby-identifier">clear_tags!</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-keyword">super</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tagged">
+            
+              <b>tagged</b>(*tags)
+            
+            <a href="../../classes/ActiveSupport/TaggedLogging.html#method-i-tagged" name="method-i-tagged" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tagged_source')" id="l_method-i-tagged_source">show</a>
+                
+              </p>
+              <div id="method-i-tagged_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/tagged_logging.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tagged</span>(*<span class="ruby-identifier">tags</span>)
+  <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">tagged</span>(*<span class="ruby-identifier">tags</span>) { <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

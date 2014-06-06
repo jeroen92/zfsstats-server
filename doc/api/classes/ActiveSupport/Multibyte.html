@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Multibyte</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Multibyte 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/multibyte_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/multibyte/chars_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/multibyte/unicode_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Multibyte/Unicode.html">ActiveSupport::Multibyte::Unicode</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Multibyte/Chars.html">ActiveSupport::Multibyte::Chars</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-proxy_class">proxy_class</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-proxy_class-3D">proxy_class=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-proxy_class">
+            
+              <b>proxy_class</b>()
+            
+            <a href="../../classes/ActiveSupport/Multibyte.html#method-c-proxy_class" name="method-c-proxy_class" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the current proxy class.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-proxy_class_source')" id="l_method-c-proxy_class_source">show</a>
+                
+              </p>
+              <div id="method-c-proxy_class_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">proxy_class</span>
+  <span class="ruby-ivar">@proxy_class</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Multibyte</span><span class="ruby-operator">::</span><span class="ruby-constant">Chars</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-proxy_class-3D">
+            
+              <b>proxy_class=</b>(klass)
+            
+            <a href="../../classes/ActiveSupport/Multibyte.html#method-c-proxy_class-3D" name="method-c-proxy_class-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The proxy class returned when calling mb_chars. You can use this accessor
+to configure your own proxy class so you can support other encodings. See
+the <a href="Multibyte/Chars.html">ActiveSupport::Multibyte::Chars</a>
+implementation for an example how to do this.</p>
+
+<pre>ActiveSupport::Multibyte.proxy_class = CharsForUTF32</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-proxy_class-3D_source')" id="l_method-c-proxy_class-3D_source">show</a>
+                
+              </p>
+              <div id="method-c-proxy_class-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">proxy_class=</span>(<span class="ruby-identifier">klass</span>)
+  <span class="ruby-ivar">@proxy_class</span> = <span class="ruby-identifier">klass</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,20 @@
+<div class="control-group" ng-class="{true: 'error'}[submitted && measurementJobForm.interval.$invalid]">
+      <form name="measurementJobForm">
+        <div class="modal-header">
+          <h3>Edit Measurement Job</h3>
+        </div>
+        <div class="modal-body">
+          <label>Interval in minutes</label>
+          <div class="controls">
+            <input type="number" name="interval" ng-model="measurementJob.interval" required>
+            <label style="color:#b94a48" class="help-inline" ng-show="measurementJobForm.interval.$error.required">Invalid number</label>
+          </div>
+          <label>Job enabled/disabled</label>
+          <input type="checkbox" name="status" ng-model="measurementJob.status" required>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-success" ng-click="submitted=true; save()">Save</button>
+          <button class="btn btn-danger" ng-click="cancel()">Cancel</button>
+        </div>
+      </form>
+</div>

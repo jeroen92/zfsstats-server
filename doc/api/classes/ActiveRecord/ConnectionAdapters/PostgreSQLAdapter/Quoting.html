@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::Quoting</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::Quoting 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/quoting_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-escape_bytea">escape_bytea</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Q</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-quote_table_name">quote_table_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-quote_table_name_for_assignment">quote_table_name_for_assignment</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-type_cast">type_cast</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-unescape_bytea">unescape_bytea</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-escape_bytea">
+            
+              <b>escape_bytea</b>(value)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/Quoting.html#method-i-escape_bytea" name="method-i-escape_bytea" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Escapes binary strings for bytea input to the database.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-escape_bytea_source')" id="l_method-i-escape_bytea_source">show</a>
+                
+              </p>
+              <div id="method-i-escape_bytea_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">escape_bytea</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-constant">PGconn</span>.<span class="ruby-identifier">escape_bytea</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-quote_table_name">
+            
+              <b>quote_table_name</b>(name)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/Quoting.html#method-i-quote_table_name" name="method-i-quote_table_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Checks the following cases:</p>
+<ul><li>
+<p>table_name</p>
+</li><li>
+<p>“table.name”</p>
+</li><li>
+<p>schema_name.table_name</p>
+</li><li>
+<p>schema_name.“table.name”</p>
+</li><li>
+<p>“schema.name”.table_name</p>
+</li><li>
+<p>“schema.name”.“table.name”</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-quote_table_name_source')" id="l_method-i-quote_table_name_source">show</a>
+                
+              </p>
+              <div id="method-i-quote_table_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">quote_table_name</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">schema</span>, <span class="ruby-identifier">name_part</span> = <span class="ruby-identifier">extract_pg_identifier_from_name</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>)
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name_part</span>
+    <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">schema</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">name_part</span> = <span class="ruby-identifier">extract_pg_identifier_from_name</span>(<span class="ruby-identifier">name_part</span>)
+    <span class="ruby-node">&quot;#{quote_column_name(schema)}.#{quote_column_name(table_name)}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-quote_table_name_for_assignment">
+            
+              <b>quote_table_name_for_assignment</b>(table, attr)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/Quoting.html#method-i-quote_table_name_for_assignment" name="method-i-quote_table_name_for_assignment" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-quote_table_name_for_assignment_source')" id="l_method-i-quote_table_name_for_assignment_source">show</a>
+                
+              </p>
+              <div id="method-i-quote_table_name_for_assignment_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">quote_table_name_for_assignment</span>(<span class="ruby-identifier">table</span>, <span class="ruby-identifier">attr</span>)
+  <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">attr</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-type_cast">
+            
+              <b>type_cast</b>(value, column, array_member = false)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/Quoting.html#method-i-type_cast" name="method-i-type_cast" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-type_cast_source')" id="l_method-i-type_cast_source">show</a>
+                
+              </p>
+              <div id="method-i-type_cast_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">type_cast</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>, <span class="ruby-identifier">array_member</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">column</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Range</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>) <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/range$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sql_type</span>
+    <span class="ruby-constant">PostgreSQLColumn</span>.<span class="ruby-identifier">range_to_string</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">NilClass</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">array</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">array_member</span>
+      <span class="ruby-string">&#39;NULL&#39;</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">array</span>
+      <span class="ruby-identifier">value</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sql_type</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;point&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">PostgreSQLColumn</span>.<span class="ruby-identifier">point_to_string</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">array</span>
+      <span class="ruby-constant">PostgreSQLColumn</span>.<span class="ruby-identifier">array_to_string</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>, <span class="ruby-keyword">self</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>) <span class="ruby-keyword">unless</span> <span class="ruby-string">&#39;bytea&#39;</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sql_type</span>
+    { <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>, <span class="ruby-value">:format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span> }
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sql_type</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;hstore&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">PostgreSQLColumn</span>.<span class="ruby-identifier">hstore_to_string</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;json&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-constant">PostgreSQLColumn</span>.<span class="ruby-identifier">json_to_string</span>(<span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword">else</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">IPAddr</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>) <span class="ruby-keyword">unless</span> [<span class="ruby-string">&#39;inet&#39;</span>,<span class="ruby-string">&#39;cidr&#39;</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sql_type</span>
+    <span class="ruby-constant">PostgreSQLColumn</span>.<span class="ruby-identifier">cidr_to_string</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unescape_bytea">
+            
+              <b>unescape_bytea</b>(value)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/Quoting.html#method-i-unescape_bytea" name="method-i-unescape_bytea" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Unescapes bytea output from a database to the binary string it represents.
+NOTE: This is NOT an inverse of <a
+href="Quoting.html#method-i-escape_bytea">#escape_bytea</a>! This is only
+to be used on escaped binary output from database drive.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-unescape_bytea_source')" id="l_method-i-unescape_bytea_source">show</a>
+                
+              </p>
+              <div id="method-i-unescape_bytea_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unescape_bytea</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-constant">PGconn</span>.<span class="ruby-identifier">unescape_bytea</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

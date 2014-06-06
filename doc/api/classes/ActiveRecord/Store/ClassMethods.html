@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Store::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Store::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/store_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_store_accessors_module">_store_accessors_module</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-store">store</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-store_accessor">store_accessor</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_store_accessors_module">
+            
+              <b>_store_accessors_module</b>()
+            
+            <a href="../../../classes/ActiveRecord/Store/ClassMethods.html#method-i-_store_accessors_module" name="method-i-_store_accessors_module" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_store_accessors_module_source')" id="l_method-i-_store_accessors_module_source">show</a>
+                
+              </p>
+              <div id="method-i-_store_accessors_module_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_store_accessors_module</span>
+  <span class="ruby-ivar">@_store_accessors_module</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">mod</span> = <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">include</span> <span class="ruby-identifier">mod</span>
+    <span class="ruby-identifier">mod</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-store">
+            
+              <b>store</b>(store_attribute, options = {})
+            
+            <a href="../../../classes/ActiveRecord/Store/ClassMethods.html#method-i-store" name="method-i-store" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-store_source')" id="l_method-i-store_source">show</a>
+                
+              </p>
+              <div id="method-i-store_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">store</span>(<span class="ruby-identifier">store_attribute</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">serialize</span> <span class="ruby-identifier">store_attribute</span>, <span class="ruby-constant">IndifferentCoder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:coder</span>])
+  <span class="ruby-identifier">store_accessor</span>(<span class="ruby-identifier">store_attribute</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:accessors</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span> <span class="ruby-value">:accessors</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-store_accessor">
+            
+              <b>store_accessor</b>(store_attribute, *keys)
+            
+            <a href="../../../classes/ActiveRecord/Store/ClassMethods.html#method-i-store_accessor" name="method-i-store_accessor" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-store_accessor_source')" id="l_method-i-store_accessor_source">show</a>
+                
+              </p>
+              <div id="method-i-store_accessor_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">store_accessor</span>(<span class="ruby-identifier">store_attribute</span>, *<span class="ruby-identifier">keys</span>)
+  <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">flatten</span>
+
+  <span class="ruby-identifier">_store_accessors_module</span>.<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;#{key}=&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">write_store_attribute</span>(<span class="ruby-identifier">store_attribute</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">do</span>
+        <span class="ruby-identifier">read_store_attribute</span>(<span class="ruby-identifier">store_attribute</span>, <span class="ruby-identifier">key</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">stored_attributes</span>[<span class="ruby-identifier">store_attribute</span>] <span class="ruby-operator">||=</span> []
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">stored_attributes</span>[<span class="ruby-identifier">store_attribute</span>] <span class="ruby-operator">|=</span> <span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Deprecation::Behavior</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Deprecation::Behavior 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/deprecation/behaviors_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/behaviors.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-behavior">behavior</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-behavior-3D">behavior=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>debug</td>
+            <td class='attr-desc'><p>Whether to print a backtrace along with the warning.</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-behavior">
+            
+              <b>behavior</b>()
+            
+            <a href="../../../classes/ActiveSupport/Deprecation/Behavior.html#method-i-behavior" name="method-i-behavior" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the current behavior or if one isn&#39;t set, defaults to
+<code>:stderr</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-behavior_source')" id="l_method-i-behavior_source">show</a>
+                
+              </p>
+              <div id="method-i-behavior_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/behaviors.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">behavior</span>
+  <span class="ruby-ivar">@behavior</span> <span class="ruby-operator">||=</span> [<span class="ruby-constant">DEFAULT_BEHAVIORS</span>[<span class="ruby-value">:stderr</span>]]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-behavior-3D">
+            
+              <b>behavior=</b>(behavior)
+            
+            <a href="../../../classes/ActiveSupport/Deprecation/Behavior.html#method-i-behavior-3D" name="method-i-behavior-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the behavior to the specified value. Can be a single value, array, or
+an object that responds to <code>call</code>.</p>
+
+<p>Available behaviors:</p>
+<dl class="rdoc-list label-list"><dt><code>stderr</code>
+<dd>
+<p>Log all deprecation warnings to +$stderr+.</p>
+</dd><dt><code>log</code>
+<dd>
+<p>Log all deprecation warnings to <code>Rails.logger</code>.</p>
+</dd><dt><code>notify</code>
+<dd>
+<p>Use +ActiveSupport::Notifications+ to notify
+<code>deprecation.rails</code>.</p>
+</dd><dt><code>silence</code>
+<dd>
+<p>Do nothing.</p>
+</dd></dl>
+
+<p>Setting behaviors only affects deprecations that happen after boot time. <a
+href="../Deprecation.html">Deprecation</a> warnings raised by gems are not
+affected by this setting because they happen before <a
+href="../../Rails.html">Rails</a> boots up.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">behavior</span> = :<span class="ruby-identifier">stderr</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">behavior</span> = [:<span class="ruby-identifier">stderr</span>, :<span class="ruby-identifier">log</span>]
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">behavior</span> = <span class="ruby-constant">MyCustomHandler</span>
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">behavior</span> = <span class="ruby-identifier">proc</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">message</span>, <span class="ruby-identifier">callstack</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># custom stuff</span>
+}
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-behavior-3D_source')" id="l_method-i-behavior-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-behavior-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/behaviors.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">behavior=</span>(<span class="ruby-identifier">behavior</span>)
+  <span class="ruby-ivar">@behavior</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">behavior</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-constant">DEFAULT_BEHAVIORS</span>[<span class="ruby-identifier">b</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">b</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

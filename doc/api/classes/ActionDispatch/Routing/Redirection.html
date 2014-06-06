@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Routing::Redirection</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Routing::Redirection 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/redirection_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/redirection.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-redirect">redirect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-redirect">
+            
+              <b>redirect</b>(*args, &amp;block)
+            
+            <a href="../../../classes/ActionDispatch/Routing/Redirection.html#method-i-redirect" name="method-i-redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Redirect any path to another path:</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/stories&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">redirect</span>(<span class="ruby-string">&quot;/posts&quot;</span>)
+</pre>
+
+<p>You can also use interpolation in the supplied redirect argument:</p>
+
+<pre>get &#39;docs/:article&#39;, to: redirect(&#39;/wiki/%{article}&#39;)</pre>
+
+<p>Alternatively you can use one of the other syntaxes:</p>
+
+<p>The block version of redirect allows for the easy encapsulation of any
+logic associated with the redirect in question. Either the params and
+request are supplied as arguments, or just params, depending of how many
+arguments your block accepts. A string is required as a return value.</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&#39;jokes/:number&#39;</span>, <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-identifier">redirect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">params</span>, <span class="ruby-identifier">request</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">path</span> = (<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">number</span>].<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">even?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;wheres-the-beef&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;i-love-lamp&quot;</span>)
+  <span class="ruby-node">&quot;http://#{request.host_with_port}/#{path}&quot;</span>
+}
+</pre>
+
+<p>Note that the +do end+ syntax for the redirect block wouldn&#39;t work, as
+Ruby would pass the block to <code>get</code> instead of
+<code>redirect</code>. Use <code>{ ... }</code> instead.</p>
+
+<p>The options version of redirect allows you to supply only the parts of the
+url which need to change, it also supports interpolation of the path
+similar to the first example.</p>
+
+<pre>get &#39;stores/:name&#39;,       to: redirect(subdomain: &#39;stores&#39;, path: &#39;/%{name}&#39;)
+get &#39;stores/:name(*all)&#39;, to: redirect(subdomain: &#39;stores&#39;, path: &#39;/%{name}%{all}&#39;)</pre>
+
+<p>Finally, an object which responds to call can be supplied to redirect,
+allowing you to reuse common redirect routes. The call method must accept
+two arguments, params and request, and return a string.</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&#39;accounts/:name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">redirect</span>(<span class="ruby-constant">SubdomainRedirector</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;api&#39;</span>))
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-redirect_source')" id="l_method-i-redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/redirection.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">redirect</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">status</span>  = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:status</span>) <span class="ruby-operator">||</span> <span class="ruby-number">301</span>
+  <span class="ruby-identifier">path</span>    = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">OptionRedirect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">status</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">any?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">PathRedirect</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">status</span>, <span class="ruby-identifier">path</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">path</span>
+
+  <span class="ruby-identifier">block</span> = <span class="ruby-identifier">path</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:call</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;redirection argument not supported&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">block</span>
+  <span class="ruby-constant">Redirect</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">status</span>, <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

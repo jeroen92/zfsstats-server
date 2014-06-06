@@ -1,0 +1,1858 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>DateAndTime::Calculations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            DateAndTime::Calculations 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/date_and_time/calculations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-at_beginning_of_month">at_beginning_of_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_beginning_of_quarter">at_beginning_of_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_beginning_of_week">at_beginning_of_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_beginning_of_year">at_beginning_of_year</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_end_of_month">at_end_of_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_end_of_quarter">at_end_of_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_end_of_week">at_end_of_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at_end_of_year">at_end_of_year</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-beginning_of_month">beginning_of_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-beginning_of_quarter">beginning_of_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-beginning_of_week">beginning_of_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-beginning_of_year">beginning_of_year</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-days_ago">days_ago</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-days_since">days_since</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-days_to_week_start">days_to_week_start</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-end_of_month">end_of_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-end_of_quarter">end_of_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-end_of_week">end_of_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-end_of_year">end_of_year</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-future-3F">future?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-last_month">last_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-last_quarter">last_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-last_week">last_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-last_year">last_year</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-monday">monday</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-months_ago">months_ago</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-months_since">months_since</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-next_month">next_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-next_quarter">next_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-next_week">next_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-next_year">next_year</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-past-3F">past?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-prev_month">prev_month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-prev_quarter">prev_quarter</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-prev_week">prev_week</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-prev_year">prev_year</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-sunday">sunday</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-today-3F">today?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-tomorrow">tomorrow</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-weeks_ago">weeks_ago</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-weeks_since">weeks_since</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Y</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-years_ago">years_ago</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-years_since">years_since</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-yesterday">yesterday</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DAYS_INTO_WEEK</td>
+            <td>=</td>
+            <td class="attr-value">{
+:monday    =&gt; 0,
+:tuesday   =&gt; 1,
+:wednesday =&gt; 2,
+:thursday  =&gt; 3,
+:friday    =&gt; 4,
+:saturday  =&gt; 5,
+:sunday    =&gt; 6
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-at_beginning_of_month">
+            
+              <b>at_beginning_of_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_beginning_of_month" name="method-i-at_beginning_of_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_beginning_of_quarter">
+            
+              <b>at_beginning_of_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_beginning_of_quarter" name="method-i-at_beginning_of_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_beginning_of_week">
+            
+              <b>at_beginning_of_week</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_beginning_of_week" name="method-i-at_beginning_of_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_beginning_of_year">
+            
+              <b>at_beginning_of_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_beginning_of_year" name="method-i-at_beginning_of_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_end_of_month">
+            
+              <b>at_end_of_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_end_of_month" name="method-i-at_end_of_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_end_of_quarter">
+            
+              <b>at_end_of_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_end_of_quarter" name="method-i-at_end_of_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_end_of_week">
+            
+              <b>at_end_of_week</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_end_of_week" name="method-i-at_end_of_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at_end_of_year">
+            
+              <b>at_end_of_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-at_end_of_year" name="method-i-at_end_of_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-beginning_of_month">
+            
+              <b>beginning_of_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-beginning_of_month" name="method-i-beginning_of_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time at the start of the month. <a
+href="../DateTime.html">DateTime</a> objects will have a time set to 0:00.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_beginning_of_month">at_beginning_of_month</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-beginning_of_month_source')" id="l_method-i-beginning_of_month_source">show</a>
+                
+              </p>
+              <div id="method-i-beginning_of_month_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">beginning_of_month</span>
+  <span class="ruby-identifier">first_hour</span>{ <span class="ruby-identifier">change</span>(<span class="ruby-value">:day</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-beginning_of_quarter">
+            
+              <b>beginning_of_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-beginning_of_quarter" name="method-i-beginning_of_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time at the start of the quarter. Example: 1st January,
+1st July, 1st October. <a href="../DateTime.html">DateTime</a> objects will
+have a time set to 0:00.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_beginning_of_quarter">at_beginning_of_quarter</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-beginning_of_quarter_source')" id="l_method-i-beginning_of_quarter_source">show</a>
+                
+              </p>
+              <div id="method-i-beginning_of_quarter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">beginning_of_quarter</span>
+  <span class="ruby-identifier">first_quarter_month</span> = [<span class="ruby-number">10</span>, <span class="ruby-number">7</span>, <span class="ruby-number">4</span>, <span class="ruby-number">1</span>].<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">month</span> }
+  <span class="ruby-identifier">beginning_of_month</span>.<span class="ruby-identifier">change</span>(<span class="ruby-value">:month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">first_quarter_month</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-beginning_of_week">
+            
+              <b>beginning_of_week</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-beginning_of_week" name="method-i-beginning_of_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing the start of this week on the given
+day. Week is assumed to start on <code>start_day</code>, default is
+<code>Date.beginning_of_week</code> or
+<code>config.beginning_of_week</code> when set. <code>DateTime</code>
+objects have their time set to 0:00.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_beginning_of_week">at_beginning_of_week</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-beginning_of_week_source')" id="l_method-i-beginning_of_week_source">show</a>
+                
+              </p>
+              <div id="method-i-beginning_of_week_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">beginning_of_week</span>(<span class="ruby-identifier">start_day</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">beginning_of_week</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">days_ago</span>(<span class="ruby-identifier">days_to_week_start</span>(<span class="ruby-identifier">start_day</span>))
+  <span class="ruby-identifier">acts_like?</span>(<span class="ruby-value">:time</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">midnight</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-beginning_of_year">
+            
+              <b>beginning_of_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-beginning_of_year" name="method-i-beginning_of_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return a new date/time at the beginning of the year. Example: 1st January.
+<a href="../DateTime.html">DateTime</a> objects will have a time set to
+0:00.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_beginning_of_year">at_beginning_of_year</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-beginning_of_year_source')" id="l_method-i-beginning_of_year_source">show</a>
+                
+              </p>
+              <div id="method-i-beginning_of_year_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">beginning_of_year</span>
+  <span class="ruby-identifier">change</span>(<span class="ruby-value">:month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span>).<span class="ruby-identifier">beginning_of_month</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-days_ago">
+            
+              <b>days_ago</b>(days)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-days_ago" name="method-i-days_ago" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of days ago.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-days_ago_source')" id="l_method-i-days_ago_source">show</a>
+                
+              </p>
+              <div id="method-i-days_ago_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">days_ago</span>(<span class="ruby-identifier">days</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:days</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">-</span><span class="ruby-identifier">days</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-days_since">
+            
+              <b>days_since</b>(days)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-days_since" name="method-i-days_since" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of days in the future.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-days_since_source')" id="l_method-i-days_since_source">show</a>
+                
+              </p>
+              <div id="method-i-days_since_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">days_since</span>(<span class="ruby-identifier">days</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:days</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">days</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-days_to_week_start">
+            
+              <b>days_to_week_start</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-days_to_week_start" name="method-i-days_to_week_start" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the number of days to the start of the week on the given day. Week
+is assumed to start on <code>start_day</code>, default is
+<code>Date.beginning_of_week</code> or
+<code>config.beginning_of_week</code> when set.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-days_to_week_start_source')" id="l_method-i-days_to_week_start_source">show</a>
+                
+              </p>
+              <div id="method-i-days_to_week_start_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">days_to_week_start</span>(<span class="ruby-identifier">start_day</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">beginning_of_week</span>)
+  <span class="ruby-identifier">start_day_number</span> = <span class="ruby-constant">DAYS_INTO_WEEK</span>[<span class="ruby-identifier">start_day</span>]
+  <span class="ruby-identifier">current_day_number</span> = <span class="ruby-identifier">wday</span> <span class="ruby-operator">!=</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">wday</span> <span class="ruby-operator">-</span> <span class="ruby-number">1</span> <span class="ruby-operator">:</span> <span class="ruby-number">6</span>
+  (<span class="ruby-identifier">current_day_number</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start_day_number</span>) <span class="ruby-operator">%</span> <span class="ruby-number">7</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-end_of_month">
+            
+              <b>end_of_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-end_of_month" name="method-i-end_of_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing the end of the month. <a
+href="../DateTime.html">DateTime</a> objects will have a time set to
+23:59:59.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_end_of_month">at_end_of_month</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-end_of_month_source')" id="l_method-i-end_of_month_source">show</a>
+                
+              </p>
+              <div id="method-i-end_of_month_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">end_of_month</span>
+  <span class="ruby-identifier">last_day</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">days_in_month</span>(<span class="ruby-identifier">month</span>, <span class="ruby-identifier">year</span>)
+  <span class="ruby-identifier">last_hour</span>{ <span class="ruby-identifier">days_since</span>(<span class="ruby-identifier">last_day</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">day</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-end_of_quarter">
+            
+              <b>end_of_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-end_of_quarter" name="method-i-end_of_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time at the end of the quarter. Example: 31st March,
+30th June, 30th September. <a href="../DateTime.html">DateTime</a> objects
+will have a time set to 23:59:59.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_end_of_quarter">at_end_of_quarter</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-end_of_quarter_source')" id="l_method-i-end_of_quarter_source">show</a>
+                
+              </p>
+              <div id="method-i-end_of_quarter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">end_of_quarter</span>
+  <span class="ruby-identifier">last_quarter_month</span> = [<span class="ruby-number">3</span>, <span class="ruby-number">6</span>, <span class="ruby-number">9</span>, <span class="ruby-number">12</span>].<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">month</span> }
+  <span class="ruby-identifier">beginning_of_month</span>.<span class="ruby-identifier">change</span>(<span class="ruby-value">:month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">last_quarter_month</span>).<span class="ruby-identifier">end_of_month</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-end_of_week">
+            
+              <b>end_of_week</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-end_of_week" name="method-i-end_of_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing the end of this week on the given day.
+Week is assumed to start on <code>start_day</code>, default is
+<code>Date.beginning_of_week</code> or
+<code>config.beginning_of_week</code> when set. <a
+href="../DateTime.html">DateTime</a> objects have their time set to
+23:59:59.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_end_of_week">at_end_of_week</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-end_of_week_source')" id="l_method-i-end_of_week_source">show</a>
+                
+              </p>
+              <div id="method-i-end_of_week_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">end_of_week</span>(<span class="ruby-identifier">start_day</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">beginning_of_week</span>)
+  <span class="ruby-identifier">last_hour</span>{ <span class="ruby-identifier">days_since</span>(<span class="ruby-number">6</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">days_to_week_start</span>(<span class="ruby-identifier">start_day</span>)) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-end_of_year">
+            
+              <b>end_of_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-end_of_year" name="method-i-end_of_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing the end of the year. <a
+href="../DateTime.html">DateTime</a> objects will have a time set to
+23:59:59.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-at_end_of_year">at_end_of_year</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-end_of_year_source')" id="l_method-i-end_of_year_source">show</a>
+                
+              </p>
+              <div id="method-i-end_of_year_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">end_of_year</span>
+  <span class="ruby-identifier">change</span>(<span class="ruby-value">:month</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">12</span>).<span class="ruby-identifier">end_of_month</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-future-3F">
+            
+              <b>future?</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-future-3F" name="method-i-future-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the date/time is in the future.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-future-3F_source')" id="l_method-i-future-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-future-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">future?</span>
+  <span class="ruby-keyword">self</span> <span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">current</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_month">
+            
+              <b>last_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-last_month" name="method-i-last_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_quarter">
+            
+              <b>last_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-last_quarter" name="method-i-last_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_week">
+            
+              <b>last_week</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-last_week" name="method-i-last_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_year">
+            
+              <b>last_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-last_year" name="method-i-last_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-monday">
+            
+              <b>monday</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-monday" name="method-i-monday" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns Monday of this week assuming that week starts on Monday.
+<code>DateTime</code> objects have their time set to 0:00.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-monday_source')" id="l_method-i-monday_source">show</a>
+                
+              </p>
+              <div id="method-i-monday_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">monday</span>
+  <span class="ruby-identifier">beginning_of_week</span>(<span class="ruby-value">:monday</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-months_ago">
+            
+              <b>months_ago</b>(months)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-months_ago" name="method-i-months_ago" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of months ago.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-months_ago_source')" id="l_method-i-months_ago_source">show</a>
+                
+              </p>
+              <div id="method-i-months_ago_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">months_ago</span>(<span class="ruby-identifier">months</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:months</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">-</span><span class="ruby-identifier">months</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-months_since">
+            
+              <b>months_since</b>(months)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-months_since" name="method-i-months_since" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of months in the future.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-months_since_source')" id="l_method-i-months_since_source">show</a>
+                
+              </p>
+              <div id="method-i-months_since_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">months_since</span>(<span class="ruby-identifier">months</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:months</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">months</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-next_month">
+            
+              <b>next_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-next_month" name="method-i-next_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Short-hand for <a
+href="Calculations.html#method-i-months_since">#months_since</a>(1).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-next_month_source')" id="l_method-i-next_month_source">show</a>
+                
+              </p>
+              <div id="method-i-next_month_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">next_month</span>
+  <span class="ruby-identifier">months_since</span>(<span class="ruby-number">1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-next_quarter">
+            
+              <b>next_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-next_quarter" name="method-i-next_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Short-hand for <a
+href="Calculations.html#method-i-months_since">#months_since</a>(3)</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-next_quarter_source')" id="l_method-i-next_quarter_source">show</a>
+                
+              </p>
+              <div id="method-i-next_quarter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">next_quarter</span>
+  <span class="ruby-identifier">months_since</span>(<span class="ruby-number">3</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-next_week">
+            
+              <b>next_week</b>(given_day_in_next_week = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-next_week" name="method-i-next_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing the given day in the next week. The
+<code>given_day_in_next_week</code> defaults to the beginning of the week
+which is determined by <code>Date.beginning_of_week</code> or
+<code>config.beginning_of_week</code> when set. <code>DateTime</code>
+objects have their time set to 0:00.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-next_week_source')" id="l_method-i-next_week_source">show</a>
+                
+              </p>
+              <div id="method-i-next_week_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">next_week</span>(<span class="ruby-identifier">given_day_in_next_week</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">beginning_of_week</span>)
+  <span class="ruby-identifier">first_hour</span>{ <span class="ruby-identifier">weeks_since</span>(<span class="ruby-number">1</span>).<span class="ruby-identifier">beginning_of_week</span>.<span class="ruby-identifier">days_since</span>(<span class="ruby-identifier">days_span</span>(<span class="ruby-identifier">given_day_in_next_week</span>)) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-next_year">
+            
+              <b>next_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-next_year" name="method-i-next_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Short-hand for <a
+href="Calculations.html#method-i-years_since">#years_since</a>(1).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-next_year_source')" id="l_method-i-next_year_source">show</a>
+                
+              </p>
+              <div id="method-i-next_year_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">next_year</span>
+  <span class="ruby-identifier">years_since</span>(<span class="ruby-number">1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-past-3F">
+            
+              <b>past?</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-past-3F" name="method-i-past-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the date/time is in the past.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-past-3F_source')" id="l_method-i-past-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-past-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">past?</span>
+  <span class="ruby-keyword">self</span> <span class="ruby-operator">&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">current</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prev_month">
+            
+              <b>prev_month</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-prev_month" name="method-i-prev_month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Short-hand for <a
+href="Calculations.html#method-i-months_ago">#months_ago</a>(1).</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-last_month">last_month</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prev_month_source')" id="l_method-i-prev_month_source">show</a>
+                
+              </p>
+              <div id="method-i-prev_month_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prev_month</span>
+  <span class="ruby-identifier">months_ago</span>(<span class="ruby-number">1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prev_quarter">
+            
+              <b>prev_quarter</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-prev_quarter" name="method-i-prev_quarter" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Short-hand for <a
+href="Calculations.html#method-i-months_ago">#months_ago</a>(3).</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-last_quarter">last_quarter</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prev_quarter_source')" id="l_method-i-prev_quarter_source">show</a>
+                
+              </p>
+              <div id="method-i-prev_quarter_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prev_quarter</span>
+  <span class="ruby-identifier">months_ago</span>(<span class="ruby-number">3</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prev_week">
+            
+              <b>prev_week</b>(start_day = Date.beginning_of_week)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-prev_week" name="method-i-prev_week" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing the given day in the previous week.
+Week is assumed to start on <code>start_day</code>, default is
+<code>Date.beginning_of_week</code> or
+<code>config.beginning_of_week</code> when set. <a
+href="../DateTime.html">DateTime</a> objects have their time set to 0:00.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-last_week">last_week</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prev_week_source')" id="l_method-i-prev_week_source">show</a>
+                
+              </p>
+              <div id="method-i-prev_week_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prev_week</span>(<span class="ruby-identifier">start_day</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">beginning_of_week</span>)
+  <span class="ruby-identifier">first_hour</span>{ <span class="ruby-identifier">weeks_ago</span>(<span class="ruby-number">1</span>).<span class="ruby-identifier">beginning_of_week</span>.<span class="ruby-identifier">days_since</span>(<span class="ruby-identifier">days_span</span>(<span class="ruby-identifier">start_day</span>)) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prev_year">
+            
+              <b>prev_year</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-prev_year" name="method-i-prev_year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Short-hand for <a
+href="Calculations.html#method-i-years_ago">#years_ago</a>(1).</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Calculations.html#method-i-last_year">last_year</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prev_year_source')" id="l_method-i-prev_year_source">show</a>
+                
+              </p>
+              <div id="method-i-prev_year_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prev_year</span>
+  <span class="ruby-identifier">years_ago</span>(<span class="ruby-number">1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sunday">
+            
+              <b>sunday</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-sunday" name="method-i-sunday" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns Sunday of this week assuming that week starts on Monday.
+<code>DateTime</code> objects have their time set to 23:59:59.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sunday_source')" id="l_method-i-sunday_source">show</a>
+                
+              </p>
+              <div id="method-i-sunday_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sunday</span>
+  <span class="ruby-identifier">end_of_week</span>(<span class="ruby-value">:monday</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-today-3F">
+            
+              <b>today?</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-today-3F" name="method-i-today-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the date/time is today.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-today-3F_source')" id="l_method-i-today-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-today-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">today?</span>
+  <span class="ruby-identifier">to_date</span> <span class="ruby-operator">==</span> <span class="ruby-operator">::</span><span class="ruby-constant">Date</span>.<span class="ruby-identifier">current</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tomorrow">
+            
+              <b>tomorrow</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-tomorrow" name="method-i-tomorrow" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing tomorrow.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tomorrow_source')" id="l_method-i-tomorrow_source">show</a>
+                
+              </p>
+              <div id="method-i-tomorrow_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tomorrow</span>
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:days</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-weeks_ago">
+            
+              <b>weeks_ago</b>(weeks)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-weeks_ago" name="method-i-weeks_ago" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of weeks ago.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-weeks_ago_source')" id="l_method-i-weeks_ago_source">show</a>
+                
+              </p>
+              <div id="method-i-weeks_ago_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">weeks_ago</span>(<span class="ruby-identifier">weeks</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:weeks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">-</span><span class="ruby-identifier">weeks</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-weeks_since">
+            
+              <b>weeks_since</b>(weeks)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-weeks_since" name="method-i-weeks_since" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of weeks in the future.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-weeks_since_source')" id="l_method-i-weeks_since_source">show</a>
+                
+              </p>
+              <div id="method-i-weeks_since_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">weeks_since</span>(<span class="ruby-identifier">weeks</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:weeks</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">weeks</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-years_ago">
+            
+              <b>years_ago</b>(years)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-years_ago" name="method-i-years_ago" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of years ago.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-years_ago_source')" id="l_method-i-years_ago_source">show</a>
+                
+              </p>
+              <div id="method-i-years_ago_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">years_ago</span>(<span class="ruby-identifier">years</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:years</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">-</span><span class="ruby-identifier">years</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-years_since">
+            
+              <b>years_since</b>(years)
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-years_since" name="method-i-years_since" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time the specified number of years in the future.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-years_since_source')" id="l_method-i-years_since_source">show</a>
+                
+              </p>
+              <div id="method-i-years_since_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">years_since</span>(<span class="ruby-identifier">years</span>)
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:years</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">years</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-yesterday">
+            
+              <b>yesterday</b>()
+            
+            <a href="../../classes/DateAndTime/Calculations.html#method-i-yesterday" name="method-i-yesterday" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new date/time representing yesterday.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-yesterday_source')" id="l_method-i-yesterday_source">show</a>
+                
+              </p>
+              <div id="method-i-yesterday_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/date_and_time/calculations.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">yesterday</span>
+  <span class="ruby-identifier">advance</span>(<span class="ruby-value">:days</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-number">-1</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Integer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Integer 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/integer/inflections_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/inflections.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/integer/multiple_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/multiple.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/integer/time_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/time.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-month">month</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-months">months</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-multiple_of-3F">multiple_of?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-ordinal">ordinal</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-ordinalize">ordinalize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Y</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-year">year</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-years">years</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-month">
+            
+              <b>month</b>()
+            
+            <a href="../classes/Integer.html#method-i-month" name="method-i-month" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-months">
+            
+              <b>months</b>()
+            
+            <a href="../classes/Integer.html#method-i-months" name="method-i-months" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Enables the use of time calculations and declarations, like
+<code>45.minutes + 2.hours + 4.years</code>.</p>
+
+<p>These methods use <a href="Time.html#method-i-advance">Time#advance</a> for
+precise date calculations when using <code>from_now</code>,
+<code>ago</code>, etc. as well as adding or subtracting their results from
+a <a href="Time.html">Time</a> object.</p>
+
+<pre># equivalent to Time.now.advance(months: 1)
+1.month.from_now
+
+# equivalent to Time.now.advance(years: 2)
+2.years.from_now
+
+# equivalent to Time.now.advance(months: 4, years: 5)
+(4.months + 5.years).from_now</pre>
+
+<p>While these methods provide precise calculation when used as in the
+examples above, care should be taken to note that this is not true if the
+result of <code>months</code>, <code>years</code>, etc is converted before
+use:</p>
+
+<pre># equivalent to 30.days.to_i.from_now
+1.month.to_i.from_now
+
+# equivalent to 365.25.days.to_f.from_now
+1.year.to_f.from_now</pre>
+
+<p>In such cases, Ruby&#39;s core <a
+href="http://ruby-doc.org/stdlib/libdoc/date/rdoc/Date.html">Date</a> and
+<a href="http://ruby-doc.org/stdlib/libdoc/time/rdoc/Time.html">Time</a>
+should be used for precision date and time arithmetic.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Integer.html#method-i-month">month</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-months_source')" id="l_method-i-months_source">show</a>
+                
+              </p>
+              <div id="method-i-months_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/time.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">months</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span> * <span class="ruby-number">30</span>.<span class="ruby-identifier">days</span>, [[<span class="ruby-value">:months</span>, <span class="ruby-keyword">self</span>]])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-multiple_of-3F">
+            
+              <b>multiple_of?</b>(number)
+            
+            <a href="../classes/Integer.html#method-i-multiple_of-3F" name="method-i-multiple_of-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Check whether the integer is evenly divisible by the argument.</p>
+
+<pre class="ruby"><span class="ruby-value">0</span>.<span class="ruby-identifier">multiple_of?</span>(<span class="ruby-value">0</span>)  <span class="ruby-comment">#=&gt; true</span>
+<span class="ruby-value">6</span>.<span class="ruby-identifier">multiple_of?</span>(<span class="ruby-value">5</span>)  <span class="ruby-comment">#=&gt; false</span>
+<span class="ruby-value">10</span>.<span class="ruby-identifier">multiple_of?</span>(<span class="ruby-value">2</span>) <span class="ruby-comment">#=&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-multiple_of-3F_source')" id="l_method-i-multiple_of-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-multiple_of-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/multiple.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">multiple_of?</span>(<span class="ruby-identifier">number</span>)
+  <span class="ruby-identifier">number</span> <span class="ruby-operator">!=</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">number</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">zero?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ordinal">
+            
+              <b>ordinal</b>()
+            
+            <a href="../classes/Integer.html#method-i-ordinal" name="method-i-ordinal" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Ordinal returns the suffix used to denote the position in an ordered
+sequence such as 1st, 2nd, 3rd, 4th.</p>
+
+<pre class="ruby"><span class="ruby-value">1</span>.<span class="ruby-identifier">ordinal</span>     <span class="ruby-comment"># =&gt; &quot;st&quot;</span>
+<span class="ruby-value">2</span>.<span class="ruby-identifier">ordinal</span>     <span class="ruby-comment"># =&gt; &quot;nd&quot;</span>
+<span class="ruby-value">1002</span>.<span class="ruby-identifier">ordinal</span>  <span class="ruby-comment"># =&gt; &quot;nd&quot;</span>
+<span class="ruby-value">1003</span>.<span class="ruby-identifier">ordinal</span>  <span class="ruby-comment"># =&gt; &quot;rd&quot;</span>
+<span class="ruby-value">-11</span>.<span class="ruby-identifier">ordinal</span>   <span class="ruby-comment"># =&gt; &quot;th&quot;</span>
+<span class="ruby-value">-1001</span>.<span class="ruby-identifier">ordinal</span> <span class="ruby-comment"># =&gt; &quot;st&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ordinal_source')" id="l_method-i-ordinal_source">show</a>
+                
+              </p>
+              <div id="method-i-ordinal_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/inflections.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ordinal</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Inflector</span>.<span class="ruby-identifier">ordinal</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ordinalize">
+            
+              <b>ordinalize</b>()
+            
+            <a href="../classes/Integer.html#method-i-ordinalize" name="method-i-ordinalize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Ordinalize turns a number into an ordinal string used to denote the
+position in an ordered sequence such as 1st, 2nd, 3rd, 4th.</p>
+
+<pre class="ruby"><span class="ruby-value">1</span>.<span class="ruby-identifier">ordinalize</span>     <span class="ruby-comment"># =&gt; &quot;1st&quot;</span>
+<span class="ruby-value">2</span>.<span class="ruby-identifier">ordinalize</span>     <span class="ruby-comment"># =&gt; &quot;2nd&quot;</span>
+<span class="ruby-value">1002</span>.<span class="ruby-identifier">ordinalize</span>  <span class="ruby-comment"># =&gt; &quot;1002nd&quot;</span>
+<span class="ruby-value">1003</span>.<span class="ruby-identifier">ordinalize</span>  <span class="ruby-comment"># =&gt; &quot;1003rd&quot;</span>
+<span class="ruby-value">-11</span>.<span class="ruby-identifier">ordinalize</span>   <span class="ruby-comment"># =&gt; &quot;-11th&quot;</span>
+<span class="ruby-value">-1001</span>.<span class="ruby-identifier">ordinalize</span> <span class="ruby-comment"># =&gt; &quot;-1001st&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ordinalize_source')" id="l_method-i-ordinalize_source">show</a>
+                
+              </p>
+              <div id="method-i-ordinalize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/inflections.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ordinalize</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Inflector</span>.<span class="ruby-identifier">ordinalize</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-year">
+            
+              <b>year</b>()
+            
+            <a href="../classes/Integer.html#method-i-year" name="method-i-year" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-years">
+            
+              <b>years</b>()
+            
+            <a href="../classes/Integer.html#method-i-years" name="method-i-years" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Integer.html#method-i-year">year</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-years_source')" id="l_method-i-years_source">show</a>
+                
+              </p>
+              <div id="method-i-years_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/integer/time.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">years</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span> * <span class="ruby-number">365.25</span>.<span class="ruby-identifier">days</span>, [[<span class="ruby-value">:years</span>, <span class="ruby-keyword">self</span>]])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

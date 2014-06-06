@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::RenderingHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::RenderingHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/rendering_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/rendering_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Action+View+Rendering">Action View Rendering</h1>
+
+<p>Implements methods that allow rendering from a view context. In order to
+use this module, all you need is to implement view_renderer that returns an
+<a href="../Renderer.html">ActionView::Renderer</a> object.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_layout_for">_layout_for</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-render">render</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_layout_for">
+            
+              <b>_layout_for</b>(*args, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/RenderingHelper.html#method-i-_layout_for" name="method-i-_layout_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Overwrites <a
+href="RenderingHelper.html#method-i-_layout_for">#_layout_for</a> in the
+context object so it supports the case a block is passed to a partial.
+Returns the contents that are yielded to a layout, given a name or a block.</p>
+
+<p>You can think of a layout as a method that is called with a block. If the
+user calls <code>yield :some_name</code>, the block, by default, returns
+<code>content_for(:some_name)</code>. If the user calls simply
+<code>yield</code>, the default block returns
+<code>content_for(:layout)</code>.</p>
+
+<p>The user can override this default by passing a block to the layout:</p>
+
+<pre># The template
+&lt;%= render layout: &quot;my_layout&quot; do %&gt;
+  Content
+&lt;% end %&gt;
+
+# The layout
+&lt;html&gt;
+  &lt;%= yield %&gt;
+&lt;/html&gt;</pre>
+
+<p>In this case, instead of the default block, which would return
+<code>content_for(:layout)</code>, this method returns the block that was
+passed in to <code>render :layout</code>, and the response would be</p>
+
+<pre>&lt;html&gt;
+  Content
+&lt;/html&gt;</pre>
+
+<p>Finally, the block can take block arguments, which can be passed in by
+<code>yield</code>:</p>
+
+<pre># The template
+&lt;%= render layout: &quot;my_layout&quot; do |customer| %&gt;
+  Hello &lt;%= customer.name %&gt;
+&lt;% end %&gt;
+
+# The layout
+&lt;html&gt;
+  &lt;%= yield Struct.new(:name).new(&quot;David&quot;) %&gt;
+&lt;/html&gt;</pre>
+
+<p>In this case, the layout would receive the block passed into <code>render
+:layout</code>, and the struct specified would be passed into the block as
+an argument. The result would be</p>
+
+<pre>&lt;html&gt;
+  Hello David
+&lt;/html&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_layout_for_source')" id="l_method-i-_layout_for_source">show</a>
+                
+              </p>
+              <div id="method-i-_layout_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/rendering_helper.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_layout_for</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">name</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+    <span class="ruby-identifier">capture</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render">
+            
+              <b>render</b>(options = {}, locals = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/RenderingHelper.html#method-i-render" name="method-i-render" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the result of a render that&#39;s dictated by the options hash. The
+primary options are:</p>
+<ul><li>
+<p><code>:partial</code> - See <code>ActionView::PartialRenderer</code>.</p>
+</li><li>
+<p><code>:file</code> - Renders an explicit template file (this used to be the
+old default), add :locals to pass in those.</p>
+</li><li>
+<p><code>:inline</code> - Renders an inline template similar to how it&#39;s
+done in the controller.</p>
+</li><li>
+<p><code>:text</code> - Renders the text passed in out.</p>
+</li></ul>
+
+<p>If no options hash is passed or :update specified, the default is to render
+a partial and use the second parameter as the locals hash.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_source')" id="l_method-i-render_source">show</a>
+                
+              </p>
+              <div id="method-i-render_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/rendering_helper.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">locals</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">view_renderer</span>.<span class="ruby-identifier">render_partial</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:layout</span>]), &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">view_renderer</span>.<span class="ruby-identifier">render</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">view_renderer</span>.<span class="ruby-identifier">render_partial</span>(<span class="ruby-keyword">self</span>, <span class="ruby-value">:partial</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>, <span class="ruby-value">:locals</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">locals</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Rollback</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Rollback 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="ActiveRecordError.html">ActiveRecord::ActiveRecordError</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/errors_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/errors.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a
+href="Transactions/ClassMethods.html#method-i-transaction">ActiveRecord::Transactions::ClassMethods#transaction</a>
+uses this exception to distinguish a deliberate rollback from other
+exceptional situations. Normally, raising an exception will cause the
+<code>transaction</code> method to rollback the database transaction
+<strong>and</strong> pass on the exception. But if you raise an <a
+href="Rollback.html">ActiveRecord::Rollback</a> exception, then the
+database transaction will be rolled back, without passing on the exception.</p>
+
+<p>For example, you could do this in your controller to rollback a
+transaction:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BooksController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+    <span class="ruby-constant">Book</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">book</span> = <span class="ruby-constant">Book</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">book</span>])
+      <span class="ruby-identifier">book</span>.<span class="ruby-identifier">save!</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">today_is_friday?</span>
+        <span class="ruby-comment"># The system must fail on Friday so that our support department</span>
+        <span class="ruby-comment"># won&#39;t be out of job. We silently rollback this transaction</span>
+        <span class="ruby-comment"># without telling the user.</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Rollback</span>, <span class="ruby-string">&quot;Call tech support!&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># ActiveRecord::Rollback is the only exception that won&#39;t be passed on</span>
+    <span class="ruby-comment"># by ActiveRecord::Base.transaction, so this line will still be reached</span>
+    <span class="ruby-comment"># even on Friday.</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

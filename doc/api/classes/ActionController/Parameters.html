@@ -1,0 +1,847 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Parameters</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Parameters 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../ActiveSupport/HashWithIndifferentAccess.html">ActiveSupport::HashWithIndifferentAccess</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/strong_parameters_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Action+Controller+Parameters">Action Controller Parameters</h2>
+
+<p>Allows to choose which attributes should be whitelisted for mass updating
+and thus prevent accidentally exposing that which shouldn’t be exposed.
+Provides two methods for this purpose: <a
+href="Parameters.html#method-i-require">require</a> and <a
+href="Parameters.html#method-i-permit">permit</a>. The former is used to
+mark parameters as required. The latter is used to set the parameter as
+permitted and limit which attributes should be allowed for mass updating.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>({
+  <span class="ruby-identifier">person</span><span class="ruby-operator">:</span> {
+    <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>,
+    <span class="ruby-identifier">age</span><span class="ruby-operator">:</span>  <span class="ruby-value">22</span>,
+    <span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;admin&#39;</span>
+  }
+})
+
+<span class="ruby-identifier">permitted</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>).<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">age</span>)
+<span class="ruby-identifier">permitted</span>            <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Francesco&quot;, &quot;age&quot;=&gt;22}</span>
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">class</span>      <span class="ruby-comment"># =&gt; ActionController::Parameters</span>
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">update!</span>(<span class="ruby-identifier">permitted</span>)
+<span class="ruby-comment"># =&gt; #&lt;Person id: 1, name: &quot;Francesco&quot;, age: 22, role: &quot;user&quot;&gt;</span>
+</pre>
+
+<p>It provides two options that controls the top-level behavior of new
+instances:</p>
+<ul><li>
+<p><code>permit_all_parameters</code> - If it&#39;s <code>true</code>, all the
+parameters will be permitted by default. The default is <code>false</code>.</p>
+</li><li>
+<p><code>action_on_unpermitted_parameters</code> - Allow to control the
+behavior when parameters that are not explicitly permitted are found. The
+values can be <code>:log</code> to write a message on the logger or
+<code>:raise</code> to raise <a
+href="UnpermittedParameters.html">ActionController::UnpermittedParameters</a>
+exception. The default value is <code>:log</code> in test and development
+environments, <code>false</code> otherwise.</p>
+</li></ul>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; false</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">permit_all_parameters</span> = <span class="ruby-keyword">true</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;123&quot;</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;456&quot;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">c</span>)
+<span class="ruby-comment"># =&gt; {}</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">action_on_unpermitted_parameters</span> = :<span class="ruby-identifier">raise</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;123&quot;</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;456&quot;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">c</span>)
+<span class="ruby-comment"># =&gt; ActionController::UnpermittedParameters: found unpermitted keys: a, b</span>
+</pre>
+
+<p><code>ActionController::Parameters</code> is inherited from
+<code>ActiveSupport::HashWithIndifferentAccess</code>, this means that you
+can fetch values using either <code>:key</code> or
+<code>&quot;key&quot;</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;value&#39;</span>)
+<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">key</span>]  <span class="ruby-comment"># =&gt; &quot;value&quot;</span>
+<span class="ruby-identifier">params</span>[<span class="ruby-string">&quot;key&quot;</span>] <span class="ruby-comment"># =&gt; &quot;value&quot;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D">[]</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-dup">dup</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fetch">fetch</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-permit">permit</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-permit-21">permit!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-permitted-3F">permitted?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-require">require</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-required">required</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-slice">slice</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">NEVER_UNPERMITTED_PARAMS</td>
+            <td>=</td>
+            <td class="attr-value">%w( controller action )</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>Never raise an <a
+href="UnpermittedParameters.html">UnpermittedParameters</a> exception
+because of these params are present. They are added by <a
+href="../Rails.html">Rails</a> and it&#39;s of no concern.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">PERMITTED_SCALAR_TYPES</td>
+            <td>=</td>
+            <td class="attr-value">[
+String,
+Symbol,
+NilClass,
+Numeric,
+TrueClass,
+FalseClass,
+Date,
+Time,
+# DateTimes are Dates, we document the type but avoid the redundant check.
+StringIO,
+IO,
+ActionDispatch::Http::UploadedFile,
+Rack::Test::UploadedFile,
+]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>This is a white list of permitted scalar types that includes the ones
+supported in XML and JSON requests.</p>
+
+<p>This list is in particular used to filter ordinary requests, <a
+href="../String.html">String</a> goes as first element to quickly
+short-circuit the common case.</p>
+
+<p>If you modify this collection please update the API of <code>permit</code>
+above.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">EMPTY_ARRAY</td>
+            <td>=</td>
+            <td class="attr-value">[]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(attributes = nil)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new instance of <code>ActionController::Parameters</code>. Also,
+sets the <code>permitted</code> attribute to the default value of
+<code>ActionController::Parameters.permit_all_parameters</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span>  <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>) <span class="ruby-comment"># =&gt; ActiveModel::ForbiddenAttributesError</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">permit_all_parameters</span> = <span class="ruby-keyword">true</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span>  <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>) <span class="ruby-comment"># =&gt; #&lt;Person id: nil, name: &quot;Francesco&quot;&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">attributes</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">attributes</span>)
+  <span class="ruby-ivar">@permitted</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">permit_all_parameters</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D">
+            
+              <b>[]</b>(key)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-5B-5D" name="method-i-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a parameter for the given <code>key</code>. If not found, returns
+<code>nil</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">person</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span> })
+<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">person</span>] <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Francesco&quot;}</span>
+<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">none</span>]   <span class="ruby-comment"># =&gt; nil</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D_source')" id="l_method-i-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 270</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">key</span>)
+  <span class="ruby-identifier">convert_hashes_to_parameters</span>(<span class="ruby-identifier">key</span>, <span class="ruby-keyword">super</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-dup">
+            
+              <b>dup</b>()
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-dup" name="method-i-dup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an exact copy of the <code>ActionController::Parameters</code>
+instance. <code>permitted</code> state is kept on the duped object.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit!</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span>        <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">copy_params</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">dup</span> <span class="ruby-comment"># =&gt; {&quot;a&quot;=&gt;1}</span>
+<span class="ruby-identifier">copy_params</span>.<span class="ruby-identifier">permitted?</span>   <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dup_source')" id="l_method-i-dup_source">show</a>
+                
+              </p>
+              <div id="method-i-dup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 312</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dup</span>
+  <span class="ruby-keyword">super</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">duplicate</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">duplicate</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-value">:@permitted</span>, <span class="ruby-ivar">@permitted</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-fetch">
+            
+              <b>fetch</b>(key, *args)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-fetch" name="method-i-fetch" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a parameter for the given <code>key</code>. If the <code>key</code>
+can&#39;t be found, there are several options: With no other arguments, it
+will raise an <code>ActionController::ParameterMissing</code> error; if
+more arguments are given, then that will be returned; if a block is given,
+then that will be run and its result returned.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">person</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span> })
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">person</span>)               <span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Francesco&quot;}</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">none</span>)                 <span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param not found: none</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">none</span>, <span class="ruby-string">&#39;Francesco&#39;</span>)    <span class="ruby-comment"># =&gt; &quot;Francesco&quot;</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">none</span>) { <span class="ruby-string">&#39;Francesco&#39;</span> } <span class="ruby-comment"># =&gt; &quot;Francesco&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-fetch_source')" id="l_method-i-fetch_source">show</a>
+                
+              </p>
+              <div id="method-i-fetch_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 285</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fetch</span>(<span class="ruby-identifier">key</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">convert_hashes_to_parameters</span>(<span class="ruby-identifier">key</span>, <span class="ruby-keyword">super</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">KeyError</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">ParameterMissing</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-permit">
+            
+              <b>permit</b>(*filters)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-permit" name="method-i-permit" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new <code>ActionController::Parameters</code> instance that
+includes only the given <code>filters</code> and sets the
+<code>permitted</code> attribute for the object to <code>true</code>. This
+is useful for limiting which attributes should be allowed for mass
+updating.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">user</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>, <span class="ruby-identifier">age</span><span class="ruby-operator">:</span> <span class="ruby-value">22</span>, <span class="ruby-identifier">role</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;admin&#39;</span> })
+<span class="ruby-identifier">permitted</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">user</span>).<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">age</span>)
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">permitted?</span>      <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">has_key?</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">has_key?</span>(:<span class="ruby-identifier">age</span>)  <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">has_key?</span>(:<span class="ruby-identifier">role</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p>Only permitted scalars pass the filter. For example, given</p>
+
+<pre>params.permit(:name)</pre>
+
+<p><code>:name</code> passes it is a key of <code>params</code> whose
+associated value is of type <code>String</code>, <code>Symbol</code>,
+<code>NilClass</code>, <code>Numeric</code>, <code>TrueClass</code>,
+<code>FalseClass</code>, <code>Date</code>, <code>Time</code>,
+<code>DateTime</code>, <code>StringIO</code>, <code>IO</code>,
++ActionDispatch::Http::UploadedFile+ or +Rack::Test::UploadedFile+.
+Otherwise, the key <code>:name</code> is filtered out.</p>
+
+<p>You may declare that the parameter should be an array of permitted scalars
+by mapping it to an empty array:</p>
+
+<pre>params.permit(tags: [])</pre>
+
+<p>You can also use <code>permit</code> on nested parameters, like:</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>({
+  <span class="ruby-identifier">person</span><span class="ruby-operator">:</span> {
+    <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>,
+    <span class="ruby-identifier">age</span><span class="ruby-operator">:</span>  <span class="ruby-value">22</span>,
+    <span class="ruby-identifier">pets</span><span class="ruby-operator">:</span> [{
+      <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Purplish&#39;</span>,
+      <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;dogs&#39;</span>
+    }]
+  }
+})
+
+<span class="ruby-identifier">permitted</span> = <span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit</span>(<span class="ruby-identifier">person</span><span class="ruby-operator">:</span> [ :<span class="ruby-identifier">name</span>, { <span class="ruby-identifier">pets</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">name</span> } ])
+<span class="ruby-identifier">permitted</span>.<span class="ruby-identifier">permitted?</span>                    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">permitted</span>[:<span class="ruby-identifier">person</span>][:<span class="ruby-identifier">name</span>]               <span class="ruby-comment"># =&gt; &quot;Francesco&quot;</span>
+<span class="ruby-identifier">permitted</span>[:<span class="ruby-identifier">person</span>][:<span class="ruby-identifier">age</span>]                <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-identifier">permitted</span>[:<span class="ruby-identifier">person</span>][:<span class="ruby-identifier">pets</span>][<span class="ruby-value">0</span>][:<span class="ruby-identifier">name</span>]     <span class="ruby-comment"># =&gt; &quot;Purplish&quot;</span>
+<span class="ruby-identifier">permitted</span>[:<span class="ruby-identifier">person</span>][:<span class="ruby-identifier">pets</span>][<span class="ruby-value">0</span>][:<span class="ruby-identifier">category</span>] <span class="ruby-comment"># =&gt; nil</span>
+</pre>
+
+<p>Note that if you use <code>permit</code> in a key that points to a hash, it
+won&#39;t allow all the hash. You also need to specify which attributes
+inside the hash should be whitelisted.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>({
+  <span class="ruby-identifier">person</span><span class="ruby-operator">:</span> {
+    <span class="ruby-identifier">contact</span><span class="ruby-operator">:</span> {
+      <span class="ruby-identifier">email</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;none@test.com&#39;</span>,
+      <span class="ruby-identifier">phone</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;555-1234&#39;</span>
+    }
+  }
+})
+
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>).<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">contact</span>)
+<span class="ruby-comment"># =&gt; {}</span>
+
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-identifier">contact</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">phone</span>)
+<span class="ruby-comment"># =&gt; {&quot;contact&quot;=&gt;{&quot;phone&quot;=&gt;&quot;555-1234&quot;}}</span>
+
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>).<span class="ruby-identifier">permit</span>(<span class="ruby-identifier">contact</span><span class="ruby-operator">:</span> [ :<span class="ruby-identifier">email</span>, :<span class="ruby-identifier">phone</span> ])
+<span class="ruby-comment"># =&gt; {&quot;contact&quot;=&gt;{&quot;email&quot;=&gt;&quot;none@test.com&quot;, &quot;phone&quot;=&gt;&quot;555-1234&quot;}}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-permit_source')" id="l_method-i-permit_source">show</a>
+                
+              </p>
+              <div id="method-i-permit_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">permit</span>(*<span class="ruby-identifier">filters</span>)
+  <span class="ruby-identifier">params</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">filters</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">filter</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">filter</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span>, <span class="ruby-constant">String</span>
+      <span class="ruby-identifier">permitted_scalar_filter</span>(<span class="ruby-identifier">params</span>, <span class="ruby-identifier">filter</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">hash_filter</span>(<span class="ruby-identifier">params</span>, <span class="ruby-identifier">filter</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">unpermitted_parameters!</span>(<span class="ruby-identifier">params</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">action_on_unpermitted_parameters</span>
+
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-permit-21">
+            
+              <b>permit!</b>()
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-permit-21" name="method-i-permit-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the <code>permitted</code> attribute to <code>true</code>. This can be
+used to pass mass assignment. Returns <code>self</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span>  <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>) <span class="ruby-comment"># =&gt; ActiveModel::ForbiddenAttributesError</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit!</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span>  <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>) <span class="ruby-comment"># =&gt; #&lt;Person id: nil, name: &quot;Francesco&quot;&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-permit-21_source')" id="l_method-i-permit-21_source">show</a>
+                
+              </p>
+              <div id="method-i-permit-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">permit!</span>
+  <span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">convert_hashes_to_parameters</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">permit!</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:permit!</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@permitted</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-permitted-3F">
+            
+              <b>permitted?</b>()
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-permitted-3F" name="method-i-permitted-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the parameter is permitted, <code>false</code>
+otherwise.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permit!</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">permitted?</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-permitted-3F_source')" id="l_method-i-permitted-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-permitted-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">permitted?</span>
+  <span class="ruby-ivar">@permitted</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-require">
+            
+              <b>require</b>(key)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-require" name="method-i-require" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Ensures that a parameter is present. If it&#39;s present, returns the
+parameter at the given <code>key</code>, otherwise raises an
+<code>ActionController::ParameterMissing</code> error.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">person</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span> }).<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>)
+<span class="ruby-comment"># =&gt; {&quot;name&quot;=&gt;&quot;Francesco&quot;}</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">person</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>).<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>)
+<span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param not found: person</span>
+
+<span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">person</span><span class="ruby-operator">:</span> {}).<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>)
+<span class="ruby-comment"># =&gt; ActionController::ParameterMissing: param not found: person</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Parameters.html#method-i-required">required</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-require_source')" id="l_method-i-require_source">show</a>
+                
+              </p>
+              <div id="method-i-require_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">require</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">ParameterMissing</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-required">
+            
+              <b>required</b>(key)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-required" name="method-i-required" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Alias of <a href="Parameters.html#method-i-require">require</a>.</p>
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-slice">
+            
+              <b>slice</b>(*keys)
+            
+            <a href="../../classes/ActionController/Parameters.html#method-i-slice" name="method-i-slice" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new <code>ActionController::Parameters</code> instance that
+includes only the given <code>keys</code>. If the given <code>keys</code>
+don&#39;t exist, returns an empty hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">params</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">:</span> <span class="ruby-value">3</span>)
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">slice</span>(:<span class="ruby-identifier">a</span>, :<span class="ruby-identifier">b</span>) <span class="ruby-comment"># =&gt; {&quot;a&quot;=&gt;1, &quot;b&quot;=&gt;2}</span>
+<span class="ruby-identifier">params</span>.<span class="ruby-identifier">slice</span>(:<span class="ruby-identifier">d</span>)     <span class="ruby-comment"># =&gt; {}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-slice_source')" id="l_method-i-slice_source">show</a>
+                
+              </p>
+              <div id="method-i-slice_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 298</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">slice</span>(*<span class="ruby-identifier">keys</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">super</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">new_instance</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new_instance</span>.<span class="ruby-identifier">instance_variable_set</span> <span class="ruby-value">:@permitted</span>, <span class="ruby-ivar">@permitted</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

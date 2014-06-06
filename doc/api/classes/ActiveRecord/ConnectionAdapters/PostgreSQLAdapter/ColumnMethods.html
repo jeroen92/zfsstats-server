@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::ColumnMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::ColumnMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cidr">cidr</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-daterange">daterange</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-hstore">hstore</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inet">inet</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-int4range">int4range</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-int8range">int8range</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-json">json</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-ltree">ltree</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-macaddr">macaddr</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-numrange">numrange</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-tsrange">tsrange</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-tstzrange">tstzrange</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-tsvector">tsvector</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-uuid">uuid</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>X</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-xml">xml</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cidr">
+            
+              <b>cidr</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-cidr" name="method-i-cidr" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cidr_source')" id="l_method-i-cidr_source">show</a>
+                
+              </p>
+              <div id="method-i-cidr_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 313</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cidr</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;cidr&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-daterange">
+            
+              <b>daterange</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-daterange" name="method-i-daterange" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-daterange_source')" id="l_method-i-daterange_source">show</a>
+                
+              </p>
+              <div id="method-i-daterange_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 297</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">daterange</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;daterange&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-hstore">
+            
+              <b>hstore</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-hstore" name="method-i-hstore" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-hstore_source')" id="l_method-i-hstore_source">show</a>
+                
+              </p>
+              <div id="method-i-hstore_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hstore</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;hstore&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inet">
+            
+              <b>inet</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-inet" name="method-i-inet" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inet_source')" id="l_method-i-inet_source">show</a>
+                
+              </p>
+              <div id="method-i-inet_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 309</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inet</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;inet&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-int4range">
+            
+              <b>int4range</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-int4range" name="method-i-int4range" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-int4range_source')" id="l_method-i-int4range_source">show</a>
+                
+              </p>
+              <div id="method-i-int4range_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">int4range</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;int4range&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-int8range">
+            
+              <b>int8range</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-int8range" name="method-i-int8range" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-int8range_source')" id="l_method-i-int8range_source">show</a>
+                
+              </p>
+              <div id="method-i-int8range_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 281</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">int8range</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;int8range&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-json">
+            
+              <b>json</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-json" name="method-i-json" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-json_source')" id="l_method-i-json_source">show</a>
+                
+              </p>
+              <div id="method-i-json_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 325</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">json</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;json&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ltree">
+            
+              <b>ltree</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-ltree" name="method-i-ltree" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ltree_source')" id="l_method-i-ltree_source">show</a>
+                
+              </p>
+              <div id="method-i-ltree_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 305</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ltree</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;ltree&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-macaddr">
+            
+              <b>macaddr</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-macaddr" name="method-i-macaddr" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-macaddr_source')" id="l_method-i-macaddr_source">show</a>
+                
+              </p>
+              <div id="method-i-macaddr_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 317</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">macaddr</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;macaddr&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-numrange">
+            
+              <b>numrange</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-numrange" name="method-i-numrange" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-numrange_source')" id="l_method-i-numrange_source">show</a>
+                
+              </p>
+              <div id="method-i-numrange_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">numrange</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;numrange&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tsrange">
+            
+              <b>tsrange</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-tsrange" name="method-i-tsrange" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tsrange_source')" id="l_method-i-tsrange_source">show</a>
+                
+              </p>
+              <div id="method-i-tsrange_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 285</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tsrange</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;tsrange&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tstzrange">
+            
+              <b>tstzrange</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-tstzrange" name="method-i-tstzrange" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tstzrange_source')" id="l_method-i-tstzrange_source">show</a>
+                
+              </p>
+              <div id="method-i-tstzrange_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 289</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tstzrange</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;tstzrange&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tsvector">
+            
+              <b>tsvector</b>(*args)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-tsvector" name="method-i-tsvector" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tsvector_source')" id="l_method-i-tsvector_source">show</a>
+                
+              </p>
+              <div id="method-i-tsvector_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 272</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tsvector</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">args</span>[<span class="ruby-number">0</span>], <span class="ruby-string">&#39;tsvector&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uuid">
+            
+              <b>uuid</b>(name, options = {})
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-uuid" name="method-i-uuid" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-uuid_source')" id="l_method-i-uuid_source">show</a>
+                
+              </p>
+              <div id="method-i-uuid_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">uuid</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;uuid&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xml">
+            
+              <b>xml</b>(*args)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter/ColumnMethods.html#method-i-xml" name="method-i-xml" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-xml_source')" id="l_method-i-xml_source">show</a>
+                
+              </p>
+              <div id="method-i-xml_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">xml</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">args</span>[<span class="ruby-number">0</span>], <span class="ruby-string">&#39;xml&#39;</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

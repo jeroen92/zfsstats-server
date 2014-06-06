@@ -1,0 +1,603 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::DBConsole</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::DBConsole 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/commands/dbconsole_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-available_environments">available_environments</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-config">config</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-environment">environment</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find_cmd_and_exec">find_cmd_and_exec</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-parse_arguments">parse_arguments</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-start">start</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-start">start</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>arguments</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(arguments = ARGV)
+            
+            <a href="../../classes/Rails/DBConsole.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">arguments</span> = <span class="ruby-constant">ARGV</span>)
+  <span class="ruby-ivar">@arguments</span> = <span class="ruby-identifier">arguments</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-start">
+            
+              <b>start</b>()
+            
+            <a href="../../classes/Rails/DBConsole.html#method-c-start" name="method-c-start" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-start_source')" id="l_method-c-start_source">show</a>
+                
+              </p>
+              <div id="method-c-start_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">start</span>
+  <span class="ruby-identifier">new</span>.<span class="ruby-identifier">start</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-config">
+            
+              <b>config</b>()
+            
+            <a href="../../classes/Rails/DBConsole.html#method-i-config" name="method-i-config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-config_source')" id="l_method-i-config_source">show</a>
+                
+              </p>
+              <div id="method-i-config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">config</span>
+  <span class="ruby-ivar">@config</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">cfg</span> = <span class="ruby-keyword">begin</span>
+      <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;config/database.yml&quot;</span>)).<span class="ruby-identifier">result</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">SyntaxError</span>, <span class="ruby-constant">StandardError</span>
+      <span class="ruby-identifier">require</span> <span class="ruby-constant">APP_PATH</span>
+      <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">database_configuration</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">cfg</span>[<span class="ruby-identifier">environment</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">abort</span>(<span class="ruby-node">&quot;No database is configured for the environment &#39;#{environment}&#39;&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-environment">
+            
+              <b>environment</b>()
+            
+            <a href="../../classes/Rails/DBConsole.html#method-i-environment" name="method-i-environment" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-environment_source')" id="l_method-i-environment_source">show</a>
+                
+              </p>
+              <div id="method-i-environment_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">environment</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:env</span>)
+    <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;RAILS_ENV&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;RACK_ENV&quot;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;development&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-start">
+            
+              <b>start</b>()
+            
+            <a href="../../classes/Rails/DBConsole.html#method-i-start" name="method-i-start" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-start_source')" id="l_method-i-start_source">show</a>
+                
+              </p>
+              <div id="method-i-start_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">start</span>
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">parse_arguments</span>(<span class="ruby-identifier">arguments</span>)
+  <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;RAILS_ENV&#39;</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-value">:environment</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">environment</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;adapter&quot;</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^mysql/</span>
+    <span class="ruby-identifier">args</span> = {
+      <span class="ruby-string">&#39;host&#39;</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--host&#39;</span>,
+      <span class="ruby-string">&#39;port&#39;</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--port&#39;</span>,
+      <span class="ruby-string">&#39;socket&#39;</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--socket&#39;</span>,
+      <span class="ruby-string">&#39;username&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--user&#39;</span>,
+      <span class="ruby-string">&#39;encoding&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--default-character-set&#39;</span>,
+      <span class="ruby-string">&#39;sslca&#39;</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--ssl-ca&#39;</span>,
+      <span class="ruby-string">&#39;sslcert&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--ssl-cert&#39;</span>,
+      <span class="ruby-string">&#39;sslcapath&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--ssl-capath&#39;</span>,
+      <span class="ruby-string">&#39;sslcipher&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--ssh-cipher&#39;</span>,
+      <span class="ruby-string">&#39;sslkey&#39;</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;--ssl-key&#39;</span>
+    }.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span>, <span class="ruby-identifier">arg</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{arg}=#{config[opt]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-identifier">opt</span>] }.<span class="ruby-identifier">compact</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;password&#39;</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;include_password&#39;</span>]
+      <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;--password=#{config[&#39;password&#39;]}&quot;</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;password&#39;</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;password&#39;</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;-p&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;database&#39;</span>]
+
+    <span class="ruby-identifier">find_cmd_and_exec</span>([<span class="ruby-string">&#39;mysql&#39;</span>, <span class="ruby-string">&#39;mysql5&#39;</span>], *<span class="ruby-identifier">args</span>)
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;postgresql&quot;</span>, <span class="ruby-string">&quot;postgres&quot;</span>
+    <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PGUSER&#39;</span>]     = <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;username&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;username&quot;</span>]
+    <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PGHOST&#39;</span>]     = <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;host&quot;</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;host&quot;</span>]
+    <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PGPORT&#39;</span>]     = <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;port&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;port&quot;</span>]
+    <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PGPASSWORD&#39;</span>] = <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;password&quot;</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;password&quot;</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;include_password&#39;</span>]
+    <span class="ruby-identifier">find_cmd_and_exec</span>(<span class="ruby-string">&#39;psql&#39;</span>, <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;database&quot;</span>])
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;sqlite&quot;</span>
+    <span class="ruby-identifier">find_cmd_and_exec</span>(<span class="ruby-string">&#39;sqlite&#39;</span>, <span class="ruby-identifier">config</span>[<span class="ruby-string">&quot;database&quot;</span>])
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;sqlite3&quot;</span>
+    <span class="ruby-identifier">args</span> = []
+
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;-#{options[&#39;mode&#39;]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;mode&#39;</span>]
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;-header&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;header&#39;</span>]
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;database&#39;</span>], <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:root</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+
+    <span class="ruby-identifier">find_cmd_and_exec</span>(<span class="ruby-string">&#39;sqlite3&#39;</span>, *<span class="ruby-identifier">args</span>)
+
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;oracle&quot;</span>, <span class="ruby-string">&quot;oracle_enhanced&quot;</span>
+    <span class="ruby-identifier">logon</span> = <span class="ruby-string">&quot;&quot;</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;username&#39;</span>]
+      <span class="ruby-identifier">logon</span> = <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;username&#39;</span>]
+      <span class="ruby-identifier">logon</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;/#{config[&#39;password&#39;]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;password&#39;</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;include_password&#39;</span>]
+      <span class="ruby-identifier">logon</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;@#{config[&#39;database&#39;]}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">config</span>[<span class="ruby-string">&#39;database&#39;</span>]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">find_cmd_and_exec</span>(<span class="ruby-string">&#39;sqlplus&#39;</span>, <span class="ruby-identifier">logon</span>)
+
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">abort</span> <span class="ruby-node">&quot;Unknown command-line client for #{config[&#39;database&#39;]}. Submit a Rails patch to add support!&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-available_environments">
+            
+              <b>available_environments</b>()
+            
+            <a href="../../classes/Rails/DBConsole.html#method-i-available_environments" name="method-i-available_environments" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-available_environments_source')" id="l_method-i-available_environments_source">show</a>
+                
+              </p>
+              <div id="method-i-available_environments_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">available_environments</span>
+  <span class="ruby-constant">Dir</span>[<span class="ruby-string">&#39;config/environments/*.rb&#39;</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">fname</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">fname</span>, <span class="ruby-string">&#39;.*&#39;</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_cmd_and_exec">
+            
+              <b>find_cmd_and_exec</b>(commands, *args)
+            
+            <a href="../../classes/Rails/DBConsole.html#method-i-find_cmd_and_exec" name="method-i-find_cmd_and_exec" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_cmd_and_exec_source')" id="l_method-i-find_cmd_and_exec_source">show</a>
+                
+              </p>
+              <div id="method-i-find_cmd_and_exec_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_cmd_and_exec</span>(<span class="ruby-identifier">commands</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">commands</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">commands</span>)
+
+  <span class="ruby-identifier">dirs_on_path</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;PATH&#39;</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">PATH_SEPARATOR</span>)
+  <span class="ruby-identifier">commands</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">commands</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{cmd}.exe&quot;</span>} <span class="ruby-keyword">if</span> <span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-string">&#39;host_os&#39;</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/mswin|mingw/</span>
+
+  <span class="ruby-identifier">full_path_command</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">found</span> = <span class="ruby-identifier">commands</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cmd</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">dirs_on_path</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">full_path_command</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">cmd</span>)
+      <span class="ruby-constant">File</span>.<span class="ruby-identifier">executable?</span> <span class="ruby-identifier">full_path_command</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">found</span>
+    <span class="ruby-identifier">exec</span> <span class="ruby-identifier">full_path_command</span>, *<span class="ruby-identifier">args</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">abort</span>(<span class="ruby-node">&quot;Couldn&#39;t find database client: #{commands.join(&#39;, &#39;)}. Check your $PATH and try again.&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-parse_arguments">
+            
+              <b>parse_arguments</b>(arguments)
+            
+            <a href="../../classes/Rails/DBConsole.html#method-i-parse_arguments" name="method-i-parse_arguments" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-parse_arguments_source')" id="l_method-i-parse_arguments_source">show</a>
+                
+              </p>
+              <div id="method-i-parse_arguments_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/dbconsole.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse_arguments</span>(<span class="ruby-identifier">arguments</span>)
+  <span class="ruby-identifier">options</span> = {}
+
+  <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-string">&quot;Usage: rails dbconsole [environment] [options]&quot;</span>
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-p&quot;</span>, <span class="ruby-string">&quot;--include-password&quot;</span>, <span class="ruby-string">&quot;Automatically provide the password from database.yml&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;include_password&#39;</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;--mode [MODE]&quot;</span>, [<span class="ruby-string">&#39;html&#39;</span>, <span class="ruby-string">&#39;list&#39;</span>, <span class="ruby-string">&#39;line&#39;</span>, <span class="ruby-string">&#39;column&#39;</span>],
+      <span class="ruby-string">&quot;Automatically put the sqlite3 database in the specified mode (html, list, line, column).&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mode</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;mode&#39;</span>] = <span class="ruby-identifier">mode</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;--header&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;header&#39;</span>] = <span class="ruby-identifier">h</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-h&quot;</span>, <span class="ruby-string">&quot;--help&quot;</span>, <span class="ruby-string">&quot;Show this help message.&quot;</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opt</span>
+      <span class="ruby-identifier">exit</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-e&quot;</span>, <span class="ruby-string">&quot;--environment=name&quot;</span>, <span class="ruby-constant">String</span>,
+      <span class="ruby-string">&quot;Specifies the environment to run this console under (test/development/production).&quot;</span>,
+      <span class="ruby-string">&quot;Default: development&quot;</span>
+    ) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:environment</span>] = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">strip</span> }
+
+    <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">parse!</span>(<span class="ruby-identifier">arguments</span>)
+    <span class="ruby-identifier">abort</span> <span class="ruby-identifier">opt</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">unless</span> (<span class="ruby-number">0</span><span class="ruby-operator">..</span><span class="ruby-number">1</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">size</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>[<span class="ruby-number">0</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;-&#39;</span>
+    <span class="ruby-identifier">env</span> = <span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">available_environments</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">env</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:environment</span>] = <span class="ruby-identifier">env</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:environment</span>] = <span class="ruby-node">%w(production development test)</span>.<span class="ruby-identifier">detect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/^#{env}/</span>} <span class="ruby-operator">||</span> <span class="ruby-identifier">env</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

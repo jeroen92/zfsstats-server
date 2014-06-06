@@ -1,0 +1,757 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/before_type_cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/before_type_cast.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/dirty_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/dirty.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/primary_key_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/query_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/query.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/read_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/serialization_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/serialization.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/time_zone_conversion_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/time_zone_conversion.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/write_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/write.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+Attribute+Methods">Active Record Attribute Methods</h1>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/BeforeTypeCast.html">ActiveRecord::AttributeMethods::BeforeTypeCast</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/ClassMethods.html">ActiveRecord::AttributeMethods::ClassMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/PrimaryKey.html">ActiveRecord::AttributeMethods::PrimaryKey</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/Query.html">ActiveRecord::AttributeMethods::Query</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/Read.html">ActiveRecord::AttributeMethods::Read</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/Serialization.html">ActiveRecord::AttributeMethods::Serialization</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/TimeZoneConversion.html">ActiveRecord::AttributeMethods::TimeZoneConversion</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/Write.html">ActiveRecord::AttributeMethods::Write</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D">[]</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D-3D">[]=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-attribute_for_inspect">attribute_for_inspect</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-attribute_names">attribute_names</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-attribute_present-3F">attribute_present?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-attributes">attributes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-column_for_attribute">column_for_attribute</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-has_attribute-3F">has_attribute?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to-3F">respond_to?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../ActiveModel/AttributeMethods.html">
+              ActiveModel::AttributeMethods
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/Read.html">
+              ActiveRecord::AttributeMethods::Read
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/Write.html">
+              ActiveRecord::AttributeMethods::Write
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/BeforeTypeCast.html">
+              ActiveRecord::AttributeMethods::BeforeTypeCast
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/Query.html">
+              ActiveRecord::AttributeMethods::Query
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/PrimaryKey.html">
+              ActiveRecord::AttributeMethods::PrimaryKey
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/TimeZoneConversion.html">
+              ActiveRecord::AttributeMethods::TimeZoneConversion
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/Serialization.html">
+              ActiveRecord::AttributeMethods::Serialization
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D">
+            
+              <b>[]</b>(attr_name)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-5B-5D" name="method-i-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the value of the attribute identified by <code>attr_name</code>
+after it has been typecast (for example, “2004-12-12” in a data column is
+cast to a date object, like Date.new(2004, 12, 12)). It raises
+<code>ActiveModel::MissingAttributeError</code> if the identified attribute
+is missing.</p>
+
+<p>Alias for the <code>read_attribute</code> method.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">organization</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>, <span class="ruby-identifier">age</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;22&#39;</span>)
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">name</span>] <span class="ruby-comment"># =&gt; &quot;Francesco&quot;</span>
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">age</span>]  <span class="ruby-comment"># =&gt; 22</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;id&#39;</span>).<span class="ruby-identifier">first</span>
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">name</span>]            <span class="ruby-comment"># =&gt; ActiveModel::MissingAttributeError: missing attribute: name</span>
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">organization_id</span>] <span class="ruby-comment"># =&gt; ActiveModel::MissingAttributeError: missing attribute: organization_id</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D_source')" id="l_method-i-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 302</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">attr_name</span>)
+  <span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">attr_name</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">missing_attribute</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">caller</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D-3D">
+            
+              <b>[]=</b>(attr_name, value)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-5B-5D-3D" name="method-i-5B-5D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Updates the attribute identified by <code>attr_name</code> with the
+specified <code>value</code>. (Alias for the protected
+<code>write_attribute</code> method).</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">age</span>] = <span class="ruby-string">&#39;22&#39;</span>
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">age</span>] <span class="ruby-comment"># =&gt; 22</span>
+<span class="ruby-identifier">person</span>[:<span class="ruby-identifier">age</span>] <span class="ruby-comment"># =&gt; Fixnum</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D-3D_source')" id="l_method-i-5B-5D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 316</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-keyword ruby-title">attr_name</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">write_attribute</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-attribute_for_inspect">
+            
+              <b>attribute_for_inspect</b>(attr_name)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-attribute_for_inspect" name="method-i-attribute_for_inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an <code>#inspect</code>-like string for the value of the attribute
+<code>attr_name</code>. <a href="../String.html">String</a> attributes are
+truncated upto 50 characters, and <a href="../Date.html">Date</a> and <a
+href="../Time.html">Time</a> attributes are returned in the
+<code>:db</code> format. Other attributes return the value of
+<code>#inspect</code> without modification.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create!</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;David Heinemeier Hansson &#39;</span> * <span class="ruby-value">3</span>)
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_for_inspect</span>(:<span class="ruby-identifier">name</span>)
+<span class="ruby-comment"># =&gt; &quot;\&quot;David Heinemeier Hansson David Heinemeier Hansson D...\&quot;&quot;</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_for_inspect</span>(:<span class="ruby-identifier">created_at</span>)
+<span class="ruby-comment"># =&gt; &quot;\&quot;2012-10-22 00:15:07\&quot;&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attribute_for_inspect_source')" id="l_method-i-attribute_for_inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-attribute_for_inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 236</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attribute_for_inspect</span>(<span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">attr_name</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">50</span>
+    <span class="ruby-node">&quot;#{value[0..50]}...&quot;</span>.<span class="ruby-identifier">inspect</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Date</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Time</span>)
+    <span class="ruby-node">%Q(&quot;#{value.to_s(:db)}&quot;)</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">value</span>.<span class="ruby-identifier">inspect</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-attribute_names">
+            
+              <b>attribute_names</b>()
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-attribute_names" name="method-i-attribute_names" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of names for the attributes available on this object.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_names</span>
+<span class="ruby-comment"># =&gt; [&quot;id&quot;, &quot;created_at&quot;, &quot;updated_at&quot;, &quot;name&quot;, &quot;age&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attribute_names_source')" id="l_method-i-attribute_names_source">show</a>
+                
+              </p>
+              <div id="method-i-attribute_names_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attribute_names</span>
+  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-attribute_present-3F">
+            
+              <b>attribute_present?</b>(attribute)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-attribute_present-3F" name="method-i-attribute_present-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the specified <code>attribute</code> has been
+set by the user or by a database load and is neither <code>nil</code> nor
+<code>empty?</code> (the latter only applies to objects that respond to
+<code>empty?</code>, most notably Strings). Otherwise, <code>false</code>.
+Note that it always returns <code>true</code> with boolean attributes.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Task</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">is_done</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_present?</span>(:<span class="ruby-identifier">title</span>)   <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_present?</span>(:<span class="ruby-identifier">is_done</span>) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;Francesco&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">is_done</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_present?</span>(:<span class="ruby-identifier">title</span>)   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attribute_present?</span>(:<span class="ruby-identifier">is_done</span>) <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attribute_present-3F_source')" id="l_method-i-attribute_present-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-attribute_present-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 263</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attribute_present?</span>(<span class="ruby-identifier">attribute</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">attribute</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:empty?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-attributes">
+            
+              <b>attributes</b>()
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-attributes" name="method-i-attributes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash of all the attributes with their names as keys and the
+values of the attributes as values.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Francesco&#39;</span>, <span class="ruby-identifier">age</span><span class="ruby-operator">:</span> <span class="ruby-value">22</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">attributes</span>
+<span class="ruby-comment"># =&gt; {&quot;id&quot;=&gt;3, &quot;created_at&quot;=&gt;Sun, 21 Oct 2012 04:53:04, &quot;updated_at&quot;=&gt;Sun, 21 Oct 2012 04:53:04, &quot;name&quot;=&gt;&quot;Francesco&quot;, &quot;age&quot;=&gt;22}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attributes_source')" id="l_method-i-attributes_source">show</a>
+                
+              </p>
+              <div id="method-i-attributes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attributes</span>
+  <span class="ruby-identifier">attribute_names</span>.<span class="ruby-identifier">each_with_object</span>({}) { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">attrs</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">attrs</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">read_attribute</span>(<span class="ruby-identifier">name</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-column_for_attribute">
+            
+              <b>column_for_attribute</b>(name)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-column_for_attribute" name="method-i-column_for_attribute" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the column object for the named attribute. Returns <code>nil</code>
+if the named attribute not exists.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">column_for_attribute</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># the result depends on the ConnectionAdapter</span>
+<span class="ruby-comment"># =&gt; #&lt;ActiveRecord::ConnectionAdapters::SQLite3Column:0x007ff4ab083980 @name=&quot;name&quot;, @sql_type=&quot;varchar(255)&quot;, @null=true, ...&gt;</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">column_for_attribute</span>(:<span class="ruby-identifier">nothing</span>)
+<span class="ruby-comment"># =&gt; nil</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-column_for_attribute_source')" id="l_method-i-column_for_attribute_source">show</a>
+                
+              </p>
+              <div id="method-i-column_for_attribute_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 280</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">column_for_attribute</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-comment"># FIXME: should this return a null object for columns that don&#39;t exist?</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">columns_hash</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-has_attribute-3F">
+            
+              <b>has_attribute?</b>(attr_name)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-has_attribute-3F" name="method-i-has_attribute-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the given attribute is in the attributes hash,
+otherwise <code>false</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">has_attribute?</span>(:<span class="ruby-identifier">name</span>)    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">has_attribute?</span>(<span class="ruby-string">&#39;age&#39;</span>)    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">has_attribute?</span>(:<span class="ruby-identifier">nothing</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-has_attribute-3F_source')" id="l_method-i-has_attribute-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-has_attribute-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">has_attribute?</span>(<span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">attr_name</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to-3F">
+            
+              <b>respond_to?</b>(name, include_private = false)
+            
+            <a href="../../classes/ActiveRecord/AttributeMethods.html#method-i-respond_to-3F" name="method-i-respond_to-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A Person object with a name attribute can ask
+<code>person.respond_to?(:name)</code>,
+<code>person.respond_to?(:name=)</code>, and
+<code>person.respond_to?(:name?)</code> which will all return
+<code>true</code>. It also define the attribute methods if they have not
+been generated.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(:<span class="ruby-identifier">name</span>)    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(:<span class="ruby-identifier">name=</span>)   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(:<span class="ruby-identifier">name?</span>)   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(<span class="ruby-string">&#39;age&#39;</span>)    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(<span class="ruby-string">&#39;age=&#39;</span>)   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(<span class="ruby-string">&#39;age?&#39;</span>)   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">respond_to</span>(:<span class="ruby-identifier">nothing</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_to-3F_source')" id="l_method-i-respond_to-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_to-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_to?</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">include_private</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">define_attribute_methods</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">attribute_methods_generated?</span>
+  <span class="ruby-identifier">result</span> = <span class="ruby-keyword">super</span>
+
+  <span class="ruby-comment"># If the result is false the answer is false.</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">result</span>
+
+  <span class="ruby-comment"># If the result is true then check for the select case.</span>
+  <span class="ruby-comment"># For queries selecting a subset of columns, return false for unselected columns.</span>
+  <span class="ruby-comment"># We check defined?(@attributes) not to issue warnings if called on objects that</span>
+  <span class="ruby-comment"># have been allocated but not yet initialized.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@attributes</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">present?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">column_names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">has_attribute?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

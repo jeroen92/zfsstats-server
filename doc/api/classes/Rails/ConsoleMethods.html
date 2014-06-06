@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::ConsoleMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            Rails::ConsoleMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/console/app_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/app.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/console/helpers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/helpers.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-app">app</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-controller">controller</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-helper">helper</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-new_session">new_session</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reload-21">reload!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-app">
+            
+              <b>app</b>(create=false)
+            
+            <a href="../../classes/Rails/ConsoleMethods.html#method-i-app" name="method-i-app" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>reference the global “app” instance, created on demand. To recreate the
+instance, pass a non-false value as the parameter.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-app_source')" id="l_method-i-app_source">show</a>
+                
+              </p>
+              <div id="method-i-app_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/app.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">app</span>(<span class="ruby-identifier">create</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@app_integration_instance</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@app_integration_instance</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">new_session</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sess</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">host!</span> <span class="ruby-string">&quot;www.example.com&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-controller">
+            
+              <b>controller</b>()
+            
+            <a href="../../classes/Rails/ConsoleMethods.html#method-i-controller" name="method-i-controller" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-controller_source')" id="l_method-i-controller_source">show</a>
+                
+              </p>
+              <div id="method-i-controller_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/helpers.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">controller</span>
+  <span class="ruby-ivar">@controller</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-helper">
+            
+              <b>helper</b>()
+            
+            <a href="../../classes/Rails/ConsoleMethods.html#method-i-helper" name="method-i-helper" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-helper_source')" id="l_method-i-helper_source">show</a>
+                
+              </p>
+              <div id="method-i-helper_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/helpers.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">helper</span>
+  <span class="ruby-ivar">@helper</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">ApplicationController</span>.<span class="ruby-identifier">helpers</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-new_session">
+            
+              <b>new_session</b>()
+            
+            <a href="../../classes/Rails/ConsoleMethods.html#method-i-new_session" name="method-i-new_session" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>create a new session. If a block is given, the new session will be yielded
+to the block before being returned.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-new_session_source')" id="l_method-i-new_session_source">show</a>
+                
+              </p>
+              <div id="method-i-new_session_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/app.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new_session</span>
+  <span class="ruby-identifier">app</span> = <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>
+  <span class="ruby-identifier">session</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Integration</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">app</span>)
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">session</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">session</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reload-21">
+            
+              <b>reload!</b>(print=true)
+            
+            <a href="../../classes/Rails/ConsoleMethods.html#method-i-reload-21" name="method-i-reload-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>reloads the environment</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reload-21_source')" id="l_method-i-reload-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reload-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/console/app.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reload!</span>(<span class="ruby-identifier">print</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Reloading...&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">print</span>
+  <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Reloader</span>.<span class="ruby-identifier">cleanup!</span>
+  <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Reloader</span>.<span class="ruby-identifier">prepare!</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

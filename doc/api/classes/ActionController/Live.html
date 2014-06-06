@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Live</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Live 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/live_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/live.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Mix this module in to your controller, and all actions in that controller
+will be able to stream data to the client as it&#39;s written.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MyController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Live</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">stream</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Content-Type&#39;</span>] = <span class="ruby-string">&#39;text/event-stream&#39;</span>
+    <span class="ruby-value">100</span>.<span class="ruby-identifier">times</span> {
+      <span class="ruby-identifier">response</span>.<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">write</span> <span class="ruby-string">&quot;hello world\n&quot;</span>
+      <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
+    }
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-identifier">response</span>.<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>There are a few caveats with this use. You <strong>cannot</strong> write
+headers after the response has been committed (<a
+href="../ActionDispatch/Response.html#method-i-committed-3F">ActionDispatch::Response#committed?</a>
+will return truthy). Calling <code>write</code> or <code>close</code> on
+the response stream will cause the response object to be committed. Make
+sure all headers are set before calling write or close on your stream.</p>
+
+<p>You <strong>must</strong> call close on your stream when you&#39;re
+finished, otherwise the socket may be left open forever.</p>
+
+<p>The final caveat is that your actions are executed in a separate thread
+than the main thread. Make sure your actions are thread safe, and this
+shouldn&#39;t be a problem (don&#39;t share state across threads, etc).</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Live/Response.html">ActionController::Live::Response</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-log_error">log_error</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-process">process</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-response_body-3D">response_body=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-set_response-21">set_response!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-log_error">
+            
+              <b>log_error</b>(exception)
+            
+            <a href="../../classes/ActionController/Live.html#method-i-log_error" name="method-i-log_error" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-log_error_source')" id="l_method-i-log_error_source">show</a>
+                
+              </p>
+              <div id="method-i-log_error_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/live.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">log_error</span>(<span class="ruby-identifier">exception</span>)
+  <span class="ruby-identifier">logger</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">logger</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">logger</span>
+
+  <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;\n#{exception.class} (#{exception.message}):\n&quot;</span>
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">annoted_source_code</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:annoted_source_code</span>)
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;  &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n  &quot;</span>)
+  <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">fatal</span>(<span class="ruby-node">&quot;#{message}\n\n&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-process">
+            
+              <b>process</b>(name)
+            
+            <a href="../../classes/ActionController/Live.html#method-i-process" name="method-i-process" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_source')" id="l_method-i-process_source">show</a>
+                
+              </p>
+              <div id="method-i-process_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/live.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">t1</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>
+  <span class="ruby-identifier">locals</span> = <span class="ruby-identifier">t1</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">key</span>, <span class="ruby-identifier">t1</span>[<span class="ruby-identifier">key</span>]] }
+
+  <span class="ruby-comment"># This processes the action in a child thread. It lets us return the</span>
+  <span class="ruby-comment"># response code and headers back up the rack stack, and still process</span>
+  <span class="ruby-comment"># the body in parallel with sending data to the client</span>
+  <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span> {
+    <span class="ruby-identifier">t2</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">current</span>
+    <span class="ruby-identifier">t2</span>.<span class="ruby-identifier">abort_on_exception</span> = <span class="ruby-keyword">true</span>
+
+    <span class="ruby-comment"># Since we&#39;re processing the view in a different thread, copy the</span>
+    <span class="ruby-comment"># thread locals from the main thread to the child thread. :&#39;(</span>
+    <span class="ruby-identifier">locals</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t2</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span> }
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-keyword">super</span>(<span class="ruby-identifier">name</span>)
+    <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-ivar">@_response</span>.<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">write</span>(<span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">streaming_completion_on_exception</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">==</span> <span class="ruby-value">:html</span>
+        <span class="ruby-ivar">@_response</span>.<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">call_on_error</span>
+      <span class="ruby-keyword">rescue</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">exception</span>
+        <span class="ruby-identifier">log_error</span>(<span class="ruby-identifier">exception</span>)
+      <span class="ruby-keyword">ensure</span>
+        <span class="ruby-identifier">log_error</span>(<span class="ruby-identifier">e</span>)
+        <span class="ruby-ivar">@_response</span>.<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">close</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">ensure</span>
+      <span class="ruby-ivar">@_response</span>.<span class="ruby-identifier">commit!</span>
+    <span class="ruby-keyword">end</span>
+  }
+
+  <span class="ruby-ivar">@_response</span>.<span class="ruby-identifier">await_commit</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-response_body-3D">
+            
+              <b>response_body=</b>(body)
+            
+            <a href="../../classes/ActionController/Live.html#method-i-response_body-3D" name="method-i-response_body-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-response_body-3D_source')" id="l_method-i-response_body-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-response_body-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/live.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">response_body=</span>(<span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">response</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_response-21">
+            
+              <b>set_response!</b>(request)
+            
+            <a href="../../classes/ActionController/Live.html#method-i-set_response-21" name="method-i-set_response-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-set_response-21_source')" id="l_method-i-set_response-21_source">show</a>
+                
+              </p>
+              <div id="method-i-set_response-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/live.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set_response!</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;HTTP_VERSION&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;HTTP/1.0&quot;</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@_response</span>         = <span class="ruby-constant">Live</span><span class="ruby-operator">::</span><span class="ruby-constant">Response</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@_response</span>.<span class="ruby-identifier">request</span> = <span class="ruby-identifier">request</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

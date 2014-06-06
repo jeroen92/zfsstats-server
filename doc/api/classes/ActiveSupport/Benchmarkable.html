@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Benchmarkable</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Benchmarkable 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/benchmarkable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/benchmarkable.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-benchmark">benchmark</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-silence">silence</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-benchmark">
+            
+              <b>benchmark</b>(message = &quot;Benchmarking&quot;, options = {})
+            
+            <a href="../../classes/ActiveSupport/Benchmarkable.html#method-i-benchmark" name="method-i-benchmark" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows you to measure the execution time of a block in a template and
+records the result to the log. Wrap this block around expensive operations
+or possible bottlenecks to get a time reading for the operation. For
+example, let&#39;s say you thought your file processing method was taking
+too long; you could wrap it in a benchmark block.</p>
+
+<pre>&lt;% benchmark &#39;Process data files&#39; do %&gt;
+  &lt;%= expensive_files_operation %&gt;
+&lt;% end %&gt;</pre>
+
+<p>That would add something like “<a href="../Process.html">Process</a> data
+files (345.2ms)” to the log, which you can then use to compare timings when
+optimizing your code.</p>
+
+<p>You may give an optional logger level (<code>:debug</code>,
+<code>:info</code>, <code>:warn</code>, <code>:error</code>) as the
+<code>:level</code> option. The default logger level value is
+<code>:info</code>.</p>
+
+<pre>&lt;% benchmark &#39;Low-level files&#39;, level: :debug do %&gt;
+  &lt;%= lowlevel_files_operation %&gt;
+&lt;% end %&gt;</pre>
+
+<p>Finally, you can pass true as the third argument to silence all log
+activity (other than the timing information) from inside the block. This is
+great for boiling down a noisy block to just a single statement that
+produces one log line:</p>
+
+<pre>&lt;% benchmark &#39;Process data files&#39;, level: :info, silence: true do %&gt;
+  &lt;%= expensive_and_chatty_files_operation %&gt;
+&lt;% end %&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-benchmark_source')" id="l_method-i-benchmark_source">show</a>
+                
+              </p>
+              <div id="method-i-benchmark_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/benchmarkable.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">benchmark</span>(<span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;Benchmarking&quot;</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">logger</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-value">:level</span>, <span class="ruby-value">:silence</span>)
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:level</span>] <span class="ruby-operator">||=</span> <span class="ruby-value">:info</span>
+
+    <span class="ruby-identifier">result</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">ms</span> = <span class="ruby-constant">Benchmark</span>.<span class="ruby-identifier">ms</span> { <span class="ruby-identifier">result</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:silence</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">silence</span> { <span class="ruby-keyword">yield</span> } <span class="ruby-operator">:</span> <span class="ruby-keyword">yield</span> }
+    <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:level</span>], <span class="ruby-string">&#39;%s (%.1fms)&#39;</span> <span class="ruby-operator">%</span> [ <span class="ruby-identifier">message</span>, <span class="ruby-identifier">ms</span> ])
+    <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-silence">
+            
+              <b>silence</b>()
+            
+            <a href="../../classes/ActiveSupport/Benchmarkable.html#method-i-silence" name="method-i-silence" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Silence the logger during the execution of the block.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-silence_source')" id="l_method-i-silence_source">show</a>
+                
+              </p>
+              <div id="method-i-silence_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/benchmarkable.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">silence</span>
+  <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;ActiveSupport::Benchmarkable#silence is deprecated. It will be removed from Rails 4.1.&quot;</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-identifier">old_logger_level</span>, <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">level</span>, <span class="ruby-operator">::</span><span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">ERROR</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">logger</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">level</span> = <span class="ruby-identifier">old_logger_level</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">logger</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveModel::Serializers::Xml</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveModel::Serializers::Xml 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/serializers/xml_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/serializers/xml.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Active+Model+XML+Serializer">Active <a href="../Model.html">Model</a> XML Serializer</h2>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-from_xml">from_xml</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_xml">to_xml</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../Serialization.html">
+              ActiveModel::Serialization
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-from_xml">
+            
+              <b>from_xml</b>(xml)
+            
+            <a href="../../../classes/ActiveModel/Serializers/Xml.html#method-i-from_xml" name="method-i-from_xml" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the model <code>attributes</code> from a <a href="JSON.html">JSON</a>
+string. Returns <code>self</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Serializers</span><span class="ruby-operator">::</span><span class="ruby-constant">Xml</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">age</span>, :<span class="ruby-identifier">awesome</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes=</span>(<span class="ruby-identifier">hash</span>)
+    <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">instance_variable_set</span>(<span class="ruby-node">&quot;@#{key}&quot;</span>, <span class="ruby-identifier">value</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
+    <span class="ruby-identifier">instance_values</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">xml</span> = { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;bob&#39;</span>, <span class="ruby-identifier">age</span><span class="ruby-operator">:</span> <span class="ruby-value">22</span>, <span class="ruby-identifier">awesome</span>:<span class="ruby-keyword">true</span> }.<span class="ruby-identifier">to_xml</span>
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">from_xml</span>(<span class="ruby-identifier">xml</span>) <span class="ruby-comment"># =&gt; #&lt;Person:0x007fec5e3b3c40 @age=22, @awesome=true, @name=&quot;bob&quot;&gt;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span>          <span class="ruby-comment"># =&gt; &quot;bob&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">age</span>           <span class="ruby-comment"># =&gt; 22</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">awesome</span>       <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-from_xml_source')" id="l_method-i-from_xml_source">show</a>
+                
+              </p>
+              <div id="method-i-from_xml_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/serializers/xml.rb, line 232</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">from_xml</span>(<span class="ruby-identifier">xml</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attributes</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">from_xml</span>(<span class="ruby-identifier">xml</span>).<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_xml">
+            
+              <b>to_xml</b>(options = {}, &amp;block)
+            
+            <a href="../../../classes/ActiveModel/Serializers/Xml.html#method-i-to_xml" name="method-i-to_xml" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns XML representing the model. Configuration can be passed through
+<code>options</code>.</p>
+
+<p>Without any <code>options</code>, the returned XML string will include all
+the model&#39;s attributes.</p>
+
+<pre>user = User.find(1)
+user.to_xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;user&gt;
+  &lt;id type=&quot;integer&quot;&gt;1&lt;/id&gt;
+  &lt;name&gt;David&lt;/name&gt;
+  &lt;age type=&quot;integer&quot;&gt;16&lt;/age&gt;
+  &lt;created-at type=&quot;dateTime&quot;&gt;2011-01-30T22:29:23Z&lt;/created-at&gt;
+&lt;/user&gt;</pre>
+
+<p>The <code>:only</code> and <code>:except</code> options can be used to
+limit the attributes included, and work similar to the
+<code>attributes</code> method.</p>
+
+<p>To include the result of some method calls on the model use
+<code>:methods</code>.</p>
+
+<p>To include associations use <code>:include</code>.</p>
+
+<p>For further documentation, see
+<code>ActiveRecord::Serialization#to_xml</code></p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_xml_source')" id="l_method-i-to_xml_source">show</a>
+                
+              </p>
+              <div id="method-i-to_xml_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/serializers/xml.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_xml</span>(<span class="ruby-identifier">options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">Serializer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>).<span class="ruby-identifier">serialize</span>(&amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

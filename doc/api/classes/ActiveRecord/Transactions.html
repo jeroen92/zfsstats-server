@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Transactions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Transactions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/transactions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/transactions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>See <a
+href="Transactions/ClassMethods.html">ActiveRecord::Transactions::ClassMethods</a>
+for documentation.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Transactions/ClassMethods.html">ActiveRecord::Transactions::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add_to_transaction">add_to_transaction</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-rollback_active_record_state-21">rollback_active_record_state!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-transaction">transaction</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-with_transaction_returning_status">with_transaction_returning_status</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ACTIONS</td>
+            <td>=</td>
+            <td class="attr-value">[:create, :destroy, :update]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-add_to_transaction">
+            
+              <b>add_to_transaction</b>()
+            
+            <a href="../../classes/ActiveRecord/Transactions.html#method-i-add_to_transaction" name="method-i-add_to_transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Add the record to the current transaction so that the :after_rollback and
+:after_commit callbacks can be called.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_to_transaction_source')" id="l_method-i-add_to_transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-add_to_transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/transactions.rb, line 309</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_to_transaction</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">add_transaction_record</span>(<span class="ruby-keyword">self</span>)
+    <span class="ruby-identifier">remember_transaction_record_state</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rollback_active_record_state-21">
+            
+              <b>rollback_active_record_state!</b>()
+            
+            <a href="../../classes/ActiveRecord/Transactions.html#method-i-rollback_active_record_state-21" name="method-i-rollback_active_record_state-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Reset id and @new_record if the transaction rolls back.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rollback_active_record_state-21_source')" id="l_method-i-rollback_active_record_state-21_source">show</a>
+                
+              </p>
+              <div id="method-i-rollback_active_record_state-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/transactions.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rollback_active_record_state!</span>
+  <span class="ruby-identifier">remember_transaction_record_state</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span>
+  <span class="ruby-identifier">restore_transaction_record_state</span>
+  <span class="ruby-identifier">raise</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">clear_transaction_record_state</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-transaction">
+            
+              <b>transaction</b>(options = {}, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Transactions.html#method-i-transaction" name="method-i-transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>See <a
+href="Transactions/ClassMethods.html">ActiveRecord::Transactions::ClassMethods</a>
+for detailed documentation.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-transaction_source')" id="l_method-i-transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/transactions.rb, line 260</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">transaction</span>(<span class="ruby-identifier">options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">transaction</span>(<span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-with_transaction_returning_status">
+            
+              <b>with_transaction_returning_status</b>()
+            
+            <a href="../../classes/ActiveRecord/Transactions.html#method-i-with_transaction_returning_status" name="method-i-with_transaction_returning_status" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes <code>method</code> within a transaction and captures its return
+value as a status flag. If the status is true the transaction is committed,
+otherwise a ROLLBACK is issued. In any case the status flag is returned.</p>
+
+<p>This method is available within the context of an <a
+href="Base.html">ActiveRecord::Base</a> instance.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-with_transaction_returning_status_source')" id="l_method-i-with_transaction_returning_status_source">show</a>
+                
+              </p>
+              <div id="method-i-with_transaction_returning_status_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/transactions.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">with_transaction_returning_status</span>
+  <span class="ruby-identifier">status</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">transaction</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">add_to_transaction</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">status</span> = <span class="ruby-keyword">yield</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Rollback</span>
+      <span class="ruby-ivar">@_start_transaction_state</span>[<span class="ruby-value">:level</span>] = (<span class="ruby-ivar">@_start_transaction_state</span>[<span class="ruby-value">:level</span>] <span class="ruby-operator">||</span> <span class="ruby-number">0</span>) <span class="ruby-operator">-</span> <span class="ruby-number">1</span>
+      <span class="ruby-identifier">status</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Rollback</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">status</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">status</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

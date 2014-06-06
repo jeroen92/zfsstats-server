@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::AtomFeedHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::AtomFeedHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/atom_feed_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/atom_feed_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-atom_feed">atom_feed</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-atom_feed">
+            
+              <b>atom_feed</b>(options = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/AtomFeedHelper.html#method-i-atom_feed" name="method-i-atom_feed" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adds easy defaults to writing Atom feeds with the Builder template engine
+(this does not work on <a href="../../ERB.html">ERB</a> or any other
+template languages).</p>
+
+<p>Full usage example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">config</span><span class="ruby-operator">/</span><span class="ruby-identifier">routes</span>.<span class="ruby-identifier">rb</span><span class="ruby-operator">:</span>
+  <span class="ruby-constant">Basecamp</span><span class="ruby-operator">::</span><span class="ruby-constant">Application</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">draw</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">resources</span> :<span class="ruby-identifier">posts</span>
+    <span class="ruby-identifier">root</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;posts#index&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">app</span><span class="ruby-operator">/</span><span class="ruby-identifier">controllers</span><span class="ruby-operator">/</span><span class="ruby-identifier">posts_controller</span>.<span class="ruby-identifier">rb</span><span class="ruby-operator">:</span>
+  <span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+    <span class="ruby-comment"># GET /posts.html</span>
+    <span class="ruby-comment"># GET /posts.atom</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+      <span class="ruby-ivar">@posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+
+      <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+        <span class="ruby-identifier">format</span>.<span class="ruby-identifier">atom</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">app</span><span class="ruby-operator">/</span><span class="ruby-identifier">views</span><span class="ruby-operator">/</span><span class="ruby-identifier">posts</span><span class="ruby-operator">/</span><span class="ruby-identifier">index</span>.<span class="ruby-identifier">atom</span>.<span class="ruby-identifier">builder</span><span class="ruby-operator">:</span>
+  <span class="ruby-identifier">atom_feed</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feed</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">title</span>(<span class="ruby-string">&quot;My great blog!&quot;</span>)
+    <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">updated</span>(<span class="ruby-ivar">@posts</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">created_at</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@posts</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+
+    <span class="ruby-ivar">@posts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">entry</span>(<span class="ruby-identifier">post</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">post</span>.<span class="ruby-identifier">title</span>)
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">content</span>(<span class="ruby-identifier">post</span>.<span class="ruby-identifier">body</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;html&#39;</span>)
+
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">author</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">author</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">author</span>.<span class="ruby-identifier">name</span>(<span class="ruby-string">&quot;DHH&quot;</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+</pre>
+
+<p>The options for <a
+href="AtomFeedHelper.html#method-i-atom_feed">#atom_feed</a> are:</p>
+<ul><li>
+<p><code>:language</code>: Defaults to “en-US”.</p>
+</li><li>
+<p><code>:root_url</code>: The <a href="../../HTML.html">HTML</a> alternative
+that this feed is doubling for. Defaults to / on the current host.</p>
+</li><li>
+<p><code>:url</code>: The URL for this feed. Defaults to the current URL.</p>
+</li><li>
+<p><code>:id</code>: The id for this feed. Defaults to “<a
+href="http://:schema_date">tag:#{request.host},#{options</a>}:#{<a
+href="http://0">request.fullpath.split(”.“)</a>}”</p>
+</li><li>
+<p><code>:schema_date</code>: The date at which the tag scheme for the feed
+was first used. A good default is the year you created the feed. See <a
+href="http://feedvalidator.org/docs/error/InvalidTAG.html">feedvalidator.org/docs/error/InvalidTAG.html</a>
+for more information. If not specified, 2005 is used (as an “I don&#39;t
+care” value).</p>
+</li><li>
+<p><code>:instruct</code>: <a href="../../Hash.html">Hash</a> of XML
+processing instructions in the form {target =&gt; {attribute =&gt; value,
+}} or {target =&gt; [{attribute =&gt; value, }, ]}</p>
+</li></ul>
+
+<p>Other namespaces can be added to the root element:</p>
+
+<pre class="ruby"><span class="ruby-identifier">app</span><span class="ruby-operator">/</span><span class="ruby-identifier">views</span><span class="ruby-operator">/</span><span class="ruby-identifier">posts</span><span class="ruby-operator">/</span><span class="ruby-identifier">index</span>.<span class="ruby-identifier">atom</span>.<span class="ruby-identifier">builder</span><span class="ruby-operator">:</span>
+  <span class="ruby-identifier">atom_feed</span>({<span class="ruby-string">&#39;xmlns:app&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://www.w3.org/2007/app&#39;</span>,
+      <span class="ruby-string">&#39;xmlns:openSearch&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://a9.com/-/spec/opensearch/1.1/&#39;</span>}) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feed</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">title</span>(<span class="ruby-string">&quot;My great blog!&quot;</span>)
+    <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">updated</span>((<span class="ruby-ivar">@posts</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">created_at</span>))
+    <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">tag!</span>(<span class="ruby-identifier">openSearch</span>:<span class="ruby-identifier">totalResults</span>, <span class="ruby-value">10</span>)
+
+    <span class="ruby-ivar">@posts</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">post</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">feed</span>.<span class="ruby-identifier">entry</span>(<span class="ruby-identifier">post</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">title</span>(<span class="ruby-identifier">post</span>.<span class="ruby-identifier">title</span>)
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">content</span>(<span class="ruby-identifier">post</span>.<span class="ruby-identifier">body</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;html&#39;</span>)
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">tag!</span>(<span class="ruby-string">&#39;app:edited&#39;</span>, <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>)
+
+        <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">author</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">author</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">author</span>.<span class="ruby-identifier">name</span>(<span class="ruby-string">&quot;DHH&quot;</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+</pre>
+
+<p>The Atom spec defines five elements (content rights title subtitle summary)
+which may directly contain xhtml content if type: &#39;xhtml&#39; is
+specified as an attribute. If so, this helper will take care of the
+enclosing div and xhtml namespace declaration. Example usage:</p>
+
+<pre class="ruby"><span class="ruby-identifier">entry</span>.<span class="ruby-identifier">summary</span> <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;xhtml&#39;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">xhtml</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">xhtml</span>.<span class="ruby-identifier">p</span> <span class="ruby-identifier">pluralize</span>(<span class="ruby-identifier">order</span>.<span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">count</span>, <span class="ruby-string">&quot;line item&quot;</span>)
+  <span class="ruby-identifier">xhtml</span>.<span class="ruby-identifier">p</span> <span class="ruby-node">&quot;Shipped to #{order.address}&quot;</span>
+  <span class="ruby-identifier">xhtml</span>.<span class="ruby-identifier">p</span> <span class="ruby-node">&quot;Paid by #{order.pay_type}&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><code>atom_feed</code> yields an <code>AtomFeedBuilder</code> instance.
+Nested elements yield an <code>AtomBuilder</code> instance.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-atom_feed_source')" id="l_method-i-atom_feed_source">show</a>
+                
+              </p>
+              <div id="method-i-atom_feed_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/atom_feed_helper.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">atom_feed</span>(<span class="ruby-identifier">options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:schema_date</span>]
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:schema_date</span>] = <span class="ruby-identifier">options</span>[<span class="ruby-value">:schema_date</span>].<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%Y-%m-%d&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:schema_date</span>].<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:strftime</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:schema_date</span>] = <span class="ruby-string">&quot;2005&quot;</span> <span class="ruby-comment"># The Atom spec copyright date</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">xml</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:xml</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">eval</span>(<span class="ruby-string">&quot;xml&quot;</span>, <span class="ruby-identifier">block</span>.<span class="ruby-identifier">binding</span>)
+  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">instruct!</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:instruct</span>]
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:instruct</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">target</span>,<span class="ruby-identifier">attrs</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:keys</span>)
+        <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">instruct!</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">attrs</span>)
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:each</span>)
+        <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr_group</span><span class="ruby-operator">|</span> <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">instruct!</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">attr_group</span>) }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">feed_opts</span> = {<span class="ruby-string">&quot;xml:lang&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:language</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&quot;en-US&quot;</span>, <span class="ruby-string">&quot;xmlns&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;http://www.w3.org/2005/Atom&#39;</span>}
+  <span class="ruby-identifier">feed_opts</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">reject!</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-operator">!</span><span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/^xml/</span>)}
+
+  <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">feed</span>(<span class="ruby-identifier">feed_opts</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">id</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:id</span>] <span class="ruby-operator">||</span> <span class="ruby-node">&quot;tag:#{request.host},#{options[:schema_date]}:#{request.fullpath.split(&quot;.&quot;)[0]}&quot;</span>)
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value">:rel</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;alternate&#39;</span>, <span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;text/html&#39;</span>, <span class="ruby-value">:href</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:root_url</span>] <span class="ruby-operator">||</span> (<span class="ruby-identifier">request</span>.<span class="ruby-identifier">protocol</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">host_with_port</span>))
+    <span class="ruby-identifier">xml</span>.<span class="ruby-identifier">link</span>(<span class="ruby-value">:rel</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;self&#39;</span>, <span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/atom+xml&#39;</span>, <span class="ruby-value">:href</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:url</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">url</span>)
+
+    <span class="ruby-keyword">yield</span> <span class="ruby-constant">AtomFeedBuilder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">xml</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

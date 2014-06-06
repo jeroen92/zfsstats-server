@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::RequestForgeryProtection</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::RequestForgeryProtection 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/request_forgery_protection_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Controller actions are protected from Cross-Site Request Forgery (CSRF)
+attacks by including a token in the rendered html for your application.
+This token is stored as a random string in the session, to which an
+attacker does not have access. When a request reaches your application,
+Rails verifies the received token with the token in the session. Only <a
+href="../HTML.html">HTML</a> and JavaScript requests are checked, so this
+will not protect your XML API (presumably you&#39;ll have a different
+authentication scheme there anyway). Also, GET requests are not protected
+as these should be idempotent.</p>
+
+<p>It&#39;s important to remember that XML or JSON requests are also affected
+and if you&#39;re building an API you&#39;ll need something like:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">protect_from_forgery</span>
+  <span class="ruby-identifier">skip_before_action</span> :<span class="ruby-identifier">verify_authenticity_token</span>, <span class="ruby-keyword">if</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">json_request?</span>
+
+  <span class="ruby-identifier">protected</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">json_request?</span>
+    <span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>.<span class="ruby-identifier">json?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>CSRF protection is turned on with the <code>protect_from_forgery</code>
+method, which checks the token and resets the session if it doesn&#39;t
+match what was expected. A call to this method is generated for new Rails
+applications by default.</p>
+
+<p>The token parameter is named <code>authenticity_token</code> by default.
+The name and value of this token must be added to every layout that renders
+forms by including <code>csrf_meta_tags</code> in the html
+<code>head</code>.</p>
+
+<p>Learn more about CSRF attacks and securing your application in the <a
+href="http://guides.rubyonrails.org/security.html">Ruby on Rails Security
+Guide</a>.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="RequestForgeryProtection/ClassMethods.html">ActionController::RequestForgeryProtection::ClassMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="RequestForgeryProtection/ProtectionMethods.html">ActionController::RequestForgeryProtection::ProtectionMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-form_authenticity_param">form_authenticity_param</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-form_authenticity_token">form_authenticity_token</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-handle_unverified_request">handle_unverified_request</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-protect_against_forgery-3F">protect_against_forgery?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-verified_request-3F">verified_request?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-verify_authenticity_token">verify_authenticity_token</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../AbstractController/Helpers.html">
+              AbstractController::Helpers
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../AbstractController/Callbacks.html">
+              AbstractController::Callbacks
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-form_authenticity_param">
+            
+              <b>form_authenticity_param</b>()
+            
+            <a href="../../classes/ActionController/RequestForgeryProtection.html#method-i-form_authenticity_param" name="method-i-form_authenticity_param" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The form&#39;s authenticity parameter. Override to provide your own.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-form_authenticity_param_source')" id="l_method-i-form_authenticity_param_source">show</a>
+                
+              </p>
+              <div id="method-i-form_authenticity_param_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">form_authenticity_param</span>
+  <span class="ruby-identifier">params</span>[<span class="ruby-identifier">request_forgery_protection_token</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-form_authenticity_token">
+            
+              <b>form_authenticity_token</b>()
+            
+            <a href="../../classes/ActionController/RequestForgeryProtection.html#method-i-form_authenticity_token" name="method-i-form_authenticity_token" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the token value for the current session.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-form_authenticity_token_source')" id="l_method-i-form_authenticity_token_source">show</a>
+                
+              </p>
+              <div id="method-i-form_authenticity_token_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">form_authenticity_token</span>
+  <span class="ruby-identifier">session</span>[<span class="ruby-value">:_csrf_token</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">SecureRandom</span>.<span class="ruby-identifier">base64</span>(<span class="ruby-number">32</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-handle_unverified_request">
+            
+              <b>handle_unverified_request</b>()
+            
+            <a href="../../classes/ActionController/RequestForgeryProtection.html#method-i-handle_unverified_request" name="method-i-handle_unverified_request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-handle_unverified_request_source')" id="l_method-i-handle_unverified_request_source">show</a>
+                
+              </p>
+              <div id="method-i-handle_unverified_request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">handle_unverified_request</span>
+  <span class="ruby-identifier">forgery_protection_strategy</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">handle_unverified_request</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-protect_against_forgery-3F">
+            
+              <b>protect_against_forgery?</b>()
+            
+            <a href="../../classes/ActionController/RequestForgeryProtection.html#method-i-protect_against_forgery-3F" name="method-i-protect_against_forgery-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-protect_against_forgery-3F_source')" id="l_method-i-protect_against_forgery-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-protect_against_forgery-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">protect_against_forgery?</span>
+  <span class="ruby-identifier">allow_forgery_protection</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-verified_request-3F">
+            
+              <b>verified_request?</b>()
+            
+            <a href="../../classes/ActionController/RequestForgeryProtection.html#method-i-verified_request-3F" name="method-i-verified_request-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true or false if a request is verified. Checks:</p>
+<ul><li>
+<p>is it a GET or HEAD request?  Gets should be safe and idempotent</p>
+</li><li>
+<p>Does the <a
+href="RequestForgeryProtection.html#method-i-form_authenticity_token">#form_authenticity_token</a>
+match the given token value from the params?</p>
+</li><li>
+<p>Does the X-CSRF-Token header match the <a
+href="RequestForgeryProtection.html#method-i-form_authenticity_token">#form_authenticity_token</a></p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-verified_request-3F_source')" id="l_method-i-verified_request-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-verified_request-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">verified_request?</span>
+  <span class="ruby-operator">!</span><span class="ruby-identifier">protect_against_forgery?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">get?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">head?</span> <span class="ruby-operator">||</span>
+    <span class="ruby-identifier">form_authenticity_token</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">params</span>[<span class="ruby-identifier">request_forgery_protection_token</span>] <span class="ruby-operator">||</span>
+    <span class="ruby-identifier">form_authenticity_token</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;X-CSRF-Token&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-verify_authenticity_token">
+            
+              <b>verify_authenticity_token</b>()
+            
+            <a href="../../classes/ActionController/RequestForgeryProtection.html#method-i-verify_authenticity_token" name="method-i-verify_authenticity_token" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The actual before_action that is used. Modify this to change how you handle
+unverified requests.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-verify_authenticity_token_source')" id="l_method-i-verify_authenticity_token_source">show</a>
+                
+              </p>
+              <div id="method-i-verify_authenticity_token_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/request_forgery_protection.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">verify_authenticity_token</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">verified_request?</span>
+    <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Can&#39;t verify CSRF token authenticity&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">logger</span>
+    <span class="ruby-identifier">handle_unverified_request</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

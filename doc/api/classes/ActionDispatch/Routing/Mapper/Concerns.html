@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Routing::Mapper::Concerns</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Routing::Mapper::Concerns 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/mapper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/mapper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="../../Routing.html">Routing</a> <a
+href="Concerns.html">Concerns</a> allow you to declare common routes that
+can be reused inside others resources and routes.</p>
+
+<pre>concern :commentable do
+  resources :comments
+end
+
+concern :image_attachable do
+  resources :images, only: :index
+end</pre>
+
+<p>These concerns are used in <a href="Resources.html">Resources</a> routing:</p>
+
+<pre>resources :messages, concerns: [:commentable, :image_attachable]</pre>
+
+<p>or in a scope or namespace:</p>
+
+<pre>namespace :posts do
+  concerns :commentable
+end</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-concern">concern</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-concerns">concerns</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-concern">
+            
+              <b>concern</b>(name, callable = nil, &amp;block)
+            
+            <a href="../../../../classes/ActionDispatch/Routing/Mapper/Concerns.html#method-i-concern" name="method-i-concern" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Define a routing concern using a name.</p>
+
+<p><a href="Concerns.html">Concerns</a> may be defined inline, using a block,
+or handled by another object, by passing that object as the second
+parameter.</p>
+
+<p>The concern object, if supplied, should respond to <code>call</code>, which
+will receive two parameters:</p>
+
+<pre>* The current mapper
+* A hash of options which the concern object may use</pre>
+
+<p>Options may also be used by concerns defined in a block by accepting a
+block parameter. So, using a block, you might do something as simple as
+limit the actions available on certain resources, passing standard resource
+options through the concern:</p>
+
+<pre class="ruby"><span class="ruby-identifier">concern</span> :<span class="ruby-identifier">commentable</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">options</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">resources</span> :<span class="ruby-identifier">comments</span>, <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">posts</span>, <span class="ruby-identifier">concerns</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">commentable</span>
+<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">archived_posts</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-comment"># Don&#39;t allow comments on archived posts</span>
+  <span class="ruby-identifier">concerns</span> :<span class="ruby-identifier">commentable</span>, <span class="ruby-identifier">only</span><span class="ruby-operator">:</span> [:<span class="ruby-identifier">index</span>, :<span class="ruby-identifier">show</span>]
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Or, using a callable object, you might implement something more specific to
+your application, which would be out of place in your routes file.</p>
+
+<pre class="ruby"><span class="ruby-comment"># purchasable.rb</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Purchasable</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">defaults</span> = {})
+    <span class="ruby-ivar">@defaults</span> = <span class="ruby-identifier">defaults</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">call</span>(<span class="ruby-identifier">mapper</span>, <span class="ruby-identifier">options</span> = {})
+    <span class="ruby-identifier">options</span> = <span class="ruby-ivar">@defaults</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">mapper</span>.<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">purchases</span>
+    <span class="ruby-identifier">mapper</span>.<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">receipts</span>
+    <span class="ruby-identifier">mapper</span>.<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">returns</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[:<span class="ruby-identifier">returnable</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># routes.rb</span>
+<span class="ruby-identifier">concern</span> :<span class="ruby-identifier">purchasable</span>, <span class="ruby-constant">Purchasable</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">returnable</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+
+<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">toys</span>, <span class="ruby-identifier">concerns</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchasable</span>
+<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">electronics</span>, <span class="ruby-identifier">concerns</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">purchasable</span>
+<span class="ruby-identifier">resources</span> :<span class="ruby-identifier">pets</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">concerns</span> :<span class="ruby-identifier">purchasable</span>, <span class="ruby-identifier">returnable</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Any routing helpers can be used inside a concern. If using a callable,
+they&#39;re accessible from the <a href="../Mapper.html">Mapper</a>
+that&#39;s passed to <code>call</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-concern_source')" id="l_method-i-concern_source">show</a>
+                
+              </p>
+              <div id="method-i-concern_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/mapper.rb, line 1727</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">concern</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">callable</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">callable</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mapper</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mapper</span>.<span class="ruby-identifier">instance_exec</span>(<span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>) }
+  <span class="ruby-ivar">@concerns</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">callable</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-concerns">
+            
+              <b>concerns</b>(*args)
+            
+            <a href="../../../../classes/ActionDispatch/Routing/Mapper/Concerns.html#method-i-concerns" name="method-i-concerns" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Use the named concerns</p>
+
+<pre>resources :posts do
+  concerns :commentable
+end</pre>
+
+<p>concerns also work in any routes helper that you want to use:</p>
+
+<pre>namespace :posts do
+  concerns :commentable
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-concerns_source')" id="l_method-i-concerns_source">show</a>
+                
+              </p>
+              <div id="method-i-concerns_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/mapper.rb, line 1743</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">concerns</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">concern</span> = <span class="ruby-ivar">@concerns</span>[<span class="ruby-identifier">name</span>]
+      <span class="ruby-identifier">concern</span>.<span class="ruby-identifier">call</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;No concern named #{name} was found!&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

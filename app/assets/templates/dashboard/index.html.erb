@@ -1,0 +1,111 @@
+<div class="row" id="row-status">
+	<div class="col-md-7">
+		<div class="dashboard-tile-large">
+			<h2 class="dashboard-tile-large-header"><i class="fa fa-hdd-o"></i> Servers</h2>
+			<div class="dashboard-tile-large-body dashboard-item-list">
+				<table class="table table-condensed table-borderless">
+				<thead><tr><th width="40%">Name</th><th width="50%">IPv4</th><th width="10%">Status</th></tr></thead>
+				<tbody>
+					<tr ng-repeat="server in servers.slice(0,4)" ng-click="gotoServer(server.id)">
+						<td>{{ server.name }}</td>
+						<td>{{ server.IPv4Address }}</td>
+						<td ng-switch on="server.status">
+							<i class="fa fa-check" ng-switch-when="0"></i>
+							<i class="fa fa-exclamation" ng-switch-default></i>
+						</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+			<div class="dashboard-tile-large-footer">
+				<a class="navigation-link-bottom-left" ng-href="/servers" target="_self"><i class="fa fa-list"></i> Index</a>
+				<a class="navigation-link-bottom-right" ng-href="/servers/new" target="_self">Add <i class="fa fa-plus"></i></a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="col-md-5">
+		<div class="dashboard-tile-large">
+			<h2 class="dashboard-tile-large-header"><i class="fa fa-cogs"></i> Preferences</h2>
+			<div class="dashboard-tile-large-body">
+				<p>
+					Adjust account-specific settings to satisfy your personal needs.
+				</p>
+			</div>
+			<div class="dashboard-tile-large-footer">
+				<a class="navigation-link-bottom-right" ng-href="/users/{{userId}}/edit" target="_self">Do it now <i class="fa fa-arrow-right"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="dashboard-tile-small">
+			<div class="dashboard-tile-small-header">
+				<h3>Summary</h3>
+			</div>
+			<div class="dashboard-tile-small-body" id="dashboard-summary-tile">
+				<div ng-switch on="randomMeasurementName">
+					<p class="animation-fading" ng-switch-when="bytesRead">During the last hour, a total of {{ randomMeasurementValue | convertByteToUnit }} was read from disk.</p>
+					<p class="animation-fading" ng-switch-when="bytesWrite">During the last hour, a total of {{ randomMeasurementValue | convertByteToUnit }} was written to disk.</p>
+					<p class="animation-fading" ng-switch-when="bytesReadL2arc">During the last hour, {{ randomMeasurementValue | convertByteToUnit }} was read from L2ARC cache devices.</p>
+					<p class="animation-fading" ng-switch-when="bytesWriteL2arc">During the last hour, {{ randomMeasurementValue | convertByteToUnit }} was written to L2ARC cache devices.</p>
+				</div>
+			</div>
+			<div class="dashboard-tile-small-footer">
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="dashboard-tile-small">
+			<div class="dashboard-tile-small-header">
+				<h3>Job reporting</h3>
+			</div>
+			<div class="dashboard-tile-small-body" id="dashboard-jobs-tile">
+				<div class="col-md-1">
+					<h5><i class="fa fa-exclamation-triangle"></i></h5>
+					<h4><i class="fa fa-clock-o"></i></h4>
+				</div>
+				<div class="col-md-5">
+					<div class="dashboard-jobs-count" ng-class="{true: 'dashboard-jobs-success', false: 'dashboard-jobs-alert'}[jobReportAlert24H == 0]">
+						<h5>{{ jobReportAlert24H }} alerts</h5>
+					</div>
+					<div class="dashboard-jobs-timespan">
+						<h4>24h</h4>
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="dashboard-jobs-count" ng-class="{true: 'dashboard-jobs-success', false: 'dashboard-jobs-alert'}[jobReportAlert7D == 0]">
+						<h5>{{ jobReportAlert7D }} alerts</h5>
+					</div>
+					<div class="dashboard-jobs-timespan">
+						<h4>7 days</h4>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="dashboard-tile-small">
+			<div class="dashboard-tile-small-header">
+				<h3>Users</h3>
+			</div>
+			<div class="dashboard-tile-small-body dashboard-item-list">
+				<table class="table table-condensed table-borderless dashboard-user-list">
+				<thead><tr><th width="55%">Name</th><th width="45%">Last login</th></tr></thead>
+				<tbody>
+					<tr ng-repeat="user in users.slice(0,2)" ng-click="gotoUser(user.id)">
+						<td>{{ user.firstname }}</td>
+						<td>{{ user.lastLogin | date:'MMMM d, y' }}</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+			<div class="dashboard-tile-small-footer">
+				<a class="navigation-link-bottom-left" ng-href="/users" target="_self"><i class="fa fa-list"></i> Index</a>
+				<a class="navigation-link-bottom-right" ng-href="/users/new" target="_self">Add <i class="fa fa-plus"></i></a>
+			</div>
+		</div>
+	</div>
+</div>

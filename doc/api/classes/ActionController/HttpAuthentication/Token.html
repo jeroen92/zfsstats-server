@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::HttpAuthentication::Token</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::HttpAuthentication::Token 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/http_authentication_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Makes it dead easy to do HTTP <a href="Token.html">Token</a>
+authentication.</p>
+
+<p>Simple <a href="Token.html">Token</a> example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-constant">TOKEN</span> = <span class="ruby-string">&quot;secret&quot;</span>
+
+  <span class="ruby-identifier">before_action</span> :<span class="ruby-identifier">authenticate</span>, <span class="ruby-identifier">except</span><span class="ruby-operator">:</span> [ :<span class="ruby-identifier">index</span> ]
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Everyone can see me!&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;I&#39;m only accessible if you know the password&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate</span>
+      <span class="ruby-identifier">authenticate_or_request_with_http_token</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">token</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">token</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TOKEN</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Here is a more advanced <a href="Token.html">Token</a> example where only
+Atom feeds and the XML API is protected by HTTP token authentication, the
+regular <a href="../../HTML.html">HTML</a> interface is protected by a
+session approach:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_action</span> :<span class="ruby-identifier">set_account</span>, :<span class="ruby-identifier">authenticate</span>
+
+  <span class="ruby-identifier">protected</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_account</span>
+      <span class="ruby-ivar">@account</span> = <span class="ruby-constant">Account</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">url_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">subdomains</span>.<span class="ruby-identifier">first</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">ATOM</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> = <span class="ruby-identifier">authenticate_with_http_token</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span>, <span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@account</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">t</span>, <span class="ruby-identifier">o</span>) }
+          <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">user</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">request_http_token_authentication</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">session_authenticated?</span>
+          <span class="ruby-ivar">@current_user</span> = <span class="ruby-ivar">@account</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[:<span class="ruby-identifier">authenticated</span>][:<span class="ruby-identifier">user_id</span>])
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">login_url</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In your integration tests, you can do something like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">test_access_granted_from_xml</span>
+  <span class="ruby-identifier">get</span>(
+    <span class="ruby-string">&quot;/notes/1.xml&quot;</span>, <span class="ruby-keyword">nil</span>,
+    <span class="ruby-string">&#39;HTTP_AUTHORIZATION&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">HttpAuthentication</span><span class="ruby-operator">::</span><span class="ruby-constant">Token</span>.<span class="ruby-identifier">encode_credentials</span>(<span class="ruby-identifier">users</span>(:<span class="ruby-identifier">dhh</span>).<span class="ruby-identifier">token</span>)
+  )
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">status</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>On shared hosts, Apache sometimes doesn&#39;t pass authentication headers
+to FCGI instances. If your environment matches this description and you
+cannot authenticate, try this rule in your Apache setup:</p>
+
+<pre>RewriteRule ^(.*)$ dispatch.fcgi [E=X-HTTP_AUTHORIZATION:%{HTTP:Authorization},QSA,L]</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Token/ControllerMethods.html">ActionController::HttpAuthentication::Token::ControllerMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-authenticate">authenticate</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-authentication_request">authentication_request</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encode_credentials">encode_credentials</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-params_array_from">params_array_from</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-raw_params">raw_params</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-rewrite_param_values">rewrite_param_values</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-token_and_options">token_and_options</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-token_params_from">token_params_from</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">TOKEN_REGEX</td>
+            <td>=</td>
+            <td class="attr-value">/^Token /</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">AUTHN_PAIR_DELIMITERS</td>
+            <td>=</td>
+            <td class="attr-value">/(?:,|;|\t+)/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-authenticate">
+            
+              <b>authenticate</b>(controller, &amp;login_procedure)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-authenticate" name="method-i-authenticate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>If token Authorization header is present, call the login procedure with the
+present token and options.</p>
+<dl class="rdoc-list label-list"><dt>controller
+<dd>
+<p><a href="../Base.html">ActionController::Base</a> instance for the current
+request.</p>
+</dd><dt>login_procedure
+<dd>
+<p>Proc to call if a token is present. The Proc should take two arguments:</p>
+
+<pre class="ruby"><span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">controller</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">token</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span> <span class="ruby-operator">...</span> }
+</pre>
+</dd></dl>
+
+<p>Returns the return value of <code>login_procedure</code> if a token is
+found. Returns <code>nil</code> if no token is found.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-authenticate_source')" id="l_method-i-authenticate_source">show</a>
+                
+              </p>
+              <div id="method-i-authenticate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 420</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">authenticate</span>(<span class="ruby-identifier">controller</span>, &amp;<span class="ruby-identifier">login_procedure</span>)
+  <span class="ruby-identifier">token</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">token_and_options</span>(<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">request</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">token</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">login_procedure</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">token</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-authentication_request">
+            
+              <b>authentication_request</b>(controller, realm)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-authentication_request" name="method-i-authentication_request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets a WWW-Authenticate to let the client know a token is desired.</p>
+
+<p>controller - <a href="../Base.html">ActionController::Base</a> instance for
+the outgoing response. realm      - <a href="../../String.html">String</a>
+realm to use in the header.</p>
+
+<p>Returns nothing.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-authentication_request_source')" id="l_method-i-authentication_request_source">show</a>
+                
+              </p>
+              <div id="method-i-authentication_request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 484</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">authentication_request</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">realm</span>)
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;WWW-Authenticate&quot;</span>] = <span class="ruby-node">%Q(Token realm=&quot;#{realm.gsub(/&quot;/, &quot;&quot;)}&quot;)</span>
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">__send__</span> <span class="ruby-value">:render</span>, <span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;HTTP Token: Access denied.\n&quot;</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unauthorized</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-encode_credentials">
+            
+              <b>encode_credentials</b>(token, options = {})
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-encode_credentials" name="method-i-encode_credentials" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Encodes the given token and options into an Authorization header value.</p>
+
+<p>token   - <a href="../../String.html">String</a> token. options - optional
+<a href="../../Hash.html">Hash</a> of the options.</p>
+
+<p>Returns <a href="../../String.html">String</a>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encode_credentials_source')" id="l_method-i-encode_credentials_source">show</a>
+                
+              </p>
+              <div id="method-i-encode_credentials_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 471</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encode_credentials</span>(<span class="ruby-identifier">token</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">values</span> = [<span class="ruby-node">&quot;token=#{token.to_s.inspect}&quot;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-node">&quot;#{key}=#{value.to_s.inspect}&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-node">&quot;Token #{values * &quot;, &quot;}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-params_array_from">
+            
+              <b>params_array_from</b>(raw_params)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-params_array_from" name="method-i-params_array_from" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Takes <a href="Token.html#method-i-raw_params">#raw_params</a> and turns it
+into an array of parameters</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-params_array_from_source')" id="l_method-i-params_array_from_source">show</a>
+                
+              </p>
+              <div id="method-i-params_array_from_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 449</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">params_array_from</span>(<span class="ruby-identifier">raw_params</span>)
+  <span class="ruby-identifier">raw_params</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">param</span><span class="ruby-operator">|</span> <span class="ruby-identifier">param</span>.<span class="ruby-identifier">split</span> <span class="ruby-regexp">/=(.+)?/</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-raw_params">
+            
+              <b>raw_params</b>(auth)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-raw_params" name="method-i-raw_params" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This method takes an authorization body and splits up the key-value pairs
+by the standardized `:`, `;`, or `t` delimiters defined in `<a
+href="Token.html#AUTHN_PAIR_DELIMITERS">AUTHN_PAIR_DELIMITERS</a>`.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-raw_params_source')" id="l_method-i-raw_params_source">show</a>
+                
+              </p>
+              <div id="method-i-raw_params_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 461</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">raw_params</span>(<span class="ruby-identifier">auth</span>)
+  <span class="ruby-identifier">auth</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-constant">TOKEN_REGEX</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-node">/&quot;\s*#{AUTHN_PAIR_DELIMITERS}\s*/</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rewrite_param_values">
+            
+              <b>rewrite_param_values</b>(array_params)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-rewrite_param_values" name="method-i-rewrite_param_values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This removes the `“` characters wrapping the value.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rewrite_param_values_source')" id="l_method-i-rewrite_param_values_source">show</a>
+                
+              </p>
+              <div id="method-i-rewrite_param_values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 454</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rewrite_param_values</span>(<span class="ruby-identifier">array_params</span>)
+  <span class="ruby-identifier">array_params</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">param</span><span class="ruby-operator">|</span> <span class="ruby-identifier">param</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gsub!</span> <span class="ruby-regexp">/^&quot;|&quot;$/</span>, <span class="ruby-string">&#39;&#39;</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-token_and_options">
+            
+              <b>token_and_options</b>(request)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-token_and_options" name="method-i-token_and_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Parses the token and options out of the token authorization header. If the
+header looks like this:</p>
+
+<pre class="ruby"><span class="ruby-constant">Authorization</span><span class="ruby-operator">:</span> <span class="ruby-constant">Token</span> <span class="ruby-identifier">token</span>=<span class="ruby-string">&quot;abc&quot;</span>, <span class="ruby-identifier">nonce</span>=<span class="ruby-string">&quot;def&quot;</span>
+</pre>
+
+<p>Then the returned token is “abc”, and the options is {nonce: “def”}</p>
+
+<p>request - <a
+href="../../ActionDispatch/Request.html">ActionDispatch::Request</a>
+instance with the current headers.</p>
+
+<p>Returns an <a href="../../Array.html">Array</a> of [<a
+href="../../String.html">String</a>, Hash] if a token is present. Returns
+nil if no token is found.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-token_and_options_source')" id="l_method-i-token_and_options_source">show</a>
+                
+              </p>
+              <div id="method-i-token_and_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 436</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">token_and_options</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">authorization_request</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">authorization</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">authorization_request</span>[<span class="ruby-constant">TOKEN_REGEX</span>]
+    <span class="ruby-identifier">params</span> = <span class="ruby-identifier">token_params_from</span> <span class="ruby-identifier">authorization_request</span>
+    [<span class="ruby-identifier">params</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">last</span>, <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">params</span>].<span class="ruby-identifier">with_indifferent_access</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-token_params_from">
+            
+              <b>token_params_from</b>(auth)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Token.html#method-i-token_params_from" name="method-i-token_params_from" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-token_params_from_source')" id="l_method-i-token_params_from_source">show</a>
+                
+              </p>
+              <div id="method-i-token_params_from_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 444</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">token_params_from</span>(<span class="ruby-identifier">auth</span>)
+  <span class="ruby-identifier">rewrite_param_values</span> <span class="ruby-identifier">params_array_from</span> <span class="ruby-identifier">raw_params</span> <span class="ruby-identifier">auth</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

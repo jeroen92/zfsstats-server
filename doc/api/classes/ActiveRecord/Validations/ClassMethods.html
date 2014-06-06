@@ -1,0 +1,511 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Validations::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Validations::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb</a></li>
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/associated_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/associated.rb</a></li>
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/presence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/presence.rb</a></li>
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/uniqueness_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/uniqueness.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create-21">create!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-validates_associated">validates_associated</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-validates_presence_of">validates_presence_of</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-validates_uniqueness_of">validates_uniqueness_of</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create-21">
+            
+              <b>create!</b>(attributes = nil, &amp;block)
+            
+            <a href="../../../classes/ActiveRecord/Validations/ClassMethods.html#method-i-create-21" name="method-i-create-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Creates an object just like Base.create but calls <code>save!</code>
+instead of <code>save</code> so an exception is raised if the record is
+invalid.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create-21_source')" id="l_method-i-create-21_source">show</a>
+                
+              </p>
+              <div id="method-i-create-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create!</span>(<span class="ruby-identifier">attributes</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">create!</span>(<span class="ruby-identifier">attr</span>, &amp;<span class="ruby-identifier">block</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">object</span> = <span class="ruby-identifier">new</span>(<span class="ruby-identifier">attributes</span>)
+    <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">object</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">object</span>.<span class="ruby-identifier">save!</span>
+    <span class="ruby-identifier">object</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-validates_associated">
+            
+              <b>validates_associated</b>(*attr_names)
+            
+            <a href="../../../classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_associated" name="method-i-validates_associated" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Validates whether the associated object or objects are all valid. Works
+with any kind of association.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Book</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">pages</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">library</span>
+
+  <span class="ruby-identifier">validates_associated</span> :<span class="ruby-identifier">pages</span>, :<span class="ruby-identifier">library</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>WARNING: This validation must not be used on both ends of an association.
+Doing so will lead to a circular dependency and cause infinite recursion.</p>
+
+<p>NOTE: This validation will not fail if the association hasn&#39;t been
+assigned. If you want to ensure that the association is both present and
+guaranteed to be valid, you also need to use
+<code>validates_presence_of</code>.</p>
+
+<p>Configuration options:</p>
+<ul><li>
+<p><code>:message</code> - A custom error message (default is: “is invalid”).</p>
+</li><li>
+<p><code>:on</code> - Specifies when this validation is active. Runs in all
+validation contexts by default (<code>nil</code>), other options are
+<code>:create</code> and <code>:update</code>.</p>
+</li><li>
+<p><code>:if</code> - Specifies a method, proc or string to call to determine
+if the validation should occur (e.g. <code>if: :allow_validation</code>, or
+<code>if: Proc.new { |user| user.signup_step &gt; 2 }</code>). The method,
+proc or string should return or evaluate to a <code>true</code> or
+<code>false</code> value.</p>
+</li><li>
+<p><code>:unless</code> - Specifies a method, proc or string to call to
+determine if the validation should not occur (e.g. <code>unless:
+:skip_validation</code>, or <code>unless: Proc.new { |user|
+user.signup_step &lt;= 2 }</code>). The method, proc or string should
+return or evaluate to a <code>true</code> or <code>false</code> value.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-validates_associated_source')" id="l_method-i-validates_associated_source">show</a>
+                
+              </p>
+              <div id="method-i-validates_associated_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/associated.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">validates_associated</span>(*<span class="ruby-identifier">attr_names</span>)
+  <span class="ruby-identifier">validates_with</span> <span class="ruby-constant">AssociatedValidator</span>, <span class="ruby-identifier">_merge_attributes</span>(<span class="ruby-identifier">attr_names</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-validates_presence_of">
+            
+              <b>validates_presence_of</b>(*attr_names)
+            
+            <a href="../../../classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_presence_of" name="method-i-validates_presence_of" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Validates that the specified attributes are not blank (as defined by <a
+href="../../Object.html#method-i-blank-3F">Object#blank?</a>), and, if the
+attribute is an association, that the associated object is not marked for
+destruction. Happens by default on save.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_one</span> :<span class="ruby-identifier">face</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">face</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The face attribute must be in the object and it cannot be blank or marked
+for destruction.</p>
+
+<p>If you want to validate the presence of a boolean field (where the real
+values are true and false), you will want to use
+<code>validates_inclusion_of :field_name, in: [true, false]</code>.</p>
+
+<p>This is due to the way <a
+href="../../Object.html#method-i-blank-3F">Object#blank?</a> handles
+boolean values: <code>false.blank? # =&gt; true</code>.</p>
+
+<p>This validator defers to the <a
+href="../../ActiveModel.html">ActiveModel</a> validation for presence,
+adding the check to see that an associated object is not marked for
+destruction. This prevents the parent object from validating successfully
+and saving, which then deletes the associated object, thus putting the
+parent object into an invalid state.</p>
+
+<p>Configuration options:</p>
+<ul><li>
+<p><code>:message</code> - A custom error message (default is: “can&#39;t be
+blank”).</p>
+</li><li>
+<p><code>:on</code> - Specifies when this validation is active. Runs in all
+validation contexts by default (<code>nil</code>), other options are
+<code>:create</code> and <code>:update</code>.</p>
+</li><li>
+<p><code>:if</code> - Specifies a method, proc or string to call to determine
+if the validation should occur (e.g. <code>if: :allow_validation</code>, or
+<code>if: Proc.new { |user| user.signup_step &gt; 2 }</code>). The method,
+proc or string should return or evaluate to a <code>true</code> or
+<code>false</code> value.</p>
+</li><li>
+<p><code>:unless</code> - Specifies a method, proc or string to call to
+determine if the validation should not occur (e.g. <code>unless:
+:skip_validation</code>, or <code>unless: Proc.new { |user|
+user.signup_step &lt;= 2 }</code>). The method, proc or string should
+return or evaluate to a <code>true</code> or <code>false</code> value.</p>
+</li><li>
+<p><code>:strict</code> - Specifies whether validation should be strict. See
+<code>ActiveModel::Validation#validates!</code> for more information.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-validates_presence_of_source')" id="l_method-i-validates_presence_of_source">show</a>
+                
+              </p>
+              <div id="method-i-validates_presence_of_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/presence.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">validates_presence_of</span>(*<span class="ruby-identifier">attr_names</span>)
+  <span class="ruby-identifier">validates_with</span> <span class="ruby-constant">PresenceValidator</span>, <span class="ruby-identifier">_merge_attributes</span>(<span class="ruby-identifier">attr_names</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-validates_uniqueness_of">
+            
+              <b>validates_uniqueness_of</b>(*attr_names)
+            
+            <a href="../../../classes/ActiveRecord/Validations/ClassMethods.html#method-i-validates_uniqueness_of" name="method-i-validates_uniqueness_of" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Validates whether the value of the specified attributes are unique across
+the system. Useful for making sure that only one user can be named
+“davidhh”.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">validates_uniqueness_of</span> :<span class="ruby-identifier">user_name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>It can also validate whether the value of the specified attributes are
+unique based on a <code>:scope</code> parameter:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">validates_uniqueness_of</span> :<span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">account_id</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Or even multiple scope parameters. For example, making sure that a teacher
+can only be on the schedule once per semester for a particular class.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">TeacherSchedule</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">validates_uniqueness_of</span> :<span class="ruby-identifier">teacher_id</span>, <span class="ruby-identifier">scope</span><span class="ruby-operator">:</span> [:<span class="ruby-identifier">semester_id</span>, :<span class="ruby-identifier">class_id</span>]
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>It is also possible to limit the uniqueness constraint to a set of records
+matching certain conditions. In this example archived articles are not
+being taken into consideration when validating uniqueness of the title
+attribute:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Article</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">validates_uniqueness_of</span> :<span class="ruby-identifier">title</span>, <span class="ruby-identifier">conditions</span><span class="ruby-operator">:</span> <span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">where</span>.<span class="ruby-identifier">not</span>(<span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;archived&#39;</span>) }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>When the record is created, a check is performed to make sure that no
+record exists in the database with the given value for the specified
+attribute (that maps to a column). When the record is updated, the same
+check is made but disregarding the record itself.</p>
+
+<p>Configuration options:</p>
+<ul><li>
+<p><code>:message</code> - Specifies a custom error message (default is: “has
+already been taken”).</p>
+</li><li>
+<p><code>:scope</code> - One or more columns by which to limit the scope of
+the uniqueness constraint.</p>
+</li><li>
+<p><code>:conditions</code> - Specify the conditions to be included as a
+<code>WHERE</code> SQL fragment to limit the uniqueness constraint lookup
+(e.g. <code>conditions: -&gt; { where(status: &#39;active&#39;) }</code>).</p>
+</li><li>
+<p><code>:case_sensitive</code> - Looks for an exact match. Ignored by
+non-text columns (<code>true</code> by default).</p>
+</li><li>
+<p><code>:allow_nil</code> - If set to <code>true</code>, skips this
+validation if the attribute is <code>nil</code> (default is
+<code>false</code>).</p>
+</li><li>
+<p><code>:allow_blank</code> - If set to <code>true</code>, skips this
+validation if the attribute is blank (default is <code>false</code>).</p>
+</li><li>
+<p><code>:if</code> - Specifies a method, proc or string to call to determine
+if the validation should occur (e.g. <code>if: :allow_validation</code>, or
+<code>if: Proc.new { |user| user.signup_step &gt; 2 }</code>). The method,
+proc or string should return or evaluate to a <code>true</code> or
+<code>false</code> value.</p>
+</li><li>
+<p><code>:unless</code> - Specifies a method, proc or string to call to
+determine if the validation should ot occur (e.g. <code>unless:
+:skip_validation</code>, or <code>unless: Proc.new { |user|
+user.signup_step &lt;= 2 }</code>). The method, proc or string should
+return or evaluate to a <code>true</code> or <code>false</code> value.</p>
+</li></ul>
+
+<h3 id="method-i-validates_uniqueness_of-label-Concurrency+and+integrity">Concurrency and integrity</h3>
+
+<p>Using this validation method in conjunction with <a
+href="../Validations.html#method-i-save">ActiveRecord::Validations#save</a>
+does not guarantee the absence of duplicate record insertions, because
+uniqueness checks on the application level are inherently prone to race
+conditions. For example, suppose that two users try to post a Comment at
+the same time, and a Comment&#39;s title must be unique. At the
+database-level, the actions performed by these users could be interleaved
+in the following manner:</p>
+
+<pre>             User 1                 |               User 2
+------------------------------------+--------------------------------------
+# User 1 checks whether there&#39;s     |
+# already a comment with the title  |
+# &#39;My Post&#39;. This is not the case.  |
+SELECT * FROM comments              |
+WHERE title = &#39;My Post&#39;             |
+                                    |
+                                    | # User 2 does the same thing and also
+                                    | # infers that his title is unique.
+                                    | SELECT * FROM comments
+                                    | WHERE title = &#39;My Post&#39;
+                                    |
+# User 1 inserts his comment.       |
+INSERT INTO comments                |
+(title, content) VALUES             |
+(&#39;My Post&#39;, &#39;hi!&#39;)                  |
+                                    |
+                                    | # User 2 does the same thing.
+                                    | INSERT INTO comments
+                                    | (title, content) VALUES
+                                    | (&#39;My Post&#39;, &#39;hello!&#39;)
+                                    |
+                                    | # ^^^^^^
+                                    | # Boom! We now have a duplicate
+                                    | # title!</pre>
+
+<p>This could even happen if you use transactions with the
+&#39;serializable&#39; isolation level. The best way to work around this
+problem is to add a unique index to the database table using <a
+href="../ConnectionAdapters/SchemaStatements.html#method-i-add_index">ActiveRecord::ConnectionAdapters::SchemaStatements#add_index</a>.
+In the rare case that a race condition occurs, the database will guarantee
+the field&#39;s uniqueness.</p>
+
+<p>When the database catches such a duplicate insertion, <a
+href="../Validations.html#method-i-save">ActiveRecord::Validations#save</a>
+will raise an <a
+href="../StatementInvalid.html">ActiveRecord::StatementInvalid</a>
+exception. You can either choose to let this error propagate (which will
+result in the default <a href="../../Rails.html">Rails</a> exception page
+being shown), or you can catch it and restart the transaction (e.g. by
+telling the user that the title already exists, and asking him to re-enter
+the title). This technique is also known as optimistic concurrency control:
+<a
+href="http://en.wikipedia.org/wiki/Optimistic_concurrency_control.">en.wikipedia.org/wiki/Optimistic_concurrency_control.</a></p>
+
+<p>The bundled ActiveRecord::ConnectionAdapters distinguish unique index
+constraint errors from other types of database errors by throwing an <a
+href="../RecordNotUnique.html">ActiveRecord::RecordNotUnique</a> exception.
+For other adapters you will have to parse the (database-specific) exception
+message to detect such a case.</p>
+
+<p>The following bundled adapters throw the <a
+href="../RecordNotUnique.html">ActiveRecord::RecordNotUnique</a> exception:</p>
+<ul><li>
+<p><a
+href="../ConnectionAdapters/MysqlAdapter.html">ActiveRecord::ConnectionAdapters::MysqlAdapter</a>.</p>
+</li><li>
+<p><a
+href="../ConnectionAdapters/Mysql2Adapter.html">ActiveRecord::ConnectionAdapters::Mysql2Adapter</a>.</p>
+</li><li>
+<p><a
+href="../ConnectionAdapters/SQLite3Adapter.html">ActiveRecord::ConnectionAdapters::SQLite3Adapter</a>.</p>
+</li><li>
+<p><a
+href="../ConnectionAdapters/PostgreSQLAdapter.html">ActiveRecord::ConnectionAdapters::PostgreSQLAdapter</a>.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-validates_uniqueness_of_source')" id="l_method-i-validates_uniqueness_of_source">show</a>
+                
+              </p>
+              <div id="method-i-validates_uniqueness_of_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/uniqueness.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">validates_uniqueness_of</span>(*<span class="ruby-identifier">attr_names</span>)
+  <span class="ruby-identifier">validates_with</span> <span class="ruby-constant">UniquenessValidator</span>, <span class="ruby-identifier">_merge_attributes</span>(<span class="ruby-identifier">attr_names</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

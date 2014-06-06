@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Integration::Session</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionDispatch::Integration::Session 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/testing/integration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>An instance of this class represents a set of requests and responses
+performed sequentially by a test process. Because you can instantiate
+multiple sessions and run them side-by-side, you can also mimic (to some
+limited extent) multiple simultaneous users interacting with your system.</p>
+
+<p>Typically, you will instantiate a new session using <a
+href="Runner.html#method-i-open_session">ActionDispatch::Integration::Runner#open_session</a>,
+rather than instantiating <a href="Session.html">Integration::Session</a>
+directly.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cookies">cookies</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-host">host</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-https-21">https!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-https-3F">https?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset-21">reset!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-url_options">url_options</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            MiniTest::Assertions
+          
+        </li>
+      
+        <li>
+          
+            <a href="../TestProcess.html">
+              ActionDispatch::TestProcess
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="RequestHelpers.html">
+              ActionDispatch::Integration::RequestHelpers
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../Assertions.html">
+              ActionDispatch::Assertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../Routing/UrlFor.html">
+              ActionDispatch::Routing::UrlFor
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActionController/Testing.html">
+              ActionController::Testing
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_HOST</td>
+            <td>=</td>
+            <td class="attr-value">&quot;www.example.com&quot;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>accept</td>
+            <td class='attr-desc'><p>The Accept header to send.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>controller</td>
+            <td class='attr-desc'><p>A reference to the controller instance used by the last request.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>host</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>host!</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>remote_addr</td>
+            <td class='attr-desc'><p>The <a href="Session.html#attribute-i-remote_addr">#remote_addr</a> used in
+the last request.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>request</td>
+            <td class='attr-desc'><p>A reference to the request instance used by the last request.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>request_count</td>
+            <td class='attr-desc'><p>A running counter of the number of requests processed.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>response</td>
+            <td class='attr-desc'><p>A reference to the response instance used by the last request.</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(app)
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Create and initialize a new <a href="Session.html">Session</a> instance.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 184</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">app</span>)
+  <span class="ruby-keyword">super</span>()
+  <span class="ruby-ivar">@app</span> = <span class="ruby-identifier">app</span>
+
+  <span class="ruby-comment"># If the app is a Rails app, make url_helpers available on the session</span>
+  <span class="ruby-comment"># This makes app.url_for and app.foo_path available in the console</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">app</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:routes</span>)
+    <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">include</span> <span class="ruby-identifier">app</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">url_helpers</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">app</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:url_helpers</span>)
+      <span class="ruby-identifier">include</span> <span class="ruby-identifier">app</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">mounted_helpers</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">app</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:mounted_helpers</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">reset!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cookies">
+            
+              <b>cookies</b>()
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-i-cookies" name="method-i-cookies" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A map of the cookies returned by the last response, and which will be sent
+with the next request.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cookies_source')" id="l_method-i-cookies_source">show</a>
+                
+              </p>
+              <div id="method-i-cookies_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cookies</span>
+  <span class="ruby-identifier">_mock_session</span>.<span class="ruby-identifier">cookie_jar</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-host">
+            
+              <b>host</b>()
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-i-host" name="method-i-host" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The hostname used in the last request.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-host_source')" id="l_method-i-host_source">show</a>
+                
+              </p>
+              <div id="method-i-host_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">host</span>
+  <span class="ruby-ivar">@host</span> <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_HOST</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-https-21">
+            
+              <b>https!</b>(flag = true)
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-i-https-21" name="method-i-https-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specify whether or not the session should mimic a secure HTTPS request.</p>
+
+<pre>session.https!
+session.https!(false)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-https-21_source')" id="l_method-i-https-21_source">show</a>
+                
+              </p>
+              <div id="method-i-https-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">https!</span>(<span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@https</span> = <span class="ruby-identifier">flag</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-https-3F">
+            
+              <b>https?</b>()
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-i-https-3F" name="method-i-https-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return <code>true</code> if the session is mimicking a secure HTTPS
+request.</p>
+
+<pre>if session.https?
+  ...
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-https-3F_source')" id="l_method-i-https-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-https-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 250</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">https?</span>
+  <span class="ruby-ivar">@https</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset-21">
+            
+              <b>reset!</b>()
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-i-reset-21" name="method-i-reset-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Resets the instance. This can be used to reset the state information in an
+existing session instance, so it can be used from a clean-slate condition.</p>
+
+<pre>session.reset!</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset-21_source')" id="l_method-i-reset-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reset-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset!</span>
+  <span class="ruby-ivar">@https</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@controller</span> = <span class="ruby-ivar">@request</span> = <span class="ruby-ivar">@response</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@_mock_session</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@request_count</span> = <span class="ruby-number">0</span>
+  <span class="ruby-ivar">@url_options</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">host</span>        = <span class="ruby-constant">DEFAULT_HOST</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">remote_addr</span> = <span class="ruby-string">&quot;127.0.0.1&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">accept</span>      = <span class="ruby-string">&quot;text/xml,application/xml,application/xhtml+xml,&quot;</span> <span class="ruby-operator">+</span>
+                     <span class="ruby-string">&quot;text/html;q=0.9,text/plain;q=0.8,image/png,&quot;</span> <span class="ruby-operator">+</span>
+                     <span class="ruby-string">&quot;*/*;q=0.5&quot;</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@named_routes_configured</span>
+    <span class="ruby-comment"># the helpers are made protected by default--we make them public for</span>
+    <span class="ruby-comment"># easier access during testing and troubleshooting.</span>
+    <span class="ruby-ivar">@named_routes_configured</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-url_options">
+            
+              <b>url_options</b>()
+            
+            <a href="../../../classes/ActionDispatch/Integration/Session.html#method-i-url_options" name="method-i-url_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_options_source')" id="l_method-i-url_options_source">show</a>
+                
+              </p>
+              <div id="method-i-url_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_options</span>
+  <span class="ruby-ivar">@url_options</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">default_url_options</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">url_options</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-identifier">controller</span>.<span class="ruby-identifier">url_options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:routes</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@app</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:default_url_options</span>)
+      <span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-ivar">@app</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">default_url_options</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-value">:host</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">host</span>, <span class="ruby-value">:protocol</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">https?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;https&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;http&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

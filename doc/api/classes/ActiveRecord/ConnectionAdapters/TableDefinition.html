@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::TableDefinition</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::TableDefinition 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_definitions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Represents the schema of an SQL table in an abstract way. This class
+provides methods for manipulating the schema representation.</p>
+
+<p>Inside migration files, the <code>t</code> object in
+<code>create_table</code> is actually of this type:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">SomeMigration</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">up</span>
+    <span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">foo</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">class</span>  <span class="ruby-comment"># =&gt; &quot;ActiveRecord::ConnectionAdapters::TableDefinition&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">down</span>
+    <span class="ruby-operator">...</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The table definitions The Columns are stored as a ColumnDefinition in the
+<code>columns</code> attribute.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D">[]</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-belongs_to">belongs_to</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-column">column</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-columns">columns</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-index">index</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-primary_key">primary_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-references">references</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-remove_column">remove_column</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-timestamps">timestamps</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>indexes</td>
+            <td class='attr-desc'><p>An array of ColumnDefinition objects, representing the column changes that
+have been defined.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>name</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>options</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>temporary</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(types, name, temporary, options)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">types</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">temporary</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-ivar">@columns_hash</span> = {}
+  <span class="ruby-ivar">@indexes</span> = {}
+  <span class="ruby-ivar">@native</span> = <span class="ruby-identifier">types</span>
+  <span class="ruby-ivar">@temporary</span> = <span class="ruby-identifier">temporary</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D">
+            
+              <b>[]</b>(name)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-5B-5D" name="method-i-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a ColumnDefinition for the column with name <code>name</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D_source')" id="l_method-i-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">name</span>)
+  <span class="ruby-ivar">@columns_hash</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-belongs_to">
+            
+              <b>belongs_to</b>(*args)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-belongs_to" name="method-i-belongs_to" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-column">
+            
+              <b>column</b>(name, type, options = {})
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-column" name="method-i-column" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Instantiates a new column for the table. The <code>type</code> parameter is
+normally one of the migrations native types, which is one of the following:
+<code>:primary_key</code>, <code>:string</code>, <code>:text</code>,
+<code>:integer</code>, <code>:float</code>, <code>:decimal</code>,
+<code>:datetime</code>, <code>:timestamp</code>, <code>:time</code>,
+<code>:date</code>, <code>:binary</code>, <code>:boolean</code>.</p>
+
+<p>You may use a type not in this list as long as it is supported by your
+database (for example, “polygon” in MySQL), but this will not be database
+agnostic and should usually be avoided.</p>
+
+<p>Available options are (none of these exists by default):</p>
+<ul><li>
+<p><code>:limit</code> - Requests a maximum column length. This is number of
+characters for <code>:string</code> and <code>:text</code> columns and
+number of bytes for <code>:binary</code> and <code>:integer</code> columns.</p>
+</li><li>
+<p><code>:default</code> - The column&#39;s default value. Use nil for NULL.</p>
+</li><li>
+<p><code>:null</code> - Allows or disallows <code>NULL</code> values in the
+column. This option could have been named <code>:null_allowed</code>.</p>
+</li><li>
+<p><code>:precision</code> - Specifies the precision for a
+<code>:decimal</code> column.</p>
+</li><li>
+<p><code>:scale</code> - Specifies the scale for a <code>:decimal</code>
+column.</p>
+</li></ul>
+
+<p>For clarity&#39;s sake: the precision is the number of significant digits,
+while the scale is the number of digits that can be stored following the
+decimal point. For example, the number 123.45 has a precision of 5 and a
+scale of 2. A decimal with a precision of 5 and a scale of 2 can range from
+-999.99 to 999.99.</p>
+
+<p>Please be aware of different RDBMS implementations behavior with
+<code>:decimal</code> columns:</p>
+<ul><li>
+<p>The SQL standard says the default scale should be 0, <code>:scale</code>
+&lt;= <code>:precision</code>, and makes no comments about the requirements
+of <code>:precision</code>.</p>
+</li><li>
+<p>MySQL: <code>:precision</code> [1..63], <code>:scale</code> [0..30].
+Default is (10,0).</p>
+</li><li>
+<p>PostgreSQL: <code>:precision</code> [1..infinity], <code>:scale</code>
+[0..infinity]. No default.</p>
+</li><li>
+<p>SQLite2: Any <code>:precision</code> and <code>:scale</code> may be used.
+Internal storage as strings. No default.</p>
+</li><li>
+<p>SQLite3: No restrictions on <code>:precision</code> and
+<code>:scale</code>, but the maximum supported <code>:precision</code> is
+16. No default.</p>
+</li><li>
+<p>Oracle: <code>:precision</code> [1..38], <code>:scale</code> [-84..127].
+Default is (38,0).</p>
+</li><li>
+<p>DB2: <code>:precision</code> [1..63], <code>:scale</code> [0..62]. Default
+unknown.</p>
+</li><li>
+<p>Firebird: <code>:precision</code> [1..18], <code>:scale</code> [0..18].
+Default (9,0). Internal types NUMERIC and DECIMAL have different storage
+rules, decimal being better.</p>
+</li><li>
+<p>FrontBase?: <code>:precision</code> [1..38], <code>:scale</code> [0..38].
+Default (38,0). WARNING Max <code>:precision</code>/<code>:scale</code> for
+NUMERIC is 19, and DECIMAL is 38.</p>
+</li><li>
+<p>SqlServer?: <code>:precision</code> [1..38], <code>:scale</code> [0..38].
+Default (38,0).</p>
+</li><li>
+<p>Sybase: <code>:precision</code> [1..38], <code>:scale</code> [0..38].
+Default (38,0).</p>
+</li><li>
+<p>OpenBase?: Documentation unclear. Claims storage in <code>double</code>.</p>
+</li></ul>
+
+<p>This method returns <code>self</code>.</p>
+
+<h2 id="method-i-column-label-Examples">Examples</h2>
+
+<pre class="ruby"><span class="ruby-comment"># Assuming +td+ is an instance of TableDefinition</span>
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">granted</span>, :<span class="ruby-identifier">boolean</span>)
+<span class="ruby-comment"># granted BOOLEAN</span>
+
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">picture</span>, :<span class="ruby-identifier">binary</span>, <span class="ruby-identifier">limit</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>.<span class="ruby-identifier">megabytes</span>)
+<span class="ruby-comment"># =&gt; picture BLOB(2097152)</span>
+
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">sales_stage</span>, :<span class="ruby-identifier">string</span>, <span class="ruby-identifier">limit</span><span class="ruby-operator">:</span> <span class="ruby-value">20</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;new&#39;</span>, <span class="ruby-identifier">null</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-comment"># =&gt; sales_stage VARCHAR(20) DEFAULT &#39;new&#39; NOT NULL</span>
+
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">bill_gates_money</span>, :<span class="ruby-identifier">decimal</span>, <span class="ruby-identifier">precision</span><span class="ruby-operator">:</span> <span class="ruby-value">15</span>, <span class="ruby-identifier">scale</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>)
+<span class="ruby-comment"># =&gt; bill_gates_money DECIMAL(15,2)</span>
+
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">sensor_reading</span>, :<span class="ruby-identifier">decimal</span>, <span class="ruby-identifier">precision</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>, <span class="ruby-identifier">scale</span><span class="ruby-operator">:</span> <span class="ruby-value">20</span>)
+<span class="ruby-comment"># =&gt; sensor_reading DECIMAL(30,20)</span>
+
+<span class="ruby-comment"># While &lt;tt&gt;:scale&lt;/tt&gt; defaults to zero on most databases, it</span>
+<span class="ruby-comment"># probably wouldn&#39;t hurt to include it.</span>
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">huge_integer</span>, :<span class="ruby-identifier">decimal</span>, <span class="ruby-identifier">precision</span><span class="ruby-operator">:</span> <span class="ruby-value">30</span>)
+<span class="ruby-comment"># =&gt; huge_integer DECIMAL(30)</span>
+
+<span class="ruby-comment"># Defines a column with a database-specific type.</span>
+<span class="ruby-identifier">td</span>.<span class="ruby-identifier">column</span>(:<span class="ruby-identifier">foo</span>, <span class="ruby-string">&#39;polygon&#39;</span>)
+<span class="ruby-comment"># =&gt; foo polygon</span>
+</pre>
+
+<h2 id="method-i-column-label-Short-hand+examples">Short-hand examples</h2>
+
+<p>Instead of calling <code>column</code> directly, you can also work with the
+short-hand definitions for the default types. They use the type as the
+method name instead of as a parameter and allow for multiple columns to be
+defined in a single statement.</p>
+
+<p>What can be written like this with the regular calls to column:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">products</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> :<span class="ruby-identifier">shop_id</span>,    :<span class="ruby-identifier">integer</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> :<span class="ruby-identifier">creator_id</span>, :<span class="ruby-identifier">integer</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> :<span class="ruby-identifier">name</span>,       :<span class="ruby-identifier">string</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Untitled&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> :<span class="ruby-identifier">value</span>,      :<span class="ruby-identifier">string</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Untitled&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> :<span class="ruby-identifier">created_at</span>, :<span class="ruby-identifier">datetime</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">column</span> :<span class="ruby-identifier">updated_at</span>, :<span class="ruby-identifier">datetime</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>can also be written as follows using the short-hand:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">products</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> :<span class="ruby-identifier">shop_id</span>, :<span class="ruby-identifier">creator_id</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">value</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Untitled&quot;</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">timestamps</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>There&#39;s a short-hand method for each of the type values declared at the
+top. And then there&#39;s <a
+href="TableDefinition.html#method-i-timestamps">#timestamps</a> that&#39;ll
+add <code>created_at</code> and <code>updated_at</code> as datetimes.</p>
+
+<p><a href="TableDefinition.html#method-i-references">#references</a> will add
+an appropriately-named _id column, plus a corresponding _type column if the
+<code>:polymorphic</code> option is supplied. If <code>:polymorphic</code>
+is a hash of options, these will be used when creating the
+<code>_type</code> column. The <code>:index</code> option will also create
+an index, similar to calling <code>add_index</code>. So what can be written
+like this:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">taggings</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> :<span class="ruby-identifier">tag_id</span>, :<span class="ruby-identifier">tagger_id</span>, :<span class="ruby-identifier">taggable_id</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  :<span class="ruby-identifier">tagger_type</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  :<span class="ruby-identifier">taggable_type</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Photo&#39;</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">add_index</span> :<span class="ruby-identifier">taggings</span>, :<span class="ruby-identifier">tag_id</span>, <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;index_taggings_on_tag_id&#39;</span>
+<span class="ruby-identifier">add_index</span> :<span class="ruby-identifier">taggings</span>, [:<span class="ruby-identifier">tagger_id</span>, :<span class="ruby-identifier">tagger_type</span>]
+</pre>
+
+<p>Can also be written as follows using references:</p>
+
+<pre class="ruby"><span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">taggings</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">references</span> :<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;index_taggings_on_tag_id&#39;</span> }
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">references</span> :<span class="ruby-identifier">tagger</span>, <span class="ruby-identifier">polymorphic</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">t</span>.<span class="ruby-identifier">references</span> :<span class="ruby-identifier">taggable</span>, <span class="ruby-identifier">polymorphic</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Photo&#39;</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-column_source')" id="l_method-i-column_source">show</a>
+                
+              </p>
+              <div id="method-i-column_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_sym</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">primary_key_column_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;you can&#39;t redefine the primary key column &#39;#{name}&#39;. To define a custom primary key, pass { id: false } to create_table.&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@columns_hash</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">new_column_definition</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-columns">
+            
+              <b>columns</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-columns" name="method-i-columns" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-columns_source')" id="l_method-i-columns_source">show</a>
+                
+              </p>
+              <div id="method-i-columns_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">columns</span>; <span class="ruby-ivar">@columns_hash</span>.<span class="ruby-identifier">values</span>; <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-index">
+            
+              <b>index</b>(column_name, options = {})
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-index" name="method-i-index" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adds index options to the indexes hash, keyed by column name This is
+primarily used to track indexes that need to be created after the table</p>
+
+<pre>index(:account_id, name: &#39;index_projects_on_account_id&#39;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-index_source')" id="l_method-i-index_source">show</a>
+                
+              </p>
+              <div id="method-i-index_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">index</span>(<span class="ruby-identifier">column_name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">indexes</span>[<span class="ruby-identifier">column_name</span>] = <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-primary_key">
+            
+              <b>primary_key</b>(name, type = :primary_key, options = {})
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-primary_key" name="method-i-primary_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Appends a primary key definition to the table definition. Can be called
+multiple times, but this is probably not a good idea.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-primary_key_source')" id="l_method-i-primary_key_source">show</a>
+                
+              </p>
+              <div id="method-i-primary_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">primary_key</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:primary_key</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">column</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">type</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:primary_key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-references">
+            
+              <b>references</b>(*args)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-references" name="method-i-references" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TableDefinition.html#method-i-belongs_to">belongs_to</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-references_source')" id="l_method-i-references_source">show</a>
+                
+              </p>
+              <div id="method-i-references_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">references</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">polymorphic</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:polymorphic</span>)
+  <span class="ruby-identifier">index_options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:index</span>)
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">column</span>(<span class="ruby-node">&quot;#{col}_id&quot;</span>, <span class="ruby-value">:integer</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">column</span>(<span class="ruby-node">&quot;#{col}_type&quot;</span>, <span class="ruby-value">:string</span>, <span class="ruby-identifier">polymorphic</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">polymorphic</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">polymorphic</span>
+    <span class="ruby-identifier">index</span>(<span class="ruby-identifier">polymorphic</span> <span class="ruby-operator">?</span> <span class="ruby-node">%w(id type)</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{col}_#{t}&quot;</span> } <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{col}_id&quot;</span>, <span class="ruby-identifier">index_options</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">index_options</span> <span class="ruby-operator">:</span> {}) <span class="ruby-keyword">if</span> <span class="ruby-identifier">index_options</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-remove_column">
+            
+              <b>remove_column</b>(name)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-remove_column" name="method-i-remove_column" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-remove_column_source')" id="l_method-i-remove_column_source">show</a>
+                
+              </p>
+              <div id="method-i-remove_column_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 225</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">remove_column</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@columns_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-timestamps">
+            
+              <b>timestamps</b>(*args)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/TableDefinition.html#method-i-timestamps" name="method-i-timestamps" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Appends <code>:datetime</code> columns <code>:created_at</code> and
+<code>:updated_at</code> to the table.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-timestamps_source')" id="l_method-i-timestamps_source">show</a>
+                
+              </p>
+              <div id="method-i-timestamps_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">timestamps</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">column</span>(<span class="ruby-value">:created_at</span>, <span class="ruby-value">:datetime</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">column</span>(<span class="ruby-value">:updated_at</span>, <span class="ruby-value">:datetime</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

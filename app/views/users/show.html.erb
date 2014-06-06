@@ -1,0 +1,37 @@
+<div class="span8">
+  <legend><%= controller.action_name.capitalize %> User</legend>
+  <p id="notice"><%= notice %></p>
+  <table class="table table-striped" style="font-size:12px;">
+    <tr>
+      <th>First name</th>
+      <td><%= @user.firstname %></td>
+    </tr>
+
+    <tr>
+      <th>Last name</th>
+      <td><%= @user.lastname %></td>
+    </tr>
+
+    <tr>
+      <th>E-mail</th>
+      <td><%= @user.email %></td>
+    </tr>
+
+    <tr>
+      <th>Created at</th>
+      <td><%= @user.created_at %></td>
+    </tr>
+
+    <tr>
+      <th>Last updated</th>
+      <td><%= @user.updated_at %></td>
+    </tr>
+
+  </table>
+
+  <div class="form-actions">
+    <%= link_to 'Back', users_path, :class => 'btn btn-primary' %>
+    <%= link_to 'Edit', edit_user_path(@user), :class => 'btn btn-warning' %>
+    <%= link_to 'Delete', user_path(@user), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+  </div>
+</div>

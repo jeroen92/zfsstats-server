@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Store</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Store 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/store_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="Store.html">Store</a> gives you a thin wrapper around serialize
+for the purpose of storing hashes in a single column. It&#39;s like a
+simple key/value store baked into your record when you don&#39;t care about
+being able to query that store outside the context of a single record.</p>
+
+<p>You can then declare accessors to this store that are then accessible just
+like any other attribute of the model. This is very helpful for easily
+exposing store keys to a form or elsewhere that&#39;s already built around
+just accessing attributes on the model.</p>
+
+<p>Make sure that you declare the database column used for the serialized
+store as a text, so there&#39;s plenty of room.</p>
+
+<p>You can set custom coder to encode/decode your serialized attributes
+to/from different formats. JSON, YAML, <a
+href="../Marshal.html">Marshal</a> are supported out of the box. Generally
+it can be any wrapper that provides <code>load</code> and
+<code>dump</code>.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">store</span> :<span class="ruby-identifier">settings</span>, <span class="ruby-identifier">accessors</span><span class="ruby-operator">:</span> [ :<span class="ruby-identifier">color</span>, :<span class="ruby-identifier">homepage</span> ], <span class="ruby-identifier">coder</span><span class="ruby-operator">:</span> <span class="ruby-constant">JSON</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">u</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">color</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;black&#39;</span>, <span class="ruby-identifier">homepage</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;37signals.com&#39;</span>)
+<span class="ruby-identifier">u</span>.<span class="ruby-identifier">color</span>                          <span class="ruby-comment"># Accessor stored attribute</span>
+<span class="ruby-identifier">u</span>.<span class="ruby-identifier">settings</span>[:<span class="ruby-identifier">country</span>] = <span class="ruby-string">&#39;Denmark&#39;</span> <span class="ruby-comment"># Any attribute, even if not specified with an accessor</span>
+
+<span class="ruby-comment"># There is no difference between strings and symbols for accessing custom attributes</span>
+<span class="ruby-identifier">u</span>.<span class="ruby-identifier">settings</span>[:<span class="ruby-identifier">country</span>]  <span class="ruby-comment"># =&gt; &#39;Denmark&#39;</span>
+<span class="ruby-identifier">u</span>.<span class="ruby-identifier">settings</span>[<span class="ruby-string">&#39;country&#39;</span>] <span class="ruby-comment"># =&gt; &#39;Denmark&#39;</span>
+
+<span class="ruby-comment"># Add additional accessors to an existing store through store_accessor</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">SuperUser</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">User</span>
+  <span class="ruby-identifier">store_accessor</span> :<span class="ruby-identifier">settings</span>, :<span class="ruby-identifier">privileges</span>, :<span class="ruby-identifier">servants</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The stored attribute names can be retrieved using
+<code>stored_attributes</code>.</p>
+
+<pre>User.stored_attributes[:settings] # [:color, :homepage]</pre>
+
+<h2 id="label-Overwriting+default+accessors">Overwriting default accessors</h2>
+
+<p>All stored values are automatically available through accessors on the
+Active Record object, but sometimes you want to specialize this behavior.
+This can be done by overwriting the default accessors (using the same name
+as the attribute) and calling <code>super</code> to actually change things.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Song</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># Uses a stored integer to hold the volume adjustment of the song</span>
+  <span class="ruby-identifier">store</span> :<span class="ruby-identifier">settings</span>, <span class="ruby-identifier">accessors</span><span class="ruby-operator">:</span> [:<span class="ruby-identifier">volume_adjustment</span>]
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">volume_adjustment=</span>(<span class="ruby-identifier">decibels</span>)
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">decibels</span>.<span class="ruby-identifier">to_i</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">volume_adjustment</span>
+    <span class="ruby-keyword">super</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Store/ClassMethods.html">ActiveRecord::Store::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-read_store_attribute">read_store_attribute</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-write_store_attribute">write_store_attribute</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-read_store_attribute">
+            
+              <b>read_store_attribute</b>(store_attribute, key)
+            
+            <a href="../../classes/ActiveRecord/Store.html#method-i-read_store_attribute" name="method-i-read_store_attribute" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-read_store_attribute_source')" id="l_method-i-read_store_attribute_source">show</a>
+                
+              </p>
+              <div id="method-i-read_store_attribute_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">read_store_attribute</span>(<span class="ruby-identifier">store_attribute</span>, <span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">attribute</span> = <span class="ruby-identifier">initialize_store_attribute</span>(<span class="ruby-identifier">store_attribute</span>)
+  <span class="ruby-identifier">attribute</span>[<span class="ruby-identifier">key</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-write_store_attribute">
+            
+              <b>write_store_attribute</b>(store_attribute, key, value)
+            
+            <a href="../../classes/ActiveRecord/Store.html#method-i-write_store_attribute" name="method-i-write_store_attribute" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-write_store_attribute_source')" id="l_method-i-write_store_attribute_source">show</a>
+                
+              </p>
+              <div id="method-i-write_store_attribute_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">write_store_attribute</span>(<span class="ruby-identifier">store_attribute</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">attribute</span> = <span class="ruby-identifier">initialize_store_attribute</span>(<span class="ruby-identifier">store_attribute</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">attribute</span>[<span class="ruby-identifier">key</span>]
+    <span class="ruby-identifier">send</span> <span class="ruby-value">:&quot;#{store_attribute}_will_change!&quot;</span>
+    <span class="ruby-identifier">attribute</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

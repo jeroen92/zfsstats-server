@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::DataStreaming</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::DataStreaming 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/data_streaming_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/data_streaming.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Methods for sending arbitrary data and for streaming files to the browser,
+instead of rendering.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-send_data">send_data</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-send_file">send_file</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Rendering.html">
+              ActionController::Rendering
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_SEND_FILE_TYPE</td>
+            <td>=</td>
+            <td class="attr-value">&#39;application/octet-stream&#39;.freeze #:nodoc:</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_SEND_FILE_DISPOSITION</td>
+            <td>=</td>
+            <td class="attr-value">&#39;attachment&#39;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-send_data">
+            
+              <b>send_data</b>(data, options = {})
+            
+            <a href="../../classes/ActionController/DataStreaming.html#method-i-send_data" name="method-i-send_data" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends the given binary data to the browser. This method is similar to
+<code>render text: data</code>, but also allows you to specify whether the
+browser should display the response as a file attachment (i.e. in a
+download dialog) or as inline data. You may also set the content type, the
+apparent file name, and other things.</p>
+
+<p>Options:</p>
+<ul><li>
+<p><code>:filename</code> - suggests a filename for the browser to use.</p>
+</li><li>
+<p><code>:type</code> - specifies an HTTP content type. Defaults to
+&#39;application/octet-stream&#39;. You can specify either a string or a
+symbol for a registered type register with
+<code>Mime::Type.register</code>, for example :json If omitted, type will
+be guessed from the file extension specified in <code>:filename</code>. If
+no content type is registered for the extension, default type
+&#39;application/octet-stream&#39; will be used.</p>
+</li><li>
+<p><code>:disposition</code> - specifies whether the file will be shown inline
+or downloaded. Valid values are &#39;inline&#39; and &#39;attachment&#39;
+(default).</p>
+</li><li>
+<p><code>:status</code> - specifies the status code to send with the response.
+Defaults to 200.</p>
+</li></ul>
+
+<p>Generic data download:</p>
+
+<pre>send_data buffer</pre>
+
+<p>Download a dynamically-generated tarball:</p>
+
+<pre>send_data generate_tgz(&#39;dir&#39;), filename: &#39;dir.tgz&#39;</pre>
+
+<p>Display an image Active Record in the browser:</p>
+
+<pre>send_data image.data, type: image.content_type, disposition: &#39;inline&#39;</pre>
+
+<p>See <code>send_file</code> for more information on HTTP Content-* headers
+and caching.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-send_data_source')" id="l_method-i-send_data_source">show</a>
+                
+              </p>
+              <div id="method-i-send_data_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/data_streaming.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">send_data</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">options</span> = {}) <span class="ruby-comment">#:doc:</span>
+  <span class="ruby-identifier">send_file_headers!</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">:status</span>, <span class="ruby-value">:content_type</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-value">:text</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_file">
+            
+              <b>send_file</b>(path, options = {})
+            
+            <a href="../../classes/ActionController/DataStreaming.html#method-i-send_file" name="method-i-send_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sends the file. This uses a server-appropriate method (such as X-Sendfile)
+via the Rack::Sendfile middleware. The header to use is set via
+<code>config.action_dispatch.x_sendfile_header</code>. Your server can also
+configure this for you by setting the X-Sendfile-Type header.</p>
+
+<p>Be careful to sanitize the path parameter if it is coming from a web page.
+<code>send_file(params[:path])</code> allows a malicious user to download
+any file on your server.</p>
+
+<p>Options:</p>
+<ul><li>
+<p><code>:filename</code> - suggests a filename for the browser to use.
+Defaults to <code>File.basename(path)</code>.</p>
+</li><li>
+<p><code>:type</code> - specifies an HTTP content type. You can specify either
+a string or a symbol for a registered type register with
+<code>Mime::Type.register</code>, for example :json If omitted, type will
+be guessed from the file extension specified in <code>:filename</code>. If
+no content type is registered for the extension, default type
+&#39;application/octet-stream&#39; will be used.</p>
+</li><li>
+<p><code>:disposition</code> - specifies whether the file will be shown inline
+or downloaded. Valid values are &#39;inline&#39; and &#39;attachment&#39;
+(default).</p>
+</li><li>
+<p><code>:status</code> - specifies the status code to send with the response.
+Defaults to 200.</p>
+</li><li>
+<p><code>:url_based_filename</code> - set to <code>true</code> if you want the
+browser guess the filename from the URL, which is necessary for i18n
+filenames on certain browsers (setting <code>:filename</code> overrides
+this option).</p>
+</li></ul>
+
+<p>The default Content-Type and Content-Disposition headers are set to
+download arbitrary binary files in as many browsers as possible. IE
+versions 4, 5, 5.5, and 6 are all known to have a variety of quirks
+(especially when downloading over SSL).</p>
+
+<p>Simple download:</p>
+
+<pre>send_file &#39;/path/to.zip&#39;</pre>
+
+<p>Show a JPEG in the browser:</p>
+
+<pre>send_file &#39;/path/to.jpeg&#39;, type: &#39;image/jpeg&#39;, disposition: &#39;inline&#39;</pre>
+
+<p>Show a 404 page in the browser:</p>
+
+<pre>send_file &#39;/path/to/404.html&#39;, type: &#39;text/html; charset=utf-8&#39;, status: 404</pre>
+
+<p>Read about the other Content-* HTTP headers if you&#39;d like to provide
+the user with more information (such as Content-Description) in <a
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11">www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.11</a>.</p>
+
+<p>Also be aware that the document may be cached by proxies and browsers. The
+Pragma and Cache-Control headers declare how the file may be cached by
+intermediaries. They default to require clients to validate with the server
+before releasing cached responses. See <a
+href="http://www.mnot.net/cache_docs/">www.mnot.net/cache_docs/</a> for an
+overview of web caching and <a
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9">www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9</a>
+for the Cache-Control header spec.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-send_file_source')" id="l_method-i-send_file_source">show</a>
+                
+              </p>
+              <div id="method-i-send_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/data_streaming.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">send_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {}) <span class="ruby-comment">#:doc:</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingFile</span>, <span class="ruby-node">&quot;Cannot read file #{path}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">and</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">readable?</span>(<span class="ruby-identifier">path</span>)
+
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:filename</span>] <span class="ruby-operator">||=</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:url_based_filename</span>]
+  <span class="ruby-identifier">send_file_headers!</span> <span class="ruby-identifier">options</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">status</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:status</span>] <span class="ruby-operator">||</span> <span class="ruby-number">200</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">content_type</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:content_type</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:content_type</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">response_body</span> = <span class="ruby-constant">FileBody</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AbstractController::ViewPaths</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            AbstractController::ViewPaths 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/abstract_controller/view_paths_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/view_paths.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ViewPaths/ClassMethods.html">AbstractController::ViewPaths::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_prefixes">_prefixes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-append_view_path">append_view_path</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-details_for_lookup">details_for_lookup</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-lookup_context">lookup_context</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-prepend_view_path">prepend_view_path</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_prefixes">
+            
+              <b>_prefixes</b>()
+            
+            <a href="../../classes/AbstractController/ViewPaths.html#method-i-_prefixes" name="method-i-_prefixes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The prefixes used in render “foo” shortcuts.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_prefixes_source')" id="l_method-i-_prefixes_source">show</a>
+                
+              </p>
+              <div id="method-i-_prefixes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/view_paths.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_prefixes</span>
+  <span class="ruby-ivar">@_prefixes</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">parent_prefixes</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">parent_prefixes</span>
+    <span class="ruby-identifier">parent_prefixes</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">controller_path</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-append_view_path">
+            
+              <b>append_view_path</b>(path)
+            
+            <a href="../../classes/AbstractController/ViewPaths.html#method-i-append_view_path" name="method-i-append_view_path" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-append_view_path_source')" id="l_method-i-append_view_path_source">show</a>
+                
+              </p>
+              <div id="method-i-append_view_path_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/view_paths.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">append_view_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">lookup_context</span>.<span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">push</span>(*<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-details_for_lookup">
+            
+              <b>details_for_lookup</b>()
+            
+            <a href="../../classes/AbstractController/ViewPaths.html#method-i-details_for_lookup" name="method-i-details_for_lookup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-details_for_lookup_source')" id="l_method-i-details_for_lookup_source">show</a>
+                
+              </p>
+              <div id="method-i-details_for_lookup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/view_paths.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">details_for_lookup</span>
+  { }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-lookup_context">
+            
+              <b>lookup_context</b>()
+            
+            <a href="../../classes/AbstractController/ViewPaths.html#method-i-lookup_context" name="method-i-lookup_context" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>LookupContext is the object responsible to hold all information required to
+lookup templates, i.e. view paths and details. Check <a
+href="../ActionView/LookupContext.html">ActionView::LookupContext</a> for
+more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-lookup_context_source')" id="l_method-i-lookup_context_source">show</a>
+                
+              </p>
+              <div id="method-i-lookup_context_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/view_paths.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">lookup_context</span>
+  <span class="ruby-ivar">@_lookup_context</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">LookupContext</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">_view_paths</span>, <span class="ruby-identifier">details_for_lookup</span>, <span class="ruby-identifier">_prefixes</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prepend_view_path">
+            
+              <b>prepend_view_path</b>(path)
+            
+            <a href="../../classes/AbstractController/ViewPaths.html#method-i-prepend_view_path" name="method-i-prepend_view_path" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prepend_view_path_source')" id="l_method-i-prepend_view_path_source">show</a>
+                
+              </p>
+              <div id="method-i-prepend_view_path_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/view_paths.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prepend_view_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">lookup_context</span>.<span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">unshift</span>(*<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

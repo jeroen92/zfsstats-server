@@ -1,0 +1,967 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::PluginBuilder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::PluginBuilder 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/plugin_new/plugin_new_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The plugin builder allows you to override elements of the plugin generator
+without being forced to reverse the operations of the default generator.</p>
+
+<p>This allows you to override entire operations, like the creation of the
+Gemfile, <a
+href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/README_rdoc.html">README</a>,
+or JavaScript files, without needing to know exactly what those operations
+do so you can create another template action.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-app">app</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-bin">bin</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-config">config</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-gemfile">gemfile</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gemfile_entry">gemfile_entry</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gemspec">gemspec</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-generate_test_dummy">generate_test_dummy</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gitignore">gitignore</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-javascripts">javascripts</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-lib">lib</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-license">license</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-rakefile">rakefile</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-readme">readme</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-stylesheets">stylesheets</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-test">test</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_dummy_assets">test_dummy_assets</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_dummy_clean">test_dummy_clean</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-test_dummy_config">test_dummy_config</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">PASSTHROUGH_OPTIONS</td>
+            <td>=</td>
+            <td class="attr-value">[
+:skip_active_record, :skip_javascript, :database, :javascript, :quiet, :pretend, :force, :skip
+]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-app">
+            
+              <b>app</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-app" name="method-i-app" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-app_source')" id="l_method-i-app_source">show</a>
+                
+              </p>
+              <div id="method-i-app_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">app</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mountable?</span>
+    <span class="ruby-identifier">directory</span> <span class="ruby-string">&#39;app&#39;</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-node">&quot;app/assets/images/#{name}&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">full?</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&#39;app/models&#39;</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&#39;app/controllers&#39;</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&#39;app/views&#39;</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&#39;app/helpers&#39;</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-string">&#39;app/mailers&#39;</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-node">&quot;app/assets/images/#{name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-bin">
+            
+              <b>bin</b>(force = false)
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-bin" name="method-i-bin" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-bin_source')" id="l_method-i-bin_source">show</a>
+                
+              </p>
+              <div id="method-i-bin_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">bin</span>(<span class="ruby-identifier">force</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">engine?</span>
+
+  <span class="ruby-identifier">directory</span> <span class="ruby-string">&quot;bin&quot;</span>, <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-identifier">force</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">content</span><span class="ruby-operator">|</span>
+    <span class="ruby-node">&quot;#{shebang}\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">content</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">chmod</span> <span class="ruby-string">&quot;bin&quot;</span>, <span class="ruby-number">0755</span>, <span class="ruby-identifier">verbose</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-config">
+            
+              <b>config</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-config" name="method-i-config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-config_source')" id="l_method-i-config_source">show</a>
+                
+              </p>
+              <div id="method-i-config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">config</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;config/routes.rb&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">engine?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gemfile">
+            
+              <b>gemfile</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-gemfile" name="method-i-gemfile" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-gemfile_source')" id="l_method-i-gemfile_source">show</a>
+                
+              </p>
+              <div id="method-i-gemfile_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">gemfile</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;Gemfile&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gemfile_entry">
+            
+              <b>gemfile_entry</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-gemfile_entry" name="method-i-gemfile_entry" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-gemfile_entry_source')" id="l_method-i-gemfile_entry_source">show</a>
+                
+              </p>
+              <div id="method-i-gemfile_entry_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">gemfile_entry</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">inside_application?</span>
+
+  <span class="ruby-identifier">gemfile_in_app_path</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">rails_app_path</span>, <span class="ruby-string">&quot;Gemfile&quot;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span> <span class="ruby-identifier">gemfile_in_app_path</span>
+    <span class="ruby-identifier">entry</span> = <span class="ruby-node">&quot;gem &#39;#{name}&#39;, path: &#39;#{relative_path}&#39;&quot;</span>
+    <span class="ruby-identifier">append_file</span> <span class="ruby-identifier">gemfile_in_app_path</span>, <span class="ruby-identifier">entry</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gemspec">
+            
+              <b>gemspec</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-gemspec" name="method-i-gemspec" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-gemspec_source')" id="l_method-i-gemspec_source">show</a>
+                
+              </p>
+              <div id="method-i-gemspec_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">gemspec</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;%name%.gemspec&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-generate_test_dummy">
+            
+              <b>generate_test_dummy</b>(force = false)
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-generate_test_dummy" name="method-i-generate_test_dummy" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-generate_test_dummy_source')" id="l_method-i-generate_test_dummy_source">show</a>
+                
+              </p>
+              <div id="method-i-generate_test_dummy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">generate_test_dummy</span>(<span class="ruby-identifier">force</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">opts</span> = (<span class="ruby-identifier">options</span> <span class="ruby-operator">||</span> {}).<span class="ruby-identifier">slice</span>(*<span class="ruby-constant">PASSTHROUGH_OPTIONS</span>)
+  <span class="ruby-identifier">opts</span>[<span class="ruby-value">:force</span>] = <span class="ruby-identifier">force</span>
+  <span class="ruby-identifier">opts</span>[<span class="ruby-value">:skip_bundle</span>] = <span class="ruby-keyword">true</span>
+
+  <span class="ruby-identifier">invoke</span> <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Generators</span><span class="ruby-operator">::</span><span class="ruby-constant">AppGenerator</span>,
+    [ <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">dummy_path</span>, <span class="ruby-identifier">destination_root</span>) ], <span class="ruby-identifier">opts</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gitignore">
+            
+              <b>gitignore</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-gitignore" name="method-i-gitignore" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-gitignore_source')" id="l_method-i-gitignore_source">show</a>
+                
+              </p>
+              <div id="method-i-gitignore_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">gitignore</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;gitignore&quot;</span>, <span class="ruby-string">&quot;.gitignore&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-javascripts">
+            
+              <b>javascripts</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-javascripts" name="method-i-javascripts" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-javascripts_source')" id="l_method-i-javascripts_source">show</a>
+                
+              </p>
+              <div id="method-i-javascripts_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">javascripts</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">skip_javascript?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mountable?</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rails/javascripts.js&quot;</span>,
+             <span class="ruby-node">&quot;app/assets/javascripts/#{name}/application.js&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">full?</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-node">&quot;app/assets/javascripts/#{name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-lib">
+            
+              <b>lib</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-lib" name="method-i-lib" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-lib_source')" id="l_method-i-lib_source">show</a>
+                
+              </p>
+              <div id="method-i-lib_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">lib</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;lib/%name%.rb&quot;</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;lib/tasks/%name%_tasks.rake&quot;</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;lib/%name%/version.rb&quot;</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;lib/%name%/engine.rb&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">engine?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-license">
+            
+              <b>license</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-license" name="method-i-license" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-license_source')" id="l_method-i-license_source">show</a>
+                
+              </p>
+              <div id="method-i-license_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">license</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;MIT-LICENSE&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rakefile">
+            
+              <b>rakefile</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-rakefile" name="method-i-rakefile" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rakefile_source')" id="l_method-i-rakefile_source">show</a>
+                
+              </p>
+              <div id="method-i-rakefile_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rakefile</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;Rakefile&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-readme">
+            
+              <b>readme</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-readme" name="method-i-readme" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-readme_source')" id="l_method-i-readme_source">show</a>
+                
+              </p>
+              <div id="method-i-readme_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">readme</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;README.rdoc&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-stylesheets">
+            
+              <b>stylesheets</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-stylesheets" name="method-i-stylesheets" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-stylesheets_source')" id="l_method-i-stylesheets_source">show</a>
+                
+              </p>
+              <div id="method-i-stylesheets_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">stylesheets</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mountable?</span>
+    <span class="ruby-identifier">copy_file</span> <span class="ruby-string">&quot;rails/stylesheets.css&quot;</span>,
+              <span class="ruby-node">&quot;app/assets/stylesheets/#{name}/application.css&quot;</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">full?</span>
+    <span class="ruby-identifier">empty_directory_with_keep_file</span> <span class="ruby-node">&quot;app/assets/stylesheets/#{name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test">
+            
+              <b>test</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-test" name="method-i-test" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_source')" id="l_method-i-test_source">show</a>
+                
+              </p>
+              <div id="method-i-test_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 63</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test</span>
+      <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;test/test_helper.rb&quot;</span>
+      <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;test/%name%_test.rb&quot;</span>
+      <span class="ruby-identifier">append_file</span> <span class="ruby-string">&quot;Rakefile&quot;</span>, <span class="ruby-value">&lt;&lt;-EOF
+#{rakefile_test_tasks}
+
+task default: :test
+      EOF</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">engine?</span>
+        <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;test/integration/navigation_test.rb&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_dummy_assets">
+            
+              <b>test_dummy_assets</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-test_dummy_assets" name="method-i-test_dummy_assets" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_dummy_assets_source')" id="l_method-i-test_dummy_assets_source">show</a>
+                
+              </p>
+              <div id="method-i-test_dummy_assets_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_dummy_assets</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rails/javascripts.js&quot;</span>,  <span class="ruby-node">&quot;#{dummy_path}/app/assets/javascripts/application.js&quot;</span>, <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rails/stylesheets.css&quot;</span>, <span class="ruby-node">&quot;#{dummy_path}/app/assets/stylesheets/application.css&quot;</span>, <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_dummy_clean">
+            
+              <b>test_dummy_clean</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-test_dummy_clean" name="method-i-test_dummy_clean" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_dummy_clean_source')" id="l_method-i-test_dummy_clean_source">show</a>
+                
+              </p>
+              <div id="method-i-test_dummy_clean_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_dummy_clean</span>
+  <span class="ruby-identifier">inside</span> <span class="ruby-identifier">dummy_path</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;.gitignore&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;db/seeds.rb&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;doc&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;Gemfile&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;lib/tasks&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;public/robots.txt&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;README&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;test&quot;</span>
+    <span class="ruby-identifier">remove_file</span> <span class="ruby-string">&quot;vendor&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_dummy_config">
+            
+              <b>test_dummy_config</b>()
+            
+            <a href="../../classes/Rails/PluginBuilder.html#method-i-test_dummy_config" name="method-i-test_dummy_config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_dummy_config_source')" id="l_method-i-test_dummy_config_source">show</a>
+                
+              </p>
+              <div id="method-i-test_dummy_config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_dummy_config</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rails/boot.rb&quot;</span>, <span class="ruby-node">&quot;#{dummy_path}/config/boot.rb&quot;</span>, <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rails/application.rb&quot;</span>, <span class="ruby-node">&quot;#{dummy_path}/config/application.rb&quot;</span>, <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mountable?</span>
+    <span class="ruby-identifier">template</span> <span class="ruby-string">&quot;rails/routes.rb&quot;</span>, <span class="ruby-node">&quot;#{dummy_path}/config/routes.rb&quot;</span>, <span class="ruby-identifier">force</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

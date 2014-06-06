@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::RoutingUrlFor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::RoutingUrlFor 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/routing_url_for_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/routing_url_for.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-url_for">url_for</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-url_for">
+            
+              <b>url_for</b>(options = nil)
+            
+            <a href="../../classes/ActionView/RoutingUrlFor.html#method-i-url_for" name="method-i-url_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the URL for the set of <code>options</code> provided. This takes
+the same options as <code>url_for</code> in Action Controller (see the
+documentation for <code>ActionController::Base#url_for</code>). Note that
+by default <code>:only_path</code> is <code>true</code> so you&#39;ll get
+the relative “/controller/action” instead of the fully qualified URL like
+“<a
+href="http://example.com/controller/action">example.com/controller/action</a>”.</p>
+
+<h4 id="method-i-url_for-label-Options">Options</h4>
+<ul><li>
+<p><code>:anchor</code> - Specifies the anchor name to be appended to the
+path.</p>
+</li><li>
+<p><code>:only_path</code> - If true, returns the relative URL (omitting the
+protocol, host name, and port) (<code>true</code> by default unless
+<code>:host</code> is specified).</p>
+</li><li>
+<p><code>:trailing_slash</code> - If true, adds a trailing slash, as in
+“/archive/2005/”. Note that this is currently not recommended since it
+breaks caching.</p>
+</li><li>
+<p><code>:host</code> - Overrides the default (current) host if provided.</p>
+</li><li>
+<p><code>:protocol</code> - Overrides the default (current) protocol if
+provided.</p>
+</li><li>
+<p><code>:user</code> - Inline HTTP authentication (only plucked out if
+<code>:password</code> is also present).</p>
+</li><li>
+<p><code>:password</code> - Inline HTTP authentication (only plucked out if
+<code>:user</code> is also present).</p>
+</li></ul>
+
+<h4 id="method-i-url_for-label-Relying+on+named+routes">Relying on named routes</h4>
+
+<p>Passing a record (like an Active Record) instead of a hash as the options
+parameter will trigger the named route for that record. The lookup will
+happen on the name of the class. So passing a Workshop object will attempt
+to use the <code>workshop_path</code> route. If you have a nested route,
+such as <code>admin_workshop_path</code> you&#39;ll have to call that
+explicitly (it&#39;s impossible for <code>url_for</code> to guess that
+route).</p>
+
+<h4 id="method-i-url_for-label-Implicit+Controller+Namespacing">Implicit Controller Namespacing</h4>
+
+<p>Controllers passed in using the <code>:controller</code> option will retain
+their namespace unless it is an absolute one.</p>
+
+<h4 id="method-i-url_for-label-Examples">Examples</h4>
+
+<pre>&lt;%= url_for(action: &#39;index&#39;) %&gt;
+# =&gt; /blog/
+
+&lt;%= url_for(action: &#39;find&#39;, controller: &#39;books&#39;) %&gt;
+# =&gt; /books/find
+
+&lt;%= url_for(action: &#39;login&#39;, controller: &#39;members&#39;, only_path: false, protocol: &#39;https&#39;) %&gt;
+# =&gt; https://www.example.com/members/login/
+
+&lt;%= url_for(action: &#39;play&#39;, anchor: &#39;player&#39;) %&gt;
+# =&gt; /messages/play/#player
+
+&lt;%= url_for(action: &#39;jump&#39;, anchor: &#39;tax&amp;ship&#39;) %&gt;
+# =&gt; /testing/jump/#tax&amp;ship
+
+&lt;%= url_for(Workshop.new) %&gt;
+# relies on Workshop answering a persisted? call (and in this case returning false)
+# =&gt; /workshops
+
+&lt;%= url_for(@workshop) %&gt;
+# calls @workshop.to_param which by default returns the id
+# =&gt; /workshops/5
+
+# to_param can be re-defined in a model to provide different URL names:
+# =&gt; /workshops/1-workshop-name
+
+&lt;%= url_for(&quot;http://www.example.com&quot;) %&gt;
+# =&gt; http://www.example.com
+
+&lt;%= url_for(:back) %&gt;
+# if request.env[&quot;HTTP_REFERER&quot;] is set to &quot;http://www.example.com&quot;
+# =&gt; http://www.example.com
+
+&lt;%= url_for(:back) %&gt;
+# if request.env[&quot;HTTP_REFERER&quot;] is not set or is blank
+# =&gt; javascript:history.back()
+
+&lt;%= url_for(action: &#39;index&#39;, controller: &#39;users&#39;) %&gt;
+# Assuming an &quot;admin&quot; namespace
+# =&gt; /admin/users
+
+&lt;%= url_for(action: &#39;index&#39;, controller: &#39;/users&#39;) %&gt;
+# Specify absolute path with beginning slash
+# =&gt; /users</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_for_source')" id="l_method-i-url_for_source">show</a>
+                
+              </p>
+              <div id="method-i-url_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/routing_url_for.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_for</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>, <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">options</span> <span class="ruby-operator">||=</span> {}
+    <span class="ruby-identifier">options</span> = { <span class="ruby-value">:only_path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:host</span>].<span class="ruby-identifier">nil?</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys</span>)
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:back</span>
+    <span class="ruby-identifier">_back_url</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">polymorphic_path</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

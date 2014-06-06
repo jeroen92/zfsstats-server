@@ -1,0 +1,2 @@
+module JobReportsHelper
+end

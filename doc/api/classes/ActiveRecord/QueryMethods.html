@@ -1,0 +1,1747 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::QueryMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::QueryMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/query_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="QueryMethods/WhereChain.html">ActiveRecord::QueryMethods::WhereChain</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-arel">arel</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-bind">bind</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-build_arel">build_arel</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create_with">create_with</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-distinct">distinct</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-eager_load">eager_load</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-extending">extending</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-from">from</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-group">group</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-having">having</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-includes">includes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-joins">joins</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-limit">limit</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-lock">lock</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-none">none</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-offset">offset</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-order">order</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-preload">preload</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-readonly">readonly</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-references">references</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reorder">reorder</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reverse_order">reverse_order</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-select">select</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-uniq">uniq</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-unscope">unscope</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-where">where</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">VALID_UNSCOPING_VALUES</td>
+            <td>=</td>
+            <td class="attr-value">Set.new([:where, :select, :group, :order, :lock,
+:limit, :offset, :joins, :includes, :from,
+:readonly, :having])</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-arel">
+            
+              <b>arel</b>()
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-arel" name="method-i-arel" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the Arel object associated with the relation.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-arel_source')" id="l_method-i-arel_source">show</a>
+                
+              </p>
+              <div id="method-i-arel_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 794</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">arel</span>
+  <span class="ruby-ivar">@arel</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">with_default_scope</span>.<span class="ruby-identifier">build_arel</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-bind">
+            
+              <b>bind</b>(value)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-bind" name="method-i-bind" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-bind_source')" id="l_method-i-bind_source">show</a>
+                
+              </p>
+              <div id="method-i-bind_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 399</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">bind</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">bind!</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-build_arel">
+            
+              <b>build_arel</b>()
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-build_arel" name="method-i-build_arel" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Like <a href="QueryMethods.html#method-i-arel">arel</a>, but ignores the
+default scope of the model.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-build_arel_source')" id="l_method-i-build_arel_source">show</a>
+                
+              </p>
+              <div id="method-i-build_arel_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 799</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">build_arel</span>
+  <span class="ruby-identifier">arel</span> = <span class="ruby-constant">Arel</span><span class="ruby-operator">::</span><span class="ruby-constant">SelectManager</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table</span>.<span class="ruby-identifier">engine</span>, <span class="ruby-identifier">table</span>)
+
+  <span class="ruby-identifier">build_joins</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">joins_values</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">joins_values</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">collapse_wheres</span>(<span class="ruby-identifier">arel</span>, (<span class="ruby-identifier">where_values</span> <span class="ruby-operator">-</span> [<span class="ruby-string">&#39;&#39;</span>]).<span class="ruby-identifier">uniq</span>)
+
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">having</span>(*<span class="ruby-identifier">having_values</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">h</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">blank?</span>}) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">having_values</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">take</span>(<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">sanitize_limit</span>(<span class="ruby-identifier">limit_value</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit_value</span>
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">skip</span>(<span class="ruby-identifier">offset_value</span>.<span class="ruby-identifier">to_i</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">offset_value</span>
+
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">group</span>(*<span class="ruby-identifier">group_values</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">reject</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">g</span><span class="ruby-operator">|</span> <span class="ruby-identifier">g</span>.<span class="ruby-identifier">blank?</span>}) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">group_values</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">build_order</span>(<span class="ruby-identifier">arel</span>)
+
+  <span class="ruby-identifier">build_select</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">select_values</span>.<span class="ruby-identifier">uniq</span>)
+
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">distinct</span>(<span class="ruby-identifier">distinct_value</span>)
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">from</span>(<span class="ruby-identifier">build_from</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">from_value</span>
+  <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">lock</span>(<span class="ruby-identifier">lock_value</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">lock_value</span>
+
+  <span class="ruby-identifier">arel</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create_with">
+            
+              <b>create_with</b>(value)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-create_with" name="method-i-create_with" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets attributes to be used when creating new records from a relation
+object.</p>
+
+<pre class="ruby"><span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Oscar&#39;</span>)
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &#39;Oscar&#39;</span>
+
+<span class="ruby-identifier">users</span> = <span class="ruby-identifier">users</span>.<span class="ruby-identifier">create_with</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;DHH&#39;</span>)
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &#39;DHH&#39;</span>
+</pre>
+
+<p>You can pass <code>nil</code> to <code>create_with</code> to reset
+attributes:</p>
+
+<pre class="ruby"><span class="ruby-identifier">users</span> = <span class="ruby-identifier">users</span>.<span class="ruby-identifier">create_with</span>(<span class="ruby-keyword">nil</span>)
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &#39;Oscar&#39;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_with_source')" id="l_method-i-create_with_source">show</a>
+                
+              </p>
+              <div id="method-i-create_with_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 675</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create_with</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">create_with!</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-distinct">
+            
+              <b>distinct</b>(value = true)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-distinct" name="method-i-distinct" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies whether the records should be unique or not. For example:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">select</span>(:<span class="ruby-identifier">name</span>)
+<span class="ruby-comment"># =&gt; Might return two records with the same name</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">select</span>(:<span class="ruby-identifier">name</span>).<span class="ruby-identifier">distinct</span>
+<span class="ruby-comment"># =&gt; Returns 1 record per distinct name</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">select</span>(:<span class="ruby-identifier">name</span>).<span class="ruby-identifier">distinct</span>.<span class="ruby-identifier">distinct</span>(<span class="ruby-keyword">false</span>)
+<span class="ruby-comment"># =&gt; You can also remove the uniqueness</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="QueryMethods.html#method-i-uniq">uniq</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-distinct_source')" id="l_method-i-distinct_source">show</a>
+                
+              </p>
+              <div id="method-i-distinct_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 716</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">distinct</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">distinct!</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-eager_load">
+            
+              <b>eager_load</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-eager_load" name="method-i-eager_load" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Forces eager loading by performing a LEFT OUTER JOIN on <code>args</code>:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">eager_load</span>(:<span class="ruby-identifier">posts</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;id&quot;</span> <span class="ruby-constant">AS</span> <span class="ruby-identifier">t0_r0</span>, <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;name&quot;</span> <span class="ruby-constant">AS</span> <span class="ruby-identifier">t0_r1</span>, <span class="ruby-operator">...</span>
+<span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">LEFT</span> <span class="ruby-constant">OUTER</span> <span class="ruby-constant">JOIN</span> <span class="ruby-string">&quot;posts&quot;</span> <span class="ruby-constant">ON</span> <span class="ruby-string">&quot;posts&quot;</span>.<span class="ruby-string">&quot;user_id&quot;</span> =
+<span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;id&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-eager_load_source')" id="l_method-i-eager_load_source">show</a>
+                
+              </p>
+              <div id="method-i-eager_load_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eager_load</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;eager_load&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">eager_load!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-extending">
+            
+              <b>extending</b>(*modules, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-extending" name="method-i-extending" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Used to extend a scope with additional methods, either through a module or
+through a block provided.</p>
+
+<p>The object returned is a relation, which can be further extended.</p>
+
+<h3 id="method-i-extending-label-Using+a+module">Using a module</h3>
+
+<pre class="ruby"><span class="ruby-keyword">module</span> <span class="ruby-constant">Pagination</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">page</span>(<span class="ruby-identifier">number</span>)
+    <span class="ruby-comment"># pagination code goes here</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">scope</span> = <span class="ruby-constant">Model</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">extending</span>(<span class="ruby-constant">Pagination</span>)
+<span class="ruby-identifier">scope</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">page</span>])
+</pre>
+
+<p>You can also pass a list of modules:</p>
+
+<pre>scope = Model.all.extending(Pagination, SomethingElse)</pre>
+
+<h3 id="method-i-extending-label-Using+a+block">Using a block</h3>
+
+<pre class="ruby"><span class="ruby-identifier">scope</span> = <span class="ruby-constant">Model</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">extending</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">page</span>(<span class="ruby-identifier">number</span>)
+    <span class="ruby-comment"># pagination code goes here</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-identifier">scope</span>.<span class="ruby-identifier">page</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">page</span>])
+</pre>
+
+<p>You can also use a block and a module list:</p>
+
+<pre class="ruby"><span class="ruby-identifier">scope</span> = <span class="ruby-constant">Model</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">extending</span>(<span class="ruby-constant">Pagination</span>) <span class="ruby-keyword">do</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">per_page</span>(<span class="ruby-identifier">number</span>)
+    <span class="ruby-comment"># pagination code goes here</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-extending_source')" id="l_method-i-extending_source">show</a>
+                
+              </p>
+              <div id="method-i-extending_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 764</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">extending</span>(*<span class="ruby-identifier">modules</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">modules</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block</span>
+    <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">extending!</span>(*<span class="ruby-identifier">modules</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-from">
+            
+              <b>from</b>(value, subquery_name = nil)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-from" name="method-i-from" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies table from which the records will be fetched. For example:</p>
+
+<pre class="ruby"><span class="ruby-constant">Topic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;title&#39;</span>).<span class="ruby-identifier">from</span>(<span class="ruby-string">&#39;posts&#39;</span>)
+<span class="ruby-comment">#=&gt; SELECT title FROM posts</span>
+</pre>
+
+<p>Can accept other relation objects. For example:</p>
+
+<pre class="ruby"><span class="ruby-constant">Topic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;title&#39;</span>).<span class="ruby-identifier">from</span>(<span class="ruby-constant">Topic</span>.<span class="ruby-identifier">approved</span>)
+<span class="ruby-comment"># =&gt; SELECT title FROM (SELECT * FROM topics WHERE approved = &#39;t&#39;) subquery</span>
+
+<span class="ruby-constant">Topic</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;a.title&#39;</span>).<span class="ruby-identifier">from</span>(<span class="ruby-constant">Topic</span>.<span class="ruby-identifier">approved</span>, :<span class="ruby-identifier">a</span>)
+<span class="ruby-comment"># =&gt; SELECT a.title FROM (SELECT * FROM topics WHERE approved = &#39;t&#39;) a</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-from_source')" id="l_method-i-from_source">show</a>
+                
+              </p>
+              <div id="method-i-from_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 697</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">from</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">subquery_name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">from!</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">subquery_name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-group">
+            
+              <b>group</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-group" name="method-i-group" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows to specify a group attribute:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">group</span>(:<span class="ruby-identifier">name</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">GROUP</span> <span class="ruby-constant">BY</span> <span class="ruby-identifier">name</span>
+</pre>
+
+<p>Returns an array with distinct records based on the <code>group</code>
+attribute:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">select</span>([:<span class="ruby-identifier">id</span>, :<span class="ruby-identifier">name</span>])
+=<span class="ruby-operator">&gt;</span> [<span class="ruby-comment">#&lt;User id: 1, name: &quot;Oscar&quot;&gt;, #&lt;User id: 2, name: &quot;Oscar&quot;&gt;, #&lt;User id: 3, name: &quot;Foo&quot;&gt;</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">group</span>(:<span class="ruby-identifier">name</span>)
+=<span class="ruby-operator">&gt;</span> [<span class="ruby-comment">#&lt;User id: 3, name: &quot;Foo&quot;, ...&gt;, #&lt;User id: 2, name: &quot;Oscar&quot;, ...&gt;]</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">group</span>(<span class="ruby-string">&#39;name AS grouped_name, age&#39;</span>)
+=<span class="ruby-operator">&gt;</span> [<span class="ruby-comment">#&lt;User id: 3, name: &quot;Foo&quot;, age: 21, ...&gt;, #&lt;User id: 2, name: &quot;Oscar&quot;, age: 21, ...&gt;, #&lt;User id: 5, name: &quot;Foo&quot;, age: 23, ...&gt;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-group_source')" id="l_method-i-group_source">show</a>
+                
+              </p>
+              <div id="method-i-group_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 243</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">group</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;group&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">group!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-having">
+            
+              <b>having</b>(opts, *rest)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-having" name="method-i-having" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows to specify a HAVING clause. Note that you can&#39;t use HAVING
+without also specifying a GROUP clause.</p>
+
+<pre>Order.having(&#39;SUM(price) &gt; 30&#39;).group(&#39;user_id&#39;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-having_source')" id="l_method-i-having_source">show</a>
+                
+              </p>
+              <div id="method-i-having_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 552</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">having</span>(<span class="ruby-identifier">opts</span>, *<span class="ruby-identifier">rest</span>)
+  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">having!</span>(<span class="ruby-identifier">opts</span>, *<span class="ruby-identifier">rest</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-includes">
+            
+              <b>includes</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-includes" name="method-i-includes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specify relationships to be included in the result set. For example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">includes</span>(:<span class="ruby-identifier">address</span>)
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">address</span>.<span class="ruby-identifier">city</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>allows you to access the <code>address</code> attribute of the
+<code>User</code> model without firing an additional query. This will often
+result in a performance improvement over a simple <code>join</code>.</p>
+
+<h3 id="method-i-includes-label-conditions">conditions</h3>
+
+<p>If you want to add conditions to your included models you&#39;ll have to
+explicitly reference them. For example:</p>
+
+<pre>User.includes(:posts).where(&#39;posts.name = ?&#39;, &#39;example&#39;)</pre>
+
+<p>Will throw an error, but this will work:</p>
+
+<pre>User.includes(:posts).where(&#39;posts.name = ?&#39;, &#39;example&#39;).references(:posts)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-includes_source')" id="l_method-i-includes_source">show</a>
+                
+              </p>
+              <div id="method-i-includes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">includes</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;includes&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">includes!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-joins">
+            
+              <b>joins</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-joins" name="method-i-joins" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a joins on <code>args</code>:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(:<span class="ruby-identifier">posts</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">INNER</span> <span class="ruby-constant">JOIN</span> <span class="ruby-string">&quot;posts&quot;</span> <span class="ruby-constant">ON</span> <span class="ruby-string">&quot;posts&quot;</span>.<span class="ruby-string">&quot;user_id&quot;</span> = <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;id&quot;</span>
+</pre>
+
+<p>You can use strings in order to customize your joins:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(<span class="ruby-string">&quot;LEFT JOIN bookmarks ON bookmarks.bookmarkable_type = &#39;Post&#39; AND bookmarks.user_id = users.id&quot;</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">LEFT</span> <span class="ruby-constant">JOIN</span> <span class="ruby-identifier">bookmarks</span> <span class="ruby-constant">ON</span> <span class="ruby-identifier">bookmarks</span>.<span class="ruby-identifier">bookmarkable_type</span> = <span class="ruby-string">&#39;Post&#39;</span> <span class="ruby-constant">AND</span> <span class="ruby-identifier">bookmarks</span>.<span class="ruby-identifier">user_id</span> = <span class="ruby-identifier">users</span>.<span class="ruby-identifier">id</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-joins_source')" id="l_method-i-joins_source">show</a>
+                
+              </p>
+              <div id="method-i-joins_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 389</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">joins</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;joins&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">joins!</span>(*<span class="ruby-identifier">args</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">flatten</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-limit">
+            
+              <b>limit</b>(value)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-limit" name="method-i-limit" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies a limit for the number of records to retrieve.</p>
+
+<pre>User.limit(10) # generated SQL has &#39;LIMIT 10&#39;
+
+User.limit(10).limit(20) # generated SQL has &#39;LIMIT 20&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-limit_source')" id="l_method-i-limit_source">show</a>
+                
+              </p>
+              <div id="method-i-limit_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 568</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">limit</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">limit!</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-lock">
+            
+              <b>lock</b>(locks = true)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-lock" name="method-i-lock" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies locking settings (default to <code>true</code>). For more
+information on locking, please see +ActiveRecord::Locking+.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-lock_source')" id="l_method-i-lock_source">show</a>
+                
+              </p>
+              <div id="method-i-lock_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 595</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">lock</span>(<span class="ruby-identifier">locks</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">lock!</span>(<span class="ruby-identifier">locks</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-none">
+            
+              <b>none</b>()
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-none" name="method-i-none" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a chainable relation with zero records, specifically an instance of
+the <code>ActiveRecord::NullRelation</code> class.</p>
+
+<p>The returned <code>ActiveRecord::NullRelation</code> inherits from <a
+href="Relation.html">Relation</a> and implements the Null <a
+href="../Object.html">Object</a> pattern. It is an object with defined null
+behavior and always returns an empty array of records without querying the
+database.</p>
+
+<p>Any subsequent condition chained to the returned relation will continue
+generating an empty relation and will not fire any query to the database.</p>
+
+<p>Used in cases where a method or scope could return zero records but the
+result needs to be chainable.</p>
+
+<p>For example:</p>
+
+<pre class="ruby"><span class="ruby-ivar">@posts</span> = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">visible_posts</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">name</span>])
+<span class="ruby-comment"># =&gt; the visible_posts method is expected to return a chainable Relation</span>
+
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">visible_posts</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">role</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Country Manager&#39;</span>
+    <span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">country</span><span class="ruby-operator">:</span> <span class="ruby-identifier">country</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Reviewer&#39;</span>
+    <span class="ruby-constant">Post</span>.<span class="ruby-identifier">published</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Bad User&#39;</span>
+    <span class="ruby-constant">Post</span>.<span class="ruby-identifier">none</span> <span class="ruby-comment"># =&gt; returning [] instead breaks the previous code</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-none_source')" id="l_method-i-none_source">show</a>
+                
+              </p>
+              <div id="method-i-none_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 639</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">none</span>
+  <span class="ruby-identifier">extending</span>(<span class="ruby-constant">NullRelation</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-offset">
+            
+              <b>offset</b>(value)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-offset" name="method-i-offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies the number of rows to skip before returning rows.</p>
+
+<pre>User.offset(10) # generated SQL has &quot;OFFSET 10&quot;</pre>
+
+<p>Should be used with order.</p>
+
+<pre>User.offset(10).order(&quot;name ASC&quot;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-offset_source')" id="l_method-i-offset_source">show</a>
+                
+              </p>
+              <div id="method-i-offset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 584</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">offset</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">offset!</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-order">
+            
+              <b>order</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-order" name="method-i-order" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows to specify an order attribute:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;name&#39;</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">ORDER</span> <span class="ruby-constant">BY</span> <span class="ruby-identifier">name</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;name DESC&#39;</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">ORDER</span> <span class="ruby-constant">BY</span> <span class="ruby-identifier">name</span> <span class="ruby-constant">DESC</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(<span class="ruby-string">&#39;name DESC, email&#39;</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">ORDER</span> <span class="ruby-constant">BY</span> <span class="ruby-identifier">name</span> <span class="ruby-constant">DESC</span>, <span class="ruby-identifier">email</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(:<span class="ruby-identifier">name</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">ORDER</span> <span class="ruby-constant">BY</span> <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;name&quot;</span> <span class="ruby-constant">ASC</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">email</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">desc</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">ORDER</span> <span class="ruby-constant">BY</span> <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;email&quot;</span> <span class="ruby-constant">DESC</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">order</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-identifier">email</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">desc</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;users&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;users&quot;</span> <span class="ruby-constant">ORDER</span> <span class="ruby-constant">BY</span> <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;name&quot;</span> <span class="ruby-constant">ASC</span>, <span class="ruby-string">&quot;users&quot;</span>.<span class="ruby-string">&quot;email&quot;</span> <span class="ruby-constant">DESC</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-order_source')" id="l_method-i-order_source">show</a>
+                
+              </p>
+              <div id="method-i-order_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 274</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">order</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;order&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">order!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-preload">
+            
+              <b>preload</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-preload" name="method-i-preload" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows preloading of <code>args</code>, in the same way that
+<code>includes</code> does:</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">preload</span>(:<span class="ruby-identifier">posts</span>)
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">SELECT</span> <span class="ruby-string">&quot;posts&quot;</span>.* <span class="ruby-constant">FROM</span> <span class="ruby-string">&quot;posts&quot;</span> <span class="ruby-constant">WHERE</span> <span class="ruby-string">&quot;posts&quot;</span>.<span class="ruby-string">&quot;user_id&quot;</span> <span class="ruby-constant">IN</span> (<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>)
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-preload_source')" id="l_method-i-preload_source">show</a>
+                
+              </p>
+              <div id="method-i-preload_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">preload</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;preload&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">preload!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-readonly">
+            
+              <b>readonly</b>(value = true)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-readonly" name="method-i-readonly" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets readonly attributes for the returned relation. If value is true
+(default), attempting to update a record will result in an error.</p>
+
+<pre class="ruby"><span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">readonly</span>
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">save</span>
+=<span class="ruby-operator">&gt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ReadOnlyRecord</span><span class="ruby-operator">:</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">ReadOnlyRecord</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-readonly_source')" id="l_method-i-readonly_source">show</a>
+                
+              </p>
+              <div id="method-i-readonly_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 653</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">readonly</span>(<span class="ruby-identifier">value</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">readonly!</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-references">
+            
+              <b>references</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-references" name="method-i-references" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Used to indicate that an association is referenced by an SQL string, and
+should therefore be JOINed in any query rather than loaded separately.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">includes</span>(:<span class="ruby-identifier">posts</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;posts.name = &#39;foo&#39;&quot;</span>)
+<span class="ruby-comment"># =&gt; Doesn&#39;t JOIN the posts table, resulting in an error.</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">includes</span>(:<span class="ruby-identifier">posts</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;posts.name = &#39;foo&#39;&quot;</span>).<span class="ruby-identifier">references</span>(:<span class="ruby-identifier">posts</span>)
+<span class="ruby-comment"># =&gt; Query now knows the string references posts, so adds a JOIN</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-references_source')" id="l_method-i-references_source">show</a>
+                
+              </p>
+              <div id="method-i-references_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">references</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;references&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">references!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reorder">
+            
+              <b>reorder</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-reorder" name="method-i-reorder" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Replaces any existing order defined on the relation with the specified
+order.</p>
+
+<pre>User.order(&#39;email DESC&#39;).reorder(&#39;id ASC&#39;) # generated SQL has &#39;ORDER BY id ASC&#39;</pre>
+
+<p>Subsequent calls to order on the same relation will be appended. For
+example:</p>
+
+<pre>User.order(&#39;email DESC&#39;).reorder(&#39;id ASC&#39;).order(&#39;name ASC&#39;)</pre>
+
+<p>generates a query with &#39;ORDER BY name ASC, id ASC&#39;.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reorder_source')" id="l_method-i-reorder_source">show</a>
+                
+              </p>
+              <div id="method-i-reorder_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 305</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reorder</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;reorder&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">reorder!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reverse_order">
+            
+              <b>reverse_order</b>()
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-reverse_order" name="method-i-reverse_order" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Reverse the existing order clause on the relation.</p>
+
+<pre>User.order(&#39;name ASC&#39;).reverse_order # generated SQL has &#39;ORDER BY name DESC&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reverse_order_source')" id="l_method-i-reverse_order_source">show</a>
+                
+              </p>
+              <div id="method-i-reverse_order_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 784</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reverse_order</span>
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">reverse_order!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select">
+            
+              <b>select</b>(*fields)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-select" name="method-i-select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Works in two unique ways.</p>
+
+<p>First: takes a block so it can be used just like Array#select.</p>
+
+<pre class="ruby"><span class="ruby-constant">Model</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">field</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">value</span> }
+</pre>
+
+<p>This will build an array of objects from the database for the scope,
+converting them into an array and iterating through them using
+Array#select.</p>
+
+<p>Second: Modifies the SELECT statement for the query so that only certain
+fields are retrieved:</p>
+
+<pre class="ruby"><span class="ruby-constant">Model</span>.<span class="ruby-identifier">select</span>(:<span class="ruby-identifier">field</span>)
+<span class="ruby-comment"># =&gt; [#&lt;Model field:value&gt;]</span>
+</pre>
+
+<p>Although in the above example it looks as though this method returns an
+array, it actually returns a relation object and can have other query
+methods appended to it, such as the other methods in <a
+href="QueryMethods.html">ActiveRecord::QueryMethods</a>.</p>
+
+<p>The argument to the method can also be an array of fields.</p>
+
+<pre class="ruby"><span class="ruby-constant">Model</span>.<span class="ruby-identifier">select</span>(:<span class="ruby-identifier">field</span>, :<span class="ruby-identifier">other_field</span>, :<span class="ruby-identifier">and_one_more</span>)
+<span class="ruby-comment"># =&gt; [#&lt;Model field: &quot;value&quot;, other_field: &quot;value&quot;, and_one_more: &quot;value&quot;&gt;]</span>
+</pre>
+
+<p>You can also use one or more strings, which will be used unchanged as
+SELECT fields.</p>
+
+<pre class="ruby"><span class="ruby-constant">Model</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;field AS field_one&#39;</span>, <span class="ruby-string">&#39;other_field AS field_two&#39;</span>)
+<span class="ruby-comment"># =&gt; [#&lt;Model field: &quot;value&quot;, other_field: &quot;value&quot;&gt;]</span>
+</pre>
+
+<p>If an alias was specified, it will be accessible from the resulting
+objects:</p>
+
+<pre class="ruby"><span class="ruby-constant">Model</span>.<span class="ruby-identifier">select</span>(<span class="ruby-string">&#39;field AS field_one&#39;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">field_one</span>
+<span class="ruby-comment"># =&gt; &quot;value&quot;</span>
+</pre>
+
+<p>Accessing attributes of an object that do not have fields retrieved by a
+select will throw <code>ActiveModel::MissingAttributeError</code>:</p>
+
+<pre class="ruby"><span class="ruby-constant">Model</span>.<span class="ruby-identifier">select</span>(:<span class="ruby-identifier">field</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">other_field</span>
+<span class="ruby-comment"># =&gt; ActiveModel::MissingAttributeError: missing attribute: other_field</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_source')" id="l_method-i-select_source">show</a>
+                
+              </p>
+              <div id="method-i-select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select</span>(*<span class="ruby-identifier">fields</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span>*<span class="ruby-identifier">block_args</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>(*<span class="ruby-identifier">block_args</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;Call this with at least one field&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">fields</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">select!</span>(*<span class="ruby-identifier">fields</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uniq">
+            
+              <b>uniq</b>(value = true)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-uniq" name="method-i-uniq" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unscope">
+            
+              <b>unscope</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-unscope" name="method-i-unscope" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Removes an unwanted relation that is already defined on a chain of
+relations. This is useful when passing around chains of relations and would
+like to modify the relations without reconstructing the entire chain.</p>
+
+<pre>User.order(&#39;email DESC&#39;).unscope(:order) == User.all</pre>
+
+<p>The method arguments are symbols which correspond to the names of the
+methods which should be unscoped. The valid arguments are given in <a
+href="QueryMethods.html#VALID_UNSCOPING_VALUES">VALID_UNSCOPING_VALUES</a>.
+The method can also be called with multiple arguments. For example:</p>
+
+<pre>User.order(&#39;email DESC&#39;).select(&#39;id&#39;).where(name: &quot;John&quot;)
+    .unscope(:order, :select, :where) == User.all</pre>
+
+<p>One can additionally pass a hash as an argument to unscope specific :where
+values. This is done by passing a hash with a single key-value pair. The
+key should be :where and the value should be the where value to unscope.
+For example:</p>
+
+<pre>User.where(name: &quot;John&quot;, active: true).unscope(where: :name)
+    == User.where(active: true)</pre>
+
+<p>Note that this method is more generalized than <a
+href="SpawnMethods.html#method-i-except">ActiveRecord::SpawnMethods#except</a>
+because except will only affect a particular relation&#39;s values. It
+won&#39;t wipe the order, grouping, etc. when that relation is merged. For
+example:</p>
+
+<pre>Post.comments.except(:order)</pre>
+
+<p>will still have an order if it comes from the default_scope on Comment.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-unscope_source')" id="l_method-i-unscope_source">show</a>
+                
+              </p>
+              <div id="method-i-unscope_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 350</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unscope</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_if_method_has_arguments!</span>(<span class="ruby-string">&quot;unscope&quot;</span>, <span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">unscope!</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-where">
+            
+              <b>where</b>(opts = :chain, *rest)
+            
+            <a href="../../classes/ActiveRecord/QueryMethods.html#method-i-where" name="method-i-where" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new relation, which is the result of filtering the current
+relation according to the conditions in the arguments.</p>
+
+<p><a href="QueryMethods.html#method-i-where">where</a> accepts conditions in
+one of several formats. In the examples below, the resulting SQL is given
+as an illustration; the actual query generated may be different depending
+on the database adapter.</p>
+
+<h3 id="method-i-where-label-string">string</h3>
+
+<p>A single string, without additional arguments, is passed to the query
+constructor as a SQL fragment, and used in the where clause of the query.</p>
+
+<pre>Client.where(&quot;orders_count = &#39;2&#39;&quot;)
+# SELECT * from clients where orders_count = &#39;2&#39;;</pre>
+
+<p>Note that building your own string from user input may expose your
+application to injection attacks if not done properly. As an alternative,
+it is recommended to use one of the following methods.</p>
+
+<h3 id="method-i-where-label-array">array</h3>
+
+<p>If an array is passed, then the first element of the array is treated as a
+template, and the remaining elements are inserted into the template to
+generate the condition. Active Record takes care of building the query to
+avoid injection attacks, and will convert from the ruby type to the
+database type where needed. Elements are inserted into the string in the
+order in which they appear.</p>
+
+<pre>User.where([&quot;name = ? and email = ?&quot;, &quot;Joe&quot;, &quot;joe@example.com&quot;])
+# SELECT * FROM users WHERE name = &#39;Joe&#39; AND email = &#39;joe@example.com&#39;;</pre>
+
+<p>Alternatively, you can use named placeholders in the template, and pass a
+hash as the second element of the array. The names in the template are
+replaced with the corresponding values from the hash.</p>
+
+<pre>User.where([&quot;name = :name and email = :email&quot;, { name: &quot;Joe&quot;, email: &quot;joe@example.com&quot; }])
+# SELECT * FROM users WHERE name = &#39;Joe&#39; AND email = &#39;joe@example.com&#39;;</pre>
+
+<p>This can make for more readable code in complex queries.</p>
+
+<p>Lastly, you can use sprintf-style % escapes in the template. This works
+slightly differently than the previous methods; you are responsible for
+ensuring that the values in the template are properly quoted. The values
+are passed to the connector for quoting, but the caller is responsible for
+ensuring they are enclosed in quotes in the resulting SQL. After quoting,
+the values are inserted using the same escapes as the Ruby core method
+<code>Kernel::sprintf</code>.</p>
+
+<pre>User.where([&quot;name = &#39;%s&#39; and email = &#39;%s&#39;&quot;, &quot;Joe&quot;, &quot;joe@example.com&quot;])
+# SELECT * FROM users WHERE name = &#39;Joe&#39; AND email = &#39;joe@example.com&#39;;</pre>
+
+<p>If <a href="QueryMethods.html#method-i-where">where</a> is called with
+multiple arguments, these are treated as if they were passed as the
+elements of a single array.</p>
+
+<pre>User.where(&quot;name = :name and email = :email&quot;, { name: &quot;Joe&quot;, email: &quot;joe@example.com&quot; })
+# SELECT * FROM users WHERE name = &#39;Joe&#39; AND email = &#39;joe@example.com&#39;;</pre>
+
+<p>When using strings to specify conditions, you can use any operator
+available from the database. While this provides the most flexibility, you
+can also unintentionally introduce dependencies on the underlying database.
+If your code is intended for general consumption, test with multiple
+database backends.</p>
+
+<h3 id="method-i-where-label-hash">hash</h3>
+
+<p><a href="QueryMethods.html#method-i-where">where</a> will also accept a
+hash condition, in which the keys are fields and the values are values to
+be searched for.</p>
+
+<p>Fields can be symbols or strings. Values can be single values, arrays, or
+ranges.</p>
+
+<pre>User.where({ name: &quot;Joe&quot;, email: &quot;joe@example.com&quot; })
+# SELECT * FROM users WHERE name = &#39;Joe&#39; AND email = &#39;joe@example.com&#39;
+
+User.where({ name: [&quot;Alice&quot;, &quot;Bob&quot;]})
+# SELECT * FROM users WHERE name IN (&#39;Alice&#39;, &#39;Bob&#39;)
+
+User.where({ created_at: (Time.now.midnight - 1.day)..Time.now.midnight })
+# SELECT * FROM users WHERE (created_at BETWEEN &#39;2012-06-09 07:00:00.000000&#39; AND &#39;2012-06-10 07:00:00.000000&#39;)</pre>
+
+<p>In the case of a belongs_to relationship, an association key can be used to
+specify the model if an <a href="../ActiveRecord.html">ActiveRecord</a>
+object is used as the value.</p>
+
+<pre>author = Author.find(1)
+
+# The following queries will be equivalent:
+Post.where(author: author)
+Post.where(author_id: author)</pre>
+
+<p>This also works with polymorphic belongs_to relationships:</p>
+
+<pre>treasure = Treasure.create(name: &#39;gold coins&#39;)
+treasure.price_estimates &lt;&lt; PriceEstimate.create(price: 125)
+
+# The following queries will be equivalent:
+PriceEstimate.where(estimate_of: treasure)
+PriceEstimate.where(estimate_of_type: &#39;Treasure&#39;, estimate_of_id: treasure)</pre>
+
+<h3 id="method-i-where-label-Joins">Joins</h3>
+
+<p>If the relation is the result of a join, you may create a condition which
+uses any of the tables in the join. For string and array conditions, use
+the table name in the condition.</p>
+
+<pre>User.joins(:posts).where(&quot;posts.created_at &lt; ?&quot;, Time.now)</pre>
+
+<p>For hash conditions, you can either use the table name in the key, or use a
+sub-hash.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(:<span class="ruby-identifier">posts</span>).<span class="ruby-identifier">where</span>({ <span class="ruby-string">&quot;posts.published&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> })
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">joins</span>(:<span class="ruby-identifier">posts</span>).<span class="ruby-identifier">where</span>({ <span class="ruby-identifier">posts</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">published</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span> } })
+</pre>
+
+<h3 id="method-i-where-label-no+argument">no argument</h3>
+
+<p>If no argument is passed, <a
+href="QueryMethods.html#method-i-where">where</a> returns a new instance of
+<a href="QueryMethods/WhereChain.html">WhereChain</a>, that can be chained
+with not to return a new relation that negates the where clause.</p>
+
+<pre>User.where.not(name: &quot;Jon&quot;)
+# SELECT * FROM users WHERE name != &#39;Jon&#39;</pre>
+
+<p>See <a href="QueryMethods/WhereChain.html">WhereChain</a> for more details
+on not.</p>
+
+<h3 id="method-i-where-label-blank+condition">blank condition</h3>
+
+<p>If the condition is any blank-ish object, then <a
+href="QueryMethods.html#method-i-where">where</a> is a no-op and returns
+the current relation.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-where_source')" id="l_method-i-where_source">show</a>
+                
+              </p>
+              <div id="method-i-where_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb, line 527</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">where</span>(<span class="ruby-identifier">opts</span> = <span class="ruby-value">:chain</span>, *<span class="ruby-identifier">rest</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">opts</span> <span class="ruby-operator">==</span> <span class="ruby-value">:chain</span>
+    <span class="ruby-constant">WhereChain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">spawn</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">where!</span>(<span class="ruby-identifier">opts</span>, *<span class="ruby-identifier">rest</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::CaptureHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::CaptureHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/capture_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/capture_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="CaptureHelper.html">CaptureHelper</a> exposes methods to let you
+extract generated markup which can be used in other parts of a template or
+layout file.</p>
+
+<p>It provides a method to capture blocks into variables through capture and a
+way to capture a block of markup for use in a layout through content_for.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-capture">capture</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-content_for">content_for</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-content_for-3F">content_for?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-provide">provide</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-capture">
+            
+              <b>capture</b>(*args)
+            
+            <a href="../../../classes/ActionView/Helpers/CaptureHelper.html#method-i-capture" name="method-i-capture" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The capture method allows you to extract part of a template into a
+variable. You can then use this variable anywhere in your templates or
+layout.</p>
+
+<p>The capture method can be used in <a href="../../ERB.html">ERB</a>
+templates…</p>
+
+<pre>&lt;% @greeting = capture do %&gt;
+  Welcome to my shiny new web page!  The date and time is
+  &lt;%= Time.now %&gt;
+&lt;% end %&gt;</pre>
+
+<p>…and Builder (RXML) templates.</p>
+
+<pre>@timestamp = capture do
+  &quot;The current timestamp is #{Time.now}.&quot;
+end</pre>
+
+<p>You can then use that variable anywhere else. For example:</p>
+
+<pre>&lt;html&gt;
+&lt;head&gt;&lt;title&gt;&lt;%= @greeting %&gt;&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;b&gt;&lt;%= @greeting %&gt;&lt;/b&gt;
+&lt;/body&gt;&lt;/html&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-capture_source')" id="l_method-i-capture_source">show</a>
+                
+              </p>
+              <div id="method-i-capture_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/capture_helper.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">capture</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">buffer</span> = <span class="ruby-identifier">with_output_buffer</span> { <span class="ruby-identifier">value</span> = <span class="ruby-keyword">yield</span>(*<span class="ruby-identifier">args</span>) }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">string</span> = <span class="ruby-identifier">buffer</span>.<span class="ruby-identifier">presence</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">value</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+    <span class="ruby-constant">ERB</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">html_escape</span> <span class="ruby-identifier">string</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-content_for">
+            
+              <b>content_for</b>(name, content = nil, options = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/CaptureHelper.html#method-i-content_for" name="method-i-content_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Calling <a href="CaptureHelper.html#method-i-content_for">#content_for</a>
+stores a block of markup in an identifier for later use. In order to access
+this stored content in other templates, helper modules or the layout, you
+would pass the identifier as an argument to <code>content_for</code>.</p>
+
+<p>Note: <code>yield</code> can still be used to retrieve the stored content,
+but calling <code>yield</code> doesn&#39;t work in helper modules, while
+<code>content_for</code> does.</p>
+
+<pre>&lt;% content_for :not_authorized do %&gt;
+  alert(&#39;You are not authorized to do that!&#39;)
+&lt;% end %&gt;</pre>
+
+<p>You can then use <code>content_for :not_authorized</code> anywhere in your
+templates.</p>
+
+<pre>&lt;%= content_for :not_authorized if current_user.nil? %&gt;</pre>
+
+<p>This is equivalent to:</p>
+
+<pre>&lt;%= yield :not_authorized if current_user.nil? %&gt;</pre>
+
+<p><code>content_for</code>, however, can also be used in helper modules.</p>
+
+<pre class="ruby"><span class="ruby-keyword">module</span> <span class="ruby-constant">StorageHelper</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">stored_content</span>
+    <span class="ruby-identifier">content_for</span>(:<span class="ruby-identifier">storage</span>) <span class="ruby-operator">||</span> <span class="ruby-string">&quot;Your storage is empty&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This helper works just like normal helpers.</p>
+
+<pre>&lt;%= stored_content %&gt;</pre>
+
+<p>You can also use the <code>yield</code> syntax alongside an existing call
+to <code>yield</code> in a layout. For example:</p>
+
+<pre>&lt;%# This is the layout %&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+  &lt;%= yield :script %&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;%= yield %&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>And now, we&#39;ll create a view that has a <code>content_for</code> call
+that creates the <code>script</code> identifier.</p>
+
+<pre>&lt;%# This is our view %&gt;
+Please login!
+
+&lt;% content_for :script do %&gt;
+  &lt;script&gt;alert(&#39;You are not authorized to view this page!&#39;)&lt;/script&gt;
+&lt;% end %&gt;</pre>
+
+<p>Then, in another view, you could to do something like this:</p>
+
+<pre>&lt;%= link_to &#39;Logout&#39;, action: &#39;logout&#39;, remote: true %&gt;
+
+&lt;% content_for :script do %&gt;
+  &lt;%= javascript_include_tag :defaults %&gt;
+&lt;% end %&gt;</pre>
+
+<p>That will place <code>script</code> tags for your default set of JavaScript
+files on the page; this technique is useful if you&#39;ll only be using
+these scripts in a few views.</p>
+
+<p>Note that <a
+href="CaptureHelper.html#method-i-content_for">#content_for</a>
+concatenates (default) the blocks it is given for a particular identifier
+in order. For example:</p>
+
+<pre> &lt;% content_for :navigation do %&gt;
+   &lt;li&gt;&lt;%= link_to &#39;Home&#39;, action: &#39;index&#39; %&gt;&lt;/li&gt;
+ &lt;% end %&gt;
+
+And in other place:
+
+ &lt;% content_for :navigation do %&gt;
+   &lt;li&gt;&lt;%= link_to &#39;Login&#39;, action: &#39;login&#39; %&gt;&lt;/li&gt;
+ &lt;% end %&gt;</pre>
+
+<p>Then, in another template or layout, this code would render both links in
+order:</p>
+
+<pre>&lt;ul&gt;&lt;%= content_for :navigation %&gt;&lt;/ul&gt;</pre>
+
+<p>If the flush parameter is true <a
+href="CaptureHelper.html#method-i-content_for">#content_for</a> replaces
+the blocks it is given. For example:</p>
+
+<pre>&lt;% content_for :navigation do %&gt;
+  &lt;li&gt;&lt;%= link_to &#39;Home&#39;, action: &#39;index&#39; %&gt;&lt;/li&gt;
+&lt;% end %&gt;
+
+&lt;%#  Add some other content, or use a different template: %&gt;
+
+&lt;% content_for :navigation, flush: true do %&gt;
+  &lt;li&gt;&lt;%= link_to &#39;Login&#39;, action: &#39;login&#39; %&gt;&lt;/li&gt;
+&lt;% end %&gt;</pre>
+
+<p>Then, in another template or layout, this code would render only the last
+link:</p>
+
+<pre>&lt;ul&gt;&lt;%= content_for :navigation %&gt;&lt;/ul&gt;</pre>
+
+<p>Lastly, simple content can be passed as a parameter:</p>
+
+<pre>&lt;% content_for :script, javascript_include_tag(:defaults) %&gt;</pre>
+
+<p>WARNING: <a href="CaptureHelper.html#method-i-content_for">#content_for</a>
+is ignored in caches. So you shouldn&#39;t use it for elements that will be
+fragment cached.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-content_for_source')" id="l_method-i-content_for_source">show</a>
+                
+              </p>
+              <div id="method-i-content_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/capture_helper.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">content_for</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">content</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">options</span> = <span class="ruby-identifier">content</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">content</span>
+      <span class="ruby-identifier">content</span> = <span class="ruby-identifier">capture</span>(&amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">content</span>
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:flush</span>] <span class="ruby-operator">?</span> <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">set</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span>) <span class="ruby-operator">:</span> <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">append</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">presence</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-content_for-3F">
+            
+              <b>content_for?</b>(name)
+            
+            <a href="../../../classes/ActionView/Helpers/CaptureHelper.html#method-i-content_for-3F" name="method-i-content_for-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><a href="CaptureHelper.html#method-i-content_for">#content_for</a>? checks
+whether any content has been captured yet using `<a
+href="CaptureHelper.html#method-i-content_for">#content_for</a>`. Useful to
+render parts of your layout differently based on what is in your views.</p>
+
+<pre>&lt;%# This is the layout %&gt;
+&lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot; xml:lang=&quot;en&quot; lang=&quot;en&quot;&gt;
+&lt;head&gt;
+  &lt;title&gt;My Website&lt;/title&gt;
+  &lt;%= yield :script %&gt;
+&lt;/head&gt;
+&lt;body class=&quot;&lt;%= content_for?(:right_col) ? &#39;two-column&#39; : &#39;one-column&#39; %&gt;&quot;&gt;
+  &lt;%= yield %&gt;
+  &lt;%= yield :right_col %&gt;
+&lt;/body&gt;
+&lt;/html&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-content_for-3F_source')" id="l_method-i-content_for-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-content_for-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/capture_helper.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">content_for?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">name</span>).<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-provide">
+            
+              <b>provide</b>(name, content = nil, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/CaptureHelper.html#method-i-provide" name="method-i-provide" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The same as <code>content_for</code> but when used with streaming flushes
+straight back to the layout. In other words, if you want to concatenate
+several times to the same buffer when rendering a given template, you
+should use <code>content_for</code>, if not, use <code>provide</code> to
+tell the layout to stop looking for more contents.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-provide_source')" id="l_method-i-provide_source">show</a>
+                
+              </p>
+              <div id="method-i-provide_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/capture_helper.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">provide</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">capture</span>(&amp;<span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@view_flow</span>.<span class="ruby-identifier">append!</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">content</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">content</span>
+  <span class="ruby-identifier">result</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">content</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

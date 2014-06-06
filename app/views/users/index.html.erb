@@ -1,0 +1,54 @@
+<legend><%= controller.action_name.capitalize %> Users</legend>
+<p>
+  On this page are all users listed in a nice bootstrapp'd table.
+</p>
+
+<table class="table table-striped" style="font-size:12px;">
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Email</th>
+      <th>Role</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= user.firstname %></td>
+        <td><%= user.lastname %></td>
+        <td><%= user.email %></td>
+        <td><b><%= user.role %></b></td>
+        <td>
+          <% if can? :read, user %>
+            <%= link_to image_tag('/img/info.png', :size => '16x16'), user%>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td>
+          <% if can? :update, user %>
+            <%= link_to image_tag('/img/edit.png', :size => '16x16'), edit_user_path(user)%>
+          <% else %>
+            -
+          <% end %>
+        </td>
+        <td>
+          <% if can? :delete, user %>
+            <%= link_to image_tag('/img/delete.png', :size => '16x16'), user, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% else %>
+            -
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if can? :create, User %>
+  <%= link_to 'New User', new_user_path, :class => 'btn btn-primary' %>
+<% end %>

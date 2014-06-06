@@ -1,0 +1,534 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Routing::UrlFor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Routing::UrlFor 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/url_for_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>In <code>config/routes.rb</code> you define URL-to-controller mappings, but
+the reverse is also possible: an URL can be generated from one of your
+routing definitions. URL generation functionality is centralized in this
+module.</p>
+
+<p>See <a href="../Routing.html">ActionDispatch::Routing</a> for general
+information about routing and routes.rb.</p>
+
+<p><strong>Tip:</strong> If you need to generate URLs from your models or some
+other place, then <a
+href="../../ActionController/UrlFor.html">ActionController::UrlFor</a> is
+what you&#39;re looking for. Read on for an introduction. In general, this
+module should not be included on its own, as it is usually included by
+url_helpers (as in <a
+href="../../Rails.html#attribute-c-application">Rails.application</a>.routes.url_helpers).</p>
+
+<h2 id="label-URL+generation+from+parameters">URL generation from parameters</h2>
+
+<p>As you may know, some functions, such as ActionController::Base#url_for and
+<a
+href="../../ActionView/Helpers/UrlHelper.html#method-i-link_to">ActionView::Helpers::UrlHelper#link_to</a>,
+can generate URLs given a set of parameters. For example, you&#39;ve
+probably had the chance to write code like this in one of your views:</p>
+
+<pre>&lt;%= link_to(&#39;Click here&#39;, controller: &#39;users&#39;,
+        action: &#39;new&#39;, message: &#39;Welcome!&#39;) %&gt;
+# =&gt; &quot;/users/new?message=Welcome%21&quot;</pre>
+
+<p>link_to, and all other functions that require URL generation functionality,
+actually use <a
+href="../../ActionController/UrlFor.html">ActionController::UrlFor</a>
+under the hood. And in particular, they use the
+ActionController::UrlFor#url_for method. One can generate the same path as
+the above example by using the following code:</p>
+
+<pre class="ruby"><span class="ruby-identifier">include</span> <span class="ruby-constant">UrlFor</span>
+<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;users&#39;</span>,
+        <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;new&#39;</span>,
+        <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Welcome!&#39;</span>,
+        <span class="ruby-identifier">only_path</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; &quot;/users/new?message=Welcome%21&quot;</span>
+</pre>
+
+<p>Notice the <code>only_path: true</code> part. This is because <a
+href="UrlFor.html">UrlFor</a> has no information about the website hostname
+that your <a href="../../Rails.html">Rails</a> app is serving. So if you
+want to include the hostname as well, then you must also pass the
+<code>:host</code> argument:</p>
+
+<pre class="ruby"><span class="ruby-identifier">include</span> <span class="ruby-constant">UrlFor</span>
+<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;users&#39;</span>,
+        <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;new&#39;</span>,
+        <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Welcome!&#39;</span>,
+        <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;www.example.com&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;http://www.example.com/users/new?message=Welcome%21&quot;</span>
+</pre>
+
+<p>By default, all controllers and views have access to a special version of
+<a href="UrlFor.html#method-i-url_for">#url_for</a>, that already knows
+what the current hostname is. So if you use <a
+href="UrlFor.html#method-i-url_for">#url_for</a> in your controllers or
+your views, then you don&#39;t need to explicitly pass the
+<code>:host</code> argument.</p>
+
+<p>For convenience reasons, mailers provide a shortcut for
+ActionController::UrlFor#url_for. So within mailers, you only have to type
+&#39;<a href="UrlFor.html#method-i-url_for">#url_for</a>&#39; instead of
+&#39;ActionController::UrlFor#url_for&#39; in full. However, mailers
+don&#39;t have hostname information, and that&#39;s why you&#39;ll still
+have to specify the <code>:host</code> argument when generating URLs in
+mailers.</p>
+
+<h2 id="label-URL+generation+for+named+routes">URL generation for named routes</h2>
+
+<p><a href="UrlFor.html">UrlFor</a> also allows one to access methods that
+have been auto-generated from named routes. For example, suppose that you
+have a &#39;users&#39; resource in your <code>config/routes.rb</code>:</p>
+
+<pre>resources :users</pre>
+
+<p>This generates, among other things, the method <code>users_path</code>. By
+default, this method is accessible from your controllers, views and
+mailers. If you need to access this auto-generated method from other places
+(such as a model), then you can do that by including <a
+href="../../Rails.html#attribute-c-application">Rails.application</a>.routes.url_helpers
+in your class:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">url_helpers</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">base_uri</span>
+    <span class="ruby-identifier">user_path</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-value">1</span>).<span class="ruby-identifier">base_uri</span> <span class="ruby-comment"># =&gt; &quot;/users/1&quot;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_routes_context">_routes_context</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-_with_routes">_with_routes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-optimize_routes_generation-3F">optimize_routes_generation?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-url_for">url_for</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-url_options">url_options</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="PolymorphicRoutes.html">
+              ActionDispatch::Routing::PolymorphicRoutes
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(*)
+            
+            <a href="../../../classes/ActionDispatch/Routing/UrlFor.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(*)
+  <span class="ruby-ivar">@_routes</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-url_for">
+            
+              <b>url_for</b>(options = nil)
+            
+            <a href="../../../classes/ActionDispatch/Routing/UrlFor.html#method-i-url_for" name="method-i-url_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Generate a url based on the options provided, default_url_options and the
+routes defined in routes.rb. The following options are supported:</p>
+<ul><li>
+<p><code>:only_path</code> - If true, the relative url is returned. Defaults
+to <code>false</code>.</p>
+</li><li>
+<p><code>:protocol</code> - The protocol to connect to. Defaults to
+&#39;http&#39;.</p>
+</li><li>
+<p><code>:host</code> - Specifies the host the link should be targeted at. If
+<code>:only_path</code> is false, this option must be provided either
+explicitly, or via <code>default_url_options</code>.</p>
+</li><li>
+<p><code>:subdomain</code> - Specifies the subdomain of the link, using the
+<code>tld_length</code> to split the subdomain from the host. If false,
+removes all subdomains from the host part of the link.</p>
+</li><li>
+<p><code>:domain</code> - Specifies the domain of the link, using the
+<code>tld_length</code> to split the domain from the host.</p>
+</li><li>
+<p><code>:tld_length</code> - Number of labels the TLD id composed of, only
+used if <code>:subdomain</code> or <code>:domain</code> are supplied.
+Defaults to <code>ActionDispatch::Http::URL.tld_length</code>, which in
+turn defaults to 1.</p>
+</li><li>
+<p><code>:port</code> - Optionally specify the port to connect to.</p>
+</li><li>
+<p><code>:anchor</code> - An anchor name to be appended to the path.</p>
+</li><li>
+<p><code>:trailing_slash</code> - If true, adds a trailing slash, as in
+“/archive/2009/”</p>
+</li><li>
+<p><code>:script_name</code> - Specifies application path relative to domain
+root. If provided, prepends application path.</p>
+</li></ul>
+
+<p>Any other key (<code>:controller</code>, <code>:action</code>, etc.) given
+to <code>url_for</code> is forwarded to the Routes module.</p>
+
+<pre class="ruby"><span class="ruby-identifier">url_for</span> <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tasks&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;testing&#39;</span>, <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;somehost.org&#39;</span>, <span class="ruby-identifier">port</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;8080&#39;</span>
+<span class="ruby-comment"># =&gt; &#39;http://somehost.org:8080/tasks/testing&#39;</span>
+<span class="ruby-identifier">url_for</span> <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tasks&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;testing&#39;</span>, <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;somehost.org&#39;</span>, <span class="ruby-identifier">anchor</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;ok&#39;</span>, <span class="ruby-identifier">only_path</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># =&gt; &#39;/tasks/testing#ok&#39;</span>
+<span class="ruby-identifier">url_for</span> <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tasks&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;testing&#39;</span>, <span class="ruby-identifier">trailing_slash</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># =&gt; &#39;http://somehost.org/tasks/testing/&#39;</span>
+<span class="ruby-identifier">url_for</span> <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tasks&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;testing&#39;</span>, <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;somehost.org&#39;</span>, <span class="ruby-identifier">number</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;33&#39;</span>
+<span class="ruby-comment"># =&gt; &#39;http://somehost.org/tasks/testing?number=33&#39;</span>
+<span class="ruby-identifier">url_for</span> <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tasks&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;testing&#39;</span>, <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;somehost.org&#39;</span>, <span class="ruby-identifier">script_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;/myapp&quot;</span>
+<span class="ruby-comment"># =&gt; &#39;http://somehost.org/myapp/tasks/testing&#39;</span>
+<span class="ruby-identifier">url_for</span> <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;tasks&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;testing&#39;</span>, <span class="ruby-identifier">host</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;somehost.org&#39;</span>, <span class="ruby-identifier">script_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;/myapp&quot;</span>, <span class="ruby-identifier">only_path</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># =&gt; &#39;/myapp/tasks/testing&#39;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_for_source')" id="l_method-i-url_for_source">show</a>
+                
+              </p>
+              <div id="method-i-url_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_for</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">_routes</span>.<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">url_options</span>.<span class="ruby-identifier">symbolize_keys</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">_routes</span>.<span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">symbolize_keys</span>.<span class="ruby-identifier">reverse_merge!</span>(<span class="ruby-identifier">url_options</span>))
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">polymorphic_url</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-url_options">
+            
+              <b>url_options</b>()
+            
+            <a href="../../../classes/ActionDispatch/Routing/UrlFor.html#method-i-url_options" name="method-i-url_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Hook overridden in controller to add request information with
+`default_url_options`. Application logic should not go into url_options.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_options_source')" id="l_method-i-url_options_source">show</a>
+                
+              </p>
+              <div id="method-i-url_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_options</span>
+  <span class="ruby-identifier">default_url_options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_routes_context">
+            
+              <b>_routes_context</b>()
+            
+            <a href="../../../classes/ActionDispatch/Routing/UrlFor.html#method-i-_routes_context" name="method-i-_routes_context" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_routes_context_source')" id="l_method-i-_routes_context_source">show</a>
+                
+              </p>
+              <div id="method-i-_routes_context_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_routes_context</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-_with_routes">
+            
+              <b>_with_routes</b>(routes)
+            
+            <a href="../../../classes/ActionDispatch/Routing/UrlFor.html#method-i-_with_routes" name="method-i-_with_routes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_with_routes_source')" id="l_method-i-_with_routes_source">show</a>
+                
+              </p>
+              <div id="method-i-_with_routes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_with_routes</span>(<span class="ruby-identifier">routes</span>)
+  <span class="ruby-identifier">old_routes</span>, <span class="ruby-ivar">@_routes</span> = <span class="ruby-ivar">@_routes</span>, <span class="ruby-identifier">routes</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@_routes</span> = <span class="ruby-identifier">old_routes</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-optimize_routes_generation-3F">
+            
+              <b>optimize_routes_generation?</b>()
+            
+            <a href="../../../classes/ActionDispatch/Routing/UrlFor.html#method-i-optimize_routes_generation-3F" name="method-i-optimize_routes_generation-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-optimize_routes_generation-3F_source')" id="l_method-i-optimize_routes_generation-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-optimize_routes_generation-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">optimize_routes_generation?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@_optimized_routes</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@_optimized_routes</span>)
+  <span class="ruby-ivar">@_optimized_routes</span> = <span class="ruby-identifier">_routes</span>.<span class="ruby-identifier">optimize_routes_generation?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">default_url_options</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

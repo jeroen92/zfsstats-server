@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Base</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Base 
+            
+                <span class="parent">&lt; 
+                    
+                    Metal
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/base.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Action Controllers are the core of a web request in Rails. They are made up
+of one or more actions that are executed on request and then either render
+a template or redirect to another action. An action is defined as a public
+method on the controller, which will automatically be made accessible to
+the web-server through Rails Routes.</p>
+
+<p>By default, only the ApplicationController in a Rails application inherits
+from <code>ActionController::Base</code>. All other controllers in turn
+inherit from ApplicationController. This gives you one class to configure
+things such as request forgery protection and filtering of sensitive
+request parameters.</p>
+
+<p>A sample controller could look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+    <span class="ruby-ivar">@post</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">post</span>]
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">posts_path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Actions, by default, render a template in the <code>app/views</code>
+directory corresponding to the name of the controller and action after
+executing code in the action. For example, the <code>index</code> action of
+the PostsController would render the template
+<code>app/views/posts/index.html.erb</code> by default after populating the
+<code>@posts</code> instance variable.</p>
+
+<p>Unlike index, the create action will not render a template. After
+performing its main purpose (creating a new post), it initiates a redirect
+instead. This redirect works by returning an external “302 Moved” HTTP
+response that takes the user to the index action.</p>
+
+<p>These two methods represent the two basic action archetypes used in Action
+Controllers. Get-and-show and do-and-redirect. Most actions are variations
+on these themes.</p>
+
+<h2 id="label-Requests">Requests</h2>
+
+<p>For every request, the router determines the value of the
+<code>controller</code> and <code>action</code> keys. These determine which
+controller and action are called. The remaining request parameters, the
+session (if one is available), and the full request with all the HTTP
+headers are made available to the action through accessor methods. Then the
+action is performed.</p>
+
+<p>The full request object is available via the request accessor and is
+primarily used to query for HTTP headers:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">server_ip</span>
+  <span class="ruby-identifier">location</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;SERVER_ADDR&quot;</span>]
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;This server hosted at #{location}&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-Parameters"><a href="Parameters.html">Parameters</a></h2>
+
+<p>All request parameters, whether they come from a GET or POST request, or
+from the URL, are available through the params method which returns a hash.
+For example, an action that was performed through
+<code>/posts?category=All&amp;limit=5</code> will include <code>{
+&quot;category&quot; =&gt; &quot;All&quot;, &quot;limit&quot; =&gt;
+&quot;5&quot; }</code> in params.</p>
+
+<p>It&#39;s also possible to construct multi-dimensional parameter hashes by
+specifying keys using brackets, such as:</p>
+
+<pre>&lt;input type=&quot;text&quot; name=&quot;post[name]&quot; value=&quot;david&quot;&gt;
+&lt;input type=&quot;text&quot; name=&quot;post[address]&quot; value=&quot;hyacintvej&quot;&gt;</pre>
+
+<p>A request stemming from a form holding these inputs will include <code>{
+&quot;post&quot; =&gt; { &quot;name&quot; =&gt; &quot;david&quot;,
+&quot;address&quot; =&gt; &quot;hyacintvej&quot; } }</code>. If the address
+input had been named “<a href="http://address">post</a>[street]”, the
+params would have included <code>{ &quot;post&quot; =&gt; {
+&quot;address&quot; =&gt; { &quot;street&quot; =&gt; &quot;hyacintvej&quot;
+} } }</code>. There&#39;s no limit to the depth of the nesting.</p>
+
+<h2 id="label-Sessions">Sessions</h2>
+
+<p>Sessions allow you to store objects in between requests. This is useful for
+objects that are not yet ready to be persisted, such as a Signup object
+constructed in a multi-paged process, or objects that don&#39;t change much
+and are needed all the time, such as a User object for a system that
+requires login. The session should not be used, however, as a cache for
+objects where it&#39;s likely they could be changed unknowingly. It&#39;s
+usually too much work to keep it all synchronized – something databases
+already excel at.</p>
+
+<p>You can place objects in the session by using the <code>session</code>
+method, which accesses a hash:</p>
+
+<pre>session[:person] = Person.authenticate(user_name, password)</pre>
+
+<p>And retrieved again through the same hash:</p>
+
+<pre>Hello #{session[:person]}</pre>
+
+<p>For removing objects from the session, you can either assign a single key
+to <code>nil</code>:</p>
+
+<pre># removes :person from session
+session[:person] = nil</pre>
+
+<p>or you can remove the entire session with <code>reset_session</code>.</p>
+
+<p>Sessions are stored by default in a browser cookie that&#39;s
+cryptographically signed, but unencrypted. This prevents the user from
+tampering with the session but also allows him to see its contents.</p>
+
+<p>Do not put secret information in cookie-based sessions!</p>
+
+<h2 id="label-Responses">Responses</h2>
+
+<p>Each action results in a response, which holds the headers and document to
+be sent to the user&#39;s browser. The actual response object is generated
+automatically through the use of renders and redirects and requires no user
+intervention.</p>
+
+<h2 id="label-Renders">Renders</h2>
+
+<p>Action Controller sends content to the user by using one of five rendering
+methods. The most versatile and common is the rendering of a template.
+Included in the Action Pack is the Action View, which enables rendering of
+<a href="../ERB.html">ERB</a> templates. It&#39;s automatically configured.
+The controller passes objects to the view by assigning instance variables:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@post</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Which are then automatically available to the view:</p>
+
+<pre>Title: &lt;%= @post.title %&gt;</pre>
+
+<p>You don&#39;t have to rely on the automated rendering. For example, actions
+that could result in the rendering of different templates will use the
+manual rendering methods:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">search</span>
+  <span class="ruby-ivar">@results</span> = <span class="ruby-constant">Search</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">query</span>])
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@results</span>.<span class="ruby-identifier">count</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;no_results&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;show&quot;</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">10</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;show_many&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Read more about writing <a href="../ERB.html">ERB</a> and Builder templates
+in <a href="../ActionView/Base.html">ActionView::Base</a>.</p>
+
+<h2 id="label-Redirects">Redirects</h2>
+
+<p>Redirects are used to move from one action to another. For example, after a
+<code>create</code> action, which stores a blog entry to the database, we
+might like to show the user the new entry. Because we&#39;re following good
+DRY principles (Don&#39;t Repeat Yourself), we&#39;re going to reuse (and
+redirect to) a <code>show</code> action that we&#39;ll assume has already
+been created. The code might look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@entry</span> = <span class="ruby-constant">Entry</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">entry</span>])
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@entry</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-comment"># The entry was saved correctly, redirect to show</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;show&#39;</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@entry</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># things didn&#39;t go so well, do something else</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In this case, after saving our new entry to the database, the user is
+redirected to the <code>show</code> method, which is then executed. Note
+that this is an external HTTP-level redirection which will cause the
+browser to make a second request (a GET to the show action), and not some
+internal re-routing which calls both “create” and then “show” within one
+request.</p>
+
+<p>Learn more about <code>redirect_to</code> and what options you have in <a
+href="Redirecting.html">ActionController::Redirecting</a>.</p>
+
+<h2 id="label-Calling+multiple+redirects+or+renders">Calling multiple redirects or renders</h2>
+
+<p>An action may contain only a single render or a single redirect. Attempting
+to try to do either again will result in a DoubleRenderError:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">do_something</span>
+  <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;elsewhere&quot;</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;overthere&quot;</span> <span class="ruby-comment"># raises DoubleRenderError</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If you need to redirect on the condition of something, then be sure to add
+“and return” to halt execution.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">do_something</span>
+  <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;elsewhere&quot;</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">monkeys</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;overthere&quot;</span> <span class="ruby-comment"># won&#39;t be called if monkeys is nil</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-request">request</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-response">response</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-without_modules">without_modules</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">MODULES</td>
+            <td>=</td>
+            <td class="attr-value">[
+AbstractController::Layouts,
+AbstractController::Translation,
+AbstractController::AssetPaths,
+
+Helpers,
+HideActions,
+UrlFor,
+Redirecting,
+Rendering,
+Renderers::All,
+ConditionalGet,
+RackDelegation,
+Caching,
+MimeResponds,
+ImplicitRender,
+StrongParameters,
+
+Cookies,
+Flash,
+RequestForgeryProtection,
+ForceSSL,
+Streaming,
+DataStreaming,
+RecordIdentifier,
+HttpAuthentication::Basic::ControllerMethods,
+HttpAuthentication::Digest::ControllerMethods,
+HttpAuthentication::Token::ControllerMethods,
+
+# Before callbacks should also be executed the earliest as possible, so
+# also include them at the bottom.
+AbstractController::Callbacks,
+
+# Append rescue at the bottom to wrap as much as possible.
+Rescue,
+
+# Add instrumentations hooks at the bottom, to ensure they instrument
+# all the methods properly.
+Instrumentation,
+
+# Params wrapper should come before instrumentation so they are
+# properly showed in logs
+ParamsWrapper
+]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-without_modules">
+            
+              <b>without_modules</b>(*modules)
+            
+            <a href="../../classes/ActionController/Base.html#method-c-without_modules" name="method-c-without_modules" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut helper that returns all the modules included in <a
+href="Base.html">ActionController::Base</a> except the ones passed as
+arguments:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">MetalController</span>
+  <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">without_modules</span>(:<span class="ruby-constant">ParamsWrapper</span>, :<span class="ruby-constant">Streaming</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">left</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">include</span> <span class="ruby-identifier">left</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This gives better control over what you want to exclude and makes it easier
+to create a bare controller class, instead of listing the modules required
+manually.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-without_modules_source')" id="l_method-c-without_modules_source">show</a>
+                
+              </p>
+              <div id="method-c-without_modules_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/base.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">without_modules</span>(*<span class="ruby-identifier">modules</span>)
+  <span class="ruby-identifier">modules</span> = <span class="ruby-identifier">modules</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">m</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">ActionController</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">m</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">MODULES</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">modules</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-request">
+            
+              <b>request</b>
+            
+            <a href="../../classes/ActionController/Base.html#method-i-request" name="method-i-request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an <a
+href="../ActionDispatch/Request.html">ActionDispatch::Request</a> instance
+that represents the current request.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-request_source')" id="l_method-i-request_source">show</a>
+                
+              </p>
+              <div id="method-i-request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/base.rb, line 176</span>
+    </pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-response">
+            
+              <b>response</b>
+            
+            <a href="../../classes/ActionController/Base.html#method-i-response" name="method-i-response" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an <a
+href="../ActionDispatch/Response.html">ActionDispatch::Response</a> that
+represents the current response.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-response_source')" id="l_method-i-response_source">show</a>
+                
+              </p>
+              <div id="method-i-response_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/base.rb, line 182</span>
+    </pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Configurable::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Configurable::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/configurable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/configurable.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-config">config</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-config_accessor">config_accessor</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-configure">configure</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-config">
+            
+              <b>config</b>()
+            
+            <a href="../../../classes/ActiveSupport/Configurable/ClassMethods.html#method-i-config" name="method-i-config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-config_source')" id="l_method-i-config_source">show</a>
+                
+              </p>
+              <div id="method-i-config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/configurable.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">config</span>
+  <span class="ruby-ivar">@_config</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:superclass</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">superclass</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:config</span>)
+    <span class="ruby-identifier">superclass</span>.<span class="ruby-identifier">config</span>.<span class="ruby-identifier">inheritable_copy</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># create a new &quot;anonymous&quot; class that will host the compiled reader methods</span>
+    <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Configuration</span>).<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-config_accessor">
+            
+              <b>config_accessor</b>(*names)
+            
+            <a href="../../../classes/ActiveSupport/Configurable/ClassMethods.html#method-i-config_accessor" name="method-i-config_accessor" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows you to add shortcut so that you don&#39;t have to refer to attribute
+through config. Also look at the example for config to contrast.</p>
+
+<p>Defines both class and instance config accessors.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Configurable</span>
+  <span class="ruby-identifier">config_accessor</span> :<span class="ruby-identifier">allowed_access</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; false</span>
+
+<span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">allowed_access</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p>The attribute name must be a valid method name in Ruby.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Configurable</span>
+  <span class="ruby-identifier">config_accessor</span> :<span class="ruby-string">&quot;1_Badname&quot;</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; NameError: invalid config attribute name</span>
+</pre>
+
+<p>To opt out of the instance writer method, pass <code>instance_writer:
+false</code>. To opt out of the instance reader method, pass
+<code>instance_reader: false</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Configurable</span>
+  <span class="ruby-identifier">config_accessor</span> :<span class="ruby-identifier">allowed_access</span>, <span class="ruby-identifier">instance_reader</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>, <span class="ruby-identifier">instance_writer</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; false</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">allowed_access</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment"># =&gt; NoMethodError</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">allowed_access</span>        <span class="ruby-comment"># =&gt; NoMethodError</span>
+</pre>
+
+<p>Or pass <code>instance_accessor: false</code>, to opt out both instance
+methods.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Configurable</span>
+  <span class="ruby-identifier">config_accessor</span> :<span class="ruby-identifier">allowed_access</span>, <span class="ruby-identifier">instance_accessor</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">allowed_access</span> <span class="ruby-comment"># =&gt; false</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">allowed_access</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment"># =&gt; NoMethodError</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">allowed_access</span>        <span class="ruby-comment"># =&gt; NoMethodError</span>
+</pre>
+
+<p>Also you can pass a block to set up the attribute with a default value.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Configurable</span>
+  <span class="ruby-identifier">config_accessor</span> :<span class="ruby-identifier">hair_colors</span> <span class="ruby-keyword">do</span>
+    [:<span class="ruby-identifier">brown</span>, :<span class="ruby-identifier">black</span>, :<span class="ruby-identifier">blonde</span>, :<span class="ruby-identifier">red</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">hair_colors</span> <span class="ruby-comment"># =&gt; [:brown, :black, :blonde, :red]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-config_accessor_source')" id="l_method-i-config_accessor_source">show</a>
+                
+              </p>
+              <div id="method-i-config_accessor_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/configurable.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">config_accessor</span>(*<span class="ruby-identifier">names</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">names</span>.<span class="ruby-identifier">extract_options!</span>
+
+  <span class="ruby-identifier">names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;invalid config attribute name&#39;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^[_A-Za-z]\w*$/</span>
+
+    <span class="ruby-identifier">reader</span>, <span class="ruby-identifier">reader_line</span> = <span class="ruby-node">&quot;def #{name}; config.#{name}; end&quot;</span>, <span class="ruby-keyword">__LINE__</span>
+    <span class="ruby-identifier">writer</span>, <span class="ruby-identifier">writer_line</span> = <span class="ruby-node">&quot;def #{name}=(value); config.#{name} = value; end&quot;</span>, <span class="ruby-keyword">__LINE__</span>
+
+    <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">reader</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-identifier">reader_line</span>
+    <span class="ruby-identifier">singleton_class</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">writer</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-identifier">writer_line</span>
+
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:instance_accessor</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">reader</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-identifier">reader_line</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:instance_reader</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+      <span class="ruby-identifier">class_eval</span> <span class="ruby-identifier">writer</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-identifier">writer_line</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:instance_writer</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{name}=&quot;</span>, <span class="ruby-keyword">yield</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-configure">
+            
+              <b>configure</b>()
+            
+            <a href="../../../classes/ActiveSupport/Configurable/ClassMethods.html#method-i-configure" name="method-i-configure" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-configure_source')" id="l_method-i-configure_source">show</a>
+                
+              </p>
+              <div id="method-i-configure_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/configurable.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">configure</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">config</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

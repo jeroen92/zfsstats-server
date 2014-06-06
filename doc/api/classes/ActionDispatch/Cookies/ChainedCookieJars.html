@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Cookies::ChainedCookieJars</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Cookies::ChainedCookieJars 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/middleware/cookies_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/cookies.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Include in a cookie jar to allow chaining, e.g. cookies.permanent.signed</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encrypted">encrypted</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-permanent">permanent</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-signed">signed</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-signed_or_encrypted">signed_or_encrypted</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-encrypted">
+            
+              <b>encrypted</b>()
+            
+            <a href="../../../classes/ActionDispatch/Cookies/ChainedCookieJars.html#method-i-encrypted" name="method-i-encrypted" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a jar that&#39;ll automatically encrypt cookie values before
+sending them to the client and will decrypt them for read. If the cookie
+was tampered with by the user (or a 3rd party), nil will be returned.</p>
+
+<p>If <code>config.secret_key_base</code> and <code>config.secret_token</code>
+(deprecated) are both set, legacy cookies signed with the old key generator
+will be transparently upgraded.</p>
+
+<p>This jar requires that you set a suitable secret for the verification on
+your app&#39;s <code>config.secret_key_base</code>.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">encrypted</span>[:<span class="ruby-identifier">discount</span>] = <span class="ruby-value">45</span>
+<span class="ruby-comment"># =&gt; Set-Cookie: discount=ZS9ZZ1R4cG1pcUJ1bm80anhQang3dz09LS1mbDZDSU5scGdOT3ltQ2dTdlhSdWpRPT0%3D--ab54663c9f4e3bc340c790d6d2b71e92f5b60315; path=/</span>
+
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">encrypted</span>[:<span class="ruby-identifier">discount</span>] <span class="ruby-comment"># =&gt; 45</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encrypted_source')" id="l_method-i-encrypted_source">show</a>
+                
+              </p>
+              <div id="method-i-encrypted_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/cookies.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encrypted</span>
+  <span class="ruby-ivar">@encrypted</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:upgrade_legacy_signed_cookies</span>]
+      <span class="ruby-constant">UpgradeLegacyEncryptedCookieJar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@key_generator</span>, <span class="ruby-ivar">@options</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">EncryptedCookieJar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@key_generator</span>, <span class="ruby-ivar">@options</span>)
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-permanent">
+            
+              <b>permanent</b>()
+            
+            <a href="../../../classes/ActionDispatch/Cookies/ChainedCookieJars.html#method-i-permanent" name="method-i-permanent" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a jar that&#39;ll automatically set the assigned cookies to have an
+expiration date 20 years from now. Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">permanent</span>[:<span class="ruby-identifier">prefers_open_id</span>] = <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># =&gt; Set-Cookie: prefers_open_id=true; path=/; expires=Sun, 16-Dec-2029 03:24:16 GMT</span>
+</pre>
+
+<p>This jar is only meant for writing. You&#39;ll read permanent cookies
+through the regular accessor.</p>
+
+<p>This jar allows chaining with the signed jar as well, so you can set
+permanent, signed cookies. Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">permanent</span>.<span class="ruby-identifier">signed</span>[:<span class="ruby-identifier">remember_me</span>] = <span class="ruby-identifier">current_user</span>.<span class="ruby-identifier">id</span>
+<span class="ruby-comment"># =&gt; Set-Cookie: remember_me=BAhU--848956038e692d7046deab32b7131856ab20e14e; path=/; expires=Sun, 16-Dec-2029 03:24:16 GMT</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-permanent_source')" id="l_method-i-permanent_source">show</a>
+                
+              </p>
+              <div id="method-i-permanent_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/cookies.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">permanent</span>
+  <span class="ruby-ivar">@permanent</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">PermanentCookieJar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@key_generator</span>, <span class="ruby-ivar">@options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-signed">
+            
+              <b>signed</b>()
+            
+            <a href="../../../classes/ActionDispatch/Cookies/ChainedCookieJars.html#method-i-signed" name="method-i-signed" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a jar that&#39;ll automatically generate a signed representation of
+cookie value and verify it when reading from the cookie again. This is
+useful for creating cookies with values that the user is not supposed to
+change. If a signed cookie was tampered with by the user (or a 3rd party),
+nil will be returned.</p>
+
+<p>If <code>config.secret_key_base</code> and <code>config.secret_token</code>
+(deprecated) are both set, legacy cookies signed with the old key generator
+will be transparently upgraded.</p>
+
+<p>This jar requires that you set a suitable secret for the verification on
+your app&#39;s <code>config.secret_key_base</code>.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>[:<span class="ruby-identifier">discount</span>] = <span class="ruby-value">45</span>
+<span class="ruby-comment"># =&gt; Set-Cookie: discount=BAhpMg==--2c1c6906c90a3bc4fd54a51ffb41dffa4bf6b5f7; path=/</span>
+
+<span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">signed</span>[:<span class="ruby-identifier">discount</span>] <span class="ruby-comment"># =&gt; 45</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-signed_source')" id="l_method-i-signed_source">show</a>
+                
+              </p>
+              <div id="method-i-signed_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/cookies.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">signed</span>
+  <span class="ruby-ivar">@signed</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:upgrade_legacy_signed_cookies</span>]
+      <span class="ruby-constant">UpgradeLegacySignedCookieJar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@key_generator</span>, <span class="ruby-ivar">@options</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">SignedCookieJar</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@key_generator</span>, <span class="ruby-ivar">@options</span>)
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-signed_or_encrypted">
+            
+              <b>signed_or_encrypted</b>()
+            
+            <a href="../../../classes/ActionDispatch/Cookies/ChainedCookieJars.html#method-i-signed_or_encrypted" name="method-i-signed_or_encrypted" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the <code>signed</code> or +encrypted jar, preferring
+<code>encrypted</code> if <code>secret_key_base</code> is set. Used by <a
+href="../Session/CookieStore.html">ActionDispatch::Session::CookieStore</a>
+to avoid the need to introduce new cookie stores.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-signed_or_encrypted_source')" id="l_method-i-signed_or_encrypted_source">show</a>
+                
+              </p>
+              <div id="method-i-signed_or_encrypted_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/cookies.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">signed_or_encrypted</span>
+  <span class="ruby-ivar">@signed_or_encrypted</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:secret_key_base</span>].<span class="ruby-identifier">present?</span>
+      <span class="ruby-identifier">encrypted</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">signed</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

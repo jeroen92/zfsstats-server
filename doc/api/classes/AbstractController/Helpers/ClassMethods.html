@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AbstractController::Helpers::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            AbstractController::Helpers::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/abstract_controller/helpers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/helpers.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ClassMethods/MissingHelperError.html">AbstractController::Helpers::ClassMethods::MissingHelperError</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear_helpers">clear_helpers</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-helper">helper</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-helper_method">helper_method</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inherited">inherited</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-modules_for_helpers">modules_for_helpers</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-clear_helpers">
+            
+              <b>clear_helpers</b>()
+            
+            <a href="../../../classes/AbstractController/Helpers/ClassMethods.html#method-i-clear_helpers" name="method-i-clear_helpers" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clears up all existing helpers in this class, only keeping the helper with
+the same name as this class.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_helpers_source')" id="l_method-i-clear_helpers_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_helpers_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/helpers.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear_helpers</span>
+  <span class="ruby-identifier">inherited_helper_methods</span> = <span class="ruby-identifier">_helper_methods</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_helpers</span> = <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_helper_methods</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">inherited_helper_methods</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">meth</span><span class="ruby-operator">|</span> <span class="ruby-identifier">helper_method</span> <span class="ruby-identifier">meth</span> }
+  <span class="ruby-identifier">default_helper_module!</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">anonymous?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-helper">
+            
+              <b>helper</b>(*args, &amp;block)
+            
+            <a href="../../../classes/AbstractController/Helpers/ClassMethods.html#method-i-helper" name="method-i-helper" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The <code>helper</code> class method can take a series of helper module
+names, a block, or both.</p>
+
+<h4 id="method-i-helper-label-Options">Options</h4>
+<ul><li>
+<p><code>*args</code> - <a href="../../Module.html">Module</a>, <a
+href="../../Symbol.html">Symbol</a>, <a href="../../String.html">String</a></p>
+</li><li>
+<p><code>block</code> - A block defining helper methods</p>
+</li></ul>
+
+<p>When the argument is a module it will be included directly in the template
+class.</p>
+
+<pre class="ruby"><span class="ruby-identifier">helper</span> <span class="ruby-constant">FooHelper</span> <span class="ruby-comment"># =&gt; includes FooHelper</span>
+</pre>
+
+<p>When the argument is a string or symbol, the method will provide the
+“_helper” suffix, require the file and include the module in the template
+class. The second form illustrates how to include custom helpers when
+working with namespaced controllers, or other cases where the file
+containing the helper definition is not in one of Rails&#39; standard load
+paths:</p>
+
+<pre class="ruby"><span class="ruby-identifier">helper</span> :<span class="ruby-identifier">foo</span>             <span class="ruby-comment"># =&gt; requires &#39;foo_helper&#39; and includes FooHelper</span>
+<span class="ruby-identifier">helper</span> <span class="ruby-string">&#39;resources/foo&#39;</span>  <span class="ruby-comment"># =&gt; requires &#39;resources/foo_helper&#39; and includes Resources::FooHelper</span>
+</pre>
+
+<p>Additionally, the <code>helper</code> class method can receive and evaluate
+a block, making the methods defined available to the template.</p>
+
+<pre class="ruby"><span class="ruby-comment"># One line</span>
+<span class="ruby-identifier">helper</span> { <span class="ruby-keyword">def</span> <span class="ruby-identifier">hello</span>() <span class="ruby-string">&quot;Hello, world!&quot;</span> <span class="ruby-keyword">end</span> }
+
+<span class="ruby-comment"># Multi-line</span>
+<span class="ruby-identifier">helper</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">foo</span>(<span class="ruby-identifier">bar</span>)
+    <span class="ruby-node">&quot;#{bar} is the very best&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Finally, all the above styles can be mixed together, and the
+<code>helper</code> method can be invoked with a mix of
+<code>symbols</code>, <code>strings</code>, <code>modules</code> and
+blocks.</p>
+
+<pre class="ruby"><span class="ruby-identifier">helper</span>(:<span class="ruby-identifier">three</span>, <span class="ruby-constant">BlindHelper</span>) { <span class="ruby-keyword">def</span> <span class="ruby-identifier">mice</span>() <span class="ruby-string">&#39;mice&#39;</span> <span class="ruby-keyword">end</span> }
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-helper_source')" id="l_method-i-helper_source">show</a>
+                
+              </p>
+              <div id="method-i-helper_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/helpers.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">helper</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">modules_for_helpers</span>(<span class="ruby-identifier">args</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">add_template_helper</span>(<span class="ruby-identifier">mod</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">_helpers</span>.<span class="ruby-identifier">module_eval</span>(&amp;<span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-helper_method">
+            
+              <b>helper_method</b>(*meths)
+            
+            <a href="../../../classes/AbstractController/Helpers/ClassMethods.html#method-i-helper_method" name="method-i-helper_method" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Declare a controller method as a helper. For example, the following makes
+the <code>current_user</code> controller method available to the view:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">helper_method</span> :<span class="ruby-identifier">current_user</span>, :<span class="ruby-identifier">logged_in?</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">current_user</span>
+    <span class="ruby-ivar">@current_user</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">User</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">session</span>[:<span class="ruby-identifier">user</span>])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">logged_in?</span>
+    <span class="ruby-identifier">current_user</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In a view:</p>
+
+<pre>&lt;% if logged_in? -%&gt;Welcome, &lt;%= current_user.name %&gt;&lt;% end -%&gt;</pre>
+
+<h4 id="method-i-helper_method-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>method[, method]</code> - A name or names of a method on the
+controller to be made available on the view.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-helper_method_source')" id="l_method-i-helper_method_source">show</a>
+                
+              </p>
+              <div id="method-i-helper_method_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/helpers.rb, line 46</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">helper_method</span>(*<span class="ruby-identifier">meths</span>)
+        <span class="ruby-identifier">meths</span>.<span class="ruby-identifier">flatten!</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_helper_methods</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">meths</span>
+
+        <span class="ruby-identifier">meths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">meth</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">_helpers</span>.<span class="ruby-identifier">class_eval</span> <span class="ruby-string">&quot;            def #{meth}(*args, &amp;blk)                               # def current_user(*args, &amp;blk)
+              controller.send(%(#{meth}), *args, &amp;blk)             #   controller.send(:current_user, *args, &amp;blk)
+            end                                                    # end
+&quot;</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inherited">
+            
+              <b>inherited</b>(klass)
+            
+            <a href="../../../classes/AbstractController/Helpers/ClassMethods.html#method-i-inherited" name="method-i-inherited" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>When a class is inherited, wrap its helper module in a new module. This
+ensures that the parent class&#39;s module can be changed independently of
+the child class&#39;s.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inherited_source')" id="l_method-i-inherited_source">show</a>
+                
+              </p>
+              <div id="method-i-inherited_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/helpers.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inherited</span>(<span class="ruby-identifier">klass</span>)
+  <span class="ruby-identifier">helpers</span> = <span class="ruby-identifier">_helpers</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">_helpers</span> = <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span> { <span class="ruby-identifier">include</span> <span class="ruby-identifier">helpers</span> }
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">class_eval</span> { <span class="ruby-identifier">default_helper_module!</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">anonymous?</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-modules_for_helpers">
+            
+              <b>modules_for_helpers</b>(args)
+            
+            <a href="../../../classes/AbstractController/Helpers/ClassMethods.html#method-i-modules_for_helpers" name="method-i-modules_for_helpers" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a list of modules, normalized from the acceptable kinds of helpers
+with the following behavior:</p>
+<dl class="rdoc-list note-list"><dt><a href="../../String.html">String</a> or <a href="../../Symbol.html">Symbol</a>
+<dd>
+<p>:FooBar or “FooBar” becomes “foo_bar_helper”,</p>
+</dd></dl>
+
+<p>and “foo_bar_helper.rb” is loaded using require_dependency.</p>
+<dl class="rdoc-list note-list"><dt><a href="../../Module.html">Module</a>
+<dd>
+<p>No further processing</p>
+</dd></dl>
+
+<p>After loading the appropriate files, the corresponding modules are
+returned.</p>
+
+<h4 id="method-i-modules_for_helpers-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>args</code> - An array of helpers</p>
+</li></ul>
+
+<h4 id="method-i-modules_for_helpers-label-Returns">Returns</h4>
+<ul><li>
+<p><code>Array</code> - A normalized list of modules for the list of helpers
+provided.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-modules_for_helpers_source')" id="l_method-i-modules_for_helpers_source">show</a>
+                
+              </p>
+              <div id="method-i-modules_for_helpers_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/helpers.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">modules_for_helpers</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arg</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">arg</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+      <span class="ruby-identifier">file_name</span> = <span class="ruby-node">&quot;#{arg.to_s.underscore}_helper&quot;</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-identifier">require_dependency</span>(<span class="ruby-identifier">file_name</span>)
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">MissingHelperError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">file_name</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">file_name</span>.<span class="ruby-identifier">camelize</span>.<span class="ruby-identifier">constantize</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Module</span>
+      <span class="ruby-identifier">arg</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;helper must be a String, Symbol, or Module&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

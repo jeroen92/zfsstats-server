@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionMailer::TestCase::Behavior::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionMailer::TestCase::Behavior::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionmailer-4_0_0/lib/action_mailer/test_case_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionmailer-4.0.0/lib/action_mailer/test_case.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-determine_default_mailer">determine_default_mailer</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-mailer_class">mailer_class</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-tests">tests</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-determine_default_mailer">
+            
+              <b>determine_default_mailer</b>(name)
+            
+            <a href="../../../../classes/ActionMailer/TestCase/Behavior/ClassMethods.html#method-i-determine_default_mailer" name="method-i-determine_default_mailer" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-determine_default_mailer_source')" id="l_method-i-determine_default_mailer_source">show</a>
+                
+              </p>
+              <div id="method-i-determine_default_mailer_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionmailer-4.0.0/lib/action_mailer/test_case.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">determine_default_mailer</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">mailer</span> = <span class="ruby-identifier">determine_constant_from_test_name</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">constant</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Class</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">constant</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">constant</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionMailer</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NonInferrableMailerError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">mailer</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">mailer</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-mailer_class">
+            
+              <b>mailer_class</b>()
+            
+            <a href="../../../../classes/ActionMailer/TestCase/Behavior/ClassMethods.html#method-i-mailer_class" name="method-i-mailer_class" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-mailer_class_source')" id="l_method-i-mailer_class_source">show</a>
+                
+              </p>
+              <div id="method-i-mailer_class_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionmailer-4.0.0/lib/action_mailer/test_case.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mailer_class</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">mailer</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_mailer_class</span>
+    <span class="ruby-identifier">mailer</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">tests</span> <span class="ruby-identifier">determine_default_mailer</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tests">
+            
+              <b>tests</b>(mailer)
+            
+            <a href="../../../../classes/ActionMailer/TestCase/Behavior/ClassMethods.html#method-i-tests" name="method-i-tests" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tests_source')" id="l_method-i-tests_source">show</a>
+                
+              </p>
+              <div id="method-i-tests_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionmailer-4.0.0/lib/action_mailer/test_case.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tests</span>(<span class="ruby-identifier">mailer</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">mailer</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_mailer_class</span> = <span class="ruby-identifier">mailer</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span>.<span class="ruby-identifier">constantize</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Module</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">_mailer_class</span> = <span class="ruby-identifier">mailer</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NonInferrableMailerError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">mailer</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

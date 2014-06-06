@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/connection_pool_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/database_limits_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_limits.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/database_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/query_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/quoting_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/quoting.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_definitions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_dumper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_dumper.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_statements.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/transaction_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/transaction.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract_mysql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract_mysql_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/column_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/column.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/connection_specification_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/connection_specification.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql2_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql2_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/array_parser_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/array_parser.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/database_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/database_statements.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/oid_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/oid.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/quoting_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/referential_integrity_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/referential_integrity.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/schema_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/schema_statements.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/schema_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/sqlite3_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/sqlite3_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/statement_pool_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/statement_pool.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConnectionAdapters/ColumnDumper.html">ActiveRecord::ConnectionAdapters::ColumnDumper</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConnectionAdapters/DatabaseLimits.html">ActiveRecord::ConnectionAdapters::DatabaseLimits</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConnectionAdapters/DatabaseStatements.html">ActiveRecord::ConnectionAdapters::DatabaseStatements</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConnectionAdapters/QueryCache.html">ActiveRecord::ConnectionAdapters::QueryCache</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConnectionAdapters/Quoting.html">ActiveRecord::ConnectionAdapters::Quoting</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConnectionAdapters/SchemaStatements.html">ActiveRecord::ConnectionAdapters::SchemaStatements</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/AbstractAdapter.html">ActiveRecord::ConnectionAdapters::AbstractAdapter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/AbstractMysqlAdapter.html">ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/Column.html">ActiveRecord::ConnectionAdapters::Column</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/ConnectionHandler.html">ActiveRecord::ConnectionAdapters::ConnectionHandler</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/ConnectionManagement.html">ActiveRecord::ConnectionAdapters::ConnectionManagement</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/ConnectionPool.html">ActiveRecord::ConnectionAdapters::ConnectionPool</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/Mysql2Adapter.html">ActiveRecord::ConnectionAdapters::Mysql2Adapter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/MysqlAdapter.html">ActiveRecord::ConnectionAdapters::MysqlAdapter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/PostgreSQLAdapter.html">ActiveRecord::ConnectionAdapters::PostgreSQLAdapter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/PostgreSQLColumn.html">ActiveRecord::ConnectionAdapters::PostgreSQLColumn</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/SQLite3Adapter.html">ActiveRecord::ConnectionAdapters::SQLite3Adapter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/SchemaCache.html">ActiveRecord::ConnectionAdapters::SchemaCache</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/StatementPool.html">ActiveRecord::ConnectionAdapters::StatementPool</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/Table.html">ActiveRecord::ConnectionAdapters::Table</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/TableDefinition.html">ActiveRecord::ConnectionAdapters::TableDefinition</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ConnectionAdapters/TransactionState.html">ActiveRecord::ConnectionAdapters::TransactionState</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

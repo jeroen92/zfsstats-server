@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Streaming</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Streaming 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/streaming_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/streaming.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Allows views to be streamed back to the client as they are rendered.</p>
+
+<p>The default way <a href="../Rails.html">Rails</a> renders views is by first
+rendering the template and then the layout. The response is sent to the
+client after the whole template is rendered, all queries are made, and the
+layout is processed.</p>
+
+<p><a href="Streaming.html">Streaming</a> inverts the rendering flow by
+rendering the layout first and streaming each part of the layout as they
+are processed. This allows the header of the <a
+href="../HTML.html">HTML</a> (which is usually in the layout) to be
+streamed back to client very quickly, allowing JavaScripts and stylesheets
+to be loaded earlier than usual.</p>
+
+<p>This approach was introduced in <a href="../Rails.html">Rails</a> 3.1 and
+is still improving. Several Rack middlewares may not work and you need to
+be careful when streaming. Those points are going to be addressed soon.</p>
+
+<p>In order to use streaming, you will need to use a Ruby version that
+supports fibers (fibers are supported since version 1.9.2 of the main Ruby
+implementation).</p>
+
+<p><a href="Streaming.html">Streaming</a> can be added to a given template
+easily, all you need to do is to pass the :stream option.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">stream</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-When+to+use+streaming">When to use streaming</h2>
+
+<p><a href="Streaming.html">Streaming</a> may be considered to be overkill for
+lightweight actions like <code>new</code> or <code>edit</code>. The real
+benefit of streaming is on expensive actions that, for example, do a lot of
+queries on the database.</p>
+
+<p>In such actions, you want to delay queries execution as much as you can.
+For example, imagine the following <code>dashboard</code> action:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">dashboard</span>
+  <span class="ruby-ivar">@posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@pages</span> = <span class="ruby-constant">Page</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@articles</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Most of the queries here are happening in the controller. In order to
+benefit from streaming you would want to rewrite it as:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">dashboard</span>
+  <span class="ruby-comment"># Allow lazy execution of the queries</span>
+  <span class="ruby-ivar">@posts</span> = <span class="ruby-constant">Post</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@pages</span> = <span class="ruby-constant">Page</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-ivar">@articles</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">stream</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Notice that :stream only works with templates. <a
+href="Rendering.html">Rendering</a> :json or :xml with :stream won&#39;t
+work.</p>
+
+<h2 id="label-Communication+between+layout+and+template">Communication between layout and template</h2>
+
+<p>When streaming, rendering happens top-down instead of inside-out. <a
+href="../Rails.html">Rails</a> starts with the layout, and the template is
+rendered later, when its <code>yield</code> is reached.</p>
+
+<p>This means that, if your application currently relies on instance variables
+set in the template to be used in the layout, they won&#39;t work once you
+move to streaming. The proper way to communicate between layout and
+template, regardless of whether you use streaming or not, is by using
+<code>content_for</code>, <code>provide</code> and <code>yield</code>.</p>
+
+<p>Take a simple example where the layout expects the template to tell which
+title to use:</p>
+
+<pre>&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;&lt;%= yield :title %&gt;&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;&lt;%= yield %&gt;&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>You would use <code>content_for</code> in your template to specify the
+title:</p>
+
+<pre>&lt;%= content_for :title, &quot;Main&quot; %&gt;
+Hello</pre>
+
+<p>And the final result would be:</p>
+
+<pre>&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;Main&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;Hello&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>However, if <code>content_for</code> is called several times, the final
+result would have all calls concatenated. For instance, if we have the
+following template:</p>
+
+<pre>&lt;%= content_for :title, &quot;Main&quot; %&gt;
+Hello
+&lt;%= content_for :title, &quot; page&quot; %&gt;</pre>
+
+<p>The final result would be:</p>
+
+<pre>&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;Main page&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;Hello&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>This means that, if you have <code>yield :title</code> in your layout and
+you want to use streaming, you would have to render the whole template (and
+eventually trigger all queries) before streaming the title and all assets,
+which kills the purpose of streaming. For this reason <a
+href="../Rails.html">Rails</a> 3.1 introduces a new helper called
+<code>provide</code> that does the same as <code>content_for</code> but
+tells the layout to stop searching for other entries and continue
+rendering.</p>
+
+<p>For instance, the template above using <code>provide</code> would be:</p>
+
+<pre>&lt;%= provide :title, &quot;Main&quot; %&gt;
+Hello
+&lt;%= content_for :title, &quot; page&quot; %&gt;</pre>
+
+<p>Giving:</p>
+
+<pre>&lt;html&gt;
+  &lt;head&gt;&lt;title&gt;Main&lt;/title&gt;&lt;/head&gt;
+  &lt;body&gt;Hello&lt;/body&gt;
+&lt;/html&gt;</pre>
+
+<p>That said, when streaming, you need to properly check your templates and
+choose when to use <code>provide</code> and <code>content_for</code>.</p>
+
+<h2 id="label-Headers%2C+cookies%2C+session+and+flash">Headers, cookies, session and flash</h2>
+
+<p>When streaming, the HTTP headers are sent to the client right before it
+renders the first line. This means that, modifying headers, cookies,
+session or flash after the template starts rendering will not propagate to
+the client.</p>
+
+<h2 id="label-Middlewares">Middlewares</h2>
+
+<p>Middlewares that need to manipulate the body won&#39;t work with streaming.
+You should disable those middlewares whenever streaming in development or
+production. For instance, <code>Rack::Bug</code> won&#39;t work when
+streaming as it needs to inject contents in the <a
+href="../HTML.html">HTML</a> body.</p>
+
+<p>Also <code>Rack::Cache</code> won&#39;t work with streaming as it does not
+support streaming bodies yet. Whenever streaming Cache-Control is
+automatically set to “no-cache”.</p>
+
+<h2 id="label-Errors">Errors</h2>
+
+<p>When it comes to streaming, exceptions get a bit more complicated. This
+happens because part of the template was already rendered and streamed to
+the client, making it impossible to render a whole exception page.</p>
+
+<p>Currently, when an exception happens in development or production, <a
+href="../Rails.html">Rails</a> will automatically stream to the client:</p>
+
+<pre>&quot;&gt;&lt;script&gt;window.location = &quot;/500.html&quot;&lt;/script&gt;&lt;/html&gt;</pre>
+
+<p>The first two characters (“&gt;) are required in case the exception happens
+while rendering attributes for a given tag. You can check the real cause
+for the exception in your logger.</p>
+
+<h2 id="label-Web+server+support">Web server support</h2>
+
+<p>Not all web servers support streaming out-of-the-box. You need to check the
+instructions for each of them.</p>
+
+<h4 id="label-Unicorn">Unicorn</h4>
+
+<p>Unicorn supports streaming but it needs to be configured. For this, you
+need to create a config file as follow:</p>
+
+<pre># unicorn.config.rb
+listen 3000, tcp_nopush: false</pre>
+
+<p>And use it on initialization:</p>
+
+<pre>unicorn_rails --config-file unicorn.config.rb</pre>
+
+<p>You may also want to configure other parameters like
+<code>:tcp_nodelay</code>. Please check its documentation for more
+information: <a
+href="http://unicorn.bogomips.org/Unicorn/Configurator.html#method-i-listen">unicorn.bogomips.org/Unicorn/Configurator.html#method-i-listen</a></p>
+
+<p>If you are using Unicorn with Nginx, you may need to tweak Nginx. <a
+href="Streaming.html">Streaming</a> should work out of the box on Rainbows.</p>
+
+<h4 id="label-Passenger">Passenger</h4>
+
+<p>To be described.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../AbstractController/Rendering.html">
+              AbstractController::Rendering
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

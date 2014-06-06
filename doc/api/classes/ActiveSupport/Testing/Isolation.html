@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Testing::Isolation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::Isolation 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/testing/isolation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/isolation.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Isolation/Forking.html">ActiveSupport::Testing::Isolation::Forking</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Isolation/Subprocess.html">ActiveSupport::Testing::Isolation::Subprocess</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_run_class_setup">_run_class_setup</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-forking_env-3F">forking_env?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-run">run</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-test_methods">test_methods</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-forking_env-3F">
+            
+              <b>forking_env?</b>()
+            
+            <a href="../../../classes/ActiveSupport/Testing/Isolation.html#method-c-forking_env-3F" name="method-c-forking_env-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-forking_env-3F_source')" id="l_method-c-forking_env-3F_source">show</a>
+                
+              </p>
+              <div id="method-c-forking_env-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/isolation.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">forking_env?</span>
+  <span class="ruby-operator">!</span><span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;NO_FORK&quot;</span>] <span class="ruby-operator">&amp;&amp;</span> ((<span class="ruby-constant">RbConfig</span><span class="ruby-operator">::</span><span class="ruby-constant">CONFIG</span>[<span class="ruby-string">&#39;host_os&#39;</span>] <span class="ruby-operator">!~</span> <span class="ruby-regexp">/mswin|mingw/</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/java/</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_run_class_setup">
+            
+              <b>_run_class_setup</b>()
+            
+            <a href="../../../classes/ActiveSupport/Testing/Isolation.html#method-i-_run_class_setup" name="method-i-_run_class_setup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_run_class_setup_source')" id="l_method-i-_run_class_setup_source">show</a>
+                
+              </p>
+              <div id="method-i-_run_class_setup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/isolation.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_run_class_setup</span>      <span class="ruby-comment"># class setup method should only happen in parent</span>
+  <span class="ruby-identifier">@@class_setup_mutex</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-identifier">@@ran_class_setup</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;ISOLATION_TEST&#39;</span>]
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">setup</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:setup</span>)
+      <span class="ruby-identifier">@@ran_class_setup</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-run">
+            
+              <b>run</b>(runner)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Isolation.html#method-i-run" name="method-i-run" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-run_source')" id="l_method-i-run_source">show</a>
+                
+              </p>
+              <div id="method-i-run_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/isolation.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">run</span>(<span class="ruby-identifier">runner</span>)
+  <span class="ruby-identifier">_run_class_setup</span>
+
+  <span class="ruby-identifier">serialized</span> = <span class="ruby-identifier">run_in_isolation</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">isolated_runner</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">isolated_runner</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">retval</span>, <span class="ruby-identifier">proxy</span> = <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">serialized</span>)
+  <span class="ruby-identifier">proxy</span>.<span class="ruby-identifier">__replay__</span>(<span class="ruby-identifier">runner</span>)
+  <span class="ruby-identifier">retval</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-test_methods">
+            
+              <b>test_methods</b>()
+            
+            <a href="../../../classes/ActiveSupport/Testing/Isolation.html#method-i-test_methods" name="method-i-test_methods" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-test_methods_source')" id="l_method-i-test_methods_source">show</a>
+                
+              </p>
+              <div id="method-i-test_methods_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/isolation.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">test_methods</span>
+  <span class="ruby-constant">ParallelEach</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

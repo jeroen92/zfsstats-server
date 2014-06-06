@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::JSON</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::JSON 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/json/decoding_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/decoding.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/json/encoding_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/json/variable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/variable.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="JSON/Encoding.html">ActiveSupport::JSON::Encoding</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="JSON/Variable.html">ActiveSupport::JSON::Variable</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-backend">backend</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-backend-3D">backend=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-decode">decode</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-encode">encode</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-engine">engine</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-engine-3D">engine=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-parse_error">parse_error</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-with_backend">with_backend</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DATE_REGEX</td>
+            <td>=</td>
+            <td class="attr-value">/^(?:\d{4}-\d{2}-\d{2}|\d{4}-\d{1,2}-\d{1,2}[T \t]+\d{1,2}:\d{2}:\d{2}(\.[0-9]*)?(([ \t]*)Z|[-+]\d{2}?(:\d{2})?))$/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>matches YAML-formatted dates</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-backend">
+            
+              <b>backend</b>()
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-backend" name="method-c-backend" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-backend-3D">
+            
+              <b>backend=</b>(name)
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-backend-3D" name="method-c-backend-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-decode">
+            
+              <b>decode</b>(json, options ={})
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-decode" name="method-c-decode" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Parses a <a href="JSON.html">JSON</a> string (JavaScript <a
+href="../Object.html">Object</a> Notation) into a hash. See <a
+href="http://www.json.org">www.json.org</a> for more info.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-string">&quot;{\&quot;team\&quot;:\&quot;rails\&quot;,\&quot;players\&quot;:\&quot;36\&quot;}&quot;</span>)
+=<span class="ruby-operator">&gt;</span> {<span class="ruby-string">&quot;team&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;rails&quot;</span>, <span class="ruby-string">&quot;players&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;36&quot;</span>}
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-decode_source')" id="l_method-c-decode_source">show</a>
+                
+              </p>
+              <div id="method-c-decode_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/decoding.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">decode</span>(<span class="ruby-identifier">json</span>, <span class="ruby-identifier">options</span> ={})
+  <span class="ruby-identifier">data</span> = <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">load</span>(<span class="ruby-identifier">json</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">ActiveSupport</span>.<span class="ruby-identifier">parse_json_times</span>
+    <span class="ruby-identifier">convert_dates_from</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">data</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-encode">
+            
+              <b>encode</b>(value, options = nil)
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-encode" name="method-c-encode" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Dumps objects in <a href="JSON.html">JSON</a> (JavaScript <a
+href="../Object.html">Object</a> Notation). See <a
+href="http://www.json.org">www.json.org</a> for more info.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">encode</span>({ <span class="ruby-identifier">team</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;rails&#39;</span>, <span class="ruby-identifier">players</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;36&#39;</span> })
+<span class="ruby-comment"># =&gt; &quot;{\&quot;team\&quot;:\&quot;rails\&quot;,\&quot;players\&quot;:\&quot;36\&quot;}&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-encode_source')" id="l_method-c-encode_source">show</a>
+                
+              </p>
+              <div id="method-c-encode_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">Encoder</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-engine">
+            
+              <b>engine</b>()
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-engine" name="method-c-engine" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="JSON.html#method-c-backend">backend</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-engine_source')" id="l_method-c-engine_source">show</a>
+                
+              </p>
+              <div id="method-c-engine_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/decoding.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">engine</span>
+  <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">adapter</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-engine-3D">
+            
+              <b>engine=</b>(name)
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-engine-3D" name="method-c-engine-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="JSON.html#method-c-backend-3D">backend=</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-engine-3D_source')" id="l_method-c-engine-3D_source">show</a>
+                
+              </p>
+              <div id="method-c-engine-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/decoding.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">engine=</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-constant">MultiJson</span>.<span class="ruby-identifier">use</span>(<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-parse_error">
+            
+              <b>parse_error</b>()
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-parse_error" name="method-c-parse_error" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the class of the error that will be raised when there is an error
+in decoding <a href="JSON.html">JSON</a>. Using this method means you
+won&#39;t directly depend on the ActiveSupport&#39;s <a
+href="JSON.html">JSON</a> implementation, in case it changes in the future.</p>
+
+<pre>begin
+  obj = ActiveSupport::JSON.decode(some_string)
+rescue ActiveSupport::JSON.parse_error
+  Rails.logger.warn(&quot;Attempted to decode invalid JSON: #{some_string}&quot;)
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-parse_error_source')" id="l_method-c-parse_error_source">show</a>
+                
+              </p>
+              <div id="method-c-parse_error_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/decoding.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse_error</span>
+  <span class="ruby-constant">MultiJson</span><span class="ruby-operator">::</span><span class="ruby-constant">DecodeError</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-with_backend">
+            
+              <b>with_backend</b>(name)
+            
+            <a href="../../classes/ActiveSupport/JSON.html#method-c-with_backend" name="method-c-with_backend" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-with_backend_source')" id="l_method-c-with_backend_source">show</a>
+                
+              </p>
+              <div id="method-c-with_backend_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/decoding.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">with_backend</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">old_backend</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">backend</span> = <span class="ruby-identifier">backend</span>, <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">backend</span> = <span class="ruby-identifier">old_backend</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

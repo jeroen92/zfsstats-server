@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Server::Options</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Server::Options 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/commands/server_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/server.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-parse-21">parse!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-parse-21">
+            
+              <b>parse!</b>(args)
+            
+            <a href="../../../classes/Rails/Server/Options.html#method-i-parse-21" name="method-i-parse-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-parse-21_source')" id="l_method-i-parse-21_source">show</a>
+                
+              </p>
+              <div id="method-i-parse-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/server.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse!</span>(<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">args</span>, <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">dup</span>, {}
+
+  <span class="ruby-identifier">opt_parser</span> = <span class="ruby-constant">OptionParser</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opts</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">banner</span> = <span class="ruby-string">&quot;Usage: rails server [mongrel, thin, etc] [options]&quot;</span>
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-p&quot;</span>, <span class="ruby-string">&quot;--port=port&quot;</span>, <span class="ruby-constant">Integer</span>,
+            <span class="ruby-string">&quot;Runs Rails on the specified port.&quot;</span>, <span class="ruby-string">&quot;Default: 3000&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:Port</span>] = <span class="ruby-identifier">v</span> }
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-b&quot;</span>, <span class="ruby-string">&quot;--binding=ip&quot;</span>, <span class="ruby-constant">String</span>,
+            <span class="ruby-string">&quot;Binds Rails to the specified ip.&quot;</span>, <span class="ruby-string">&quot;Default: 0.0.0.0&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:Host</span>] = <span class="ruby-identifier">v</span> }
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-c&quot;</span>, <span class="ruby-string">&quot;--config=file&quot;</span>, <span class="ruby-constant">String</span>,
+            <span class="ruby-string">&quot;Use custom rackup configuration file&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:config</span>] = <span class="ruby-identifier">v</span> }
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-d&quot;</span>, <span class="ruby-string">&quot;--daemon&quot;</span>, <span class="ruby-string">&quot;Make server run as a Daemon.&quot;</span>) { <span class="ruby-identifier">options</span>[<span class="ruby-value">:daemonize</span>] = <span class="ruby-keyword">true</span> }
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-u&quot;</span>, <span class="ruby-string">&quot;--debugger&quot;</span>, <span class="ruby-string">&quot;Enable the debugger&quot;</span>) { <span class="ruby-identifier">options</span>[<span class="ruby-value">:debugger</span>] = <span class="ruby-keyword">true</span> }
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-e&quot;</span>, <span class="ruby-string">&quot;--environment=name&quot;</span>, <span class="ruby-constant">String</span>,
+            <span class="ruby-string">&quot;Specifies the environment to run this server under (test/development/production).&quot;</span>,
+            <span class="ruby-string">&quot;Default: development&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:environment</span>] = <span class="ruby-identifier">v</span> }
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-P&quot;</span>,<span class="ruby-string">&quot;--pid=pid&quot;</span>,<span class="ruby-constant">String</span>,
+            <span class="ruby-string">&quot;Specifies the PID file.&quot;</span>,
+            <span class="ruby-string">&quot;Default: tmp/pids/server.pid&quot;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:pid</span>] = <span class="ruby-identifier">v</span> }
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">separator</span> <span class="ruby-string">&quot;&quot;</span>
+
+    <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">on</span>(<span class="ruby-string">&quot;-h&quot;</span>, <span class="ruby-string">&quot;--help&quot;</span>, <span class="ruby-string">&quot;Show this help message.&quot;</span>) { <span class="ruby-identifier">puts</span> <span class="ruby-identifier">opts</span>; <span class="ruby-identifier">exit</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">opt_parser</span>.<span class="ruby-identifier">parse!</span> <span class="ruby-identifier">args</span>
+
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:server</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

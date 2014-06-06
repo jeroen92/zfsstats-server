@@ -1,0 +1,1050 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Multibyte::Unicode</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Multibyte::Unicode 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/multibyte/unicode_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Unicode/Codepoint.html">ActiveSupport::Multibyte::Unicode::Codepoint</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Unicode/UnicodeDatabase.html">ActiveSupport::Multibyte::Unicode::UnicodeDatabase</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-compose">compose</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-decompose">decompose</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-downcase">downcase</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-in_char_class-3F">in_char_class?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-normalize">normalize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-pack_graphemes">pack_graphemes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reorder_characters">reorder_characters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-swapcase">swapcase</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-tidy_bytes">tidy_bytes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-unpack_graphemes">unpack_graphemes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-upcase">upcase</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">NORMALIZATION_FORMS</td>
+            <td>=</td>
+            <td class="attr-value">[:c, :kc, :d, :kd]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>A list of all available normalization forms. See <a
+href="http://www.unicode.org/reports/tr15/tr15-29.html">www.unicode.org/reports/tr15/tr15-29.html</a>
+for more information about normalization.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">UNICODE_VERSION</td>
+            <td>=</td>
+            <td class="attr-value">&#39;6.2.0&#39;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>The <a href="Unicode.html">Unicode</a> version that is supported by the
+implementation</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_SBASE</td>
+            <td>=</td>
+            <td class="attr-value">0xAC00</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>Hangul character boundaries and properties</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_LBASE</td>
+            <td>=</td>
+            <td class="attr-value">0x1100</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_VBASE</td>
+            <td>=</td>
+            <td class="attr-value">0x1161</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_TBASE</td>
+            <td>=</td>
+            <td class="attr-value">0x11A7</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_LCOUNT</td>
+            <td>=</td>
+            <td class="attr-value">19</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_VCOUNT</td>
+            <td>=</td>
+            <td class="attr-value">21</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_TCOUNT</td>
+            <td>=</td>
+            <td class="attr-value">28</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_NCOUNT</td>
+            <td>=</td>
+            <td class="attr-value">HANGUL_VCOUNT * HANGUL_TCOUNT</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_SCOUNT</td>
+            <td>=</td>
+            <td class="attr-value">11172</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_SLAST</td>
+            <td>=</td>
+            <td class="attr-value">HANGUL_SBASE + HANGUL_SCOUNT</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_JAMO_FIRST</td>
+            <td>=</td>
+            <td class="attr-value">0x1100</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HANGUL_JAMO_LAST</td>
+            <td>=</td>
+            <td class="attr-value">0x11FF</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">WHITESPACE</td>
+            <td>=</td>
+            <td class="attr-value">[
+(0x0009..0x000D).to_a, # White_Space # Cc   [5] &lt;control-0009&gt;..&lt;control-000D&gt;
+0x0020,                # White_Space # Zs       SPACE
+0x0085,                # White_Space # Cc       &lt;control-0085&gt;
+0x00A0,                # White_Space # Zs       NO-BREAK SPACE
+0x1680,                # White_Space # Zs       OGHAM SPACE MARK
+0x180E,                # White_Space # Zs       MONGOLIAN VOWEL SEPARATOR
+(0x2000..0x200A).to_a, # White_Space # Zs  [11] EN QUAD..HAIR SPACE
+0x2028,                # White_Space # Zl       LINE SEPARATOR
+0x2029,                # White_Space # Zp       PARAGRAPH SEPARATOR
+0x202F,                # White_Space # Zs       NARROW NO-BREAK SPACE
+0x205F,                # White_Space # Zs       MEDIUM MATHEMATICAL SPACE
+0x3000,                # White_Space # Zs       IDEOGRAPHIC SPACE
+].flatten.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>All the unicode whitespace</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">LEADERS_AND_TRAILERS</td>
+            <td>=</td>
+            <td class="attr-value">WHITESPACE + [65279]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>BOM (byte order mark) can also be seen as whitespace, it&#39;s a
+non-rendering character used to distinguish between little and big endian.
+This is not an issue in utf-8, so it must be ignored.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">TRAILERS_PAT</td>
+            <td>=</td>
+            <td class="attr-value">/(#{codepoints_to_pattern(LEADERS_AND_TRAILERS)})+\Z/u</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">LEADERS_PAT</td>
+            <td>=</td>
+            <td class="attr-value">/\A(#{codepoints_to_pattern(LEADERS_AND_TRAILERS)})+/u</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>default_normalization_form</td>
+            <td class='attr-desc'><p>The default normalization used for operations that require normalization.
+It can be set to any of the normalizations in <a
+href="Unicode.html#NORMALIZATION_FORMS">NORMALIZATION_FORMS</a>.</p>
+
+<pre>ActiveSupport::Multibyte::Unicode.default_normalization_form = :c</pre></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-compose">
+            
+              <b>compose</b>(codepoints)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-compose" name="method-i-compose" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compose decomposed characters to the composed form.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-compose_source')" id="l_method-i-compose_source">show</a>
+                
+              </p>
+              <div id="method-i-compose_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">compose</span>(<span class="ruby-identifier">codepoints</span>)
+  <span class="ruby-identifier">pos</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">eoa</span> = <span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-number">1</span>
+  <span class="ruby-identifier">starter_pos</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">starter_char</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-number">0</span>]
+  <span class="ruby-identifier">previous_combining_class</span> = <span class="ruby-number">-1</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">eoa</span>
+    <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+    <span class="ruby-identifier">lindex</span> = <span class="ruby-identifier">starter_char</span> <span class="ruby-operator">-</span> <span class="ruby-constant">HANGUL_LBASE</span>
+    <span class="ruby-comment"># -- Hangul</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-number">0</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">lindex</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">lindex</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">HANGUL_LCOUNT</span>
+      <span class="ruby-identifier">vindex</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">starter_pos</span><span class="ruby-operator">+</span><span class="ruby-number">1</span>] <span class="ruby-operator">-</span> <span class="ruby-constant">HANGUL_VBASE</span> <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">vindex</span> = <span class="ruby-number">-1</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-number">0</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">vindex</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">vindex</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">HANGUL_VCOUNT</span>
+        <span class="ruby-identifier">tindex</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">starter_pos</span><span class="ruby-operator">+</span><span class="ruby-number">2</span>] <span class="ruby-operator">-</span> <span class="ruby-constant">HANGUL_TBASE</span> <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">tindex</span> = <span class="ruby-number">-1</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-number">0</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">tindex</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">tindex</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">HANGUL_TCOUNT</span>
+          <span class="ruby-identifier">j</span> = <span class="ruby-identifier">starter_pos</span> <span class="ruby-operator">+</span> <span class="ruby-number">2</span>
+          <span class="ruby-identifier">eoa</span> <span class="ruby-operator">-=</span> <span class="ruby-number">2</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">tindex</span> = <span class="ruby-number">0</span>
+          <span class="ruby-identifier">j</span> = <span class="ruby-identifier">starter_pos</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>
+          <span class="ruby-identifier">eoa</span> <span class="ruby-operator">-=</span> <span class="ruby-number">1</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">starter_pos</span><span class="ruby-operator">..</span><span class="ruby-identifier">j</span>] = (<span class="ruby-identifier">lindex</span> * <span class="ruby-constant">HANGUL_VCOUNT</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">vindex</span>) * <span class="ruby-constant">HANGUL_TCOUNT</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tindex</span> <span class="ruby-operator">+</span> <span class="ruby-constant">HANGUL_SBASE</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">starter_pos</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+      <span class="ruby-identifier">starter_char</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">starter_pos</span>]
+    <span class="ruby-comment"># -- Other characters</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">current_char</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span>]
+      <span class="ruby-identifier">current</span> = <span class="ruby-identifier">database</span>.<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">current_char</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">current</span>.<span class="ruby-identifier">combining_class</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">previous_combining_class</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">ref</span> = <span class="ruby-identifier">database</span>.<span class="ruby-identifier">composition_map</span>[<span class="ruby-identifier">starter_char</span>]
+          <span class="ruby-identifier">composition</span> = <span class="ruby-identifier">ref</span>[<span class="ruby-identifier">current_char</span>]
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">composition</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">unless</span> <span class="ruby-identifier">composition</span>.<span class="ruby-identifier">nil?</span>
+          <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">starter_pos</span>] = <span class="ruby-identifier">composition</span>
+          <span class="ruby-identifier">starter_char</span> = <span class="ruby-identifier">composition</span>
+          <span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">delete_at</span> <span class="ruby-identifier">pos</span>
+          <span class="ruby-identifier">eoa</span> <span class="ruby-operator">-=</span> <span class="ruby-number">1</span>
+          <span class="ruby-identifier">pos</span> <span class="ruby-operator">-=</span> <span class="ruby-number">1</span>
+          <span class="ruby-identifier">previous_combining_class</span> = <span class="ruby-number">-1</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">previous_combining_class</span> = <span class="ruby-identifier">current</span>.<span class="ruby-identifier">combining_class</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">previous_combining_class</span> = <span class="ruby-identifier">current</span>.<span class="ruby-identifier">combining_class</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">current</span>.<span class="ruby-identifier">combining_class</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span>
+        <span class="ruby-identifier">starter_pos</span> = <span class="ruby-identifier">pos</span>
+        <span class="ruby-identifier">starter_char</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">codepoints</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-decompose">
+            
+              <b>decompose</b>(type, codepoints)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-decompose" name="method-i-decompose" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Decompose composed characters to the decomposed form.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-decompose_source')" id="l_method-i-decompose_source">show</a>
+                
+              </p>
+              <div id="method-i-decompose_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">decompose</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">codepoints</span>)
+  <span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">inject</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">decomposed</span>, <span class="ruby-identifier">cp</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># if it&#39;s a hangul syllable starter character</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">HANGUL_SBASE</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">cp</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cp</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">HANGUL_SLAST</span>
+      <span class="ruby-identifier">sindex</span> = <span class="ruby-identifier">cp</span> <span class="ruby-operator">-</span> <span class="ruby-constant">HANGUL_SBASE</span>
+      <span class="ruby-identifier">ncp</span> = [] <span class="ruby-comment"># new codepoints</span>
+      <span class="ruby-identifier">ncp</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HANGUL_LBASE</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sindex</span> <span class="ruby-operator">/</span> <span class="ruby-constant">HANGUL_NCOUNT</span>
+      <span class="ruby-identifier">ncp</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HANGUL_VBASE</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">sindex</span> <span class="ruby-operator">%</span> <span class="ruby-constant">HANGUL_NCOUNT</span>) <span class="ruby-operator">/</span> <span class="ruby-constant">HANGUL_TCOUNT</span>
+      <span class="ruby-identifier">tindex</span> = <span class="ruby-identifier">sindex</span> <span class="ruby-operator">%</span> <span class="ruby-constant">HANGUL_TCOUNT</span>
+      <span class="ruby-identifier">ncp</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-constant">HANGUL_TBASE</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tindex</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tindex</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span>
+      <span class="ruby-identifier">decomposed</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">ncp</span>
+    <span class="ruby-comment"># if the codepoint is decomposable in with the current decomposition type</span>
+    <span class="ruby-keyword">elsif</span> (<span class="ruby-identifier">ncp</span> = <span class="ruby-identifier">database</span>.<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">cp</span>].<span class="ruby-identifier">decomp_mapping</span>) <span class="ruby-keyword">and</span> (<span class="ruby-operator">!</span><span class="ruby-identifier">database</span>.<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">cp</span>].<span class="ruby-identifier">decomp_type</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:compatability</span>)
+      <span class="ruby-identifier">decomposed</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">decompose</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">ncp</span>.<span class="ruby-identifier">dup</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">decomposed</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">cp</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-downcase">
+            
+              <b>downcase</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-downcase" name="method-i-downcase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-downcase_source')" id="l_method-i-downcase_source">show</a>
+                
+              </p>
+              <div id="method-i-downcase_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">downcase</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">apply_mapping</span> <span class="ruby-identifier">string</span>, <span class="ruby-value">:lowercase_mapping</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-in_char_class-3F">
+            
+              <b>in_char_class?</b>(codepoint, classes)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-in_char_class-3F" name="method-i-in_char_class-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Detect whether the codepoint is in a certain character class. Returns
+<code>true</code> when it&#39;s in the specified character class and
+<code>false</code> otherwise. Valid character classes are:
+<code>:cr</code>, <code>:lf</code>, <code>:l</code>, <code>:v</code>,
+<code>:lv</code>, <code>:lvt</code> and <code>:t</code>.</p>
+
+<p>Primarily used by the grapheme cluster support.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-in_char_class-3F_source')" id="l_method-i-in_char_class-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-in_char_class-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">in_char_class?</span>(<span class="ruby-identifier">codepoint</span>, <span class="ruby-identifier">classes</span>)
+  <span class="ruby-identifier">classes</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">database</span>.<span class="ruby-identifier">boundary</span>[<span class="ruby-identifier">c</span>] <span class="ruby-operator">===</span> <span class="ruby-identifier">codepoint</span> } <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-normalize">
+            
+              <b>normalize</b>(string, form=nil)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-normalize" name="method-i-normalize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the KC normalization of the string by default. NFKC is considered
+the best normalization form for passing strings to databases and
+validations.</p>
+<ul><li>
+<p><code>string</code> - The string to perform normalization on.</p>
+</li><li>
+<p><code>form</code> - The form you want to normalize in. Should be one of the
+following: <code>:c</code>, <code>:kc</code>, <code>:d</code>, or
+<code>:kd</code>. Default is
+ActiveSupport::Multibyte.default_normalization_form.</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-normalize_source')" id="l_method-i-normalize_source">show</a>
+                
+              </p>
+              <div id="method-i-normalize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">normalize</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">form</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">form</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@default_normalization_form</span>
+  <span class="ruby-comment"># See http://www.unicode.org/reports/tr15, Table 1</span>
+  <span class="ruby-identifier">codepoints</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">form</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:d</span>
+      <span class="ruby-identifier">reorder_characters</span>(<span class="ruby-identifier">decompose</span>(<span class="ruby-value">:canonical</span>, <span class="ruby-identifier">codepoints</span>))
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:c</span>
+      <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">reorder_characters</span>(<span class="ruby-identifier">decompose</span>(<span class="ruby-value">:canonical</span>, <span class="ruby-identifier">codepoints</span>)))
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:kd</span>
+      <span class="ruby-identifier">reorder_characters</span>(<span class="ruby-identifier">decompose</span>(<span class="ruby-value">:compatability</span>, <span class="ruby-identifier">codepoints</span>))
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:kc</span>
+      <span class="ruby-identifier">compose</span>(<span class="ruby-identifier">reorder_characters</span>(<span class="ruby-identifier">decompose</span>(<span class="ruby-value">:compatability</span>, <span class="ruby-identifier">codepoints</span>)))
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;#{form} is not a valid normalization variant&quot;</span>, <span class="ruby-identifier">caller</span>
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;U*&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-pack_graphemes">
+            
+              <b>pack_graphemes</b>(unpacked)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-pack_graphemes" name="method-i-pack_graphemes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Reverse operation of unpack_graphemes.</p>
+
+<pre class="ruby"><span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">pack_graphemes</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">unpack_graphemes</span>(<span class="ruby-string">&#39;क्षि&#39;</span>)) <span class="ruby-comment"># =&gt; &#39;क्षि&#39;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-pack_graphemes_source')" id="l_method-i-pack_graphemes_source">show</a>
+                
+              </p>
+              <div id="method-i-pack_graphemes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">pack_graphemes</span>(<span class="ruby-identifier">unpacked</span>)
+  <span class="ruby-identifier">unpacked</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;U*&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reorder_characters">
+            
+              <b>reorder_characters</b>(codepoints)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-reorder_characters" name="method-i-reorder_characters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Re-order codepoints so the string becomes canonical.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reorder_characters_source')" id="l_method-i-reorder_characters_source">show</a>
+                
+              </p>
+              <div id="method-i-reorder_characters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reorder_characters</span>(<span class="ruby-identifier">codepoints</span>)
+  <span class="ruby-identifier">length</span> = <span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span> <span class="ruby-number">1</span>
+  <span class="ruby-identifier">pos</span> = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">length</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">cp1</span>, <span class="ruby-identifier">cp2</span> = <span class="ruby-identifier">database</span>.<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span>]], <span class="ruby-identifier">database</span>.<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-number">1</span>]]
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">cp1</span>.<span class="ruby-identifier">combining_class</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cp2</span>.<span class="ruby-identifier">combining_class</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">cp2</span>.<span class="ruby-identifier">combining_class</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span>)
+      <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">..</span><span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-number">1</span>] = <span class="ruby-identifier">cp2</span>.<span class="ruby-identifier">code</span>, <span class="ruby-identifier">cp1</span>.<span class="ruby-identifier">code</span>
+      <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-number">-1</span> <span class="ruby-operator">:</span> <span class="ruby-number">1</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">codepoints</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-swapcase">
+            
+              <b>swapcase</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-swapcase" name="method-i-swapcase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-swapcase_source')" id="l_method-i-swapcase_source">show</a>
+                
+              </p>
+              <div id="method-i-swapcase_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">swapcase</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">apply_mapping</span> <span class="ruby-identifier">string</span>, <span class="ruby-value">:swapcase_mapping</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tidy_bytes">
+            
+              <b>tidy_bytes</b>(string, force = false)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-tidy_bytes" name="method-i-tidy_bytes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Replaces all ISO-8859-1 or CP1252 characters by their UTF-8 equivalent
+resulting in a valid UTF-8 string.</p>
+
+<p>Passing <code>true</code> will forcibly tidy all bytes, assuming that the
+string&#39;s encoding is entirely CP1252 or ISO-8859-1.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tidy_bytes_source')" id="l_method-i-tidy_bytes_source">show</a>
+                
+              </p>
+              <div id="method-i-tidy_bytes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tidy_bytes</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">force</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">force</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">tidy_byte</span>(<span class="ruby-identifier">b</span>)
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;U*&quot;</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;U*&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">bytes</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;C*&quot;</span>)
+  <span class="ruby-identifier">conts_expected</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">last_lead</span> = <span class="ruby-number">0</span>
+
+  <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+
+    <span class="ruby-identifier">byte</span>          = <span class="ruby-identifier">bytes</span>[<span class="ruby-identifier">i</span>]
+    <span class="ruby-identifier">is_cont</span>       = <span class="ruby-identifier">byte</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">127</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">byte</span> <span class="ruby-operator">&lt;</span> <span class="ruby-number">192</span>
+    <span class="ruby-identifier">is_lead</span>       = <span class="ruby-identifier">byte</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">191</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">byte</span> <span class="ruby-operator">&lt;</span> <span class="ruby-number">245</span>
+    <span class="ruby-identifier">is_unused</span>     = <span class="ruby-identifier">byte</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">240</span>
+    <span class="ruby-identifier">is_restricted</span> = <span class="ruby-identifier">byte</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">244</span>
+
+    <span class="ruby-comment"># Impossible or highly unlikely byte? Clean it.</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_unused</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_restricted</span>
+      <span class="ruby-identifier">bytes</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">tidy_byte</span>(<span class="ruby-identifier">byte</span>)
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">is_cont</span>
+      <span class="ruby-comment"># Not expecting continuation byte? Clean up. Otherwise, now expect one less.</span>
+      <span class="ruby-identifier">conts_expected</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">bytes</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">tidy_byte</span>(<span class="ruby-identifier">byte</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">conts_expected</span> <span class="ruby-operator">-=</span> <span class="ruby-number">1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">conts_expected</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span>
+        <span class="ruby-comment"># Expected continuation, but got ASCII or leading? Clean backwards up to</span>
+        <span class="ruby-comment"># the leading byte.</span>
+        (<span class="ruby-number">1</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">last_lead</span>)).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">bytes</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">j</span>] = <span class="ruby-identifier">tidy_byte</span>(<span class="ruby-identifier">bytes</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">j</span>])}
+        <span class="ruby-identifier">conts_expected</span> = <span class="ruby-number">0</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_lead</span>
+        <span class="ruby-comment"># Final byte is leading? Clean it.</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-number">1</span>
+          <span class="ruby-identifier">bytes</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">tidy_byte</span>(<span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">last</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-comment"># Valid leading byte? Expect continuations determined by position of</span>
+          <span class="ruby-comment"># first zero bit, with max of 3.</span>
+          <span class="ruby-identifier">conts_expected</span> = <span class="ruby-identifier">byte</span> <span class="ruby-operator">&lt;</span> <span class="ruby-number">224</span> <span class="ruby-operator">?</span> <span class="ruby-number">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">byte</span> <span class="ruby-operator">&lt;</span> <span class="ruby-number">240</span> <span class="ruby-operator">?</span> <span class="ruby-number">2</span> <span class="ruby-operator">:</span> <span class="ruby-number">3</span>
+          <span class="ruby-identifier">last_lead</span> = <span class="ruby-identifier">i</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">bytes</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;C*&quot;</span>).<span class="ruby-identifier">unpack</span>(<span class="ruby-string">&quot;U*&quot;</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&quot;U*&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unpack_graphemes">
+            
+              <b>unpack_graphemes</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-unpack_graphemes" name="method-i-unpack_graphemes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Unpack the string at grapheme boundaries. Returns a list of character
+lists.</p>
+
+<pre class="ruby"><span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">unpack_graphemes</span>(<span class="ruby-string">&#39;क्षि&#39;</span>) <span class="ruby-comment"># =&gt; [[2325, 2381], [2359], [2367]]</span>
+<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">unpack_graphemes</span>(<span class="ruby-string">&#39;Café&#39;</span>) <span class="ruby-comment"># =&gt; [[67], [97], [102], [233]]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-unpack_graphemes_source')" id="l_method-i-unpack_graphemes_source">show</a>
+                
+              </p>
+              <div id="method-i-unpack_graphemes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unpack_graphemes</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">codepoints</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">unpacked</span> = []
+  <span class="ruby-identifier">pos</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">marker</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">eoc</span> = <span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">length</span>
+  <span class="ruby-keyword">while</span>(<span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">eoc</span>)
+    <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+    <span class="ruby-identifier">previous</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">-</span><span class="ruby-number">1</span>]
+    <span class="ruby-identifier">current</span> = <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">pos</span>]
+    <span class="ruby-keyword">if</span> (
+        <span class="ruby-comment"># CR X LF</span>
+        ( <span class="ruby-identifier">previous</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">database</span>.<span class="ruby-identifier">boundary</span>[<span class="ruby-value">:cr</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">current</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">database</span>.<span class="ruby-identifier">boundary</span>[<span class="ruby-value">:lf</span>] ) <span class="ruby-keyword">or</span>
+        <span class="ruby-comment"># L X (L|V|LV|LVT)</span>
+        ( <span class="ruby-identifier">database</span>.<span class="ruby-identifier">boundary</span>[<span class="ruby-value">:l</span>] <span class="ruby-operator">===</span> <span class="ruby-identifier">previous</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">in_char_class?</span>(<span class="ruby-identifier">current</span>, [<span class="ruby-value">:l</span>,<span class="ruby-value">:v</span>,<span class="ruby-value">:lv</span>,<span class="ruby-value">:lvt</span>]) ) <span class="ruby-keyword">or</span>
+        <span class="ruby-comment"># (LV|V) X (V|T)</span>
+        ( <span class="ruby-identifier">in_char_class?</span>(<span class="ruby-identifier">previous</span>, [<span class="ruby-value">:lv</span>,<span class="ruby-value">:v</span>]) <span class="ruby-keyword">and</span> <span class="ruby-identifier">in_char_class?</span>(<span class="ruby-identifier">current</span>, [<span class="ruby-value">:v</span>,<span class="ruby-value">:t</span>]) ) <span class="ruby-keyword">or</span>
+        <span class="ruby-comment"># (LVT|T) X (T)</span>
+        ( <span class="ruby-identifier">in_char_class?</span>(<span class="ruby-identifier">previous</span>, [<span class="ruby-value">:lvt</span>,<span class="ruby-value">:t</span>]) <span class="ruby-keyword">and</span> <span class="ruby-identifier">database</span>.<span class="ruby-identifier">boundary</span>[<span class="ruby-value">:t</span>] <span class="ruby-operator">===</span> <span class="ruby-identifier">current</span> ) <span class="ruby-keyword">or</span>
+        <span class="ruby-comment"># X Extend</span>
+        (<span class="ruby-identifier">database</span>.<span class="ruby-identifier">boundary</span>[<span class="ruby-value">:extend</span>] <span class="ruby-operator">===</span> <span class="ruby-identifier">current</span>)
+      )
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">unpacked</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">codepoints</span>[<span class="ruby-identifier">marker</span><span class="ruby-operator">..</span><span class="ruby-identifier">pos</span><span class="ruby-operator">-</span><span class="ruby-number">1</span>]
+      <span class="ruby-identifier">marker</span> = <span class="ruby-identifier">pos</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">unpacked</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-upcase">
+            
+              <b>upcase</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Unicode.html#method-i-upcase" name="method-i-upcase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-upcase_source')" id="l_method-i-upcase_source">show</a>
+                
+              </p>
+              <div id="method-i-upcase_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/unicode.rb, line 297</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">upcase</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">apply_mapping</span> <span class="ruby-identifier">string</span>, <span class="ruby-value">:uppercase_mapping</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

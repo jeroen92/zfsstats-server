@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Base</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Base 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/base.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record">Active Record</h1>
+
+<p>Active Record objects don&#39;t specify their attributes directly, but
+rather infer them from the table definition with which they&#39;re linked.
+Adding, removing, and changing attributes and their type is done directly
+in the database. Any change is instantly reflected in the Active Record
+objects. The mapping that binds a given Active Record class to a certain
+database table will happen automatically in most common cases, but can be
+overwritten for the uncommon ones.</p>
+
+<p>See the mapping rules in table_name and the full example in <a
+href="../../files/activerecord/README_rdoc.html">files/activerecord/README_rdoc.html</a>
+for more insight.</p>
+
+<h2 id="label-Creation">Creation</h2>
+
+<p>Active Records accept constructor parameters either in a hash or as a
+block. The hash method is especially useful when you&#39;re receiving the
+data from somewhere else, like an HTTP request. It works like this:</p>
+
+<pre class="ruby"><span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;David&quot;</span>, <span class="ruby-identifier">occupation</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Code Artist&quot;</span>)
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;David&quot;</span>
+</pre>
+
+<p>You can also use block initialization:</p>
+
+<pre class="ruby"><span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;David&quot;</span>
+  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">occupation</span> = <span class="ruby-string">&quot;Code Artist&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>And of course you can just create a bare object and specify the attributes
+after the fact:</p>
+
+<pre>user = User.new
+user.name = &quot;David&quot;
+user.occupation = &quot;Code Artist&quot;</pre>
+
+<h2 id="label-Conditions">Conditions</h2>
+
+<p>Conditions can either be specified as a string, array, or hash representing
+the WHERE-part of an SQL statement. The array form is to be used when the
+condition input is tainted and requires sanitization. The string form can
+be used for statements that don&#39;t involve tainted data. The hash form
+works much like the array form, except only equality and range is possible.
+Examples:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authenticate_unsafely</span>(<span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">password</span>)
+    <span class="ruby-identifier">where</span>(<span class="ruby-node">&quot;user_name = &#39;#{user_name}&#39; AND password = &#39;#{password}&#39;&quot;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authenticate_safely</span>(<span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">password</span>)
+    <span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;user_name = ? AND password = ?&quot;</span>, <span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">password</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">authenticate_safely_simply</span>(<span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">password</span>)
+    <span class="ruby-identifier">where</span>(<span class="ruby-identifier">user_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">password</span><span class="ruby-operator">:</span> <span class="ruby-identifier">password</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The <code>authenticate_unsafely</code> method inserts the parameters
+directly into the query and is thus susceptible to SQL-injection attacks if
+the <code>user_name</code> and <code>password</code> parameters come
+directly from an HTTP request. The <code>authenticate_safely</code> and
+<code>authenticate_safely_simply</code> both will sanitize the
+<code>user_name</code> and <code>password</code> before inserting them in
+the query, which will ensure that an attacker can&#39;t escape the query
+and fake the login (or worse).</p>
+
+<p>When using multiple parameters in the conditions, it can easily become hard
+to read exactly what the fourth or fifth question mark is supposed to
+represent. In those cases, you can resort to named bind variables instead.
+That&#39;s done by replacing the question marks with symbols and supplying
+a hash with values for the matching symbol keys:</p>
+
+<pre>Company.where(
+  &quot;id = :id AND name = :name AND division = :division AND created_at &gt; :accounting_date&quot;,
+  { id: 3, name: &quot;37signals&quot;, division: &quot;First&quot;, accounting_date: &#39;2005-01-01&#39; }
+).first</pre>
+
+<p>Similarly, a simple hash without a statement will generate conditions based
+on equality with the SQL AND operator. For instance:</p>
+
+<pre>Student.where(first_name: &quot;Harvey&quot;, status: 1)
+Student.where(params[:student])</pre>
+
+<p>A range may be used in the hash to use the SQL BETWEEN operator:</p>
+
+<pre>Student.where(grade: 9..12)</pre>
+
+<p>An array may be used in the hash to use the SQL IN operator:</p>
+
+<pre>Student.where(grade: [9,11,12])</pre>
+
+<p>When joining tables, nested hashes or keys written in the form
+&#39;table_name.column_name&#39; can be used to qualify the table name of a
+particular condition. For instance:</p>
+
+<pre class="ruby"><span class="ruby-constant">Student</span>.<span class="ruby-identifier">joins</span>(:<span class="ruby-identifier">schools</span>).<span class="ruby-identifier">where</span>(<span class="ruby-identifier">schools</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;public&#39;</span> })
+<span class="ruby-constant">Student</span>.<span class="ruby-identifier">joins</span>(:<span class="ruby-identifier">schools</span>).<span class="ruby-identifier">where</span>(<span class="ruby-string">&#39;schools.category&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;public&#39;</span> )
+</pre>
+
+<h2 id="label-Overwriting+default+accessors">Overwriting default accessors</h2>
+
+<p>All column values are automatically available through basic accessors on
+the Active Record object, but sometimes you want to specialize this
+behavior. This can be done by overwriting the default accessors (using the
+same name as the attribute) and calling
+<code>read_attribute(attr_name)</code> and <code>write_attribute(attr_name,
+value)</code> to actually change things.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Song</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># Uses an integer of seconds to hold the length of the song</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">length=</span>(<span class="ruby-identifier">minutes</span>)
+    <span class="ruby-identifier">write_attribute</span>(:<span class="ruby-identifier">length</span>, <span class="ruby-identifier">minutes</span>.<span class="ruby-identifier">to_i</span> * <span class="ruby-value">60</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">read_attribute</span>(:<span class="ruby-identifier">length</span>) <span class="ruby-operator">/</span> <span class="ruby-value">60</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You can alternatively use <code>self[:attribute]=(value)</code> and
+<code>self[:attribute]</code> instead of <code>write_attribute(:attribute,
+value)</code> and <code>read_attribute(:attribute)</code>.</p>
+
+<h2 id="label-Attribute+query+methods">Attribute query methods</h2>
+
+<p>In addition to the basic accessors, query methods are also automatically
+available on the Active Record object. Query methods allow you to test
+whether an attribute value is present.</p>
+
+<p>For example, an Active Record User with the <code>name</code> attribute has
+a <code>name?</code> method that you can call to determine whether the user
+has a name:</p>
+
+<pre class="ruby"><span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;David&quot;</span>)
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">name?</span> <span class="ruby-comment"># =&gt; true</span>
+
+<span class="ruby-identifier">anonymous</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>)
+<span class="ruby-identifier">anonymous</span>.<span class="ruby-identifier">name?</span> <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<h2 id="label-Accessing+attributes+before+they+have+been+typecasted">Accessing attributes before they have been typecasted</h2>
+
+<p>Sometimes you want to be able to read the raw attribute data without having
+the column-determined typecast run its course first. That can be done by
+using the <code>&lt;attribute&gt;_before_type_cast</code> accessors that
+all attributes have. For example, if your Account model has a
+<code>balance</code> attribute, you can call
+<code>account.balance_before_type_cast</code> or
+<code>account.id_before_type_cast</code>.</p>
+
+<p>This is especially useful in validation situations where the user might
+supply a string for an integer field and you want to display the original
+string back in an error message. Accessing the attribute normally would
+typecast the string to 0, which isn&#39;t what you want.</p>
+
+<h2 id="label-Dynamic+attribute-based+finders">Dynamic attribute-based finders</h2>
+
+<p>Dynamic attribute-based finders are a mildly deprecated way of getting
+(and/or creating) objects by simple queries without turning to SQL. They
+work by appending the name of an attribute to <code>find_by_</code> like
+<code>Person.find_by_user_name</code>. Instead of writing
+<code>Person.find_by(user_name: user_name)</code>, you can use
+<code>Person.find_by_user_name(user_name)</code>.</p>
+
+<p>It&#39;s possible to add an exclamation point (!) on the end of the dynamic
+finders to get them to raise an <code>ActiveRecord::RecordNotFound</code>
+error if they do not return any records, like
+<code>Person.find_by_last_name!</code>.</p>
+
+<p>It&#39;s also possible to use multiple attributes in the same find by
+separating them with “<em>and</em>”.</p>
+
+<pre>Person.find_by(user_name: user_name, password: password)
+Person.find_by_user_name_and_password(user_name, password) # with dynamic finder</pre>
+
+<p>It&#39;s even possible to call these dynamic finder methods on relations
+and named scopes.</p>
+
+<pre>Payment.order(&quot;created_on&quot;).find_by_amount(50)</pre>
+
+<h2 id="label-Saving+arrays%2C+hashes%2C+and+other+non-mappable+objects+in+text+columns">Saving arrays, hashes, and other non-mappable objects in text columns</h2>
+
+<p>Active Record can serialize any object in text columns using YAML. To do
+so, you must specify this with a call to the class method
+<code>serialize</code>. This makes it possible to store arrays, hashes, and
+other non-mappable objects without doing any additional work.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">serialize</span> :<span class="ruby-identifier">preferences</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">preferences</span><span class="ruby-operator">:</span> { <span class="ruby-string">&quot;background&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;black&quot;</span>, <span class="ruby-string">&quot;display&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">large</span> })
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">preferences</span> <span class="ruby-comment"># =&gt; { &quot;background&quot; =&gt; &quot;black&quot;, &quot;display&quot; =&gt; large }</span>
+</pre>
+
+<p>You can also specify a class option as the second parameter that&#39;ll
+raise an exception if a serialized object is retrieved as a descendant of a
+class not in the hierarchy.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">serialize</span> :<span class="ruby-identifier">preferences</span>, <span class="ruby-constant">Hash</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">preferences</span><span class="ruby-operator">:</span> <span class="ruby-node">%w( one two three )</span>)
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">user</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">preferences</span>    <span class="ruby-comment"># raises SerializationTypeMismatch</span>
+</pre>
+
+<p>When you specify a class option, the default value for that attribute will
+be a new instance of that class.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">User</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">serialize</span> :<span class="ruby-identifier">preferences</span>, <span class="ruby-constant">OpenStruct</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">preferences</span>.<span class="ruby-identifier">theme_color</span> = <span class="ruby-string">&quot;red&quot;</span>
+</pre>
+
+<h2 id="label-Single+table+inheritance">Single table inheritance</h2>
+
+<p>Active Record allows inheritance by storing the name of the class in a
+column that by default is named “type” (can be changed by overwriting
+<code>Base.inheritance_column</code>). This means that an inheritance
+looking like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Company</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>; <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Firm</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Company</span>; <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Client</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Company</span>; <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PriorityClient</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Client</span>; <span class="ruby-keyword">end</span>
+</pre>
+
+<p>When you do <code>Firm.create(name: &quot;37signals&quot;)</code>, this
+record will be saved in the companies table with type = “Firm”. You can
+then fetch this row again using <code>Company.where(name:
+&#39;37signals&#39;).first</code> and it will return a Firm object.</p>
+
+<p>If you don&#39;t have a type column defined in your table, single-table
+inheritance won&#39;t be triggered. In that case, it&#39;ll work just like
+normal subclasses with no special magic for differentiating between them or
+reloading the right type with find.</p>
+
+<p>Note, all the attributes for all the cases are kept in the same table. Read
+more: <a
+href="http://www.martinfowler.com/eaaCatalog/singleTableInheritance.html">www.martinfowler.com/eaaCatalog/singleTableInheritance.html</a></p>
+
+<h2 id="label-Connection+to+multiple+databases+in+different+models">Connection to multiple databases in different models</h2>
+
+<p>Connections are usually created through
+ActiveRecord::Base.establish_connection and retrieved by <a
+href="Core.html#method-i-connection">ActiveRecord::Core#connection</a>. All
+classes inheriting from <a href="Base.html">ActiveRecord::Base</a> will use
+this connection. But you can also set a class-specific connection. For
+example, if Course is an <a href="Base.html">ActiveRecord::Base</a>, but
+resides in a different database, you can just say
+<code>Course.establish_connection</code> and Course and all of its
+subclasses will use this connection instead.</p>
+
+<p>This feature is implemented by keeping a connection pool in <a
+href="Base.html">ActiveRecord::Base</a> that is a <a
+href="../Hash.html">Hash</a> indexed by the class. If a connection is
+requested, the retrieve_connection method will go up the class-hierarchy
+until a connection is found in the connection pool.</p>
+
+<h2 id="label-Exceptions">Exceptions</h2>
+<ul><li>
+<p><a href="ActiveRecordError.html">ActiveRecordError</a> - Generic error
+class and superclass of all other errors raised by Active Record.</p>
+</li><li>
+<p><a href="AdapterNotSpecified.html">AdapterNotSpecified</a> - The
+configuration hash used in <code>establish_connection</code> didn&#39;t
+include an <code>:adapter</code> key.</p>
+</li><li>
+<p><a href="AdapterNotFound.html">AdapterNotFound</a> - The
+<code>:adapter</code> key used in <code>establish_connection</code>
+specified a non-existent adapter (or a bad spelling of an existing one).</p>
+</li><li>
+<p><a href="AssociationTypeMismatch.html">AssociationTypeMismatch</a> - The
+object assigned to the association wasn&#39;t of the type specified in the
+association definition.</p>
+</li><li>
+<p><a href="AttributeAssignmentError.html">AttributeAssignmentError</a> - An
+error occurred while doing a mass assignment through the
+<code>attributes=</code> method. You can inspect the <code>attribute</code>
+property of the exception object to determine which attribute triggered the
+error.</p>
+</li><li>
+<p><a href="ConnectionNotEstablished.html">ConnectionNotEstablished</a> - No
+connection has been established. Use <code>establish_connection</code>
+before querying.</p>
+</li><li>
+<p><a
+href="MultiparameterAssignmentErrors.html">MultiparameterAssignmentErrors</a>
+- Collection of errors that occurred during a mass assignment using the
+<code>attributes=</code> method. The <code>errors</code> property of this
+exception contains an array of <a
+href="AttributeAssignmentError.html">AttributeAssignmentError</a> objects
+that should be inspected to determine which attributes triggered the
+errors.</p>
+</li><li>
+<p><a href="RecordInvalid.html">RecordInvalid</a> - raised by save! and
+create! when the record is invalid.</p>
+</li><li>
+<p><a href="RecordNotFound.html">RecordNotFound</a> - No record responded to
+the <code>find</code> method. Either the row with the given ID doesn&#39;t
+exist or the row didn&#39;t meet the additional restrictions. Some
+<code>find</code> calls do not raise this exception to signal nothing was
+found, please check its documentation for further details.</p>
+</li><li>
+<p><a href="SerializationTypeMismatch.html">SerializationTypeMismatch</a> -
+The serialized object wasn&#39;t of the class specified as the second
+parameter.</p>
+</li><li>
+<p><a href="StatementInvalid.html">StatementInvalid</a> - The database server
+rejected the SQL statement. The precise error is added in the message.</p>
+</li></ul>
+
+<p><strong>Note</strong>: The attributes listed are class-level attributes
+(accessible from both the class and instance level). So it&#39;s possible
+to assign a logger to the class through <code>Base.logger=</code> which
+will then be used by all instances in the current object space.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Persistence.html">
+              ActiveRecord::Persistence
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="ReadonlyAttributes.html">
+              ActiveRecord::ReadonlyAttributes
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="ModelSchema.html">
+              ActiveRecord::ModelSchema
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Inheritance.html">
+              ActiveRecord::Inheritance
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Scoping.html">
+              ActiveRecord::Scoping
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Sanitization.html">
+              ActiveRecord::Sanitization
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeAssignment.html">
+              ActiveRecord::AttributeAssignment
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../ActiveModel/Conversion.html">
+              ActiveModel::Conversion
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Integration.html">
+              ActiveRecord::Integration
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Validations.html">
+              ActiveRecord::Validations
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="CounterCache.html">
+              ActiveRecord::CounterCache
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Locking/Optimistic.html">
+              ActiveRecord::Locking::Optimistic
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Locking/Pessimistic.html">
+              ActiveRecord::Locking::Pessimistic
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods.html">
+              ActiveRecord::AttributeMethods
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Callbacks.html">
+              ActiveRecord::Callbacks
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Timestamp.html">
+              ActiveRecord::Timestamp
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Associations.html">
+              ActiveRecord::Associations
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../ActiveModel/SecurePassword.html">
+              ActiveModel::SecurePassword
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AutosaveAssociation.html">
+              ActiveRecord::AutosaveAssociation
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="NestedAttributes.html">
+              ActiveRecord::NestedAttributes
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Aggregations.html">
+              ActiveRecord::Aggregations
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Transactions.html">
+              ActiveRecord::Transactions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Reflection.html">
+              ActiveRecord::Reflection
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="AttributeMethods/Serialization.html">
+              ActiveRecord::AttributeMethods::Serialization
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Store.html">
+              ActiveRecord::Store
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Core.html">
+              ActiveRecord::Core
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

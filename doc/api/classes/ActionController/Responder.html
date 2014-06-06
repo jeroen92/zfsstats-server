@@ -1,0 +1,1183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Responder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Responder 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/responder_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Responsible for exposing a resource to different mime requests, usually
+depending on the HTTP verb. The responder is triggered when
+<code>respond_with</code> is called. The simplest case to study is a GET
+request:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">respond_to</span> :<span class="ruby-identifier">html</span>, :<span class="ruby-identifier">xml</span>, :<span class="ruby-identifier">json</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@people</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@people</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>When a request comes in, for example for an XML response, three steps
+happen:</p>
+
+<pre>1) the responder searches for a template at people/index.xml;
+
+2) if the template is not available, it will invoke &lt;code&gt;#to_xml&lt;/code&gt; on the given resource;
+
+3) if the responder does not &lt;code&gt;respond_to :to_xml&lt;/code&gt;, call &lt;code&gt;#to_format&lt;/code&gt; on it.</pre>
+
+<h3 id="label-Builtin+HTTP+verb+semantics">Builtin HTTP verb semantics</h3>
+
+<p>The default Rails responder holds semantics for each HTTP verb. Depending
+on the content type, verb and the resource status, it will behave
+differently.</p>
+
+<p>Using Rails default responder, a POST request for creating an object could
+be written as:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">user</span>])
+  <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;User was successfully created.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@user</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Which is exactly the same as:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">user</span>])
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;User was successfully created.&#39;</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@user</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">created</span>, <span class="ruby-identifier">location</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;new&quot;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">errors</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">unprocessable_entity</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The same happens for PATCH/PUT and DELETE requests.</p>
+
+<h3 id="label-Nested+resources">Nested resources</h3>
+
+<p>You can supply nested resources as you do in <code>form_for</code> and
+<code>polymorphic_url</code>. Consider the project has many tasks example.
+The create action for TasksController would be like:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">project_id</span>])
+  <span class="ruby-ivar">@task</span> = <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">task</span>])
+  <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;Task was successfully created.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@task</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Giving several resources ensures that the responder will redirect to
+<code>project_task_url</code> instead of <code>task_url</code>.</p>
+
+<p>Namespaced and singleton resources require a symbol to be given, as in
+polymorphic urls. If a project has one manager which has many tasks, it
+should be invoked as:</p>
+
+<pre>respond_with(@project, :manager, @task)</pre>
+
+<p>Note that if you give an array, it will be treated as a collection, so the
+following is not equivalent:</p>
+
+<pre>respond_with [@project, :manager, @task]</pre>
+
+<h3 id="label-Custom+options">Custom options</h3>
+
+<p><code>respond_with</code> also allows you to pass options that are
+forwarded to the underlying render call. Those options are only applied for
+success scenarios. For instance, you can do the following in the create
+method above:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">project_id</span>])
+  <span class="ruby-ivar">@task</span> = <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">task</span>])
+  <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;Task was successfully created.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@task</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">201</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This will return status 201 if the task was saved successfully. If not, it
+will simply ignore the given options and return status 422 and the resource
+errors. To customize the failure scenario, you can pass a a block to
+<code>respond_with</code>:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">project_id</span>])
+  <span class="ruby-ivar">@task</span> = <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">tasks</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">task</span>])
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@task</span>, <span class="ruby-identifier">status</span><span class="ruby-operator">:</span> <span class="ruby-value">201</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;Task was successfully created.&#39;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-string">&quot;some_special_template&quot;</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Using <code>respond_with</code> with a block follows the same syntax as
+<code>respond_to</code>.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-api_behavior">api_behavior</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-api_location">api_location</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-call">call</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-default_action">default_action</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-default_render">default_render</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-display">display</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-display_errors">display_errors</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-has_errors-3F">has_errors?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-json_resource_errors">json_resource_errors</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-navigation_behavior">navigation_behavior</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-navigation_location">navigation_location</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-resource_errors">resource_errors</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-resource_location">resource_location</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-resourceful-3F">resourceful?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-respond">respond</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-response_overridden-3F">response_overridden?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_format">to_format</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_html">to_html</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_js">to_js</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_ACTIONS_FOR_VERBS</td>
+            <td>=</td>
+            <td class="attr-value">{
+:post =&gt; :new,
+:patch =&gt; :edit,
+:put =&gt; :edit
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>controller</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>format</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>options</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>request</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>resource</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>resources</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-call">
+            
+              <b>call</b>(*args)
+            
+            <a href="../../classes/ActionController/Responder.html#method-c-call" name="method-c-call" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Initializes a new responder an invoke the proper format. If the format is
+not defined, call to_format.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-call_source')" id="l_method-c-call_source">show</a>
+                
+              </p>
+              <div id="method-c-call_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">call</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">new</span>(*<span class="ruby-identifier">args</span>).<span class="ruby-identifier">respond</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(controller, resources, options={})
+            
+            <a href="../../classes/ActionController/Responder.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">resources</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-ivar">@controller</span> = <span class="ruby-identifier">controller</span>
+  <span class="ruby-ivar">@request</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">request</span>
+  <span class="ruby-ivar">@format</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">formats</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-ivar">@resource</span> = <span class="ruby-identifier">resources</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-ivar">@resources</span> = <span class="ruby-identifier">resources</span>
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>
+  <span class="ruby-ivar">@action</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:action</span>)
+  <span class="ruby-ivar">@default_response</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:default_response</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-respond">
+            
+              <b>respond</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-respond" name="method-i-respond" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Main entry point for responder responsible to dispatch to the proper
+format.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_source')" id="l_method-i-respond_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond</span>
+  <span class="ruby-identifier">method</span> = <span class="ruby-node">&quot;to_#{format}&quot;</span>
+  <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">to_format</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_format">
+            
+              <b>to_format</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-to_format" name="method-i-to_format" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>All other formats follow the procedure below. First we try to render a
+template, if the template is not available, we verify if the resource
+responds to :<a href="Responder.html#method-i-to_format">#to_format</a> and
+display it.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_format_source')" id="l_method-i-to_format_source">show</a>
+                
+              </p>
+              <div id="method-i-to_format_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_format</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">get?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">has_errors?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">response_overridden?</span>
+    <span class="ruby-identifier">default_render</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">display_errors</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTemplate</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">api_behavior</span>(<span class="ruby-identifier">e</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_html">
+            
+              <b>to_html</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-to_html" name="method-i-to_html" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><a href="../HTML.html">HTML</a> format does not render the resource, it
+always attempt to render a template.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_html_source')" id="l_method-i-to_html_source">show</a>
+                
+              </p>
+              <div id="method-i-to_html_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 160</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_html</span>
+  <span class="ruby-identifier">default_render</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">MissingTemplate</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">navigation_behavior</span>(<span class="ruby-identifier">e</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_js">
+            
+              <b>to_js</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-to_js" name="method-i-to_js" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><a href="Responder.html#method-i-to_js">#to_js</a> simply tries to render a
+template. If no template is found, raises the error.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_js_source')" id="l_method-i-to_js_source">show</a>
+                
+              </p>
+              <div id="method-i-to_js_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_js</span>
+  <span class="ruby-identifier">default_render</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-api_behavior">
+            
+              <b>api_behavior</b>(error)
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-api_behavior" name="method-i-api_behavior" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This is the common behavior for formats associated with APIs, such as :xml
+and :json.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-api_behavior_source')" id="l_method-i-api_behavior_source">show</a>
+                
+              </p>
+              <div id="method-i-api_behavior_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">api_behavior</span>(<span class="ruby-identifier">error</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">error</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">resourceful?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">get?</span>
+    <span class="ruby-identifier">display</span> <span class="ruby-identifier">resource</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">post?</span>
+    <span class="ruby-identifier">display</span> <span class="ruby-identifier">resource</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:created</span>, <span class="ruby-value">:location</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">api_location</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">head</span> <span class="ruby-value">:no_content</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-api_location">
+            
+              <b>api_location</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-api_location" name="method-i-api_location" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-default_action">
+            
+              <b>default_action</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-default_action" name="method-i-default_action" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>By default, render the <code>:edit</code> action for <a
+href="../HTML.html">HTML</a> requests with errors, unless the verb was
+POST.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-default_action_source')" id="l_method-i-default_action_source">show</a>
+                
+              </p>
+              <div id="method-i-default_action_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 271</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">default_action</span>
+  <span class="ruby-ivar">@action</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_ACTIONS_FOR_VERBS</span>[<span class="ruby-identifier">request</span>.<span class="ruby-identifier">request_method_symbol</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-default_render">
+            
+              <b>default_render</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-default_render" name="method-i-default_render" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>If a response block was given, use it, otherwise call render on controller.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-default_render_source')" id="l_method-i-default_render_source">show</a>
+                
+              </p>
+              <div id="method-i-default_render_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 229</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">default_render</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@default_response</span>
+    <span class="ruby-ivar">@default_response</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">default_render</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-display">
+            
+              <b>display</b>(resource, given_options={})
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-display" name="method-i-display" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Display is just a shortcut to render a resource with the current format.</p>
+
+<pre>display @user, status: :ok</pre>
+
+<p>For XML requests it&#39;s equivalent to:</p>
+
+<pre>render xml: @user, status: :ok</pre>
+
+<p>Options sent by the user are also used:</p>
+
+<pre>respond_with(@user, status: :created)
+display(@user, status: :ok)</pre>
+
+<p>Results in:</p>
+
+<pre>render xml: @user, status: :created</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-display_source')" id="l_method-i-display_source">show</a>
+                
+              </p>
+              <div id="method-i-display_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 254</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">display</span>(<span class="ruby-identifier">resource</span>, <span class="ruby-identifier">given_options</span>={})
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">render</span> <span class="ruby-identifier">given_options</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">resource</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-display_errors">
+            
+              <b>display_errors</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-display_errors" name="method-i-display_errors" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-display_errors_source')" id="l_method-i-display_errors_source">show</a>
+                
+              </p>
+              <div id="method-i-display_errors_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">display_errors</span>
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">render</span> <span class="ruby-identifier">format</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">resource_errors</span>, <span class="ruby-value">:status</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">:unprocessable_entity</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-has_errors-3F">
+            
+              <b>has_errors?</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-has_errors-3F" name="method-i-has_errors-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Check whether the resource has errors.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-has_errors-3F_source')" id="l_method-i-has_errors-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-has_errors-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">has_errors?</span>
+  <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:errors</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">resource</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-json_resource_errors">
+            
+              <b>json_resource_errors</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-json_resource_errors" name="method-i-json_resource_errors" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-json_resource_errors_source')" id="l_method-i-json_resource_errors_source">show</a>
+                
+              </p>
+              <div id="method-i-json_resource_errors_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">json_resource_errors</span>
+  {<span class="ruby-value">:errors</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">errors</span>}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-navigation_behavior">
+            
+              <b>navigation_behavior</b>(error)
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-navigation_behavior" name="method-i-navigation_behavior" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This is the common behavior for formats associated with browsing, like
+:html, :iphone and so forth.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-navigation_behavior_source')" id="l_method-i-navigation_behavior_source">show</a>
+                
+              </p>
+              <div id="method-i-navigation_behavior_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">navigation_behavior</span>(<span class="ruby-identifier">error</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">get?</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">error</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">has_errors?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">default_action</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-value">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">default_action</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">navigation_location</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-navigation_location">
+            
+              <b>navigation_location</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-navigation_location" name="method-i-navigation_location" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-resource_errors">
+            
+              <b>resource_errors</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-resource_errors" name="method-i-resource_errors" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-resource_errors_source')" id="l_method-i-resource_errors_source">show</a>
+                
+              </p>
+              <div id="method-i-resource_errors_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">resource_errors</span>
+  <span class="ruby-identifier">respond_to?</span>(<span class="ruby-node">&quot;#{format}_resource_errors&quot;</span>, <span class="ruby-keyword">true</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{format}_resource_errors&quot;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">errors</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-resource_location">
+            
+              <b>resource_location</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-resource_location" name="method-i-resource_location" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the resource location by retrieving it from the options or
+returning the resources array.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Responder.html#method-i-navigation_location">navigation_location</a>, <a href="Responder.html#method-i-api_location">api_location</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-resource_location_source')" id="l_method-i-resource_location_source">show</a>
+                
+              </p>
+              <div id="method-i-resource_location_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">resource_location</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:location</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">resources</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-resourceful-3F">
+            
+              <b>resourceful?</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-resourceful-3F" name="method-i-resourceful-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Checks whether the resource responds to the current format or not.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-resourceful-3F_source')" id="l_method-i-resourceful-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-resourceful-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">resourceful?</span>
+  <span class="ruby-identifier">resource</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-node">&quot;to_#{format}&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-response_overridden-3F">
+            
+              <b>response_overridden?</b>()
+            
+            <a href="../../classes/ActionController/Responder.html#method-i-response_overridden-3F" name="method-i-response_overridden-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-response_overridden-3F_source')" id="l_method-i-response_overridden-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-response_overridden-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/responder.rb, line 283</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">response_overridden?</span>
+  <span class="ruby-ivar">@default_response</span>.<span class="ruby-identifier">present?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

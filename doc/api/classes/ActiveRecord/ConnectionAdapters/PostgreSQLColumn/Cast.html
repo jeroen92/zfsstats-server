@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-array_to_string">array_to_string</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cidr_to_string">cidr_to_string</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-hstore_to_string">hstore_to_string</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-json_to_string">json_to_string</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-point_to_string">point_to_string</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-range_to_string">range_to_string</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-string_to_array">string_to_array</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-string_to_bit">string_to_bit</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-string_to_cidr">string_to_cidr</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-string_to_hstore">string_to_hstore</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-string_to_json">string_to_json</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-string_to_point">string_to_point</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-string_to_time">string_to_time</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">HstorePair</td>
+            <td>=</td>
+            <td class="attr-value">begin
+quoted_string = /&quot;[^&quot;\\]*(?:\\.[^&quot;\\]*)*&quot;/
+unquoted_string = /(?:\\.|[^\s,])[^\s=,\\]*(?:\\.[^\s=,\\]*|=[^,&gt;])*/
+/(#{quoted_string}|#{unquoted_string})\s*=&gt;\s*(#{quoted_string}|#{unquoted_string})/
+end</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-array_to_string">
+            
+              <b>array_to_string</b>(value, column, adapter, should_be_quoted = false)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-array_to_string" name="method-i-array_to_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-array_to_string_source')" id="l_method-i-array_to_string_source">show</a>
+                
+              </p>
+              <div id="method-i-array_to_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">array_to_string</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>, <span class="ruby-identifier">adapter</span>, <span class="ruby-identifier">should_be_quoted</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">casted_values</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">val</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;NULL&quot;</span>
+        <span class="ruby-node">&quot;\&quot;#{val}\&quot;&quot;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">quote_and_escape</span>(<span class="ruby-identifier">adapter</span>.<span class="ruby-identifier">type_cast</span>(<span class="ruby-identifier">val</span>, <span class="ruby-identifier">column</span>, <span class="ruby-keyword">true</span>))
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">adapter</span>.<span class="ruby-identifier">type_cast</span>(<span class="ruby-identifier">val</span>, <span class="ruby-identifier">column</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-node">&quot;{#{casted_values.join(&#39;,&#39;)}}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cidr_to_string">
+            
+              <b>cidr_to_string</b>(object)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-cidr_to_string" name="method-i-cidr_to_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cidr_to_string_source')" id="l_method-i-cidr_to_string_source">show</a>
+                
+              </p>
+              <div id="method-i-cidr_to_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cidr_to_string</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">IPAddr</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">object</span>
+    <span class="ruby-node">&quot;#{object.to_s}/#{object.instance_variable_get(:@mask_addr).to_s(2).count(&#39;1&#39;)}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">object</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-hstore_to_string">
+            
+              <b>hstore_to_string</b>(object)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-hstore_to_string" name="method-i-hstore_to_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-hstore_to_string_source')" id="l_method-i-hstore_to_string_source">show</a>
+                
+              </p>
+              <div id="method-i-hstore_to_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hstore_to_string</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">object</span>
+    <span class="ruby-identifier">object</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-node">&quot;#{escape_hstore(k)}=&gt;#{escape_hstore(v)}&quot;</span>
+    }.<span class="ruby-identifier">join</span> <span class="ruby-string">&#39;,&#39;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">object</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-json_to_string">
+            
+              <b>json_to_string</b>(object)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-json_to_string" name="method-i-json_to_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-json_to_string_source')" id="l_method-i-json_to_string_source">show</a>
+                
+              </p>
+              <div id="method-i-json_to_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">json_to_string</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">object</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">object</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-point_to_string">
+            
+              <b>point_to_string</b>(point)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-point_to_string" name="method-i-point_to_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-point_to_string_source')" id="l_method-i-point_to_string_source">show</a>
+                
+              </p>
+              <div id="method-i-point_to_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">point_to_string</span>(<span class="ruby-identifier">point</span>)
+  <span class="ruby-node">&quot;(#{point[0]},#{point[1]})&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-range_to_string">
+            
+              <b>range_to_string</b>(object)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-range_to_string" name="method-i-range_to_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-range_to_string_source')" id="l_method-i-range_to_string_source">show</a>
+                
+              </p>
+              <div id="method-i-range_to_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">range_to_string</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-identifier">from</span> = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">begin</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:infinite?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">begin</span>.<span class="ruby-identifier">infinite?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">begin</span>
+  <span class="ruby-identifier">to</span>   = <span class="ruby-identifier">object</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:infinite?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">end</span>.<span class="ruby-identifier">infinite?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">end</span>
+  <span class="ruby-node">&quot;[#{from},#{to}#{object.exclude_end? ? &#39;)&#39; : &#39;]&#39;}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_array">
+            
+              <b>string_to_array</b>(string, oid)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_array" name="method-i-string_to_array" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_array_source')" id="l_method-i-string_to_array_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_array_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_array</span>(<span class="ruby-identifier">string</span>, <span class="ruby-identifier">oid</span>)
+  <span class="ruby-identifier">parse_pg_array</span>(<span class="ruby-identifier">string</span>).<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">oid</span>.<span class="ruby-identifier">type_cast</span> <span class="ruby-identifier">val</span>}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_bit">
+            
+              <b>string_to_bit</b>(value)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_bit" name="method-i-string_to_bit" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_bit_source')" id="l_method-i-string_to_bit_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_bit_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_bit</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^0x/</span>
+    <span class="ruby-identifier">value</span>[<span class="ruby-number">2</span><span class="ruby-operator">..</span><span class="ruby-number">-1</span>].<span class="ruby-identifier">hex</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-number">2</span>) <span class="ruby-comment"># Hexadecimal notation</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">value</span>                    <span class="ruby-comment"># Bit-string notation</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_cidr">
+            
+              <b>string_to_cidr</b>(string)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_cidr" name="method-i-string_to_cidr" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_cidr_source')" id="l_method-i-string_to_cidr_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_cidr_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_cidr</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">string</span>
+    <span class="ruby-constant">IPAddr</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">string</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_hstore">
+            
+              <b>string_to_hstore</b>(string)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_hstore" name="method-i-string_to_hstore" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_hstore_source')" id="l_method-i-string_to_hstore_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_hstore_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_hstore</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">nil?</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">string</span>
+    <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">string</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-constant">HstorePair</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">v</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;NULL&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\A&quot;(.*)&quot;\Z/</span>,<span class="ruby-string">&#39;\1&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\(.)/</span>, <span class="ruby-string">&#39;\1&#39;</span>)
+      <span class="ruby-identifier">k</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\A&quot;(.*)&quot;\Z/</span>,<span class="ruby-string">&#39;\1&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\(.)/</span>, <span class="ruby-string">&#39;\1&#39;</span>)
+      [<span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span>]
+    }]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">string</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_json">
+            
+              <b>string_to_json</b>(string)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_json" name="method-i-string_to_json" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_json_source')" id="l_method-i-string_to_json_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_json_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_json</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">string</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">string</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_point">
+            
+              <b>string_to_point</b>(string)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_point" name="method-i-string_to_point" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_point_source')" id="l_method-i-string_to_point_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_point_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_point</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">string</span>[<span class="ruby-number">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;(&#39;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">string</span>[<span class="ruby-number">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;)&#39;</span>
+    <span class="ruby-identifier">string</span> = <span class="ruby-identifier">string</span>[<span class="ruby-number">1</span><span class="ruby-operator">...</span><span class="ruby-number">-1</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">string</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-constant">Float</span>(<span class="ruby-identifier">v</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-string_to_time">
+            
+              <b>string_to_time</b>(string)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn/Cast.html#method-i-string_to_time" name="method-i-string_to_time" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-string_to_time_source')" id="l_method-i-string_to_time_source">show</a>
+                
+              </p>
+              <div id="method-i-string_to_time_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">string_to_time</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword">unless</span> <span class="ruby-constant">String</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">string</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">string</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;infinity&#39;</span>; <span class="ruby-number">1.0</span> <span class="ruby-operator">/</span> <span class="ruby-number">0.0</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;-infinity&#39;</span>; <span class="ruby-number">-1.0</span> <span class="ruby-operator">/</span> <span class="ruby-number">0.0</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/ BC$/</span>
+    <span class="ruby-keyword">super</span>(<span class="ruby-string">&quot;-&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">string</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/ BC$/</span>, <span class="ruby-string">&quot;&quot;</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

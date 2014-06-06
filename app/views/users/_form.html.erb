@@ -1,0 +1,52 @@
+<%= form_for @user, :html => { :class => 'form-horizontal' } do |f| %>
+  <h2><%= controller.action_name.capitalize %> User</h2>
+  <div class="col-md-5">
+    <legend>Personal information</legend>
+    <div class="form-group">
+        <%= f.label :firstname, class: "control-label col-md-3" %>
+        <div class="col-md-9"><%= f.text_field :firstname, placeholder: "First name", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :lastname, class: "control-label col-md-3" %>
+        <div class="col-md-9"><%= f.text_field :lastname, placeholder: "Last name", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+        <%= f.label :email, class: "control-label col-md-3" %>
+        <div class="col-md-9"><%= f.text_field :email, placeholder: "E-Mail address", class: "form-control" %></div>
+    </div>
+
+    <% if current_user.admin %>
+      <div class="form-group">
+        <%= f.label :role, class: "control-label col-md-3" %>
+        <div class="col-md-9"><%= f.select :role, User::ROLES, {}, {class: "form-control" } %></div>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+        <%= f.label :password, class: "control-label col-md-3" %>
+        <div class="col-md-9"><%= f.password_field :password, placeholder: "Password", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :password_confirmation, class: "control-label col-md-3" %>
+      <div class="col-md-9"><%= f.password_field :password_confirmation, placeholder: "Password confirmation", class: "form-control" %></div>
+    </div>
+  </div>
+
+  <div class="col-md-7">
+    <legend>User preferences</legend>
+    <div class="form-group">
+      <%= f.label :measurementInterval, 'Measurement Interval in seconds', class: "control-label col-md-8" %>
+      <div class="col-md-4"><%= f.number_field :measurementInterval, class: "form-control" %></div>
+    </div>
+  </div>
+  
+  <div class="col-md-12">
+    <div class="form-actions">
+      <%= f.submit :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', users_path, :class => 'btn btn-danger' %>
+    </div>
+  </div>
+<% end %>

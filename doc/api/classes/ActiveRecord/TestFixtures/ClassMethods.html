@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::TestFixtures::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::TestFixtures::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/fixtures_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fixtures">fixtures</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-require_fixture_classes">require_fixture_classes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-set_fixture_class">set_fixture_class</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-setup_fixture_accessors">setup_fixture_accessors</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-try_to_load_dependency">try_to_load_dependency</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-uses_transaction">uses_transaction</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-uses_transaction-3F">uses_transaction?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-fixtures">
+            
+              <b>fixtures</b>(*fixture_set_names)
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-fixtures" name="method-i-fixtures" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-fixtures_source')" id="l_method-i-fixtures_source">show</a>
+                
+              </p>
+              <div id="method-i-fixtures_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 759</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fixtures</span>(*<span class="ruby-identifier">fixture_set_names</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">fixture_set_names</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-value">:all</span>
+    <span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-node">&quot;#{fixture_path}/**/*.{yml}&quot;</span>]
+    <span class="ruby-identifier">fixture_set_names</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>[(<span class="ruby-identifier">fixture_path</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>)<span class="ruby-operator">..</span><span class="ruby-number">-5</span>] }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-identifier">fixture_set_names</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fixture_table_names</span> <span class="ruby-operator">|=</span> <span class="ruby-identifier">fixture_set_names</span>
+  <span class="ruby-identifier">require_fixture_classes</span>(<span class="ruby-identifier">fixture_set_names</span>)
+  <span class="ruby-identifier">setup_fixture_accessors</span>(<span class="ruby-identifier">fixture_set_names</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-require_fixture_classes">
+            
+              <b>require_fixture_classes</b>(fixture_set_names = nil)
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-require_fixture_classes" name="method-i-require_fixture_classes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-require_fixture_classes_source')" id="l_method-i-require_fixture_classes_source">show</a>
+                
+              </p>
+              <div id="method-i-require_fixture_classes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 783</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">require_fixture_classes</span>(<span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">fixture_set_names</span>
+    <span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-identifier">fixture_set_names</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-identifier">fixture_table_names</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">fixture_set_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file_name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">file_name</span> = <span class="ruby-identifier">file_name</span>.<span class="ruby-identifier">singularize</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">pluralize_table_names</span>
+    <span class="ruby-identifier">try_to_load_dependency</span>(<span class="ruby-identifier">file_name</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set_fixture_class">
+            
+              <b>set_fixture_class</b>(class_names = {})
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-set_fixture_class" name="method-i-set_fixture_class" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the model class for a fixture when the class name cannot be inferred
+from the fixture name.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-identifier">set_fixture_class</span> <span class="ruby-identifier">some_fixture</span><span class="ruby-operator">:</span>        <span class="ruby-constant">SomeModel</span>,
+                  <span class="ruby-string">&#39;namespaced/fixture&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Another</span><span class="ruby-operator">::</span><span class="ruby-constant">Model</span>
+</pre>
+
+<p>The keys must be the fixture names, that coincide with the short paths to
+the fixture files.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-set_fixture_class_source')" id="l_method-i-set_fixture_class_source">show</a>
+                
+              </p>
+              <div id="method-i-set_fixture_class_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 755</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set_fixture_class</span>(<span class="ruby-identifier">class_names</span> = {})
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fixture_class_names</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fixture_class_names</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">class_names</span>.<span class="ruby-identifier">stringify_keys</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-setup_fixture_accessors">
+            
+              <b>setup_fixture_accessors</b>(fixture_set_names = nil)
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-setup_fixture_accessors" name="method-i-setup_fixture_accessors" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-setup_fixture_accessors_source')" id="l_method-i-setup_fixture_accessors_source">show</a>
+                
+              </p>
+              <div id="method-i-setup_fixture_accessors_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 796</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">setup_fixture_accessors</span>(<span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">fixture_set_names</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">fixture_set_names</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">fixture_table_names</span>)
+  <span class="ruby-identifier">methods</span> = <span class="ruby-constant">Module</span>.<span class="ruby-identifier">new</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">fixture_set_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fs_name</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">fs_name</span> = <span class="ruby-identifier">fs_name</span>.<span class="ruby-identifier">to_s</span>
+      <span class="ruby-identifier">accessor_name</span> = <span class="ruby-identifier">fs_name</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;/&#39;</span>, <span class="ruby-string">&#39;_&#39;</span>).<span class="ruby-identifier">to_sym</span>
+
+      <span class="ruby-identifier">define_method</span>(<span class="ruby-identifier">accessor_name</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>*<span class="ruby-identifier">fixture_names</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">force_reload</span> = <span class="ruby-identifier">fixture_names</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">fixture_names</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">fixture_names</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">==</span> <span class="ruby-value">:reload</span>
+
+        <span class="ruby-ivar">@fixture_cache</span>[<span class="ruby-identifier">fs_name</span>] <span class="ruby-operator">||=</span> {}
+
+        <span class="ruby-identifier">instances</span> = <span class="ruby-identifier">fixture_names</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f_name</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">f_name</span> = <span class="ruby-identifier">f_name</span>.<span class="ruby-identifier">to_s</span>
+          <span class="ruby-ivar">@fixture_cache</span>[<span class="ruby-identifier">fs_name</span>].<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">f_name</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">force_reload</span>
+
+          <span class="ruby-keyword">if</span> <span class="ruby-ivar">@loaded_fixtures</span>[<span class="ruby-identifier">fs_name</span>][<span class="ruby-identifier">f_name</span>]
+            <span class="ruby-ivar">@fixture_cache</span>[<span class="ruby-identifier">fs_name</span>][<span class="ruby-identifier">f_name</span>] <span class="ruby-operator">||=</span> <span class="ruby-ivar">@loaded_fixtures</span>[<span class="ruby-identifier">fs_name</span>][<span class="ruby-identifier">f_name</span>].<span class="ruby-identifier">find</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">raise</span> <span class="ruby-constant">StandardError</span>, <span class="ruby-node">&quot;No fixture named &#39;#{f_name}&#39; found for fixture set &#39;#{fs_name}&#39;&quot;</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+
+        <span class="ruby-identifier">instances</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-number">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">instances</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">instances</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">private</span> <span class="ruby-identifier">accessor_name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-identifier">methods</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-try_to_load_dependency">
+            
+              <b>try_to_load_dependency</b>(file_name)
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-try_to_load_dependency" name="method-i-try_to_load_dependency" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-try_to_load_dependency_source')" id="l_method-i-try_to_load_dependency_source">show</a>
+                
+              </p>
+              <div id="method-i-try_to_load_dependency_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 772</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">try_to_load_dependency</span>(<span class="ruby-identifier">file_name</span>)
+  <span class="ruby-identifier">require_dependency</span> <span class="ruby-identifier">file_name</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-comment"># Let&#39;s hope the developer has included it</span>
+  <span class="ruby-comment"># Let&#39;s warn in case this is a subdependency, otherwise</span>
+  <span class="ruby-comment"># subdependency error messages are totally cryptic</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">logger</span>
+    <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-node">&quot;Unable to load #{file_name}, underlying cause #{e.message} \n\n #{e.backtrace.join(&quot;\n&quot;)}&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uses_transaction">
+            
+              <b>uses_transaction</b>(*methods)
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-uses_transaction" name="method-i-uses_transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-uses_transaction_source')" id="l_method-i-uses_transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-uses_transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 827</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">uses_transaction</span>(*<span class="ruby-identifier">methods</span>)
+  <span class="ruby-ivar">@uses_transaction</span> = [] <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@uses_transaction</span>)
+  <span class="ruby-ivar">@uses_transaction</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">methods</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uses_transaction-3F">
+            
+              <b>uses_transaction?</b>(method)
+            
+            <a href="../../../classes/ActiveRecord/TestFixtures/ClassMethods.html#method-i-uses_transaction-3F" name="method-i-uses_transaction-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-uses_transaction-3F_source')" id="l_method-i-uses_transaction-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-uses_transaction-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb, line 832</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">uses_transaction?</span>(<span class="ruby-identifier">method</span>)
+  <span class="ruby-ivar">@uses_transaction</span> = [] <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@uses_transaction</span>)
+  <span class="ruby-ivar">@uses_transaction</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

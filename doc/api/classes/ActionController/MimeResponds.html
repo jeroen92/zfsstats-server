@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::MimeResponds</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::MimeResponds 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/mime_responds_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/mime_responds.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="MimeResponds/ClassMethods.html">ActionController::MimeResponds::ClassMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="MimeResponds/Collector.html">ActionController::MimeResponds::Collector</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to">respond_to</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-respond_with">respond_with</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to">
+            
+              <b>respond_to</b>(*mimes, &amp;block)
+            
+            <a href="../../classes/ActionController/MimeResponds.html#method-i-respond_to" name="method-i-respond_to" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Without web-service support, an action which collects the data for
+displaying a list of people might look something like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@people</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Here&#39;s the same action, with web-service support baked in:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@people</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@people</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>What that says is, “if the client wants <a href="../HTML.html">HTML</a> in
+response to this action, just respond as we would have before, but if the
+client wants XML, return them the list of people in XML format.” (<a
+href="../Rails.html">Rails</a> determines the desired response format from
+the HTTP Accept header submitted by the client.)</p>
+
+<p>Supposing you have an action that adds a new person, optionally creating
+their company (by name) if it does not already exist, without web-services,
+it might look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@company</span> = <span class="ruby-constant">Company</span>.<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">company</span>][:<span class="ruby-identifier">name</span>])
+  <span class="ruby-ivar">@person</span>  = <span class="ruby-ivar">@company</span>.<span class="ruby-identifier">people</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">person</span>])
+
+  <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">person_list_url</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Here&#39;s the same action, with web-service support baked in:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">company</span>  = <span class="ruby-identifier">params</span>[:<span class="ruby-identifier">person</span>].<span class="ruby-identifier">delete</span>(:<span class="ruby-identifier">company</span>)
+  <span class="ruby-ivar">@company</span> = <span class="ruby-constant">Company</span>.<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">company</span>[:<span class="ruby-identifier">name</span>])
+  <span class="ruby-ivar">@person</span>  = <span class="ruby-ivar">@company</span>.<span class="ruby-identifier">people</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">person</span>])
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">person_list_url</span>) }
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">js</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span>  { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@person</span>.<span class="ruby-identifier">to_xml</span>(<span class="ruby-identifier">include</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@company</span>) }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If the client wants <a href="../HTML.html">HTML</a>, we just redirect them
+back to the person list. If they want JavaScript, then it is an Ajax
+request and we render the JavaScript template associated with this action.
+Lastly, if the client wants XML, we render the created person as XML, but
+with a twist: we also include the person&#39;s company in the rendered XML,
+so you get something like this:</p>
+
+<pre>&lt;person&gt;
+  &lt;id&gt;...&lt;/id&gt;
+  ...
+  &lt;company&gt;
+    &lt;id&gt;...&lt;/id&gt;
+    &lt;name&gt;...&lt;/name&gt;
+    ...
+  &lt;/company&gt;
+&lt;/person&gt;</pre>
+
+<p>Note, however, the extra bit at the top of that action:</p>
+
+<pre>company  = params[:person].delete(:company)
+@company = Company.find_or_create_by(name: company[:name])</pre>
+
+<p>This is because the incoming XML document (if a web-service request is in
+process) can only contain a single root-node. So, we have to rearrange
+things so that the request looks like this (url-encoded):</p>
+
+<pre>person[name]=...&amp;person[company][name]=...&amp;...</pre>
+
+<p>And, like this (xml-encoded):</p>
+
+<pre>&lt;person&gt;
+  &lt;name&gt;...&lt;/name&gt;
+  &lt;company&gt;
+    &lt;name&gt;...&lt;/name&gt;
+  &lt;/company&gt;
+&lt;/person&gt;</pre>
+
+<p>In other words, we make the request so that it operates on a single
+entity&#39;s person. Then, in the action, we extract the company data from
+the request, find or create the company, and then create the new person
+with the remaining data.</p>
+
+<p>Note that you can define your own XML parameter parser which would allow
+you to describe multiple entities in a single request (i.e., by wrapping
+them all in a single root node), but if you just go with the flow and
+accept Rails&#39; defaults, life will be much easier.</p>
+
+<p>If you need to use a MIME type which isn&#39;t supported by default, you
+can register your own handlers in config/initializers/mime_types.rb as
+follows.</p>
+
+<pre>Mime::Type.register &quot;image/jpg&quot;, :jpg</pre>
+
+<p>Respond to also allows you to specify a common block for different formats
+by using any:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@people</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>
+
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">any</span>(:<span class="ruby-identifier">xml</span>, :<span class="ruby-identifier">json</span>) { <span class="ruby-identifier">render</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_sym</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@people</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In the example above, if the format is xml, it will render:</p>
+
+<pre>render xml: @people</pre>
+
+<p>Or if the format is json:</p>
+
+<pre>render json: @people</pre>
+
+<p>Since this is a common pattern, you can use the class method <a
+href="MimeResponds.html#method-i-respond_to">#respond_to</a> with the <a
+href="MimeResponds.html#method-i-respond_with">#respond_with</a> method to
+have the same results:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">respond_to</span> :<span class="ruby-identifier">html</span>, :<span class="ruby-identifier">xml</span>, :<span class="ruby-identifier">json</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@people</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@people</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Be sure to check the documentation of <code>respond_with</code> and
+<code>ActionController::MimeResponds.respond_to</code> for more examples.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_to_source')" id="l_method-i-respond_to_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_to_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/mime_responds.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_to</span>(*<span class="ruby-identifier">mimes</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;respond_to takes either types or a block, never both&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">mimes</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">collector</span> = <span class="ruby-identifier">retrieve_collector_from_mimes</span>(<span class="ruby-identifier">mimes</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">response</span> = <span class="ruby-identifier">collector</span>.<span class="ruby-identifier">response</span>
+    <span class="ruby-identifier">response</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">call</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">render</span>({})
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_with">
+            
+              <b>respond_with</b>(*resources, &amp;block)
+            
+            <a href="../../classes/ActionController/MimeResponds.html#method-i-respond_with" name="method-i-respond_with" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>For a given controller action, <a
+href="MimeResponds.html#method-i-respond_with">#respond_with</a> generates
+an appropriate response based on the mime-type requested by the client.</p>
+
+<p>If the method is called with just a resource, as in this example -</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-identifier">respond_to</span> :<span class="ruby-identifier">html</span>, :<span class="ruby-identifier">xml</span>, :<span class="ruby-identifier">json</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@people</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>
+    <span class="ruby-identifier">respond_with</span> <span class="ruby-ivar">@people</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>then the mime-type of the response is typically selected based on the
+request&#39;s Accept header and the set of available formats declared by
+previous calls to the controller&#39;s class method
+<code>respond_to</code>. Alternatively the mime-type can be selected by
+explicitly setting <code>request.format</code> in the controller.</p>
+
+<p>If an acceptable format is not identified, the application returns a
+&#39;406 - not acceptable&#39; status. Otherwise, the default response is
+to render a template named after the current action and the selected
+format, e.g. <code>index.html.erb</code>. If no template is available, the
+behavior depends on the selected format:</p>
+<ul><li>
+<p>for an html response - if the request method is <code>get</code>, an
+exception is raised but for other requests such as <code>post</code> the
+response depends on whether the resource has any validation errors (i.e.
+assuming that an attempt has been made to save the resource, e.g. by a
+<code>create</code> action) -</p>
+<ol><li>
+<p>If there are no errors, i.e. the resource was saved successfully, the
+response <code>redirect</code>&#39;s to the resource i.e. its
+<code>show</code> action.</p>
+</li><li>
+<p>If there are validation errors, the response renders a default action,
+which is <code>:new</code> for a <code>post</code> request or
+<code>:edit</code> for <code>patch</code> or <code>put</code>.</p>
+</li></ol>
+
+<p>Thus an example like this -</p>
+
+<pre class="ruby"><span class="ruby-identifier">respond_to</span> :<span class="ruby-identifier">html</span>, :<span class="ruby-identifier">xml</span>
+
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">user</span>])
+  <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;User was successfully created.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@user</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>is equivalent, in the absence of <code>create.html.erb</code>, to -</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">user</span>])
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+      <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;User was successfully created.&#39;</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">redirect_to</span>(<span class="ruby-ivar">@user</span>) }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;new&quot;</span> }
+      <span class="ruby-identifier">format</span>.<span class="ruby-identifier">xml</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">xml</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@user</span> }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+</li><li>
+<p>for a javascript request - if the template isn&#39;t found, an exception is
+raised.</p>
+</li><li>
+<p>for other requests - i.e. data formats such as xml, json, csv etc, if the
+resource passed to <code>respond_with</code> responds to
+<code>to_&lt;format&gt;</code>, the method attempts to render the resource
+in the requested format directly, e.g. for an xml request, the response is
+equivalent to calling  <code>render xml: resource</code>.</p>
+</li></ul>
+
+<h3 id="method-i-respond_with-label-Nested+resources">Nested resources</h3>
+
+<p>As outlined above, the <code>resources</code> argument passed to
+<code>respond_with</code> can play two roles. It can be used to generate
+the redirect url for successful html requests (e.g. for <code>create</code>
+actions when no template exists), while for formats other than html and
+javascript it is the object that gets rendered, by being converted directly
+to the required format (again assuming no template exists).</p>
+
+<p>For redirecting successful html requests, <code>respond_with</code> also
+supports the use of nested resources, which are supplied in the same way as
+in <code>form_for</code> and <code>polymorphic_url</code>. For example -</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@project</span> = <span class="ruby-constant">Project</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">project_id</span>])
+  <span class="ruby-ivar">@task</span> = <span class="ruby-ivar">@project</span>.<span class="ruby-identifier">comments</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">task</span>])
+  <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&#39;Task was successfully created.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@task</span>.<span class="ruby-identifier">save</span>
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@project</span>, <span class="ruby-ivar">@task</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This would cause <code>respond_with</code> to redirect to
+<code>project_task_url</code> instead of <code>task_url</code>. For request
+formats other than html or javascript, if multiple resources are passed in
+this way, it is the last one specified that is rendered.</p>
+
+<h3 id="method-i-respond_with-label-Customizing+response+behavior">Customizing response behavior</h3>
+
+<p>Like <code>respond_to</code>, <code>respond_with</code> may also be called
+with a block that can be used to overwrite any of the default responses,
+e.g. -</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+  <span class="ruby-ivar">@user</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">user</span>])
+  <span class="ruby-identifier">flash</span>[:<span class="ruby-identifier">notice</span>] = <span class="ruby-string">&quot;User was successfully created.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@user</span>.<span class="ruby-identifier">save</span>
+
+  <span class="ruby-identifier">respond_with</span>(<span class="ruby-ivar">@user</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span> { <span class="ruby-identifier">render</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The argument passed to the block is an <a
+href="MimeResponds/Collector.html">ActionController::MimeResponds::Collector</a>
+object which stores the responses for the formats defined within the block.
+Note that formats with responses defined explicitly in this way do not have
+to first be declared using the class method <code>respond_to</code>.</p>
+
+<p>Also, a hash passed to <code>respond_with</code> immediately after the
+specified resource(s) is interpreted as a set of options relevant to all
+formats. Any option accepted by <code>render</code> can be used, e.g.</p>
+
+<pre>respond_with @people, status: 200</pre>
+
+<p>However, note that these options are ignored after an unsuccessful attempt
+to save a resource, e.g. when automatically rendering <code>:new</code>
+after a post request.</p>
+
+<p>Two additional options are relevant specifically to
+<code>respond_with</code> -</p>
+<ol><li>
+<p><code>:location</code> - overwrites the default redirect location used
+after a successful html <code>post</code> request.</p>
+</li><li>
+<p><code>:action</code> - overwrites the default render action used after an
+unsuccessful html <code>post</code> request.</p>
+</li></ol>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_with_source')" id="l_method-i-respond_with_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_with_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/mime_responds.rb, line 323</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_with</span>(*<span class="ruby-identifier">resources</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;In order to use respond_with, first you need to declare the formats your &quot;</span>              <span class="ruby-string">&quot;controller responds to in the class level&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">mimes_for_respond_to</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">collector</span> = <span class="ruby-identifier">retrieve_collector_from_mimes</span>(&amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">resources</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-number">1</span> <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> <span class="ruby-identifier">resources</span>.<span class="ruby-identifier">extract_options!</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-value">:default_response</span>] = <span class="ruby-identifier">collector</span>.<span class="ruby-identifier">response</span>
+    (<span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:responder</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">responder</span>).<span class="ruby-identifier">call</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">resources</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

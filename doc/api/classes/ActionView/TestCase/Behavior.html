@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::TestCase::Behavior</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::TestCase::Behavior 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/test_case_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/test_case.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Behavior/ClassMethods.html">ActionView::TestCase::Behavior::ClassMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Behavior/Locals.html">ActionView::TestCase::Behavior::Locals</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Behavior/RenderedViewsCollection.html">ActionView::TestCase::Behavior::RenderedViewsCollection</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-config">config</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-render">render</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-rendered_views">rendered_views</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-setup_with_controller">setup_with_controller</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../../ActionDispatch/Assertions.html">
+              ActionDispatch::Assertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActionDispatch/TestProcess.html">
+              ActionDispatch::TestProcess
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActionController/TemplateAssertions.html">
+              ActionController::TemplateAssertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../Context.html">
+              ActionView::Context
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActionDispatch/Routing/PolymorphicRoutes.html">
+              ActionDispatch::Routing::PolymorphicRoutes
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../AbstractController/Helpers.html">
+              AbstractController::Helpers
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../Helpers.html">
+              ActionView::Helpers
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../RecordIdentifier.html">
+              ActionView::RecordIdentifier
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../RoutingUrlFor.html">
+              ActionView::RoutingUrlFor
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActiveSupport/Testing/ConstantLookup.html">
+              ActiveSupport::Testing::ConstantLookup
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">INTERNAL_IVARS</td>
+            <td>=</td>
+            <td class="attr-value">[
+:@__name__,
+:@__io__,
+:@_assertion_wrapped,
+:@_assertions,
+:@_result,
+:@_routes,
+:@controller,
+:@_layouts,
+:@_files,
+:@_rendered_views,
+:@method_name,
+:@output_buffer,
+:@_partials,
+:@passed,
+:@rendered,
+:@request,
+:@routes,
+:@tagged_logger,
+:@_templates,
+:@options,
+:@test_passed,
+:@view,
+:@view_context_class
+]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>controller</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>output_buffer</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>rendered</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-config">
+            
+              <b>config</b>()
+            
+            <a href="../../../classes/ActionView/TestCase/Behavior.html#method-i-config" name="method-i-config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-config_source')" id="l_method-i-config_source">show</a>
+                
+              </p>
+              <div id="method-i-config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/test_case.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">config</span>
+  <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">config</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:config</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render">
+            
+              <b>render</b>(options = {}, local_assigns = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/TestCase/Behavior.html#method-i-render" name="method-i-render" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_source')" id="l_method-i-render_source">show</a>
+                
+              </p>
+              <div id="method-i-render_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/test_case.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">local_assigns</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">view</span>.<span class="ruby-identifier">assign</span>(<span class="ruby-identifier">view_assigns</span>)
+  <span class="ruby-ivar">@rendered</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">output</span> = <span class="ruby-identifier">view</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">options</span>, <span class="ruby-identifier">local_assigns</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">output</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rendered_views">
+            
+              <b>rendered_views</b>()
+            
+            <a href="../../../classes/ActionView/TestCase/Behavior.html#method-i-rendered_views" name="method-i-rendered_views" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rendered_views_source')" id="l_method-i-rendered_views_source">show</a>
+                
+              </p>
+              <div id="method-i-rendered_views_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/test_case.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rendered_views</span>
+  <span class="ruby-ivar">@_rendered_views</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">RenderedViewsCollection</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-setup_with_controller">
+            
+              <b>setup_with_controller</b>()
+            
+            <a href="../../../classes/ActionView/TestCase/Behavior.html#method-i-setup_with_controller" name="method-i-setup_with_controller" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-setup_with_controller_source')" id="l_method-i-setup_with_controller_source">show</a>
+                
+              </p>
+              <div id="method-i-setup_with_controller_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/test_case.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">setup_with_controller</span>
+  <span class="ruby-ivar">@controller</span> = <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">TestCase</span><span class="ruby-operator">::</span><span class="ruby-constant">TestController</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@request</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">request</span>
+  <span class="ruby-ivar">@output_buffer</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">SafeBuffer</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@rendered</span> = <span class="ruby-string">&#39;&#39;</span>
+
+  <span class="ruby-identifier">make_test_case_available_to_view!</span>
+  <span class="ruby-identifier">say_no_to_protect_against_forgery!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

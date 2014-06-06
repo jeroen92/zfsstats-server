@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::HideActions::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::HideActions::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/hide_actions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/hide_actions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-action_methods">action_methods</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-hide_action">hide_action</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-visible_action-3F">visible_action?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-action_methods">
+            
+              <b>action_methods</b>()
+            
+            <a href="../../../classes/ActionController/HideActions/ClassMethods.html#method-i-action_methods" name="method-i-action_methods" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Overrides <a
+href="../../AbstractController/Base.html#method-i-action_methods">AbstractController::Base#action_methods</a>
+to remove any methods that are listed as hidden methods.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-action_methods_source')" id="l_method-i-action_methods_source">show</a>
+                
+              </p>
+              <div id="method-i-action_methods_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/hide_actions.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">action_methods</span>
+  <span class="ruby-ivar">@action_methods</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">super</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hidden_actions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>) }).<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-hide_action">
+            
+              <b>hide_action</b>(*args)
+            
+            <a href="../../../classes/ActionController/HideActions/ClassMethods.html#method-i-hide_action" name="method-i-hide_action" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets all of the actions passed in as hidden actions.</p>
+
+<h4 id="method-i-hide_action-label-Parameters"><a href="../Parameters.html">Parameters</a></h4>
+<ul><li>
+<p><code>args</code> - A list of actions</p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-hide_action_source')" id="l_method-i-hide_action_source">show</a>
+                
+              </p>
+              <div id="method-i-hide_action_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/hide_actions.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hide_action</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">hidden_actions</span> = <span class="ruby-identifier">hidden_actions</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">args</span>.<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:to_s</span>)).<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-visible_action-3F">
+            
+              <b>visible_action?</b>(action_name)
+            
+            <a href="../../../classes/ActionController/HideActions/ClassMethods.html#method-i-visible_action-3F" name="method-i-visible_action-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-visible_action-3F_source')" id="l_method-i-visible_action-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-visible_action-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/hide_actions.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">visible_action?</span>(<span class="ruby-identifier">action_name</span>)
+  <span class="ruby-keyword">not</span> <span class="ruby-identifier">hidden_actions</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">action_name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

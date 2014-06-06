@@ -1,0 +1,698 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Inflector::Inflections</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::Inflector::Inflections 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/inflector/inflections_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A singleton instance of this class is yielded by <a
+href="../Inflector.html#method-i-inflections">ActiveSupport::Inflector#inflections</a>,
+which can then be used to specify additional inflection rules. If passed an
+optional locale, rules for other languages can be specified. The default
+locale is <code>:en</code>. Only rules for English are provided.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Inflector</span>.<span class="ruby-identifier">inflections</span>(:<span class="ruby-identifier">en</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">inflect</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">inflect</span>.<span class="ruby-identifier">plural</span> <span class="ruby-regexp">/^(ox)$/</span>, <span class="ruby-string">&#39;\1\2en&#39;</span>
+  <span class="ruby-identifier">inflect</span>.<span class="ruby-identifier">singular</span> <span class="ruby-regexp">/^(ox)en/</span>, <span class="ruby-string">&#39;\1&#39;</span>
+
+  <span class="ruby-identifier">inflect</span>.<span class="ruby-identifier">irregular</span> <span class="ruby-string">&#39;octopus&#39;</span>, <span class="ruby-string">&#39;octopi&#39;</span>
+
+  <span class="ruby-identifier">inflect</span>.<span class="ruby-identifier">uncountable</span> <span class="ruby-string">&#39;equipment&#39;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>New rules are added at the top. So in the example above, the irregular rule
+for octopus will now be the first of the pluralization and singularization
+rules that is runs. This guarantees that your rules run before any of the
+rules that may already have been loaded.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-acronym">acronym</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear">clear</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-human">human</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-instance">instance</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-irregular">irregular</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-plural">plural</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-singular">singular</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-uncountable">uncountable</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>acronym_regex</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>acronyms</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>humans</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>plurals</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>singulars</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>uncountables</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-instance">
+            
+              <b>instance</b>(locale = :en)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-c-instance" name="method-c-instance" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-instance_source')" id="l_method-c-instance_source">show</a>
+                
+              </p>
+              <div id="method-c-instance_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">instance</span>(<span class="ruby-identifier">locale</span> = <span class="ruby-value">:en</span>)
+  <span class="ruby-ivar">@__instance__</span>[<span class="ruby-identifier">locale</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>()
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>
+  <span class="ruby-ivar">@plurals</span>, <span class="ruby-ivar">@singulars</span>, <span class="ruby-ivar">@uncountables</span>, <span class="ruby-ivar">@humans</span>, <span class="ruby-ivar">@acronyms</span>, <span class="ruby-ivar">@acronym_regex</span> = [], [], [], [], {}, <span class="ruby-regexp">/(?=a)b/</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-acronym">
+            
+              <b>acronym</b>(word)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-acronym" name="method-i-acronym" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies a new acronym. An acronym must be specified as it will appear in
+a camelized string. An underscore string that contains the acronym will
+retain the acronym when passed to <code>camelize</code>,
+<code>humanize</code>, or <code>titleize</code>. A camelized string that
+contains the acronym will maintain the acronym when titleized or humanized,
+and will convert the acronym into a non-delimited single lowercase word
+when passed to <code>underscore</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;HTML&#39;</span>
+<span class="ruby-identifier">titleize</span> <span class="ruby-string">&#39;html&#39;</span>     <span class="ruby-comment">#=&gt; &#39;HTML&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;html&#39;</span>     <span class="ruby-comment">#=&gt; &#39;HTML&#39;</span>
+<span class="ruby-identifier">underscore</span> <span class="ruby-string">&#39;MyHTML&#39;</span> <span class="ruby-comment">#=&gt; &#39;my_html&#39;</span>
+</pre>
+
+<p>The acronym, however, must occur as a delimited unit and not be part of
+another word for conversions to recognize it:</p>
+
+<pre class="ruby"><span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;HTTP&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;my_http_delimited&#39;</span> <span class="ruby-comment">#=&gt; &#39;MyHTTPDelimited&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;https&#39;</span>             <span class="ruby-comment">#=&gt; &#39;Https&#39;, not &#39;HTTPs&#39;</span>
+<span class="ruby-identifier">underscore</span> <span class="ruby-string">&#39;HTTPS&#39;</span>           <span class="ruby-comment">#=&gt; &#39;http_s&#39;, not &#39;https&#39;</span>
+
+<span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;HTTPS&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;https&#39;</span>   <span class="ruby-comment">#=&gt; &#39;HTTPS&#39;</span>
+<span class="ruby-identifier">underscore</span> <span class="ruby-string">&#39;HTTPS&#39;</span> <span class="ruby-comment">#=&gt; &#39;https&#39;</span>
+</pre>
+
+<p>Note: Acronyms that are passed to <code>pluralize</code> will no longer be
+recognized, since the acronym will not occur as a delimited unit in the
+pluralized result. To work around this, you must specify the pluralized
+form as an acronym as well:</p>
+
+<pre class="ruby"><span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;API&#39;</span>
+<span class="ruby-identifier">camelize</span>(<span class="ruby-identifier">pluralize</span>(<span class="ruby-string">&#39;api&#39;</span>)) <span class="ruby-comment">#=&gt; &#39;Apis&#39;</span>
+
+<span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;APIs&#39;</span>
+<span class="ruby-identifier">camelize</span>(<span class="ruby-identifier">pluralize</span>(<span class="ruby-string">&#39;api&#39;</span>)) <span class="ruby-comment">#=&gt; &#39;APIs&#39;</span>
+</pre>
+
+<p><code>acronym</code> may be used to specify any word that contains an
+acronym or otherwise needs to maintain a non-standard capitalization. The
+only restriction is that the word must begin with a capital letter.</p>
+
+<pre class="ruby"><span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;RESTful&#39;</span>
+<span class="ruby-identifier">underscore</span> <span class="ruby-string">&#39;RESTful&#39;</span>           <span class="ruby-comment">#=&gt; &#39;restful&#39;</span>
+<span class="ruby-identifier">underscore</span> <span class="ruby-string">&#39;RESTfulController&#39;</span> <span class="ruby-comment">#=&gt; &#39;restful_controller&#39;</span>
+<span class="ruby-identifier">titleize</span> <span class="ruby-string">&#39;RESTfulController&#39;</span>   <span class="ruby-comment">#=&gt; &#39;RESTful Controller&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;restful&#39;</span>             <span class="ruby-comment">#=&gt; &#39;RESTful&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;restful_controller&#39;</span>  <span class="ruby-comment">#=&gt; &#39;RESTfulController&#39;</span>
+
+<span class="ruby-identifier">acronym</span> <span class="ruby-string">&#39;McDonald&#39;</span>
+<span class="ruby-identifier">underscore</span> <span class="ruby-string">&#39;McDonald&#39;</span> <span class="ruby-comment">#=&gt; &#39;mcdonald&#39;</span>
+<span class="ruby-identifier">camelize</span> <span class="ruby-string">&#39;mcdonald&#39;</span>   <span class="ruby-comment">#=&gt; &#39;McDonald&#39;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-acronym_source')" id="l_method-i-acronym_source">show</a>
+                
+              </p>
+              <div id="method-i-acronym_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">acronym</span>(<span class="ruby-identifier">word</span>)
+  <span class="ruby-ivar">@acronyms</span>[<span class="ruby-identifier">word</span>.<span class="ruby-identifier">downcase</span>] = <span class="ruby-identifier">word</span>
+  <span class="ruby-ivar">@acronym_regex</span> = <span class="ruby-node">/#{@acronyms.values.join(&quot;|&quot;)}/</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear">
+            
+              <b>clear</b>(scope = :all)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-clear" name="method-i-clear" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clears the loaded inflections within a given scope (default is
+<code>:all</code>). Give the scope as a symbol of the inflection type, the
+options are: <code>:plurals</code>, <code>:singulars</code>,
+<code>:uncountables</code>, <code>:humans</code>.</p>
+
+<pre>clear :all
+clear :plurals</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_source')" id="l_method-i-clear_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 185</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear</span>(<span class="ruby-identifier">scope</span> = <span class="ruby-value">:all</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">scope</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:all</span>
+      <span class="ruby-ivar">@plurals</span>, <span class="ruby-ivar">@singulars</span>, <span class="ruby-ivar">@uncountables</span>, <span class="ruby-ivar">@humans</span> = [], [], [], []
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">instance_variable_set</span> <span class="ruby-node">&quot;@#{scope}&quot;</span>, []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-human">
+            
+              <b>human</b>(rule, replacement)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-human" name="method-i-human" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies a humanized form of a string by a regular expression rule or by a
+string mapping. When using a regular expression based replacement, the
+normal humanize formatting is called after the replacement. When a string
+is used, the human form should be specified as desired (example: &#39;The
+name&#39;, not &#39;the_name&#39;).</p>
+
+<pre>human /_cnt$/i, &#39;\1_count&#39;
+human &#39;legacy_col_person_name&#39;, &#39;Name&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-human_source')" id="l_method-i-human_source">show</a>
+                
+              </p>
+              <div id="method-i-human_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">human</span>(<span class="ruby-identifier">rule</span>, <span class="ruby-identifier">replacement</span>)
+  <span class="ruby-ivar">@humans</span>.<span class="ruby-identifier">prepend</span>([<span class="ruby-identifier">rule</span>, <span class="ruby-identifier">replacement</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-irregular">
+            
+              <b>irregular</b>(singular, plural)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-irregular" name="method-i-irregular" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies a new irregular that applies to both pluralization and
+singularization at the same time. This can only be used for strings, not
+regular expressions. You simply pass the irregular in singular and plural
+form.</p>
+
+<pre>irregular &#39;octopus&#39;, &#39;octopi&#39;
+irregular &#39;person&#39;, &#39;people&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-irregular_source')" id="l_method-i-irregular_source">show</a>
+                
+              </p>
+              <div id="method-i-irregular_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">irregular</span>(<span class="ruby-identifier">singular</span>, <span class="ruby-identifier">plural</span>)
+  <span class="ruby-ivar">@uncountables</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">singular</span>)
+  <span class="ruby-ivar">@uncountables</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">plural</span>)
+
+  <span class="ruby-identifier">s0</span> = <span class="ruby-identifier">singular</span>[<span class="ruby-number">0</span>]
+  <span class="ruby-identifier">srest</span> = <span class="ruby-identifier">singular</span>[<span class="ruby-number">1</span><span class="ruby-operator">..</span><span class="ruby-number">-1</span>]
+
+  <span class="ruby-identifier">p0</span> = <span class="ruby-identifier">plural</span>[<span class="ruby-number">0</span>]
+  <span class="ruby-identifier">prest</span> = <span class="ruby-identifier">plural</span>[<span class="ruby-number">1</span><span class="ruby-operator">..</span><span class="ruby-number">-1</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">s0</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">p0</span>.<span class="ruby-identifier">upcase</span>
+    <span class="ruby-identifier">plural</span>(<span class="ruby-node">/(#{s0})#{srest}$/</span>, <span class="ruby-string">&#39;\1&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">prest</span>)
+    <span class="ruby-identifier">plural</span>(<span class="ruby-node">/(#{p0})#{prest}$/</span>, <span class="ruby-string">&#39;\1&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">prest</span>)
+
+    <span class="ruby-identifier">singular</span>(<span class="ruby-node">/(#{s0})#{srest}$/</span>, <span class="ruby-string">&#39;\1&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">srest</span>)
+    <span class="ruby-identifier">singular</span>(<span class="ruby-node">/(#{p0})#{prest}$/</span>, <span class="ruby-string">&#39;\1&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">srest</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">plural</span>(<span class="ruby-node">/#{s0.upcase}(?i)#{srest}$/</span>,   <span class="ruby-identifier">p0</span>.<span class="ruby-identifier">upcase</span>   <span class="ruby-operator">+</span> <span class="ruby-identifier">prest</span>)
+    <span class="ruby-identifier">plural</span>(<span class="ruby-node">/#{s0.downcase}(?i)#{srest}$/</span>, <span class="ruby-identifier">p0</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">prest</span>)
+    <span class="ruby-identifier">plural</span>(<span class="ruby-node">/#{p0.upcase}(?i)#{prest}$/</span>,   <span class="ruby-identifier">p0</span>.<span class="ruby-identifier">upcase</span>   <span class="ruby-operator">+</span> <span class="ruby-identifier">prest</span>)
+    <span class="ruby-identifier">plural</span>(<span class="ruby-node">/#{p0.downcase}(?i)#{prest}$/</span>, <span class="ruby-identifier">p0</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">prest</span>)
+
+    <span class="ruby-identifier">singular</span>(<span class="ruby-node">/#{s0.upcase}(?i)#{srest}$/</span>,   <span class="ruby-identifier">s0</span>.<span class="ruby-identifier">upcase</span>   <span class="ruby-operator">+</span> <span class="ruby-identifier">srest</span>)
+    <span class="ruby-identifier">singular</span>(<span class="ruby-node">/#{s0.downcase}(?i)#{srest}$/</span>, <span class="ruby-identifier">s0</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">srest</span>)
+    <span class="ruby-identifier">singular</span>(<span class="ruby-node">/#{p0.upcase}(?i)#{prest}$/</span>,   <span class="ruby-identifier">s0</span>.<span class="ruby-identifier">upcase</span>   <span class="ruby-operator">+</span> <span class="ruby-identifier">srest</span>)
+    <span class="ruby-identifier">singular</span>(<span class="ruby-node">/#{p0.downcase}(?i)#{prest}$/</span>, <span class="ruby-identifier">s0</span>.<span class="ruby-identifier">downcase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">srest</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-plural">
+            
+              <b>plural</b>(rule, replacement)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-plural" name="method-i-plural" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies a new pluralization rule and its replacement. The rule can either
+be a string or a regular expression. The replacement should always be a
+string that may include references to the matched data from the rule.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-plural_source')" id="l_method-i-plural_source">show</a>
+                
+              </p>
+              <div id="method-i-plural_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">plural</span>(<span class="ruby-identifier">rule</span>, <span class="ruby-identifier">replacement</span>)
+  <span class="ruby-ivar">@uncountables</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">rule</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-ivar">@uncountables</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">replacement</span>)
+  <span class="ruby-ivar">@plurals</span>.<span class="ruby-identifier">prepend</span>([<span class="ruby-identifier">rule</span>, <span class="ruby-identifier">replacement</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-singular">
+            
+              <b>singular</b>(rule, replacement)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-singular" name="method-i-singular" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Specifies a new singularization rule and its replacement. The rule can
+either be a string or a regular expression. The replacement should always
+be a string that may include references to the matched data from the rule.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-singular_source')" id="l_method-i-singular_source">show</a>
+                
+              </p>
+              <div id="method-i-singular_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">singular</span>(<span class="ruby-identifier">rule</span>, <span class="ruby-identifier">replacement</span>)
+  <span class="ruby-ivar">@uncountables</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">rule</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">rule</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>)
+  <span class="ruby-ivar">@uncountables</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">replacement</span>)
+  <span class="ruby-ivar">@singulars</span>.<span class="ruby-identifier">prepend</span>([<span class="ruby-identifier">rule</span>, <span class="ruby-identifier">replacement</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uncountable">
+            
+              <b>uncountable</b>(*words)
+            
+            <a href="../../../classes/ActiveSupport/Inflector/Inflections.html#method-i-uncountable" name="method-i-uncountable" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Add uncountable words that shouldn&#39;t be attempted inflected.</p>
+
+<pre>uncountable &#39;money&#39;
+uncountable &#39;money&#39;, &#39;information&#39;
+uncountable %w( money information rice )</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-uncountable_source')" id="l_method-i-uncountable_source">show</a>
+                
+              </p>
+              <div id="method-i-uncountable_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/inflector/inflections.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">uncountable</span>(*<span class="ruby-identifier">words</span>)
+  (<span class="ruby-ivar">@uncountables</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">words</span>).<span class="ruby-identifier">flatten!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

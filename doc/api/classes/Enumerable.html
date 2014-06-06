@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Enumerable</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            Enumerable 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/enumerable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/enumerable.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/json/encoding_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-exclude-3F">exclude?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-index_by">index_by</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-many-3F">many?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-sum">sum</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-exclude-3F">
+            
+              <b>exclude?</b>(object)
+            
+            <a href="../classes/Enumerable.html#method-i-exclude-3F" name="method-i-exclude-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The negative of the <code>Enumerable#include?</code>. Returns
+<code>true</code> if the collection does not include the object.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exclude-3F_source')" id="l_method-i-exclude-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-exclude-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/enumerable.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exclude?</span>(<span class="ruby-identifier">object</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">include?</span>(<span class="ruby-identifier">object</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-index_by">
+            
+              <b>index_by</b>()
+            
+            <a href="../classes/Enumerable.html#method-i-index_by" name="method-i-index_by" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Convert an enumerable to a hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">people</span>.<span class="ruby-identifier">index_by</span>(&amp;:<span class="ruby-identifier">login</span>)
+  =<span class="ruby-operator">&gt;</span> { <span class="ruby-string">&quot;nextangle&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">&lt;</span><span class="ruby-constant">Person</span> <span class="ruby-operator">...</span><span class="ruby-operator">&gt;</span>, <span class="ruby-string">&quot;chade-&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">&lt;</span><span class="ruby-constant">Person</span> <span class="ruby-operator">...</span><span class="ruby-operator">&gt;</span>, <span class="ruby-operator">...</span>}
+<span class="ruby-identifier">people</span>.<span class="ruby-identifier">index_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{person.first_name} #{person.last_name}&quot;</span> }
+  =<span class="ruby-operator">&gt;</span> { <span class="ruby-string">&quot;Chade- Fowlersburg-e&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">&lt;</span><span class="ruby-constant">Person</span> <span class="ruby-operator">...</span><span class="ruby-operator">&gt;</span>, <span class="ruby-string">&quot;David Heinemeier Hansson&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-operator">&lt;</span><span class="ruby-constant">Person</span> <span class="ruby-operator">...</span><span class="ruby-operator">&gt;</span>, <span class="ruby-operator">...</span>}
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-index_by_source')" id="l_method-i-index_by_source">show</a>
+                
+              </p>
+              <div id="method-i-index_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/enumerable.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">index_by</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span> [<span class="ruby-keyword">yield</span>(<span class="ruby-identifier">elem</span>), <span class="ruby-identifier">elem</span>] }]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">to_enum</span> <span class="ruby-value">:index_by</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-many-3F">
+            
+              <b>many?</b>()
+            
+            <a href="../classes/Enumerable.html#method-i-many-3F" name="method-i-many-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the enumerable has more than 1 element.
+Functionally equivalent to <code>enum.to_a.size &gt; 1</code>. Can be
+called with a block too, much like any?, so <code>people.many? { |p| p.age
+&gt; 26 }</code> returns <code>true</code> if more than one person is over
+26.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-many-3F_source')" id="l_method-i-many-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-many-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/enumerable.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">many?</span>
+  <span class="ruby-identifier">cnt</span> = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">cnt</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">element</span>
+      <span class="ruby-identifier">cnt</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">any?</span> { (<span class="ruby-identifier">cnt</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sum">
+            
+              <b>sum</b>(identity = 0, &amp;block)
+            
+            <a href="../classes/Enumerable.html#method-i-sum" name="method-i-sum" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Calculates a sum from the elements.</p>
+
+<pre class="ruby"><span class="ruby-identifier">payments</span>.<span class="ruby-identifier">sum</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">price</span> * <span class="ruby-identifier">p</span>.<span class="ruby-identifier">tax_rate</span> }
+<span class="ruby-identifier">payments</span>.<span class="ruby-identifier">sum</span>(&amp;:<span class="ruby-identifier">price</span>)
+</pre>
+
+<p>The latter is a shortcut for:</p>
+
+<pre class="ruby"><span class="ruby-identifier">payments</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-value">0</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">sum</span>, <span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">price</span> }
+</pre>
+
+<p>It can also calculate the sum without the use of a block.</p>
+
+<pre class="ruby">[<span class="ruby-value">5</span>, <span class="ruby-value">15</span>, <span class="ruby-value">10</span>].<span class="ruby-identifier">sum</span> <span class="ruby-comment"># =&gt; 30</span>
+[<span class="ruby-string">&#39;foo&#39;</span>, <span class="ruby-string">&#39;bar&#39;</span>].<span class="ruby-identifier">sum</span> <span class="ruby-comment"># =&gt; &quot;foobar&quot;</span>
+[[<span class="ruby-value">1</span>, <span class="ruby-value">2</span>], [<span class="ruby-value">3</span>, <span class="ruby-value">1</span>, <span class="ruby-value">5</span>]].<span class="ruby-identifier">sum</span> =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>, <span class="ruby-value">1</span>, <span class="ruby-value">5</span>]
+</pre>
+
+<p>The default sum of an empty list is zero. You can override this default:</p>
+
+<pre class="ruby">[].<span class="ruby-identifier">sum</span>(<span class="ruby-constant">Payment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)) { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span>.<span class="ruby-identifier">amount</span> } <span class="ruby-comment"># =&gt; Payment.new(0)</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sum_source')" id="l_method-i-sum_source">show</a>
+                
+              </p>
+              <div id="method-i-sum_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/enumerable.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sum</span>(<span class="ruby-identifier">identity</span> = <span class="ruby-number">0</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">map</span>(&amp;<span class="ruby-identifier">block</span>).<span class="ruby-identifier">sum</span>(<span class="ruby-identifier">identity</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">inject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sum</span>, <span class="ruby-identifier">element</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sum</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">element</span> } <span class="ruby-operator">||</span> <span class="ruby-identifier">identity</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

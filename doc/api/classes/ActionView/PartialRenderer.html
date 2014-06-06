@@ -1,0 +1,609 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::PartialRenderer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::PartialRenderer 
+            
+                <span class="parent">&lt; 
+                    
+                    ActionView::AbstractRenderer
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/renderer/partial_renderer_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Action+View+Partials">Action View Partials</h1>
+
+<p>There&#39;s also a convenience method for rendering sub templates within
+the current controller that depends on a single object (we call this kind
+of sub templates for partials). It relies on the fact that partials should
+follow the naming convention of being prefixed with an underscore – as to
+separate them from regular templates that could be rendered on their own.</p>
+
+<p>In a template for Advertiser#account:</p>
+
+<pre>&lt;%= render partial: &quot;account&quot; %&gt;</pre>
+
+<p>This would render “advertiser/_account.html.erb”.</p>
+
+<p>In another template for Advertiser#buy, we could have:</p>
+
+<pre>&lt;%= render partial: &quot;account&quot;, locals: { account: @buyer } %&gt;
+
+&lt;% @advertisements.each do |ad| %&gt;
+  &lt;%= render partial: &quot;ad&quot;, locals: { ad: ad } %&gt;
+&lt;% end %&gt;</pre>
+
+<p>This would first render “advertiser/_account.html.erb” with @buyer passed
+in as the local variable <code>account</code>, then render
+“advertiser/_ad.html.erb” and pass the local variable <code>ad</code> to
+the template for display.</p>
+
+<h2 id="label-The+%3Aas+and+%3Aobject+options">The :as and :object options</h2>
+
+<p>By default <code>ActionView::PartialRenderer</code> doesn&#39;t have any
+local variables. The <code>:object</code> option can be used to pass an
+object to the partial. For instance:</p>
+
+<pre>&lt;%= render partial: &quot;account&quot;, object: @buyer %&gt;</pre>
+
+<p>would provide the <code>@buyer</code> object to the partial, available
+under the local variable <code>account</code> and is equivalent to:</p>
+
+<pre>&lt;%= render partial: &quot;account&quot;, locals: { account: @buyer } %&gt;</pre>
+
+<p>With the <code>:as</code> option we can specify a different name for said
+local variable. For example, if we wanted it to be <code>user</code>
+instead of <code>account</code> we&#39;d do:</p>
+
+<pre>&lt;%= render partial: &quot;account&quot;, object: @buyer, as: &#39;user&#39; %&gt;</pre>
+
+<p>This is equivalent to</p>
+
+<pre>&lt;%= render partial: &quot;account&quot;, locals: { user: @buyer } %&gt;</pre>
+
+<h2 id="label-Rendering+a+collection+of+partials">Rendering a collection of partials</h2>
+
+<p>The example of partial use describes a familiar pattern where a template
+needs to iterate over an array and render a sub template for each of the
+elements. This pattern has been implemented as a single method that accepts
+an array and renders a partial by the same name as the elements contained
+within. So the three-lined example in “Using partials” can be rewritten
+with a single line:</p>
+
+<pre>&lt;%= render partial: &quot;ad&quot;, collection: @advertisements %&gt;</pre>
+
+<p>This will render “advertiser/_ad.html.erb” and pass the local variable
+<code>ad</code> to the template for display. An iteration counter will
+automatically be made available to the template with a name of the form
+<code>partial_name_counter</code>. In the case of the example above, the
+template would be fed <code>ad_counter</code>.</p>
+
+<p>The <code>:as</code> option may be used when rendering partials.</p>
+
+<p>You can specify a partial to be rendered between elements via the
+<code>:spacer_template</code> option. The following example will render
+<code>advertiser/_ad_divider.html.erb</code> between each ad partial:</p>
+
+<pre>&lt;%= render partial: &quot;ad&quot;, collection: @advertisements, spacer_template: &quot;ad_divider&quot; %&gt;</pre>
+
+<p>If the given <code>:collection</code> is nil or empty, <code>render</code>
+will return nil. This will allow you to specify a text which will displayed
+instead by using this form:</p>
+
+<pre>&lt;%= render(partial: &quot;ad&quot;, collection: @advertisements) || &quot;There&#39;s no ad to be displayed&quot; %&gt;</pre>
+
+<p>NOTE: Due to backwards compatibility concerns, the collection can&#39;t be
+one of hashes. Normally you&#39;d also just keep domain objects, like
+Active Records, in there.</p>
+
+<h2 id="label-Rendering+shared+partials">Rendering shared partials</h2>
+
+<p>Two controllers can share a set of partials and render them like this:</p>
+
+<pre>&lt;%= render partial: &quot;advertisement/ad&quot;, locals: { ad: @advertisement } %&gt;</pre>
+
+<p>This will render the partial “advertisement/_ad.html.erb” regardless of
+which controller this is being called from.</p>
+
+<h2 id="label-Rendering+objects+that+respond+to+%60to_partial_path%60">Rendering objects that respond to `to_partial_path`</h2>
+
+<p>Instead of explicitly naming the location of a partial, you can also let <a
+href="PartialRenderer.html">PartialRenderer</a> do the work and pick the
+proper path by checking `to_partial_path` method.</p>
+
+<pre># @account.to_partial_path returns &#39;accounts/account&#39;, so it can be used to replace:
+# &lt;%= render partial: &quot;accounts/account&quot;, locals: { account: @account} %&gt;
+&lt;%= render partial: @account %&gt;
+
+# @posts is an array of Post instances, so every post record returns &#39;posts/post&#39; on `to_partial_path`,
+# that&#39;s why we can replace:
+# &lt;%= render partial: &quot;posts/post&quot;, collection: @posts %&gt;
+&lt;%= render partial: @posts %&gt;</pre>
+
+<h2 id="label-Rendering+the+default+case">Rendering the default case</h2>
+
+<p>If you&#39;re not going to be using any of the options like collections or
+layouts, you can also use the short-hand defaults of render to render
+partials. Examples:</p>
+
+<pre># Instead of &lt;%= render partial: &quot;account&quot; %&gt;
+&lt;%= render &quot;account&quot; %&gt;
+
+# Instead of &lt;%= render partial: &quot;account&quot;, locals: { account: @buyer } %&gt;
+&lt;%= render &quot;account&quot;, account: @buyer %&gt;
+
+# @account.to_partial_path returns &#39;accounts/account&#39;, so it can be used to replace:
+# &lt;%= render partial: &quot;accounts/account&quot;, locals: { account: @account} %&gt;
+&lt;%= render @account %&gt;
+
+# @posts is an array of Post instances, so every post record returns &#39;posts/post&#39; on `to_partial_path`,
+# that&#39;s why we can replace:
+# &lt;%= render partial: &quot;posts/post&quot;, collection: @posts %&gt;
+&lt;%= render @posts %&gt;</pre>
+
+<h2 id="label-Rendering+partials+with+layouts">Rendering partials with layouts</h2>
+
+<p>Partials can have their own layouts applied to them. These layouts are
+different than the ones that are specified globally for the entire action,
+but they work in a similar fashion. Imagine a list with two types of users:</p>
+
+<pre>&lt;%# app/views/users/index.html.erb &amp;&gt;
+Here&#39;s the administrator:
+&lt;%= render partial: &quot;user&quot;, layout: &quot;administrator&quot;, locals: { user: administrator } %&gt;
+
+Here&#39;s the editor:
+&lt;%= render partial: &quot;user&quot;, layout: &quot;editor&quot;, locals: { user: editor } %&gt;
+
+&lt;%# app/views/users/_user.html.erb &amp;&gt;
+Name: &lt;%= user.name %&gt;
+
+&lt;%# app/views/users/_administrator.html.erb &amp;&gt;
+&lt;div id=&quot;administrator&quot;&gt;
+  Budget: $&lt;%= user.budget %&gt;
+  &lt;%= yield %&gt;
+&lt;/div&gt;
+
+&lt;%# app/views/users/_editor.html.erb &amp;&gt;
+&lt;div id=&quot;editor&quot;&gt;
+  Deadline: &lt;%= user.deadline %&gt;
+  &lt;%= yield %&gt;
+&lt;/div&gt;</pre>
+
+<p>…this will return:</p>
+
+<pre>Here&#39;s the administrator:
+&lt;div id=&quot;administrator&quot;&gt;
+  Budget: $&lt;%= user.budget %&gt;
+  Name: &lt;%= user.name %&gt;
+&lt;/div&gt;
+
+Here&#39;s the editor:
+&lt;div id=&quot;editor&quot;&gt;
+  Deadline: &lt;%= user.deadline %&gt;
+  Name: &lt;%= user.name %&gt;
+&lt;/div&gt;</pre>
+
+<p>If a collection is given, the layout will be rendered once for each item in
+the collection. Just think these two snippets have the same output:</p>
+
+<pre>&lt;%# app/views/users/_user.html.erb %&gt;
+Name: &lt;%= user.name %&gt;
+
+&lt;%# app/views/users/index.html.erb %&gt;
+&lt;%# This does not use layouts %&gt;
+&lt;ul&gt;
+  &lt;% users.each do |user| -%&gt;
+    &lt;li&gt;
+      &lt;%= render partial: &quot;user&quot;, locals: { user: user } %&gt;
+    &lt;/li&gt;
+  &lt;% end -%&gt;
+&lt;/ul&gt;
+
+&lt;%# app/views/users/_li_layout.html.erb %&gt;
+&lt;li&gt;
+  &lt;%= yield %&gt;
+&lt;/li&gt;
+
+&lt;%# app/views/users/index.html.erb %&gt;
+&lt;ul&gt;
+  &lt;%= render partial: &quot;user&quot;, layout: &quot;li_layout&quot;, collection: users %&gt;
+&lt;/ul&gt;</pre>
+
+<p>Given two users whose names are Alice and Bob, these snippets return:</p>
+
+<pre>&lt;ul&gt;
+  &lt;li&gt;
+    Name: Alice
+  &lt;/li&gt;
+  &lt;li&gt;
+    Name: Bob
+  &lt;/li&gt;
+&lt;/ul&gt;</pre>
+
+<p>The current object being rendered, as well as the object_counter, will be
+available as local variables inside the layout template under the same
+names as available in the partial.</p>
+
+<p>You can also apply a layout to a block within any template:</p>
+
+<pre>&lt;%# app/views/users/_chief.html.erb &amp;&gt;
+&lt;%= render(layout: &quot;administrator&quot;, locals: { user: chief }) do %&gt;
+  Title: &lt;%= chief.title %&gt;
+&lt;% end %&gt;</pre>
+
+<p>…this will return:</p>
+
+<pre>&lt;div id=&quot;administrator&quot;&gt;
+  Budget: $&lt;%= user.budget %&gt;
+  Title: &lt;%= chief.name %&gt;
+&lt;/div&gt;</pre>
+
+<p>As you can see, the <code>:locals</code> hash is shared between both the
+partial and its layout.</p>
+
+<p>If you pass arguments to “yield” then this will be passed to the block. One
+way to use this is to pass an array to layout and treat it as an
+enumerable.</p>
+
+<pre>&lt;%# app/views/users/_user.html.erb &amp;&gt;
+&lt;div class=&quot;user&quot;&gt;
+  Budget: $&lt;%= user.budget %&gt;
+  &lt;%= yield user %&gt;
+&lt;/div&gt;
+
+&lt;%# app/views/users/index.html.erb &amp;&gt;
+&lt;%= render layout: @users do |user| %&gt;
+  Title: &lt;%= user.title %&gt;
+&lt;% end %&gt;</pre>
+
+<p>This will render the layout for each user and yield to the block, passing
+the user, each time.</p>
+
+<p>You can also yield multiple times in one layout and use block arguments to
+differentiate the sections.</p>
+
+<pre>&lt;%# app/views/users/_user.html.erb &amp;&gt;
+&lt;div class=&quot;user&quot;&gt;
+  &lt;%= yield user, :header %&gt;
+  Budget: $&lt;%= user.budget %&gt;
+  &lt;%= yield user, :footer %&gt;
+&lt;/div&gt;
+
+&lt;%# app/views/users/index.html.erb &amp;&gt;
+&lt;%= render layout: @users do |user, section| %&gt;
+  &lt;%- case section when :header -%&gt;
+    Title: &lt;%= user.title %&gt;
+  &lt;%- when :footer -%&gt;
+    Deadline: &lt;%= user.deadline %&gt;
+  &lt;%- end -%&gt;
+&lt;% end %&gt;</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-render">render</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-render_collection">render_collection</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-render_partial">render_partial</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">PREFIXED_PARTIAL_NAMES</td>
+            <td>=</td>
+            <td class="attr-value">ThreadSafe::Cache.new do |h, k|
+h[k] = ThreadSafe::Cache.new
+end</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">IDENTIFIER_ERROR_MESSAGE</td>
+            <td>=</td>
+            <td class="attr-value">&quot;The partial name (%s) is not a valid Ruby identifier; &quot; +
+&quot;make sure your partial name starts with a lowercase letter or underscore, &quot; +
+&quot;and is followed by any combination of letters, numbers and underscores.&quot;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(*)
+            
+            <a href="../../classes/ActionView/PartialRenderer.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb, line 256</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(*)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@context_prefix</span> = <span class="ruby-ivar">@lookup_context</span>.<span class="ruby-identifier">prefixes</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-render">
+            
+              <b>render</b>(context, options, block)
+            
+            <a href="../../classes/ActionView/PartialRenderer.html#method-i-render" name="method-i-render" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_source')" id="l_method-i-render_source">show</a>
+                
+              </p>
+              <div id="method-i-render_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb, line 261</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render</span>(<span class="ruby-identifier">context</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">setup</span>(<span class="ruby-identifier">context</span>, <span class="ruby-identifier">options</span>, <span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">identifier</span> = (<span class="ruby-ivar">@template</span> = <span class="ruby-identifier">find_partial</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">identifier</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@path</span>
+
+  <span class="ruby-ivar">@lookup_context</span>.<span class="ruby-identifier">rendered_format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@template</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">formats</span>.<span class="ruby-identifier">present?</span>
+      <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">formats</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">formats</span>.<span class="ruby-identifier">first</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@collection</span>
+    <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:collection</span>, <span class="ruby-value">:identifier</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">identifier</span> <span class="ruby-operator">||</span> <span class="ruby-string">&quot;collection&quot;</span>, <span class="ruby-value">:count</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">size</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">render_collection</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:partial</span>, <span class="ruby-value">:identifier</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">identifier</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">render_partial</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render_collection">
+            
+              <b>render_collection</b>()
+            
+            <a href="../../classes/ActionView/PartialRenderer.html#method-i-render_collection" name="method-i-render_collection" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_collection_source')" id="l_method-i-render_collection_source">show</a>
+                
+              </p>
+              <div id="method-i-render_collection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render_collection</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@collection</span>.<span class="ruby-identifier">blank?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:spacer_template</span>)
+    <span class="ruby-identifier">spacer</span> = <span class="ruby-identifier">find_template</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-value">:spacer_template</span>], <span class="ruby-ivar">@locals</span>.<span class="ruby-identifier">keys</span>).<span class="ruby-identifier">render</span>(<span class="ruby-ivar">@view</span>, <span class="ruby-ivar">@locals</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@template</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">collection_with_template</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">collection_without_template</span>
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">spacer</span>).<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render_partial">
+            
+              <b>render_partial</b>()
+            
+            <a href="../../classes/ActionView/PartialRenderer.html#method-i-render_partial" name="method-i-render_partial" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_partial_source')" id="l_method-i-render_partial_source">show</a>
+                
+              </p>
+              <div id="method-i-render_partial_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/renderer/partial_renderer.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render_partial</span>
+  <span class="ruby-identifier">view</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">block</span> = <span class="ruby-ivar">@view</span>, <span class="ruby-ivar">@locals</span>, <span class="ruby-ivar">@block</span>
+  <span class="ruby-identifier">object</span>, <span class="ruby-identifier">as</span> = <span class="ruby-ivar">@object</span>, <span class="ruby-ivar">@variable</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">block</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">layout</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:layout</span>])
+    <span class="ruby-identifier">layout</span> = <span class="ruby-identifier">find_template</span>(<span class="ruby-identifier">layout</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-ivar">@template_keys</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">object</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">as</span>]
+  <span class="ruby-identifier">locals</span>[<span class="ruby-identifier">as</span>] = <span class="ruby-identifier">object</span>
+
+  <span class="ruby-identifier">content</span> = <span class="ruby-ivar">@template</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">locals</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>*<span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">view</span>.<span class="ruby-identifier">_layout_for</span>(*<span class="ruby-identifier">name</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">layout</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">locals</span>){ <span class="ruby-identifier">content</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">layout</span>
+  <span class="ruby-identifier">content</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Callbacks</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Callbacks 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/callbacks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/callbacks.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+Callbacks">Active Record <a href="Callbacks.html">Callbacks</a></h1>
+
+<p><a href="Callbacks.html">Callbacks</a> are hooks into the life cycle of an
+Active Record object that allow you to trigger logic before or after an
+alteration of the object state. This can be used to make sure that
+associated and dependent objects are deleted when <code>destroy</code> is
+called (by overwriting <code>before_destroy</code>) or to massage
+attributes before they&#39;re validated (by overwriting
+<code>before_validation</code>). As an example of the callbacks initiated,
+consider the <code>Base#save</code> call for a new record:</p>
+<ul><li>
+<p>(-) <code>save</code></p>
+</li><li>
+<p>(-) <code>valid</code></p>
+</li><li>
+<p>(1) <code>before_validation</code></p>
+</li><li>
+<p>(-) <code>validate</code></p>
+</li><li>
+<p>(2) <code>after_validation</code></p>
+</li><li>
+<p>(3) <code>before_save</code></p>
+</li><li>
+<p>(4) <code>before_create</code></p>
+</li><li>
+<p>(-) <code>create</code></p>
+</li><li>
+<p>(5) <code>after_create</code></p>
+</li><li>
+<p>(6) <code>after_save</code></p>
+</li><li>
+<p>(7) <code>after_commit</code></p>
+</li></ul>
+
+<p>Also, an <code>after_rollback</code> callback can be configured to be
+triggered whenever a rollback is issued. Check out
+<code>ActiveRecord::Transactions</code> for more details about
+<code>after_commit</code> and <code>after_rollback</code>.</p>
+
+<p>Lastly an <code>after_find</code> and <code>after_initialize</code>
+callback is triggered for each object that is found and instantiated by a
+finder, with <code>after_initialize</code> being triggered after new
+objects are instantiated as well.</p>
+
+<p>That&#39;s a total of twelve callbacks, which gives you immense power to
+react and prepare for each state in the Active Record life cycle. The
+sequence for calling <code>Base#save</code> for an existing record is
+similar, except that each <code>_create</code> callback is replaced by the
+corresponding <code>_update</code> callback.</p>
+
+<p>Examples:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">CreditCard</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># Strip everything but digits, so the user can specify &quot;555 234 34&quot; or</span>
+  <span class="ruby-comment"># &quot;5552-3434&quot; and both will mean &quot;55523434&quot;</span>
+  <span class="ruby-identifier">before_validation</span>(<span class="ruby-identifier">on</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">create</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">number</span> = <span class="ruby-identifier">number</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[^0-9]/</span>, <span class="ruby-string">&quot;&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">attribute_present?</span>(<span class="ruby-string">&quot;number&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Subscription</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_create</span> :<span class="ruby-identifier">record_signup</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">record_signup</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">signed_up_on</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Firm</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># Destroys the associated clients and people when the firm is destroyed</span>
+  <span class="ruby-identifier">before_destroy</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span> <span class="ruby-constant">Person</span>.<span class="ruby-identifier">destroy_all</span> <span class="ruby-node">&quot;firm_id = #{record.id}&quot;</span>   }
+  <span class="ruby-identifier">before_destroy</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span> <span class="ruby-constant">Client</span>.<span class="ruby-identifier">destroy_all</span> <span class="ruby-node">&quot;client_of = #{record.id}&quot;</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-Inheritable+callback+queues">Inheritable callback queues</h2>
+
+<p>Besides the overwritable callback methods, it&#39;s also possible to
+register callbacks through the use of the callback macros. Their main
+advantage is that the macros add behavior into a callback queue that is
+kept intact down through an inheritance hierarchy.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_destroy</span> :<span class="ruby-identifier">destroy_author</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Reply</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Topic</span>
+  <span class="ruby-identifier">before_destroy</span> :<span class="ruby-identifier">destroy_readers</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Now, when <code>Topic#destroy</code> is run only
+<code>destroy_author</code> is called. When <code>Reply#destroy</code> is
+run, both <code>destroy_author</code> and <code>destroy_readers</code> are
+called. Contrast this to the following situation where the
+<code>before_destroy</code> method is overridden:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">before_destroy</span>() <span class="ruby-identifier">destroy_author</span> <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Reply</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Topic</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">before_destroy</span>() <span class="ruby-identifier">destroy_readers</span> <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In that case, <code>Reply#destroy</code> would only run
+<code>destroy_readers</code> and <em>not</em> <code>destroy_author</code>.
+So, use the callback macros when you want to ensure that a certain callback
+is called for the entire hierarchy, and use the regular overwritable
+methods when you want to leave it up to each descendant to decide whether
+they want to call <code>super</code> and trigger the inherited callbacks.</p>
+
+<p><strong>IMPORTANT:</strong> In order for inheritance to work for the
+callback queues, you must specify the callbacks before specifying the
+associations. Otherwise, you might trigger the loading of a child before
+the parent has registered the callbacks and they won&#39;t be inherited.</p>
+
+<h2 id="label-Types+of+callbacks">Types of callbacks</h2>
+
+<p>There are four types of callbacks accepted by the callback macros: Method
+references (symbol), callback objects, inline methods (using a proc), and
+inline eval methods (using a string). Method references and callback
+objects are the recommended approaches, inline methods using a proc are
+sometimes appropriate (such as for creating mix-ins), and inline eval
+methods are deprecated.</p>
+
+<p>The method reference callbacks work by specifying a protected or private
+method available in the object, like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_destroy</span> :<span class="ruby-identifier">delete_parents</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">delete_parents</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">delete_all</span> <span class="ruby-node">&quot;parent_id = #{id}&quot;</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The callback objects have methods named after the callback called with the
+record as the only parameter, such as:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BankAccount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_save</span>      <span class="ruby-constant">EncryptionWrapper</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">after_save</span>       <span class="ruby-constant">EncryptionWrapper</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">after_initialize</span> <span class="ruby-constant">EncryptionWrapper</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">EncryptionWrapper</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">before_save</span>(<span class="ruby-identifier">record</span>)
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">credit_card_number</span> = <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">credit_card_number</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">after_save</span>(<span class="ruby-identifier">record</span>)
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">credit_card_number</span> = <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">credit_card_number</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">alias_method</span> :<span class="ruby-identifier">after_find</span>, :<span class="ruby-identifier">after_save</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-comment"># Secrecy is committed</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-comment"># Secrecy is unveiled</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>So you specify the object you want messaged on a given callback. When that
+callback is triggered, the object has a method by the name of the callback
+messaged. You can make these callbacks more flexible by passing in other
+initialization data such as the name of the attribute to work with:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BankAccount</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_save</span>      <span class="ruby-constant">EncryptionWrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;credit_card_number&quot;</span>)
+  <span class="ruby-identifier">after_save</span>       <span class="ruby-constant">EncryptionWrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;credit_card_number&quot;</span>)
+  <span class="ruby-identifier">after_initialize</span> <span class="ruby-constant">EncryptionWrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;credit_card_number&quot;</span>)
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">EncryptionWrapper</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">attribute</span>)
+    <span class="ruby-ivar">@attribute</span> = <span class="ruby-identifier">attribute</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">before_save</span>(<span class="ruby-identifier">record</span>)
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{@attribute}=&quot;</span>, <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{@attribute}&quot;</span>)))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">after_save</span>(<span class="ruby-identifier">record</span>)
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{@attribute}=&quot;</span>, <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">record</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{@attribute}&quot;</span>)))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">alias_method</span> :<span class="ruby-identifier">after_find</span>, :<span class="ruby-identifier">after_save</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">encrypt</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-comment"># Secrecy is committed</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">decrypt</span>(<span class="ruby-identifier">value</span>)
+      <span class="ruby-comment"># Secrecy is unveiled</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The callback macros usually accept a symbol for the method they&#39;re
+supposed to run, but you can also pass a “method string”, which will then
+be evaluated within the binding of the callback. Example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_destroy</span> <span class="ruby-string">&#39;self.class.delete_all &quot;parent_id = #{id}&quot;&#39;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Notice that single quotes (&#39;) are used so the <code>#{id}</code> part
+isn&#39;t evaluated until the callback is triggered. Also note that these
+inline callbacks can be stacked just like the regular ones:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_destroy</span> <span class="ruby-string">&#39;self.class.delete_all &quot;parent_id = #{id}&quot;&#39;</span>,
+                 <span class="ruby-string">&#39;puts &quot;Evaluated after parents are destroyed&quot;&#39;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-before_validation%2A+returning+statements"><code>before_validation*</code> returning statements</h2>
+
+<p>If the returning value of a <code>before_validation</code> callback can be
+evaluated to <code>false</code>, the process will be aborted and
+<code>Base#save</code> will return <code>false</code>. If <a
+href="Validations.html#method-i-save-21">ActiveRecord::Validations#save!</a>
+is called it will raise a <a
+href="RecordInvalid.html">ActiveRecord::RecordInvalid</a> exception.
+Nothing will be appended to the errors object.</p>
+
+<h2 id="label-Canceling+callbacks">Canceling callbacks</h2>
+
+<p>If a <code>before_*</code> callback returns <code>false</code>, all the
+later callbacks and the associated action are cancelled. If an
+<code>after_*</code> callback returns <code>false</code>, all the later
+callbacks are cancelled. <a href="Callbacks.html">Callbacks</a> are
+generally run in the order they are defined, with the exception of
+callbacks defined as methods on the model, which are called last.</p>
+
+<h2 id="label-Ordering+callbacks">Ordering callbacks</h2>
+
+<p>Sometimes the code needs that the callbacks execute in a specific order.
+For example, a <code>before_destroy</code> callback
+(<code>log_children</code> in this case) should be executed before the
+children get destroyed by the +dependent: destroy+ option.</p>
+
+<p>Let&#39;s look at the code below:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">children</span>, <span class="ruby-identifier">dependent</span><span class="ruby-operator">:</span> <span class="ruby-identifier">destroy</span>
+
+  <span class="ruby-identifier">before_destroy</span> :<span class="ruby-identifier">log_children</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">log_children</span>
+      <span class="ruby-comment"># Child processing</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In this case, the problem is that when the <code>before_destroy</code>
+callback is executed, the children are not available because the
+<code>destroy</code> callback gets executed first. You can use the
+<code>prepend</code> option on the <code>before_destroy</code> callback to
+avoid this.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Topic</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">children</span>, <span class="ruby-identifier">dependent</span><span class="ruby-operator">:</span> <span class="ruby-identifier">destroy</span>
+
+  <span class="ruby-identifier">before_destroy</span> :<span class="ruby-identifier">log_children</span>, <span class="ruby-identifier">prepend</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">log_children</span>
+      <span class="ruby-comment"># Child processing</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This way, the <code>before_destroy</code> gets executed before the
+<code>dependent: destroy</code> is called, and the data is still available.</p>
+
+<h2 id="label-Transactions"><a href="Transactions.html">Transactions</a></h2>
+
+<p>The entire callback chain of a <code>save</code>, <code>save!</code>, or
+<code>destroy</code> call runs within a transaction. That includes
+<code>after_*</code> hooks. If everything goes fine a COMMIT is executed
+once the chain has been completed.</p>
+
+<p>If a <code>before_*</code> callback cancels the action a ROLLBACK is
+issued. You can also trigger a ROLLBACK raising an exception in any of the
+callbacks, including <code>after_*</code> hooks. Note, however, that in
+that case the client needs to be aware of it because an ordinary
+<code>save</code> will raise such exception instead of quietly returning
+<code>false</code>.</p>
+
+<h2 id="label-Debugging+callbacks">Debugging callbacks</h2>
+
+<p>The callback chain is accessible via the <code>_*_callbacks</code> method
+on an object. <a href="../ActiveModel.html">ActiveModel</a> <a
+href="Callbacks.html">Callbacks</a> support <code>:before</code>,
+<code>:after</code> and <code>:around</code> as values for the
+<code>kind</code> property. The <code>kind</code> property defines what
+part of the chain the callback runs in.</p>
+
+<p>To find all callbacks in the before_save callback chain:</p>
+
+<pre class="ruby"><span class="ruby-constant">Topic</span>.<span class="ruby-identifier">_save_callbacks</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cb</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cb</span>.<span class="ruby-identifier">kind</span>.<span class="ruby-identifier">eql?</span>(:<span class="ruby-identifier">before</span>) }
+</pre>
+
+<p>Returns an array of callback objects that form the before_save chain.</p>
+
+<p>To further check if the before_save chain contains a proc defined as
+<code>rest_when_dead</code> use the <code>filter</code> property of the
+callback object:</p>
+
+<pre class="ruby"><span class="ruby-constant">Topic</span>.<span class="ruby-identifier">_save_callbacks</span>.<span class="ruby-identifier">select</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">cb</span><span class="ruby-operator">|</span> <span class="ruby-identifier">cb</span>.<span class="ruby-identifier">kind</span>.<span class="ruby-identifier">eql?</span>(:<span class="ruby-identifier">before</span>) }.<span class="ruby-identifier">collect</span>(&amp;:<span class="ruby-identifier">filter</span>).<span class="ruby-identifier">include?</span>(:<span class="ruby-identifier">rest_when_dead</span>)
+</pre>
+
+<p>Returns true or false depending on whether the proc is contained in the
+before_save callback chain on a Topic model.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Callbacks/ClassMethods.html">ActiveRecord::Callbacks::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../ActiveModel/Validations/Callbacks.html">
+              ActiveModel::Validations::Callbacks
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">CALLBACKS</td>
+            <td>=</td>
+            <td class="attr-value">[
+:after_initialize, :after_find, :after_touch, :before_validation, :after_validation,
+:before_save, :around_save, :after_save, :before_create, :around_create,
+:after_create, :before_update, :around_update, :after_update,
+:before_destroy, :around_destroy, :after_destroy, :after_commit, :after_rollback
+]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

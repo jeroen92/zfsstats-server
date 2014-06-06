@@ -1,0 +1,665 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Template</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::Template 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template/error_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/error.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template/handlers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template/handlers/erb_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template/text_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/text.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template/types_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/types.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Action+View+Template">Action View <a href="Template.html">Template</a></h1>
+
+<h1 id="label-Action+View+Template+Handlers">Action View <a href="Template.html">Template</a> <a href="Template/Handlers.html">Handlers</a></h1>
+
+<h1 id="label-Action+View+Text+Template">Action View Text <a href="Template.html">Template</a></h1>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Template/Handlers.html">ActionView::Template::Handlers</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Template/Types.html">ActionView::Template::Types</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encode-21">encode!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inspect">inspect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-mime_type">mime_type</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-refresh">refresh</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-render">render</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-supports_streaming-3F">supports_streaming?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-type">type</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">Finalizer</td>
+            <td>=</td>
+            <td class="attr-value">proc do |method_name, mod|
+proc do
+mod.module_eval do
+remove_possible_method method_name
+end
+end
+end</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>This finalizer is needed (and exactly with a proc inside another proc)
+otherwise templates leak in development.</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>formats</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>handler</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>identifier</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>locals</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>original_encoding</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>source</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>updated_at</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>virtual_path</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(source, identifier, handler, details)
+            
+            <a href="../../classes/ActionView/Template.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">identifier</span>, <span class="ruby-identifier">handler</span>, <span class="ruby-identifier">details</span>)
+  <span class="ruby-identifier">format</span> = <span class="ruby-identifier">details</span>[<span class="ruby-value">:format</span>] <span class="ruby-operator">||</span> (<span class="ruby-identifier">handler</span>.<span class="ruby-identifier">default_format</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:default_format</span>))
+
+  <span class="ruby-ivar">@source</span>            = <span class="ruby-identifier">source</span>
+  <span class="ruby-ivar">@identifier</span>        = <span class="ruby-identifier">identifier</span>
+  <span class="ruby-ivar">@handler</span>           = <span class="ruby-identifier">handler</span>
+  <span class="ruby-ivar">@compiled</span>          = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@original_encoding</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@locals</span>            = <span class="ruby-identifier">details</span>[<span class="ruby-value">:locals</span>] <span class="ruby-operator">||</span> []
+  <span class="ruby-ivar">@virtual_path</span>      = <span class="ruby-identifier">details</span>[<span class="ruby-value">:virtual_path</span>]
+  <span class="ruby-ivar">@updated_at</span>        = <span class="ruby-identifier">details</span>[<span class="ruby-value">:updated_at</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-ivar">@formats</span>           = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">format</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:ref</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">ref</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">f</span>  }
+  <span class="ruby-ivar">@compile_mutex</span>     = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-encode-21">
+            
+              <b>encode!</b>()
+            
+            <a href="../../classes/ActionView/Template.html#method-i-encode-21" name="method-i-encode-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This method is responsible for properly setting the encoding of the source.
+Until this point, we assume that the source is BINARY data. If no
+additional information is supplied, we assume the encoding is the same as
+<code>Encoding.default_external</code>.</p>
+
+<p>The user can also specify the encoding via a comment on the first line of
+the template (# encoding: NAME-OF-ENCODING). This will work with any
+template engine, as we process out the encoding comment before passing the
+source on to the template engine, leaving a blank line in its stead.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encode-21_source')" id="l_method-i-encode-21_source">show</a>
+                
+              </p>
+              <div id="method-i-encode-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encode!</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">encoding</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">BINARY</span>
+
+  <span class="ruby-comment"># Look for # encoding: *. If we find one, we&#39;ll encode the</span>
+  <span class="ruby-comment"># String in that encoding, otherwise, we&#39;ll use the</span>
+  <span class="ruby-comment"># default external encoding.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-node">/\A#{ENCODING_FLAG}/</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">encoding</span> = <span class="ruby-identifier">magic_encoding</span> = <span class="ruby-node">$1</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">encoding</span> = <span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">default_external</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Tag the source with the default external encoding</span>
+  <span class="ruby-comment"># or the encoding specified in the file</span>
+  <span class="ruby-identifier">source</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-identifier">encoding</span>)
+
+  <span class="ruby-comment"># If the user didn&#39;t specify an encoding, and the handler</span>
+  <span class="ruby-comment"># handles encodings, we simply pass the String as is to</span>
+  <span class="ruby-comment"># the handler (with the default_external tag)</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">magic_encoding</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@handler</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:handles_encoding?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@handler</span>.<span class="ruby-identifier">handles_encoding?</span>
+    <span class="ruby-identifier">source</span>
+  <span class="ruby-comment"># Otherwise, if the String is valid in the encoding,</span>
+  <span class="ruby-comment"># encode immediately to default_internal. This means</span>
+  <span class="ruby-comment"># that if a handler doesn&#39;t handle encodings, it will</span>
+  <span class="ruby-comment"># always get Strings in the default_internal</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">source</span>.<span class="ruby-identifier">valid_encoding?</span>
+    <span class="ruby-identifier">source</span>.<span class="ruby-identifier">encode!</span>
+  <span class="ruby-comment"># Otherwise, since the String is invalid in the encoding</span>
+  <span class="ruby-comment"># specified, raise an exception</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">WrongEncodingError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">encoding</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inspect">
+            
+              <b>inspect</b>()
+            
+            <a href="../../classes/ActionView/Template.html#method-i-inspect" name="method-i-inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inspect_source')" id="l_method-i-inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
+  <span class="ruby-ivar">@inspect</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Rails</span>.<span class="ruby-identifier">root</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">identifier</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-node">&quot;#{Rails.root}/&quot;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">identifier</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-mime_type">
+            
+              <b>mime_type</b>()
+            
+            <a href="../../classes/ActionView/Template.html#method-i-mime_type" name="method-i-mime_type" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-mime_type_source')" id="l_method-i-mime_type_source">show</a>
+                
+              </p>
+              <div id="method-i-mime_type_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">mime_type</span>
+  <span class="ruby-identifier">message</span> = <span class="ruby-string">&#39;Template#mime_type is deprecated and will be removed in Rails 4.1. Please use type method instead.&#39;</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-ivar">@mime_type</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">Type</span>.<span class="ruby-identifier">lookup_by_extension</span>(<span class="ruby-ivar">@formats</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@formats</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-refresh">
+            
+              <b>refresh</b>(view)
+            
+            <a href="../../classes/ActionView/Template.html#method-i-refresh" name="method-i-refresh" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Receives a view object and return a template similar to self by using
+@virtual_path.</p>
+
+<p>This method is useful if you have a template object but it does not contain
+its source anymore since it was already compiled. In such cases, all you
+need to do is to call refresh passing in the view object.</p>
+
+<p>Notice this method raises an error if the template to be refreshed does not
+have a virtual path set (true just for inline templates).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-refresh_source')" id="l_method-i-refresh_source">show</a>
+                
+              </p>
+              <div id="method-i-refresh_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">refresh</span>(<span class="ruby-identifier">view</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;A template needs to have a virtual path in order to be refreshed&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@virtual_path</span>
+  <span class="ruby-identifier">lookup</span>  = <span class="ruby-identifier">view</span>.<span class="ruby-identifier">lookup_context</span>
+  <span class="ruby-identifier">pieces</span>  = <span class="ruby-ivar">@virtual_path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;/&quot;</span>)
+  <span class="ruby-identifier">name</span>    = <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-identifier">partial</span> = <span class="ruby-operator">!</span><span class="ruby-operator">!</span><span class="ruby-identifier">name</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^_/</span>, <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-identifier">lookup</span>.<span class="ruby-identifier">disable_cache</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">lookup</span>.<span class="ruby-identifier">find_template</span>(<span class="ruby-identifier">name</span>, [ <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;/&#39;</span>) ], <span class="ruby-identifier">partial</span>, <span class="ruby-ivar">@locals</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render">
+            
+              <b>render</b>(view, locals, buffer=nil, &amp;block)
+            
+            <a href="../../classes/ActionView/Template.html#method-i-render" name="method-i-render" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Render a template. If the template was not compiled yet, it is done exactly
+before rendering.</p>
+
+<p>This method is instrumented as “!render_template.action_view”. Notice that
+we use a bang in this instrumentation because you don&#39;t want to consume
+this in production. This is only slow if it&#39;s being listened to.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_source')" id="l_method-i-render_source">show</a>
+                
+              </p>
+              <div id="method-i-render_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">buffer</span>=<span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-string">&quot;!render_template.action_view&quot;</span>, <span class="ruby-identifier">virtual_path</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@virtual_path</span>, <span class="ruby-identifier">identifier</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@identifier</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">compile!</span>(<span class="ruby-identifier">view</span>)
+    <span class="ruby-identifier">view</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">method_name</span>, <span class="ruby-identifier">locals</span>, <span class="ruby-identifier">buffer</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">handle_render_error</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">e</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-supports_streaming-3F">
+            
+              <b>supports_streaming?</b>()
+            
+            <a href="../../classes/ActionView/Template.html#method-i-supports_streaming-3F" name="method-i-supports_streaming-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns if the underlying handler supports streaming. If so, a streaming
+buffer <strong>may</strong> be passed when it start rendering.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-supports_streaming-3F_source')" id="l_method-i-supports_streaming-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-supports_streaming-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">supports_streaming?</span>
+  <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:supports_streaming?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">supports_streaming?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-type">
+            
+              <b>type</b>()
+            
+            <a href="../../classes/ActionView/Template.html#method-i-type" name="method-i-type" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-type_source')" id="l_method-i-type_source">show</a>
+                
+              </p>
+              <div id="method-i-type_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">type</span>
+  <span class="ruby-ivar">@type</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Types</span>[<span class="ruby-ivar">@formats</span>.<span class="ruby-identifier">first</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@formats</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeMethods::PrimaryKey::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods::PrimaryKey::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/primary_key_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-dangerous_attribute_method-3F">dangerous_attribute_method?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-define_method_attribute">define_method_attribute</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-primary_key">primary_key</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-primary_key-3D">primary_key=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Q</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-quoted_primary_key">quoted_primary_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ID_ATTRIBUTE_METHODS</td>
+            <td>=</td>
+            <td class="attr-value">%w(id id= id? id_before_type_cast).to_set</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-dangerous_attribute_method-3F">
+            
+              <b>dangerous_attribute_method?</b>(method_name)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/PrimaryKey/ClassMethods.html#method-i-dangerous_attribute_method-3F" name="method-i-dangerous_attribute_method-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dangerous_attribute_method-3F_source')" id="l_method-i-dangerous_attribute_method-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-dangerous_attribute_method-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dangerous_attribute_method?</span>(<span class="ruby-identifier">method_name</span>)
+  <span class="ruby-keyword">super</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-constant">ID_ATTRIBUTE_METHODS</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">method_name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-define_method_attribute">
+            
+              <b>define_method_attribute</b>(attr_name)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/PrimaryKey/ClassMethods.html#method-i-define_method_attribute" name="method-i-define_method_attribute" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-define_method_attribute_source')" id="l_method-i-define_method_attribute_source">show</a>
+                
+              </p>
+              <div id="method-i-define_method_attribute_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">define_method_attribute</span>(<span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">primary_key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;id&#39;</span>
+    <span class="ruby-identifier">generated_attribute_methods</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:alias_method</span>, <span class="ruby-value">:id</span>, <span class="ruby-identifier">primary_key</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-primary_key">
+            
+              <b>primary_key</b>()
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/PrimaryKey/ClassMethods.html#method-i-primary_key" name="method-i-primary_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines the primary key field – can be overridden in subclasses.
+Overwriting will negate any effect of the
+<code>primary_key_prefix_type</code> setting, though.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-primary_key_source')" id="l_method-i-primary_key_source">show</a>
+                
+              </p>
+              <div id="method-i-primary_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">primary_key</span>
+  <span class="ruby-ivar">@primary_key</span> = <span class="ruby-identifier">reset_primary_key</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@primary_key</span>
+  <span class="ruby-ivar">@primary_key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-primary_key-3D">
+            
+              <b>primary_key=</b>(value)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/PrimaryKey/ClassMethods.html#method-i-primary_key-3D" name="method-i-primary_key-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the name of the primary key column.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Project</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">primary_key</span> = <span class="ruby-string">&#39;sysid&#39;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You can also define the <code>primary_key</code> method yourself:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Project</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">primary_key</span>
+    <span class="ruby-string">&#39;foo_&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">Project</span>.<span class="ruby-identifier">primary_key</span> <span class="ruby-comment"># =&gt; &quot;foo_id&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-primary_key-3D_source')" id="l_method-i-primary_key-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-primary_key-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">primary_key=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@primary_key</span>        = <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-ivar">@quoted_primary_key</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-quoted_primary_key">
+            
+              <b>quoted_primary_key</b>()
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/PrimaryKey/ClassMethods.html#method-i-quoted_primary_key" name="method-i-quoted_primary_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a quoted version of the primary key name, used to construct SQL
+statements.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-quoted_primary_key_source')" id="l_method-i-quoted_primary_key_source">show</a>
+                
+              </p>
+              <div id="method-i-quoted_primary_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">quoted_primary_key</span>
+  <span class="ruby-ivar">@quoted_primary_key</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">primary_key</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,936 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::MysqlAdapter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::MysqlAdapter 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="AbstractMysqlAdapter.html">ActiveRecord::ConnectionAdapters::AbstractMysqlAdapter</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The MySQL adapter will work with both Ruby/MySQL, which is a Ruby-based
+MySQL adapter that comes bundled with Active Record, and with the faster
+C-based MySQL/Ruby adapter (available both as a gem and from <a
+href="http://www.tmtm.org/en/mysql/ruby/">www.tmtm.org/en/mysql/ruby/</a>).</p>
+
+<p>Options:</p>
+<ul><li>
+<p><code>:host</code> - Defaults to “localhost”.</p>
+</li><li>
+<p><code>:port</code> - Defaults to 3306.</p>
+</li><li>
+<p><code>:socket</code> - Defaults to “/tmp/mysql.sock”.</p>
+</li><li>
+<p><code>:username</code> - Defaults to “root”</p>
+</li><li>
+<p><code>:password</code> - Defaults to nothing.</p>
+</li><li>
+<p><code>:database</code> - The name of the database. No default, must be
+provided.</p>
+</li><li>
+<p><code>:encoding</code> - (Optional) Sets the client encoding by executing
+“SET NAMES &lt;encoding&gt;” after connection.</p>
+</li><li>
+<p><code>:reconnect</code> - Defaults to false (See MySQL documentation: <a
+href="http://dev.mysql.com/doc/refman/5.0/en/auto-reconnect.html">dev.mysql.com/doc/refman/5.0/en/auto-reconnect.html</a>).</p>
+</li><li>
+<p><code>:strict</code> - Defaults to true. Enable STRICT_ALL_TABLES. (See
+MySQL documentation: <a
+href="http://dev.mysql.com/doc/refman/5.0/en/server-sql-mode.html">dev.mysql.com/doc/refman/5.0/en/server-sql-mode.html</a>)</p>
+</li><li>
+<p><code>:variables</code> - (Optional) A hash session variables to send as
+`SET @@SESSION.key = value` on each database connection. Use the value
+`:default` to set a variable to its DEFAULT value. (See MySQL
+documentation: <a
+href="http://dev.mysql.com/doc/refman/5.0/en/set-statement.html">dev.mysql.com/doc/refman/5.0/en/set-statement.html</a>).</p>
+</li><li>
+<p><code>:sslca</code> - Necessary to use MySQL with an SSL connection.</p>
+</li><li>
+<p><code>:sslkey</code> - Necessary to use MySQL with an SSL connection.</p>
+</li><li>
+<p><code>:sslcert</code> - Necessary to use MySQL with an SSL connection.</p>
+</li><li>
+<p><code>:sslcapath</code> - Necessary to use MySQL with an SSL connection.</p>
+</li><li>
+<p><code>:sslcipher</code> - Necessary to use MySQL with an SSL connection.</p>
+</li></ul>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="MysqlAdapter/Fields.html">ActiveRecord::ConnectionAdapters::MysqlAdapter::Fields</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="MysqlAdapter/StatementPool.html">ActiveRecord::ConnectionAdapters::MysqlAdapter::StatementPool</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-active-3F">active?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear_cache-21">clear_cache!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-client_encoding">client_encoding</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-disconnect-21">disconnect!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-exec_delete">exec_delete</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-exec_query">exec_query</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-exec_update">exec_update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-execute_and_free">execute_and_free</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-last_inserted_id">last_inserted_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reconnect-21">reconnect!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reset-21">reset!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-select_rows">select_rows</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-supports_statement_cache-3F">supports_statement_cache?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-type_cast">type_cast</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">ADAPTER_NAME</td>
+            <td>=</td>
+            <td class="attr-value">&#39;MySQL&#39;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">ENCODINGS</td>
+            <td>=</td>
+            <td class="attr-value">{
+&quot;armscii8&quot; =&gt; nil,
+&quot;ascii&quot;    =&gt; Encoding::US_ASCII,
+&quot;big5&quot;     =&gt; Encoding::Big5,
+&quot;binary&quot;   =&gt; Encoding::ASCII_8BIT,
+&quot;cp1250&quot;   =&gt; Encoding::Windows_1250,
+&quot;cp1251&quot;   =&gt; Encoding::Windows_1251,
+&quot;cp1256&quot;   =&gt; Encoding::Windows_1256,
+&quot;cp1257&quot;   =&gt; Encoding::Windows_1257,
+&quot;cp850&quot;    =&gt; Encoding::CP850,
+&quot;cp852&quot;    =&gt; Encoding::CP852,
+&quot;cp866&quot;    =&gt; Encoding::IBM866,
+&quot;cp932&quot;    =&gt; Encoding::Windows_31J,
+&quot;dec8&quot;     =&gt; nil,
+&quot;eucjpms&quot;  =&gt; Encoding::EucJP_ms,
+&quot;euckr&quot;    =&gt; Encoding::EUC_KR,
+&quot;gb2312&quot;   =&gt; Encoding::EUC_CN,
+&quot;gbk&quot;      =&gt; Encoding::GBK,
+&quot;geostd8&quot;  =&gt; nil,
+&quot;greek&quot;    =&gt; Encoding::ISO_8859_7,
+&quot;hebrew&quot;   =&gt; Encoding::ISO_8859_8,
+&quot;hp8&quot;      =&gt; nil,
+&quot;keybcs2&quot;  =&gt; nil,
+&quot;koi8r&quot;    =&gt; Encoding::KOI8_R,
+&quot;koi8u&quot;    =&gt; Encoding::KOI8_U,
+&quot;latin1&quot;   =&gt; Encoding::ISO_8859_1,
+&quot;latin2&quot;   =&gt; Encoding::ISO_8859_2,
+&quot;latin5&quot;   =&gt; Encoding::ISO_8859_9,
+&quot;latin7&quot;   =&gt; Encoding::ISO_8859_13,
+&quot;macce&quot;    =&gt; Encoding::MacCentEuro,
+&quot;macroman&quot; =&gt; Encoding::MacRoman,
+&quot;sjis&quot;     =&gt; Encoding::SHIFT_JIS,
+&quot;swe7&quot;     =&gt; nil,
+&quot;tis620&quot;   =&gt; Encoding::TIS_620,
+&quot;ucs2&quot;     =&gt; Encoding::UTF_16BE,
+&quot;ujis&quot;     =&gt; Encoding::EucJP_ms,
+&quot;utf8&quot;     =&gt; Encoding::UTF_8,
+&quot;utf8mb4&quot;  =&gt; Encoding::UTF_8,
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>Taken from here:</p>
+
+<pre>https://github.com/tmtm/ruby-mysql/blob/master/lib/mysql/charset.rb</pre>
+
+<p>Author: TOMITA Masahiro &lt;tommy@tmtm.org&gt;</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(connection, logger, connection_options, config)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">connection</span>, <span class="ruby-identifier">logger</span>, <span class="ruby-identifier">connection_options</span>, <span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@statements</span> = <span class="ruby-constant">StatementPool</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@connection</span>,
+                                  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">type_cast_config_to_integer</span>(<span class="ruby-identifier">config</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:statement_limit</span>) { <span class="ruby-number">1000</span> }))
+  <span class="ruby-ivar">@client_encoding</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">connect</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-active-3F">
+            
+              <b>active?</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-active-3F" name="method-i-active-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>CONNECTION MANAGEMENT ====================================</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-active-3F_source')" id="l_method-i-active-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-active-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">active?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:stat</span>)
+    <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">stat</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">query</span> <span class="ruby-string">&#39;select 1&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># mysql-ruby doesn&#39;t raise an exception when stat fails.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:errno</span>)
+    <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">errno</span>.<span class="ruby-identifier">zero?</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Mysql</span><span class="ruby-operator">::</span><span class="ruby-constant">Error</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear_cache-21">
+            
+              <b>clear_cache!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-clear_cache-21" name="method-i-clear_cache-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clears the prepared statements cache.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_cache-21_source')" id="l_method-i-clear_cache-21_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_cache-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear_cache!</span>
+  <span class="ruby-ivar">@statements</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-client_encoding">
+            
+              <b>client_encoding</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-client_encoding" name="method-i-client_encoding" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get the client encoding for this database</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-client_encoding_source')" id="l_method-i-client_encoding_source">show</a>
+                
+              </p>
+              <div id="method-i-client_encoding_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 272</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">client_encoding</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@client_encoding</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@client_encoding</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">exec_query</span>(
+    <span class="ruby-string">&quot;SHOW VARIABLES WHERE Variable_name = &#39;character_set_client&#39;&quot;</span>,
+    <span class="ruby-string">&#39;SCHEMA&#39;</span>)
+  <span class="ruby-ivar">@client_encoding</span> = <span class="ruby-constant">ENCODINGS</span>[<span class="ruby-identifier">result</span>.<span class="ruby-identifier">rows</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-disconnect-21">
+            
+              <b>disconnect!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-disconnect-21" name="method-i-disconnect-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Disconnects from the database if already connected. Otherwise, this method
+does nothing.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-disconnect-21_source')" id="l_method-i-disconnect-21_source">show</a>
+                
+              </p>
+              <div id="method-i-disconnect-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">disconnect!</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_delete">
+            
+              <b>exec_delete</b>(sql, name, binds)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-exec_delete" name="method-i-exec_delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="MysqlAdapter.html#method-i-exec_update">exec_update</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exec_delete_source')" id="l_method-i-exec_delete_source">show</a>
+                
+              </p>
+              <div id="method-i-exec_delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 456</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exec_delete</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+  <span class="ruby-identifier">affected_rows</span> = <span class="ruby-number">0</span>
+
+  <span class="ruby-identifier">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">affected_rows</span> = <span class="ruby-identifier">n</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">affected_rows</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_query">
+            
+              <b>exec_query</b>(sql, name = &#39;SQL&#39;, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-exec_query" name="method-i-exec_query" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exec_query_source')" id="l_method-i-exec_query_source">show</a>
+                
+              </p>
+              <div id="method-i-exec_query_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 281</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;SQL&#39;</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-comment"># If the configuration sets prepared_statements:false, binds will</span>
+  <span class="ruby-comment"># always be empty, since the bind variables will have been already</span>
+  <span class="ruby-comment"># substituted and removed from binds by BindVisitor, so this will</span>
+  <span class="ruby-comment"># effectively disable prepared statement usage completely.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">binds</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">result_set</span>, <span class="ruby-identifier">affected_rows</span> = <span class="ruby-identifier">exec_without_stmt</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result_set</span>, <span class="ruby-identifier">affected_rows</span> = <span class="ruby-identifier">exec_stmt</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">affected_rows</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-identifier">result_set</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_update">
+            
+              <b>exec_update</b>(sql, name, binds)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-exec_update" name="method-i-exec_update" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-execute_and_free">
+            
+              <b>execute_and_free</b>(sql, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-execute_and_free" name="method-i-execute_and_free" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-execute_and_free_source')" id="l_method-i-execute_and_free_source">show</a>
+                
+              </p>
+              <div id="method-i-execute_and_free_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 443</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">execute_and_free</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">free</span>
+  <span class="ruby-identifier">ret</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_inserted_id">
+            
+              <b>last_inserted_id</b>(result)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-last_inserted_id" name="method-i-last_inserted_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last_inserted_id_source')" id="l_method-i-last_inserted_id_source">show</a>
+                
+              </p>
+              <div id="method-i-last_inserted_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 297</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last_inserted_id</span>(<span class="ruby-identifier">result</span>)
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">insert_id</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reconnect-21">
+            
+              <b>reconnect!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-reconnect-21" name="method-i-reconnect-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reconnect-21_source')" id="l_method-i-reconnect-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reconnect-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reconnect!</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">disconnect!</span>
+  <span class="ruby-identifier">connect</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset-21">
+            
+              <b>reset!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-reset-21" name="method-i-reset-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset-21_source')" id="l_method-i-reset-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reset-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 205</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset!</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:change_user</span>)
+    <span class="ruby-comment"># See http://bugs.mysql.com/bug.php?id=33540 -- the workaround way to</span>
+    <span class="ruby-comment"># reset the connection is to change the user to the same user.</span>
+    <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">change_user</span>(<span class="ruby-ivar">@config</span>[<span class="ruby-value">:username</span>], <span class="ruby-ivar">@config</span>[<span class="ruby-value">:password</span>], <span class="ruby-ivar">@config</span>[<span class="ruby-value">:database</span>])
+    <span class="ruby-identifier">configure_connection</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_rows">
+            
+              <b>select_rows</b>(sql, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-select_rows" name="method-i-select_rows" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>DATABASE STATEMENTS ======================================</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_rows_source')" id="l_method-i-select_rows_source">show</a>
+                
+              </p>
+              <div id="method-i-select_rows_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 216</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_rows</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">query_with_result</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>).<span class="ruby-identifier">rows</span>
+  <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">more_results</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@connection</span>.<span class="ruby-identifier">next_result</span>    <span class="ruby-comment"># invoking stored procedures with CLIENT_MULTI_RESULTS requires this to tidy up else connection will be dropped</span>
+  <span class="ruby-identifier">rows</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-supports_statement_cache-3F">
+            
+              <b>supports_statement_cache?</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-supports_statement_cache-3F" name="method-i-supports_statement_cache-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true, since this connection adapter supports prepared statement
+caching.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-supports_statement_cache-3F_source')" id="l_method-i-supports_statement_cache-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-supports_statement_cache-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">supports_statement_cache?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-type_cast">
+            
+              <b>type_cast</b>(value, column)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html#method-i-type_cast" name="method-i-type_cast" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>QUOTING ==================================================</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-type_cast_source')" id="l_method-i-type_cast_source">show</a>
+                
+              </p>
+              <div id="method-i-type_cast_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">type_cast</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">column</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+
+  <span class="ruby-identifier">value</span> <span class="ruby-operator">?</span> <span class="ruby-number">1</span> <span class="ruby-operator">:</span> <span class="ruby-number">0</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

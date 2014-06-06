@@ -1,0 +1,15 @@
+<%= simple_form_for(@device, :html => { :class => 'form-horizontal' }) do |f| %>
+  <fieldset>
+  <legend><%= controller.action_name.capitalize %> Server</legend>
+
+  <%= f.input :guid %>
+  <%= f.input :type %>
+  <%= f.association :server, collection: Server.all, as: :select %>
+  <%= f.association :parent, collection: Device.all, label_method: :guid,  as: :select %>
+
+  <div class="form-actions">
+    <%= f.submit :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', devices_path, :class => 'btn' %>
+  </div>
+  </fieldset>
+<% end %>

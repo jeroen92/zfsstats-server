@@ -1,0 +1,1864 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::DatabaseStatements</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::DatabaseStatements 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/database_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add_transaction_record">add_transaction_record</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-begin_db_transaction">begin_db_transaction</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-begin_isolated_db_transaction">begin_isolated_db_transaction</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-case_sensitive_equality_operator">case_sensitive_equality_operator</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-commit_db_transaction">commit_db_transaction</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-default_sequence_name">default_sequence_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-delete_sql">delete_sql</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-empty_insert_statement_value">empty_insert_statement_value</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-exec_delete">exec_delete</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-exec_insert">exec_insert</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-exec_query">exec_query</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-exec_update">exec_update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-execute">execute</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-insert">insert</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-insert_fixture">insert_fixture</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-insert_sql">insert_sql</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-last_inserted_id">last_inserted_id</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-limited_update_conditions">limited_update_conditions</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset_sequence-21">reset_sequence!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-rollback_db_transaction">rollback_db_transaction</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-sanitize_limit">sanitize_limit</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-select">select</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-select_all">select_all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-select_one">select_one</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-select_rows">select_rows</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-select_value">select_value</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-select_values">select_values</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-sql_for_insert">sql_for_insert</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-subquery_for">subquery_for</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-supports_statement_cache-3F">supports_statement_cache?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_sql">to_sql</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-transaction">transaction</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-transaction_isolation_levels">transaction_isolation_levels</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-transaction_open-3F">transaction_open?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-update_sql">update_sql</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 4</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">reset_transaction</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-add_transaction_record">
+            
+              <b>add_transaction_record</b>(record)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-add_transaction_record" name="method-i-add_transaction_record" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Register a record with the current transaction so that its after_commit and
+after_rollback callbacks can be called.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_transaction_record_source')" id="l_method-i-add_transaction_record_source">show</a>
+                
+              </p>
+              <div id="method-i-add_transaction_record_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 249</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_transaction_record</span>(<span class="ruby-identifier">record</span>)
+  <span class="ruby-ivar">@transaction</span>.<span class="ruby-identifier">add_record</span>(<span class="ruby-identifier">record</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-begin_db_transaction">
+            
+              <b>begin_db_transaction</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-begin_db_transaction" name="method-i-begin_db_transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Begins the transaction (and turns off auto-committing).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-begin_db_transaction_source')" id="l_method-i-begin_db_transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-begin_db_transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 254</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">begin_db_transaction</span>()    <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-begin_isolated_db_transaction">
+            
+              <b>begin_isolated_db_transaction</b>(isolation)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-begin_isolated_db_transaction" name="method-i-begin_isolated_db_transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Begins the transaction with the isolation level set. Raises an error by
+default; adapters that support setting the isolation level should implement
+this method.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-begin_isolated_db_transaction_source')" id="l_method-i-begin_isolated_db_transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-begin_isolated_db_transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 268</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">begin_isolated_db_transaction</span>(<span class="ruby-identifier">isolation</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">TransactionIsolationError</span>, <span class="ruby-string">&quot;adapter does not support setting transaction isolation&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-case_sensitive_equality_operator">
+            
+              <b>case_sensitive_equality_operator</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-case_sensitive_equality_operator" name="method-i-case_sensitive_equality_operator" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-case_sensitive_equality_operator_source')" id="l_method-i-case_sensitive_equality_operator_source">show</a>
+                
+              </p>
+              <div id="method-i-case_sensitive_equality_operator_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 306</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">case_sensitive_equality_operator</span>
+  <span class="ruby-string">&quot;=&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-commit_db_transaction">
+            
+              <b>commit_db_transaction</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-commit_db_transaction" name="method-i-commit_db_transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Commits the transaction (and turns on auto-committing).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-commit_db_transaction_source')" id="l_method-i-commit_db_transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-commit_db_transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 273</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">commit_db_transaction</span>()   <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-default_sequence_name">
+            
+              <b>default_sequence_name</b>(table, column)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-default_sequence_name" name="method-i-default_sequence_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-default_sequence_name_source')" id="l_method-i-default_sequence_name_source">show</a>
+                
+              </p>
+              <div id="method-i-default_sequence_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 279</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">default_sequence_name</span>(<span class="ruby-identifier">table</span>, <span class="ruby-identifier">column</span>)
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(arel, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes the delete statement and returns the number of rows affected.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-identifier">exec_delete</span>(<span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">binds</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-empty_insert_statement_value">
+            
+              <b>empty_insert_statement_value</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-empty_insert_statement_value" name="method-i-empty_insert_statement_value" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-empty_insert_statement_value_source')" id="l_method-i-empty_insert_statement_value_source">show</a>
+                
+              </p>
+              <div id="method-i-empty_insert_statement_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 302</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">empty_insert_statement_value</span>
+  <span class="ruby-string">&quot;DEFAULT VALUES&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_delete">
+            
+              <b>exec_delete</b>(sql, name, binds)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-exec_delete" name="method-i-exec_delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes delete <code>sql</code> statement in the context of this
+connection using <code>binds</code> as the bind substitutes.
+<code>name</code> is logged along with the executed <code>sql</code>
+statement.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exec_delete_source')" id="l_method-i-exec_delete_source">show</a>
+                
+              </p>
+              <div id="method-i-exec_delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exec_delete</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+  <span class="ruby-identifier">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_insert">
+            
+              <b>exec_insert</b>(sql, name, binds, pk = nil, sequence_name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-exec_insert" name="method-i-exec_insert" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes insert <code>sql</code> statement in the context of this
+connection using <code>binds</code> as the bind substitutes.
+<code>name</code> is logged along with the executed <code>sql</code>
+statement.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exec_insert_source')" id="l_method-i-exec_insert_source">show</a>
+                
+              </p>
+              <div id="method-i-exec_insert_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exec_insert</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>, <span class="ruby-identifier">pk</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">sequence_name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_query">
+            
+              <b>exec_query</b>(sql, name = &#39;SQL&#39;, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-exec_query" name="method-i-exec_query" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes <code>sql</code> statement in the context of this connection using
+<code>binds</code> as the bind substitutes. <code>name</code> is logged
+along with the executed <code>sql</code> statement.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exec_query_source')" id="l_method-i-exec_query_source">show</a>
+                
+              </p>
+              <div id="method-i-exec_query_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;SQL&#39;</span>, <span class="ruby-identifier">binds</span> = [])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-exec_update">
+            
+              <b>exec_update</b>(sql, name, binds)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-exec_update" name="method-i-exec_update" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes update <code>sql</code> statement in the context of this
+connection using <code>binds</code> as the bind substitutes.
+<code>name</code> is logged along with the executed <code>sql</code>
+statement.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exec_update_source')" id="l_method-i-exec_update_source">show</a>
+                
+              </p>
+              <div id="method-i-exec_update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exec_update</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+  <span class="ruby-identifier">exec_query</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-execute">
+            
+              <b>execute</b>(sql, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-execute" name="method-i-execute" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes the SQL statement in the context of this connection.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-execute_source')" id="l_method-i-execute_source">show</a>
+                
+              </p>
+              <div id="method-i-execute_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">execute</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert">
+            
+              <b>insert</b>(arel, name = nil, pk = nil, id_value = nil, sequence_name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-insert" name="method-i-insert" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the last auto-generated ID from the affected table.</p>
+
+<p><code>id_value</code> will be returned unless the value is nil, in which
+case the database will attempt to calculate the last inserted id and return
+that value.</p>
+
+<p>If the next id was calculated in advance (as in Oracle), it should be
+passed in as <code>id_value</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-insert_source')" id="l_method-i-insert_source">show</a>
+                
+              </p>
+              <div id="method-i-insert_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 94</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">insert</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">pk</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">sequence_name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span> = <span class="ruby-identifier">sql_for_insert</span>(<span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">binds</span>), <span class="ruby-identifier">pk</span>, <span class="ruby-identifier">id_value</span>, <span class="ruby-identifier">sequence_name</span>, <span class="ruby-identifier">binds</span>)
+  <span class="ruby-identifier">value</span>      = <span class="ruby-identifier">exec_insert</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>, <span class="ruby-identifier">pk</span>, <span class="ruby-identifier">sequence_name</span>)
+  <span class="ruby-identifier">id_value</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">last_inserted_id</span>(<span class="ruby-identifier">value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert_fixture">
+            
+              <b>insert_fixture</b>(fixture, table_name)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-insert_fixture" name="method-i-insert_fixture" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Inserts the given fixture into the table. Overridden in adapters that
+require something beyond a simple insert (eg. Oracle).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-insert_fixture_source')" id="l_method-i-insert_fixture_source">show</a>
+                
+              </p>
+              <div id="method-i-insert_fixture_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 290</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">insert_fixture</span>(<span class="ruby-identifier">fixture</span>, <span class="ruby-identifier">table_name</span>)
+  <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">columns_hash</span>(<span class="ruby-identifier">table_name</span>)
+
+  <span class="ruby-identifier">key_list</span>   = []
+  <span class="ruby-identifier">value_list</span> = <span class="ruby-identifier">fixture</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">key_list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">quote_column_name</span>(<span class="ruby-identifier">name</span>)
+    <span class="ruby-identifier">quote</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">columns</span>[<span class="ruby-identifier">name</span>])
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">execute</span> <span class="ruby-node">&quot;INSERT INTO #{quote_table_name(table_name)} (#{key_list.join(&#39;, &#39;)}) VALUES (#{value_list.join(&#39;, &#39;)})&quot;</span>, <span class="ruby-string">&#39;Fixture Insert&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-limited_update_conditions">
+            
+              <b>limited_update_conditions</b>(where_sql, quoted_table_name, quoted_primary_key)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-limited_update_conditions" name="method-i-limited_update_conditions" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-limited_update_conditions_source')" id="l_method-i-limited_update_conditions_source">show</a>
+                
+              </p>
+              <div id="method-i-limited_update_conditions_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 310</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">limited_update_conditions</span>(<span class="ruby-identifier">where_sql</span>, <span class="ruby-identifier">quoted_table_name</span>, <span class="ruby-identifier">quoted_primary_key</span>)
+  <span class="ruby-node">&quot;WHERE #{quoted_primary_key} IN (SELECT #{quoted_primary_key} FROM #{quoted_table_name} #{where_sql})&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset_sequence-21">
+            
+              <b>reset_sequence!</b>(table, column, sequence = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-reset_sequence-21" name="method-i-reset_sequence-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Set the sequence to the max value of the table&#39;s column.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset_sequence-21_source')" id="l_method-i-reset_sequence-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reset_sequence-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset_sequence!</span>(<span class="ruby-identifier">table</span>, <span class="ruby-identifier">column</span>, <span class="ruby-identifier">sequence</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-comment"># Do nothing by default. Implement for PostgreSQL, Oracle, ...</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rollback_db_transaction">
+            
+              <b>rollback_db_transaction</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-rollback_db_transaction" name="method-i-rollback_db_transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Rolls back the transaction (and turns on auto-committing). Must be done if
+the transaction block raises an exception or returns false.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rollback_db_transaction_source')" id="l_method-i-rollback_db_transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-rollback_db_transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 277</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rollback_db_transaction</span>() <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sanitize_limit">
+            
+              <b>sanitize_limit</b>(limit)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-sanitize_limit" name="method-i-sanitize_limit" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sanitizes the given LIMIT parameter in order to prevent SQL injection.</p>
+
+<p>The <code>limit</code> may be anything that can evaluate to a string via
+to_s. It should look like an integer, or a comma-delimited list of
+integers, or an Arel SQL literal.</p>
+
+<p>Returns <a href="../../Integer.html">Integer</a> and
+Arel::Nodes::SqlLiteral limits as is. Returns the sanitized limit
+parameter, either as an integer, or as a string which contains a
+comma-delimited list of integers.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sanitize_limit_source')" id="l_method-i-sanitize_limit_source">show</a>
+                
+              </p>
+              <div id="method-i-sanitize_limit_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 323</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sanitize_limit</span>(<span class="ruby-identifier">limit</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">limit</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Arel</span><span class="ruby-operator">::</span><span class="ruby-constant">Nodes</span><span class="ruby-operator">::</span><span class="ruby-constant">SqlLiteral</span>)
+    <span class="ruby-identifier">limit</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">limit</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/,/</span>
+    <span class="ruby-constant">Arel</span>.<span class="ruby-identifier">sql</span> <span class="ruby-identifier">limit</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>).<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">i</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;,&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">Integer</span>(<span class="ruby-identifier">limit</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_all">
+            
+              <b>select_all</b>(arel, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-select_all" name="method-i-select_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of record hashes with the column names as keys and column
+values as values.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_all_source')" id="l_method-i-select_all_source">show</a>
+                
+              </p>
+              <div id="method-i-select_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_all</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-identifier">select</span>(<span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">binds</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_one">
+            
+              <b>select_one</b>(arel, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-select_one" name="method-i-select_one" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a record hash with the column names as keys and column values as
+values.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_one_source')" id="l_method-i-select_one_source">show</a>
+                
+              </p>
+              <div id="method-i-select_one_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_one</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">select_all</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_rows">
+            
+              <b>select_rows</b>(sql, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-select_rows" name="method-i-select_rows" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of arrays containing the field values. Order is the same
+as that returned by <code>columns</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_rows_source')" id="l_method-i-select_rows_source">show</a>
+                
+              </p>
+              <div id="method-i-select_rows_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_rows</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_value">
+            
+              <b>select_value</b>(arel, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-select_value" name="method-i-select_value" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a single value from a record</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_value_source')" id="l_method-i-select_value_source">show</a>
+                
+              </p>
+              <div id="method-i-select_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_value</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span> = <span class="ruby-identifier">select_one</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+    <span class="ruby-identifier">result</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select_values">
+            
+              <b>select_values</b>(arel, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-select_values" name="method-i-select_values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of the values of the first column in a select:</p>
+
+<pre class="ruby"><span class="ruby-identifier">select_values</span>(<span class="ruby-string">&quot;SELECT id FROM companies LIMIT 3&quot;</span>) =<span class="ruby-operator">&gt;</span> [<span class="ruby-value">1</span>,<span class="ruby-value">2</span>,<span class="ruby-value">3</span>]
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_values_source')" id="l_method-i-select_values_source">show</a>
+                
+              </p>
+              <div id="method-i-select_values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select_values</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">select_rows</span>(<span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, []), <span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>[<span class="ruby-number">0</span>] }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-supports_statement_cache-3F">
+            
+              <b>supports_statement_cache?</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-supports_statement_cache-3F" name="method-i-supports_statement_cache-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> when the connection adapter supports prepared
+statement caching, otherwise returns <code>false</code></p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-supports_statement_cache-3F_source')" id="l_method-i-supports_statement_cache-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-supports_statement_cache-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">supports_statement_cache?</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_sql">
+            
+              <b>to_sql</b>(arel, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-to_sql" name="method-i-to_sql" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Converts an arel AST to SQL</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_sql_source')" id="l_method-i-to_sql_source">show</a>
+                
+              </p>
+              <div id="method-i-to_sql_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:ast</span>)
+    <span class="ruby-identifier">binds</span> = <span class="ruby-identifier">binds</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">visitor</span>.<span class="ruby-identifier">accept</span>(<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">ast</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">quote</span>(*<span class="ruby-identifier">binds</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">reverse</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">arel</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-transaction">
+            
+              <b>transaction</b>(options = {})
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-transaction" name="method-i-transaction" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Runs the given block in a database transaction, and returns the result of
+the block.</p>
+
+<h2 id="method-i-transaction-label-Nested+transactions+support">Nested transactions support</h2>
+
+<p>Most databases don&#39;t support true nested transactions. At the time of
+writing, the only database that supports true nested transactions that
+we&#39;re aware of, is MS-SQL.</p>
+
+<p>In order to get around this problem, <a
+href="DatabaseStatements.html#method-i-transaction">transaction</a> will
+emulate the effect of nested transactions, by using savepoints: <a
+href="http://dev.mysql.com/doc/refman/5.0/en/savepoint.html">dev.mysql.com/doc/refman/5.0/en/savepoint.html</a>
+Savepoints are supported by MySQL and PostgreSQL. SQLite3 version &gt;=
+&#39;3.6.8&#39; supports savepoints.</p>
+
+<p>It is safe to call this method if a database transaction is already open,
+i.e. if <a
+href="DatabaseStatements.html#method-i-transaction">transaction</a> is
+called within another <a
+href="DatabaseStatements.html#method-i-transaction">transaction</a> block.
+In case of a nested call, <a
+href="DatabaseStatements.html#method-i-transaction">transaction</a> will
+behave as follows:</p>
+<ul><li>
+<p>The block will be run without doing anything. All database statements that
+happen within the block are effectively appended to the already open
+database transaction.</p>
+</li><li>
+<p>However, if <code>:requires_new</code> is set, the block will be wrapped in
+a database savepoint acting as a sub-transaction.</p>
+</li></ul>
+
+<h3 id="method-i-transaction-label-Caveats">Caveats</h3>
+
+<p>MySQL doesn&#39;t support DDL transactions. If you perform a DDL operation,
+then any created savepoints will be automatically released. For example, if
+you&#39;ve created a savepoint, then you execute a CREATE TABLE statement,
+then the savepoint that was created will be automatically released.</p>
+
+<p>This means that, on MySQL, you shouldn&#39;t execute DDL operations inside
+a <a href="DatabaseStatements.html#method-i-transaction">transaction</a>
+call that you know might create a savepoint. Otherwise, <a
+href="DatabaseStatements.html#method-i-transaction">transaction</a> will
+raise exceptions when it tries to release the
+already-automatically-released savepoints:</p>
+
+<pre>Model.connection.transaction do  # BEGIN
+  Model.connection.transaction(requires_new: true) do  # CREATE SAVEPOINT active_record_1
+    Model.connection.create_table(...)
+    # active_record_1 now automatically released
+  end  # RELEASE SAVEPOINT active_record_1  &lt;--- BOOM! database error!
+end</pre>
+
+<h2 id="method-i-transaction-label-Transaction+isolation">Transaction isolation</h2>
+
+<p>If your database supports setting the isolation level for a transaction,
+you can set it like so:</p>
+
+<pre>Post.transaction(isolation: :serializable) do
+  # ...
+end</pre>
+
+<p>Valid isolation levels are:</p>
+<ul><li>
+<p><code>:read_uncommitted</code></p>
+</li><li>
+<p><code>:read_committed</code></p>
+</li><li>
+<p><code>:repeatable_read</code></p>
+</li><li>
+<p><code>:serializable</code></p>
+</li></ul>
+
+<p>You should consult the documentation for your database to understand the
+semantics of these different levels:</p>
+<ul><li>
+<p><a
+href="http://www.postgresql.org/docs/9.1/static/transaction-iso.html">www.postgresql.org/docs/9.1/static/transaction-iso.html</a></p>
+</li><li>
+<p><a
+href="https://dev.mysql.com/doc/refman/5.0/en/set-transaction.html">dev.mysql.com/doc/refman/5.0/en/set-transaction.html</a></p>
+</li></ul>
+
+<p>An <code>ActiveRecord::TransactionIsolationError</code> will be raised if:</p>
+<ul><li>
+<p>The adapter does not support setting the isolation level</p>
+</li><li>
+<p>You are joining an existing open transaction</p>
+</li><li>
+<p>You are creating a nested (savepoint) transaction</p>
+</li></ul>
+
+<p>The mysql, mysql2 and postgresql adapters support setting the transaction
+isolation level. However, support is disabled for mysql versions below 5,
+because they are affected by a <a
+href="http://bugs.mysql.com/bug.php?id=39170">bug</a> which means the
+isolation level gets persisted outside the transaction.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-transaction_source')" id="l_method-i-transaction_source">show</a>
+                
+              </p>
+              <div id="method-i-transaction_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">transaction</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span> <span class="ruby-value">:requires_new</span>, <span class="ruby-value">:joinable</span>, <span class="ruby-value">:isolation</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:requires_new</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_transaction</span>.<span class="ruby-identifier">joinable?</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:isolation</span>]
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">TransactionIsolationError</span>, <span class="ruby-string">&quot;cannot set isolation when joining a transaction&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">within_new_transaction</span>(<span class="ruby-identifier">options</span>) { <span class="ruby-keyword">yield</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Rollback</span>
+  <span class="ruby-comment"># rollbacks are silently swallowed</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-transaction_isolation_levels">
+            
+              <b>transaction_isolation_levels</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-transaction_isolation_levels" name="method-i-transaction_isolation_levels" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-transaction_isolation_levels_source')" id="l_method-i-transaction_isolation_levels_source">show</a>
+                
+              </p>
+              <div id="method-i-transaction_isolation_levels_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 256</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">transaction_isolation_levels</span>
+  {
+    <span class="ruby-identifier">read_uncommitted</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;READ UNCOMMITTED&quot;</span>,
+    <span class="ruby-identifier">read_committed</span><span class="ruby-operator">:</span>   <span class="ruby-string">&quot;READ COMMITTED&quot;</span>,
+    <span class="ruby-identifier">repeatable_read</span><span class="ruby-operator">:</span>  <span class="ruby-string">&quot;REPEATABLE READ&quot;</span>,
+    <span class="ruby-identifier">serializable</span><span class="ruby-operator">:</span>     <span class="ruby-string">&quot;SERIALIZABLE&quot;</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-transaction_open-3F">
+            
+              <b>transaction_open?</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-transaction_open-3F" name="method-i-transaction_open-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-transaction_open-3F_source')" id="l_method-i-transaction_open-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-transaction_open-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">transaction_open?</span>
+  <span class="ruby-ivar">@transaction</span>.<span class="ruby-identifier">open?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>(arel, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes the update statement and returns the number of rows affected.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+  <span class="ruby-identifier">exec_update</span>(<span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">binds</span>), <span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-delete_sql">
+            
+              <b>delete_sql</b>(sql, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-delete_sql" name="method-i-delete_sql" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes the delete statement and returns the number of rows affected.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_sql_source')" id="l_method-i-delete_sql_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_sql_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 376</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">update_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert_sql">
+            
+              <b>insert_sql</b>(sql, name = nil, pk = nil, id_value = nil, sequence_name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-insert_sql" name="method-i-insert_sql" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the last auto-generated ID from the affected table.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-insert_sql_source')" id="l_method-i-insert_sql_source">show</a>
+                
+              </p>
+              <div id="method-i-insert_sql_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 365</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">insert_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">pk</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">id_value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">sequence_name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">id_value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_inserted_id">
+            
+              <b>last_inserted_id</b>(result)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-last_inserted_id" name="method-i-last_inserted_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last_inserted_id_source')" id="l_method-i-last_inserted_id_source">show</a>
+                
+              </p>
+              <div id="method-i-last_inserted_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 384</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last_inserted_id</span>(<span class="ruby-identifier">result</span>)
+  <span class="ruby-identifier">row</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">rows</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">row</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-select">
+            
+              <b>select</b>(sql, name = nil, binds = [])
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-select" name="method-i-select" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of record hashes with the column names as keys and column
+values as values.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-select_source')" id="l_method-i-select_source">show</a>
+                
+              </p>
+              <div id="method-i-select_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 360</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">select</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">binds</span> = [])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sql_for_insert">
+            
+              <b>sql_for_insert</b>(sql, pk, id_value, sequence_name, binds)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-sql_for_insert" name="method-i-sql_for_insert" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sql_for_insert_source')" id="l_method-i-sql_for_insert_source">show</a>
+                
+              </p>
+              <div id="method-i-sql_for_insert_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 380</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sql_for_insert</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">pk</span>, <span class="ruby-identifier">id_value</span>, <span class="ruby-identifier">sequence_name</span>, <span class="ruby-identifier">binds</span>)
+  [<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">binds</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-subquery_for">
+            
+              <b>subquery_for</b>(key, select)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-subquery_for" name="method-i-subquery_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return a subquery for the given key using the join information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-subquery_for_source')" id="l_method-i-subquery_for_source">show</a>
+                
+              </p>
+              <div id="method-i-subquery_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 352</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">subquery_for</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">select</span>)
+  <span class="ruby-identifier">subselect</span> = <span class="ruby-identifier">select</span>.<span class="ruby-identifier">clone</span>
+  <span class="ruby-identifier">subselect</span>.<span class="ruby-identifier">projections</span> = [<span class="ruby-identifier">key</span>]
+  <span class="ruby-identifier">subselect</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_sql">
+            
+              <b>update_sql</b>(sql, name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/DatabaseStatements.html#method-i-update_sql" name="method-i-update_sql" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Executes the update statement and returns the number of rows affected.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_sql_source')" id="l_method-i-update_sql_source">show</a>
+                
+              </p>
+              <div id="method-i-update_sql_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb, line 371</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update_sql</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">execute</span>(<span class="ruby-identifier">sql</span>, <span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

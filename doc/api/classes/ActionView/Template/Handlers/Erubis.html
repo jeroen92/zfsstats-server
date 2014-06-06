@@ -1,0 +1,471 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Template::Handlers::Erubis</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionView::Template::Handlers::Erubis 
+            
+                <span class="parent">&lt; 
+                    
+                    Erubis::Eruby
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/template/handlers/erb_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add_expr">add_expr</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_expr_escaped">add_expr_escaped</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_expr_literal">add_expr_literal</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_postamble">add_postamble</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_preamble">add_preamble</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_stmt">add_stmt</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_text">add_text</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-flush_newline_if_pending">flush_newline_if_pending</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">BLOCK_EXPR</td>
+            <td>=</td>
+            <td class="attr-value">/\s+(do|\{)(\s*\|[^|]*\|)?\s*\Z/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-add_expr">
+            
+              <b>add_expr</b>(src, code, indicator)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_expr" name="method-i-add_expr" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><a href="Erubis.html">Erubis</a> toggles &lt;%= and &lt;%== behavior when
+escaping is enabled. We override to always treat &lt;%== as escaped.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_expr_source')" id="l_method-i-add_expr_source">show</a>
+                
+              </p>
+              <div id="method-i-add_expr_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_expr</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">code</span>, <span class="ruby-identifier">indicator</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">indicator</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;==&#39;</span>
+    <span class="ruby-identifier">add_expr_escaped</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">code</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_expr_escaped">
+            
+              <b>add_expr_escaped</b>(src, code)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_expr_escaped" name="method-i-add_expr_escaped" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_expr_escaped_source')" id="l_method-i-add_expr_escaped_source">show</a>
+                
+              </p>
+              <div id="method-i-add_expr_escaped_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_expr_escaped</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">code</span>)
+  <span class="ruby-identifier">flush_newline_if_pending</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">BLOCK_EXPR</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;@output_buffer.safe_append= &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">code</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;@output_buffer.safe_append=(&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;);&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_expr_literal">
+            
+              <b>add_expr_literal</b>(src, code)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_expr_literal" name="method-i-add_expr_literal" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_expr_literal_source')" id="l_method-i-add_expr_literal_source">show</a>
+                
+              </p>
+              <div id="method-i-add_expr_literal_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_expr_literal</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">code</span>)
+  <span class="ruby-identifier">flush_newline_if_pending</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">BLOCK_EXPR</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;@output_buffer.append= &#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">code</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;@output_buffer.append=(&#39;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">code</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;);&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_postamble">
+            
+              <b>add_postamble</b>(src)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_postamble" name="method-i-add_postamble" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_postamble_source')" id="l_method-i-add_postamble_source">show</a>
+                
+              </p>
+              <div id="method-i-add_postamble_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_postamble</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-identifier">flush_newline_if_pending</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;@output_buffer.to_s&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_preamble">
+            
+              <b>add_preamble</b>(src)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_preamble" name="method-i-add_preamble" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_preamble_source')" id="l_method-i-add_preamble_source">show</a>
+                
+              </p>
+              <div id="method-i-add_preamble_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_preamble</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-ivar">@newline_pending</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;@output_buffer = output_buffer || ActionView::OutputBuffer.new;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_stmt">
+            
+              <b>add_stmt</b>(src, code)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_stmt" name="method-i-add_stmt" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_stmt_source')" id="l_method-i-add_stmt_source">show</a>
+                
+              </p>
+              <div id="method-i-add_stmt_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_stmt</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">code</span>)
+  <span class="ruby-identifier">flush_newline_if_pending</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_text">
+            
+              <b>add_text</b>(src, text)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-add_text" name="method-i-add_text" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_text_source')" id="l_method-i-add_text_source">show</a>
+                
+              </p>
+              <div id="method-i-add_text_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_text</span>(<span class="ruby-identifier">src</span>, <span class="ruby-identifier">text</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-ivar">@newline_pending</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;@output_buffer.safe_append=&#39;&quot;</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> * <span class="ruby-ivar">@newline_pending</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@newline_pending</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">escape_text</span>(<span class="ruby-identifier">text</span>)
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;&#39;;&quot;</span>
+
+    <span class="ruby-ivar">@newline_pending</span> = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-flush_newline_if_pending">
+            
+              <b>flush_newline_if_pending</b>(src)
+            
+            <a href="../../../../classes/ActionView/Template/Handlers/Erubis.html#method-i-flush_newline_if_pending" name="method-i-flush_newline_if_pending" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-flush_newline_if_pending_source')" id="l_method-i-flush_newline_if_pending_source">show</a>
+                
+              </p>
+              <div id="method-i-flush_newline_if_pending_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/template/handlers/erb.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">flush_newline_if_pending</span>(<span class="ruby-identifier">src</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@newline_pending</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span>
+    <span class="ruby-identifier">src</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;@output_buffer.safe_append=&#39;#{&quot;\n&quot; * @newline_pending}&#39;;&quot;</span>
+    <span class="ruby-ivar">@newline_pending</span> = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

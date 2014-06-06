@@ -1,0 +1,1670 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveModel::Errors</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveModel::Errors 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/errors_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Active+Model+Errors">Active Model Errors</h2>
+
+<p>Provides a modified <code>Hash</code> that you can include in your object
+for handling error messages and interacting with Action Pack helpers.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-comment"># Required dependency for ActiveModel::Errors</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+    <span class="ruby-ivar">@errors</span> = <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">attr_reader</span>   :<span class="ruby-identifier">errors</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">validate!</span>
+    <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;can not be nil&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># The following methods are needed to be minimally implemented</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">read_attribute_for_validation</span>(<span class="ruby-identifier">attr</span>)
+    <span class="ruby-identifier">send</span>(<span class="ruby-identifier">attr</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-constant">Person</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attr</span>, <span class="ruby-identifier">options</span> = {})
+    <span class="ruby-identifier">attr</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-constant">Person</span>.<span class="ruby-identifier">lookup_ancestors</span>
+    [<span class="ruby-keyword">self</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The last three methods are required in your object for <a
+href="Errors.html">Errors</a> to be able to generate error messages
+correctly and also handle multiple languages. Of course, if you extend your
+object with <a href="Translation.html">ActiveModel::Translation</a> you
+will not need to implement the last two. Likewise, using <a
+href="Validations.html">ActiveModel::Validations</a> will handle the
+validation related methods for you.</p>
+
+<p>The above allows you to do:</p>
+
+<pre class="ruby"><span class="ruby-identifier">p</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">validate!</span>            <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span> <span class="ruby-comment"># =&gt; [&quot;name can not be nil&quot;]</span>
+<span class="ruby-comment"># etc..</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D">[]</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D-3D">[]=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add">add</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_on_blank">add_on_blank</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-add_on_empty">add_on_empty</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-added-3F">added?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-as_json">as_json</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-blank-3F">blank?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear">clear</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-count">count</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-each">each</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-empty-3F">empty?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-full_message">full_message</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-full_messages">full_messages</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-full_messages_for">full_messages_for</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-generate_message">generate_message</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-has_key-3F">has_key?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-include-3F">include?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>K</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-keys">keys</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-set">set</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-size">size</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_a">to_a</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_hash">to_hash</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_xml">to_xml</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-values">values</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../Enumerable.html">
+              Enumerable
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">CALLBACKS_OPTIONS</td>
+            <td>=</td>
+            <td class="attr-value">[:if, :unless, :on, :allow_nil, :allow_blank, :strict]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>messages</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(base)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Pass in the instance of the object that is using the errors object.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+    <span class="ruby-ivar">@errors</span> = <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-ivar">@base</span>     = <span class="ruby-identifier">base</span>
+  <span class="ruby-ivar">@messages</span> = {}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D">
+            
+              <b>[]</b>(attribute)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-5B-5D" name="method-i-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>When passed a symbol or a name of a method, returns an array of errors for
+the method.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>[:<span class="ruby-identifier">name</span>]  <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>[<span class="ruby-string">&#39;name&#39;</span>] <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D_source')" id="l_method-i-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">attribute</span>)
+  <span class="ruby-identifier">get</span>(<span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_sym</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">set</span>(<span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_sym</span>, [])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D-3D">
+            
+              <b>[]=</b>(attribute, error)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-5B-5D-3D" name="method-i-5B-5D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adds to the supplied attribute the supplied error message.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>[:<span class="ruby-identifier">name</span>] = <span class="ruby-string">&quot;must be set&quot;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>[:<span class="ruby-identifier">name</span>] <span class="ruby-comment"># =&gt; [&#39;must be set&#39;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D-3D_source')" id="l_method-i-5B-5D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-keyword ruby-title">attribute</span>, <span class="ruby-identifier">error</span>)
+  <span class="ruby-keyword">self</span>[<span class="ruby-identifier">attribute</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">error</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add">
+            
+              <b>add</b>(attribute, message = nil, options = {})
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-add" name="method-i-add" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adds <code>message</code> to the error messages on <code>attribute</code>.
+More than one error can be added to the same <code>attribute</code>. If no
+<code>message</code> is supplied, <code>:invalid</code> is assumed.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>)
+<span class="ruby-comment"># =&gt; [&quot;is invalid&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;must be implemented&#39;</span>)
+<span class="ruby-comment"># =&gt; [&quot;is invalid&quot;, &quot;must be implemented&quot;]</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span>
+<span class="ruby-comment"># =&gt; {:name=&gt;[&quot;must be implemented&quot;, &quot;is invalid&quot;]}</span>
+</pre>
+
+<p>If <code>message</code> is a symbol, it will be translated using the
+appropriate scope (see <code>generate_message</code>).</p>
+
+<p>If <code>message</code> is a proc, it will be called, allowing for things
+like <code>Time.now</code> to be used within an error.</p>
+
+<p>If the <code>:strict</code> option is set to true will raise <a
+href="StrictValidationFailed.html">ActiveModel::StrictValidationFailed</a>
+instead of adding the error. <code>:strict</code> option can also be set to
+any other exception.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">strict</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-comment"># =&gt; ActiveModel::StrictValidationFailed: name is invalid</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">strict</span><span class="ruby-operator">:</span> <span class="ruby-constant">NameIsInvalid</span>)
+<span class="ruby-comment"># =&gt; NameIsInvalid: name is invalid</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span> <span class="ruby-comment"># =&gt; {}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_source')" id="l_method-i-add_source">show</a>
+                
+              </p>
+              <div id="method-i-add_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 291</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">message</span> = <span class="ruby-identifier">normalize_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">exception</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:strict</span>]
+    <span class="ruby-identifier">exception</span> = <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">StrictValidationFailed</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">exception</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">exception</span>, <span class="ruby-identifier">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">self</span>[<span class="ruby-identifier">attribute</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_on_blank">
+            
+              <b>add_on_blank</b>(attributes, options = {})
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-add_on_blank" name="method-i-add_on_blank" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Will add an error message to each of the attributes in
+<code>attributes</code> that is blank (using <a
+href="../Object.html#method-i-blank-3F">Object#blank?</a>).</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add_on_blank</span>(:<span class="ruby-identifier">name</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span>
+<span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can&#39;t be blank&quot;]}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_on_blank_source')" id="l_method-i-add_on_blank_source">show</a>
+                
+              </p>
+              <div id="method-i-add_on_blank_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 321</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_on_blank</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">attributes</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:read_attribute_for_validation</span>, <span class="ruby-identifier">attribute</span>)
+    <span class="ruby-identifier">add</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-value">:blank</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">blank?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add_on_empty">
+            
+              <b>add_on_empty</b>(attributes, options = {})
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-add_on_empty" name="method-i-add_on_empty" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Will add an error message to each of the attributes in
+<code>attributes</code> that is empty.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add_on_empty</span>(:<span class="ruby-identifier">name</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span>
+<span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can&#39;t be empty&quot;]}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_on_empty_source')" id="l_method-i-add_on_empty_source">show</a>
+                
+              </p>
+              <div id="method-i-add_on_empty_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 307</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add_on_empty</span>(<span class="ruby-identifier">attributes</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">Array</span>(<span class="ruby-identifier">attributes</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">value</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:read_attribute_for_validation</span>, <span class="ruby-identifier">attribute</span>)
+    <span class="ruby-identifier">is_empty</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:empty?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">add</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-value">:empty</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">is_empty</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-added-3F">
+            
+              <b>added?</b>(attribute, message = nil, options = {})
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-added-3F" name="method-i-added-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if an error on the attribute with the given
+message is present, <code>false</code> otherwise. <code>message</code> is
+treated the same as for <code>add</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">blank</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">added?</span> :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">blank</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-added-3F_source')" id="l_method-i-added-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-added-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 333</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">added?</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">message</span> = <span class="ruby-identifier">normalize_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">self</span>[<span class="ruby-identifier">attribute</span>].<span class="ruby-identifier">include?</span> <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-as_json">
+            
+              <b>as_json</b>(options=nil)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-as_json" name="method-i-as_json" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <a href="../Hash.html">Hash</a> that can be used as the JSON
+representation for this object. You can pass the
+<code>:full_messages</code> option. This determines if the json object
+should contain full messages or not (false by default).</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">as_json</span>                      <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can not be nil&quot;]}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">full_messages</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;name can not be nil&quot;]}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-as_json_source')" id="l_method-i-as_json_source">show</a>
+                
+              </p>
+              <div id="method-i-as_json_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 242</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">as_json</span>(<span class="ruby-identifier">options</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">to_hash</span>(<span class="ruby-identifier">options</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:full_messages</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-blank-3F">
+            
+              <b>blank?</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-blank-3F" name="method-i-blank-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>aliases empty?</p>
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear">
+            
+              <b>clear</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-clear" name="method-i-clear" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clear the error messages.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span> <span class="ruby-comment"># =&gt; [&quot;name can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span> <span class="ruby-comment"># =&gt; []</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_source')" id="l_method-i-clear_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear</span>
+  <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-count">
+            
+              <b>count</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-count" name="method-i-count" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the number of error messages.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;can&#39;t be blank&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;must be specified&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">count</span> <span class="ruby-comment"># =&gt; 2</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-count_source')" id="l_method-i-count_source">show</a>
+                
+              </p>
+              <div id="method-i-count_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 206</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">count</span>
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(key)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Delete messages for <code>key</code>. Returns the deleted messages.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">get</span>(:<span class="ruby-identifier">name</span>)    <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">delete</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">get</span>(:<span class="ruby-identifier">name</span>)    <span class="ruby-comment"># =&gt; nil</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-each">
+            
+              <b>each</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-each" name="method-i-each" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Iterates through each error key, value pair in the error messages hash.
+Yields the attribute and the error for that attribute. If the attribute has
+more than one error message, yields once for each error message.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;can&#39;t be blank&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">error</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># Will yield :name and &quot;can&#39;t be blank&quot;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;must be specified&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">error</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># Will yield :name and &quot;can&#39;t be blank&quot;</span>
+  <span class="ruby-comment"># then yield :name and &quot;must be specified&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-each_source')" id="l_method-i-each_source">show</a>
+                
+              </p>
+              <div id="method-i-each_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">each</span>
+  <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">self</span>[<span class="ruby-identifier">attribute</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">error</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">error</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-empty-3F">
+            
+              <b>empty?</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-empty-3F" name="method-i-empty-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if no errors are found, <code>false</code>
+otherwise. If the error message is a string it can be empty.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span> <span class="ruby-comment"># =&gt; [&quot;name can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span>        <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Errors.html#method-i-blank-3F">blank?</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-empty-3F_source')" id="l_method-i-empty-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-empty-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">empty?</span>
+  <span class="ruby-identifier">all?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-full_message">
+            
+              <b>full_message</b>(attribute, message)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-full_message" name="method-i-full_message" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a full message for a given attribute.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_message</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;is invalid&#39;</span>) <span class="ruby-comment"># =&gt; &quot;Name is invalid&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-full_message_source')" id="l_method-i-full_message_source">show</a>
+                
+              </p>
+              <div id="method-i-full_message_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 369</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">message</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">attribute</span> <span class="ruby-operator">==</span> <span class="ruby-value">:base</span>
+  <span class="ruby-identifier">attr_name</span> = <span class="ruby-identifier">attribute</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;.&#39;</span>, <span class="ruby-string">&#39;_&#39;</span>).<span class="ruby-identifier">humanize</span>
+  <span class="ruby-identifier">attr_name</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-value">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">t</span>(<span class="ruby-value">:&quot;errors.format&quot;</span>, {
+    <span class="ruby-value">:default</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;%{attribute} %{message}&quot;</span>,
+    <span class="ruby-value">:attribute</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">attr_name</span>,
+    <span class="ruby-value">:message</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">message</span>
+  })
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-full_messages">
+            
+              <b>full_messages</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-full_messages" name="method-i-full_messages" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns all the full error messages in an array.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">address</span>, :<span class="ruby-identifier">email</span>
+  <span class="ruby-identifier">validates_length_of</span> :<span class="ruby-identifier">name</span>, <span class="ruby-keyword">in</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span><span class="ruby-operator">..</span><span class="ruby-value">30</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">address</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;123 First St.&#39;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages</span>
+<span class="ruby-comment"># =&gt; [&quot;Name is too short (minimum is 5 characters)&quot;, &quot;Name can&#39;t be blank&quot;, &quot;Email can&#39;t be blank&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-full_messages_source')" id="l_method-i-full_messages_source">show</a>
+                
+              </p>
+              <div id="method-i-full_messages_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 348</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">full_messages</span>
+  <span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">|</span> <span class="ruby-identifier">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-full_messages_for">
+            
+              <b>full_messages_for</b>(attribute)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-full_messages_for" name="method-i-full_messages_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns all the full error messages for a given attribute in an array.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">email</span>
+  <span class="ruby-identifier">validates_length_of</span> :<span class="ruby-identifier">name</span>, <span class="ruby-keyword">in</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span><span class="ruby-operator">..</span><span class="ruby-value">30</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>()
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">full_messages_for</span>(:<span class="ruby-identifier">name</span>)
+<span class="ruby-comment"># =&gt; [&quot;Name is too short (minimum is 5 characters)&quot;, &quot;Name can&#39;t be blank&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-full_messages_for_source')" id="l_method-i-full_messages_for_source">show</a>
+                
+              </p>
+              <div id="method-i-full_messages_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 362</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">full_messages_for</span>(<span class="ruby-identifier">attribute</span>)
+  (<span class="ruby-identifier">get</span>(<span class="ruby-identifier">attribute</span>) <span class="ruby-operator">||</span> []).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">message</span><span class="ruby-operator">|</span> <span class="ruby-identifier">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-generate_message">
+            
+              <b>generate_message</b>(attribute, type = :invalid, options = {})
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-generate_message" name="method-i-generate_message" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Translates an error message in its default scope
+(<code>activemodel.errors.messages</code>).</p>
+
+<p>Error messages are first looked up in
+<code>models.MODEL.attributes.ATTRIBUTE.MESSAGE</code>, if it&#39;s not
+there, it&#39;s looked up in <code>models.MODEL.MESSAGE</code> and if that
+is not there also, it returns the translation of the default message (e.g.
+<code>activemodel.errors.messages.MESSAGE</code>). The translated model
+name, translated attribute name and the value are available for
+interpolation.</p>
+
+<p>When using inheritance in your models, it will check all the inherited
+models too, but only if the model itself hasn&#39;t been found. Say you
+have <code>class Admin &lt; User; end</code> and you wanted the translation
+for the <code>:blank</code> error message for the <code>title</code>
+attribute, it looks for these translations:</p>
+<ul><li>
+<p><code>activemodel.errors.models.admin.attributes.title.blank</code></p>
+</li><li>
+<p><code>activemodel.errors.models.admin.blank</code></p>
+</li><li>
+<p><code>activemodel.errors.models.user.attributes.title.blank</code></p>
+</li><li>
+<p><code>activemodel.errors.models.user.blank</code></p>
+</li><li>
+<p>any default you provided through the <code>options</code> hash (in the
+<code>activemodel.errors</code> scope)</p>
+</li><li>
+<p><code>activemodel.errors.messages.blank</code></p>
+</li><li>
+<p><code>errors.attributes.title.blank</code></p>
+</li><li>
+<p><code>errors.messages.blank</code></p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-generate_message_source')" id="l_method-i-generate_message_source">show</a>
+                
+              </p>
+              <div id="method-i-generate_message_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 404</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">generate_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">type</span> = <span class="ruby-value">:invalid</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">type</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:message</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:message</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:i18n_scope</span>)
+    <span class="ruby-identifier">defaults</span> = <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">lookup_ancestors</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+      [ <span class="ruby-value">:&quot;#{@base.class.i18n_scope}.errors.models.#{klass.model_name.i18n_key}.attributes.#{attribute}.#{type}&quot;</span>,
+        <span class="ruby-value">:&quot;#{@base.class.i18n_scope}.errors.models.#{klass.model_name.i18n_key}.#{type}&quot;</span> ]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">defaults</span> = []
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:message</span>)
+  <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">:&quot;#{@base.class.i18n_scope}.errors.messages.#{type}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:i18n_scope</span>)
+  <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">:&quot;errors.attributes.#{attribute}.#{type}&quot;</span>
+  <span class="ruby-identifier">defaults</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">:&quot;errors.messages.#{type}&quot;</span>
+
+  <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">flatten!</span>
+
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">defaults</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-identifier">value</span> = (<span class="ruby-identifier">attribute</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:base</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:read_attribute_for_validation</span>, <span class="ruby-identifier">attribute</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+
+  <span class="ruby-identifier">options</span> = {
+    <span class="ruby-value">:default</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">defaults</span>,
+    <span class="ruby-value">:model</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>,
+    <span class="ruby-value">:attribute</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@base</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">human_attribute_name</span>(<span class="ruby-identifier">attribute</span>),
+    <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">value</span>
+  }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get">
+            
+              <b>get</b>(key)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get messages for <code>key</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span>   <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can not be nil&quot;]}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">get</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">get</span>(:<span class="ruby-identifier">age</span>)  <span class="ruby-comment"># =&gt; nil</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                
+              </p>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">messages</span>[<span class="ruby-identifier">key</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-has_key-3F">
+            
+              <b>has_key?</b>(attribute)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-has_key-3F" name="method-i-has_key-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>aliases include?</p>
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-include-3F">
+            
+              <b>include?</b>(attribute)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-include-3F" name="method-i-include-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if the error messages include an error for the
+given key <code>attribute</code>, <code>false</code> otherwise.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span>        <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can not be nil&quot;]}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">include?</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">include?</span>(:<span class="ruby-identifier">age</span>)  <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Errors.html#method-i-has_key-3F">has_key?</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-include-3F_source')" id="l_method-i-include-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-include-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">include?</span>(<span class="ruby-identifier">attribute</span>)
+  (<span class="ruby-identifier">v</span> = <span class="ruby-identifier">messages</span>[<span class="ruby-identifier">attribute</span>]) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">any?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-keys">
+            
+              <b>keys</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-keys" name="method-i-keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns all message keys.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span> <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can not be nil&quot;, &quot;must be specified&quot;]}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">keys</span>     <span class="ruby-comment"># =&gt; [:name]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-keys_source')" id="l_method-i-keys_source">show</a>
+                
+              </p>
+              <div id="method-i-keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">keys</span>
+  <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-set">
+            
+              <b>set</b>(key, value)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-set" name="method-i-set" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Set messages for <code>key</code> to <code>value</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">get</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># =&gt; [&quot;can not be nil&quot;]</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">set</span>(:<span class="ruby-identifier">name</span>, [<span class="ruby-string">&quot;can&#39;t be nil&quot;</span>])
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">get</span>(:<span class="ruby-identifier">name</span>) <span class="ruby-comment"># =&gt; [&quot;can&#39;t be nil&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-set_source')" id="l_method-i-set_source">show</a>
+                
+              </p>
+              <div id="method-i-set_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">set</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">messages</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-size">
+            
+              <b>size</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-size" name="method-i-size" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the number of error messages.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;can&#39;t be blank&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">size</span> <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;must be specified&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">size</span> <span class="ruby-comment"># =&gt; 2</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-size_source')" id="l_method-i-size_source">show</a>
+                
+              </p>
+              <div id="method-i-size_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">size</span>
+  <span class="ruby-identifier">values</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_a">
+            
+              <b>to_a</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-to_a" name="method-i-to_a" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of error messages, with the attribute name included.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;can&#39;t be blank&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;must be specified&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">to_a</span> <span class="ruby-comment"># =&gt; [&quot;name can&#39;t be blank&quot;, &quot;name must be specified&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_a_source')" id="l_method-i-to_a_source">show</a>
+                
+              </p>
+              <div id="method-i-to_a_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_a</span>
+  <span class="ruby-identifier">full_messages</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_hash">
+            
+              <b>to_hash</b>(full_messages = false)
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-to_hash" name="method-i-to_hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <a href="../Hash.html">Hash</a> of attributes with their error
+messages. If <code>full_messages</code> is <code>true</code>, it will
+contain full messages (see <code>full_message</code>).</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_hash</span>       <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can not be nil&quot;]}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">to_hash</span>(<span class="ruby-keyword">true</span>) <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;name can not be nil&quot;]}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_hash_source')" id="l_method-i-to_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-to_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 251</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_hash</span>(<span class="ruby-identifier">full_messages</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">full_messages</span>
+    <span class="ruby-identifier">messages</span> = {}
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">messages</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">array</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">messages</span>[<span class="ruby-identifier">attribute</span>] = <span class="ruby-identifier">array</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">message</span><span class="ruby-operator">|</span> <span class="ruby-identifier">full_message</span>(<span class="ruby-identifier">attribute</span>, <span class="ruby-identifier">message</span>) }
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">messages</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">messages</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_xml">
+            
+              <b>to_xml</b>(options={})
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-to_xml" name="method-i-to_xml" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an xml formatted representation of the <a
+href="Errors.html">Errors</a> hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;can&#39;t be blank&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span>(:<span class="ruby-identifier">name</span>, <span class="ruby-string">&quot;must be specified&quot;</span>)
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">to_xml</span>
+<span class="ruby-comment"># =&gt;</span>
+<span class="ruby-comment">#  &lt;?xml version=\&quot;1.0\&quot; encoding=\&quot;UTF-8\&quot;?&gt;</span>
+<span class="ruby-comment">#  &lt;errors&gt;</span>
+<span class="ruby-comment">#    &lt;error&gt;name can&#39;t be blank&lt;/error&gt;</span>
+<span class="ruby-comment">#    &lt;error&gt;name must be specified&lt;/error&gt;</span>
+<span class="ruby-comment">#  &lt;/errors&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_xml_source')" id="l_method-i-to_xml_source">show</a>
+                
+              </p>
+              <div id="method-i-to_xml_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 232</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_xml</span>(<span class="ruby-identifier">options</span>={})
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">to_xml</span>({ <span class="ruby-value">:root</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;errors&quot;</span>, <span class="ruby-value">:skip_types</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">options</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-values">
+            
+              <b>values</b>()
+            
+            <a href="../../classes/ActiveModel/Errors.html#method-i-values" name="method-i-values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns all message values.</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span> <span class="ruby-comment"># =&gt; {:name=&gt;[&quot;can not be nil&quot;, &quot;must be specified&quot;]}</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">values</span>   <span class="ruby-comment"># =&gt; [[&quot;can not be nil&quot;, &quot;must be specified&quot;]]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-values_source')" id="l_method-i-values_source">show</a>
+                
+              </p>
+              <div id="method-i-values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/errors.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">values</span>
+  <span class="ruby-identifier">messages</span>.<span class="ruby-identifier">values</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

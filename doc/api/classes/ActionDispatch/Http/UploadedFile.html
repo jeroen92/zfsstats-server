@@ -1,0 +1,460 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Http::UploadedFile</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionDispatch::Http::UploadedFile 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/http/upload_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Models uploaded files.</p>
+
+<p>The actual file is accessible via the <code>tempfile</code> accessor,
+though some of its interface is available directly for convenience.</p>
+
+<p>Uploaded files are temporary files whose lifespan is one request. When the
+object is finalized Ruby unlinks the file, so there is no need to clean
+them with a separate maintenance task.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-close">close</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-eof-3F">eof?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-open">open</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-path">path</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-read">read</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-rewind">rewind</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-size">size</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>content_type</td>
+            <td class='attr-desc'><p>A string with the MIME type of the file.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>headers</td>
+            <td class='attr-desc'><p>A string with the headers of the multipart request.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>original_filename</td>
+            <td class='attr-desc'><p>The basename of the file in the client.</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>tempfile</td>
+            <td class='attr-desc'><p>A <code>Tempfile</code> object with the actual uploaded file. Note that
+some of its interface is available directly.</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-close">
+            
+              <b>close</b>(unlink_now=false)
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-close" name="method-i-close" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.close</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-close_source')" id="l_method-i-close_source">show</a>
+                
+              </p>
+              <div id="method-i-close_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">close</span>(<span class="ruby-identifier">unlink_now</span>=<span class="ruby-keyword">false</span>)
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">close</span>(<span class="ruby-identifier">unlink_now</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-eof-3F">
+            
+              <b>eof?</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-eof-3F" name="method-i-eof-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.eof?</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-eof-3F_source')" id="l_method-i-eof-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-eof-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eof?</span>
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">eof?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-open">
+            
+              <b>open</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-open" name="method-i-open" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.open</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-open_source')" id="l_method-i-open_source">show</a>
+                
+              </p>
+              <div id="method-i-open_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">open</span>
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">open</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-path">
+            
+              <b>path</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-path" name="method-i-path" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.path</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-path_source')" id="l_method-i-path_source">show</a>
+                
+              </p>
+              <div id="method-i-path_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">path</span>
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">path</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-read">
+            
+              <b>read</b>(length=nil, buffer=nil)
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-read" name="method-i-read" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.read</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-read_source')" id="l_method-i-read_source">show</a>
+                
+              </p>
+              <div id="method-i-read_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">read</span>(<span class="ruby-identifier">length</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">buffer</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">length</span>, <span class="ruby-identifier">buffer</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rewind">
+            
+              <b>rewind</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-rewind" name="method-i-rewind" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.rewind</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rewind_source')" id="l_method-i-rewind_source">show</a>
+                
+              </p>
+              <div id="method-i-rewind_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rewind</span>
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">rewind</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-size">
+            
+              <b>size</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/UploadedFile.html#method-i-size" name="method-i-size" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Shortcut for <code>tempfile.size</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-size_source')" id="l_method-i-size_source">show</a>
+                
+              </p>
+              <div id="method-i-size_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/upload.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">size</span>
+  <span class="ruby-ivar">@tempfile</span>.<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

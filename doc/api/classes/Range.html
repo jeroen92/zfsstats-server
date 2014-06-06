@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Range</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Range 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/enumerable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/enumerable.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/range/conversions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/range/conversions.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/range/include_range_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/range/include_range.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/range/overlaps_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/range/overlaps.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/json/encoding_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-include_with_range-3F">include_with_range?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-overlaps-3F">overlaps?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_default_s">to_default_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_formatted_s">to_formatted_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">RANGE_FORMATS</td>
+            <td>=</td>
+            <td class="attr-value">{
+:db =&gt; Proc.new { |start, stop| &quot;BETWEEN &#39;#{start.to_s(:db)}&#39; AND &#39;#{stop.to_s(:db)}&#39;&quot; }
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-include_with_range-3F">
+            
+              <b>include_with_range?</b>(value)
+            
+            <a href="../classes/Range.html#method-i-include_with_range-3F" name="method-i-include_with_range-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Extends the default Range#include? to support range comparisons.</p>
+
+<pre class="ruby">(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">5</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">5</span>) <span class="ruby-comment"># =&gt; true</span>
+(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">5</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>) <span class="ruby-comment"># =&gt; true</span>
+(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">5</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">6</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p>The native Range#include? behavior is untouched.</p>
+
+<pre class="ruby">(<span class="ruby-string">&#39;a&#39;</span><span class="ruby-operator">..</span><span class="ruby-string">&#39;f&#39;</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;c&#39;</span>) <span class="ruby-comment"># =&gt; true</span>
+(<span class="ruby-value">5</span><span class="ruby-operator">..</span><span class="ruby-value">9</span>).<span class="ruby-identifier">include?</span>(<span class="ruby-value">11</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-include_with_range-3F_source')" id="l_method-i-include_with_range-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-include_with_range-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/range/include_range.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">include_with_range?</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">Range</span>)
+    <span class="ruby-comment"># 1...10 includes 1..9 but it does not include 1..10.</span>
+    <span class="ruby-identifier">operator</span> = <span class="ruby-identifier">exclude_end?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">value</span>.<span class="ruby-identifier">exclude_end?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:&lt;</span> <span class="ruby-operator">:</span> <span class="ruby-value">:&lt;=</span>
+    <span class="ruby-identifier">include_without_range?</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">operator</span>, <span class="ruby-identifier">last</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">include_without_range?</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-overlaps-3F">
+            
+              <b>overlaps?</b>(other)
+            
+            <a href="../classes/Range.html#method-i-overlaps-3F" name="method-i-overlaps-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compare two ranges and see if they overlap each other</p>
+
+<pre class="ruby">(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">5</span>).<span class="ruby-identifier">overlaps?</span>(<span class="ruby-value">4</span><span class="ruby-operator">..</span><span class="ruby-value">6</span>) <span class="ruby-comment"># =&gt; true</span>
+(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">5</span>).<span class="ruby-identifier">overlaps?</span>(<span class="ruby-value">7</span><span class="ruby-operator">..</span><span class="ruby-value">9</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-overlaps-3F_source')" id="l_method-i-overlaps-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-overlaps-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/range/overlaps.rb, line 5</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">overlaps?</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">cover?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">cover?</span>(<span class="ruby-identifier">first</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_default_s">
+            
+              <b>to_default_s</b>(format = :default)
+            
+            <a href="../classes/Range.html#method-i-to_default_s" name="method-i-to_default_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_formatted_s">
+            
+              <b>to_formatted_s</b>(format = :default)
+            
+            <a href="../classes/Range.html#method-i-to_formatted_s" name="method-i-to_formatted_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gives a human readable format of the range.</p>
+
+<pre class="ruby">(<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">100</span>).<span class="ruby-identifier">to_formatted_s</span> <span class="ruby-comment"># =&gt; &quot;1..100&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Range.html#method-i-to_s">to_s</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_formatted_s_source')" id="l_method-i-to_formatted_s_source">show</a>
+                
+              </p>
+              <div id="method-i-to_formatted_s_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/range/conversions.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_formatted_s</span>(<span class="ruby-identifier">format</span> = <span class="ruby-value">:default</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">formatter</span> = <span class="ruby-constant">RANGE_FORMATS</span>[<span class="ruby-identifier">format</span>]
+    <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">first</span>, <span class="ruby-identifier">last</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">to_default_s</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>(format = :default)
+            
+            <a href="../classes/Range.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Range.html#method-i-to_default_s">to_default_s</a>
+            </div>
+          
+          
+          
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

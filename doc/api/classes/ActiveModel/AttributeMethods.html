@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveModel::AttributeMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveModel::AttributeMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/attribute_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/attribute_methods.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Active+Model+Attribute+Methods">Active Model Attribute Methods</h2>
+
+<p><code>ActiveModel::AttributeMethods</code> provides a way to add prefixes
+and suffixes to your methods as well as handling the creation of
+<code>ActiveRecord::Base</code>-like class methods such as
+<code>table_name</code>.</p>
+
+<p>The requirements to implement <code>ActiveModel::AttributeMethods</code>
+are to:</p>
+<ul><li>
+<p><code>include ActiveModel::AttributeMethods</code> in your class.</p>
+</li><li>
+<p>Call each of its method you want to add, such as
+<code>attribute_method_suffix</code> or
+<code>attribute_method_prefix</code>.</p>
+</li><li>
+<p>Call <code>define_attribute_methods</code> after the other methods are
+called.</p>
+</li><li>
+<p>Define the various generic <code>_attribute</code> methods that you have
+declared.</p>
+</li><li>
+<p>Define an <code>attributes</code> method, see below.</p>
+</li></ul>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">AttributeMethods</span>
+
+  <span class="ruby-identifier">attribute_method_affix</span>  <span class="ruby-identifier">prefix</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;reset_&#39;</span>, <span class="ruby-identifier">suffix</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;_to_default!&#39;</span>
+  <span class="ruby-identifier">attribute_method_suffix</span> <span class="ruby-string">&#39;_contrived?&#39;</span>
+  <span class="ruby-identifier">attribute_method_prefix</span> <span class="ruby-string">&#39;clear_&#39;</span>
+  <span class="ruby-identifier">define_attribute_methods</span> :<span class="ruby-identifier">name</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">attributes</span>
+    {<span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@name</span>}
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">attribute_contrived?</span>(<span class="ruby-identifier">attr</span>)
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_attribute</span>(<span class="ruby-identifier">attr</span>)
+    <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr}=&quot;</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">reset_attribute_to_default!</span>(<span class="ruby-identifier">attr</span>)
+    <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{attr}=&quot;</span>, <span class="ruby-string">&#39;Default Name&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Note that whenever you include <code>ActiveModel::AttributeMethods</code>
+in your class, it requires you to implement an <code>attributes</code>
+method which returns a hash with each attribute name in your model as hash
+key and the attribute value as hash value.</p>
+
+<p><a href="../Hash.html">Hash</a> keys must be strings.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="AttributeMethods/ClassMethods.html">ActiveModel::AttributeMethods::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-attribute_missing">attribute_missing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-method_missing">method_missing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to-3F">respond_to?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-respond_to_without_attributes-3F">respond_to_without_attributes?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">NAME_COMPILABLE_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/\A[a-zA-Z_]\w*[!?=]?\z/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">CALL_COMPILABLE_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/\A[a-zA-Z_]\w*[!?]?\z/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-attribute_missing">
+            
+              <b>attribute_missing</b>(match, *args, &amp;block)
+            
+            <a href="../../classes/ActiveModel/AttributeMethods.html#method-i-attribute_missing" name="method-i-attribute_missing" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><code>attribute_missing</code> is like <code>method_missing</code>, but for
+attributes. When <code>method_missing</code> is called we check to see if
+there is a matching attribute method. If so, we tell
+<code>attribute_missing</code> to dispatch the attribute. This method can
+be overloaded to customize the behavior.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attribute_missing_source')" id="l_method-i-attribute_missing_source">show</a>
+                
+              </p>
+              <div id="method-i-attribute_missing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/attribute_methods.rb, line 444</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attribute_missing</span>(<span class="ruby-identifier">match</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">match</span>.<span class="ruby-identifier">target</span>, <span class="ruby-identifier">match</span>.<span class="ruby-identifier">attr_name</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-method_missing">
+            
+              <b>method_missing</b>(method, *args, &amp;block)
+            
+            <a href="../../classes/ActiveModel/AttributeMethods.html#method-i-method_missing" name="method-i-method_missing" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows access to the object attributes, which are held in the hash returned
+by <code>attributes</code>, as though they were first-class methods. So a
+<code>Person</code> class with a <code>name</code> attribute can for
+example use <code>Person#name</code> and <code>Person#name=</code> and
+never directly use the attributes hash – except for multiple assigns with
+<code>ActiveRecord::Base#attributes=</code>.</p>
+
+<p>It&#39;s also possible to instantiate related objects, so a
+<code>Client</code> class belonging to the <code>clients</code> table with
+a <code>master_id</code> foreign key can instantiate master through
+<code>Client#master</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-method_missing_source')" id="l_method-i-method_missing_source">show</a>
+                
+              </p>
+              <div id="method-i-method_missing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/attribute_methods.rb, line 431</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">method_missing</span>(<span class="ruby-identifier">method</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">respond_to_without_attributes?</span>(<span class="ruby-identifier">method</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">match</span> = <span class="ruby-identifier">match_attribute_method?</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span>)
+    <span class="ruby-identifier">match</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">attribute_missing</span>(<span class="ruby-identifier">match</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to-3F">
+            
+              <b>respond_to?</b>(method, include_private_methods = false)
+            
+            <a href="../../classes/ActiveModel/AttributeMethods.html#method-i-respond_to-3F" name="method-i-respond_to-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="AttributeMethods.html#method-i-respond_to_without_attributes-3F">respond_to_without_attributes?</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_to-3F_source')" id="l_method-i-respond_to-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_to-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/attribute_methods.rb, line 452</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_to?</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">include_private_methods</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">include_private_methods</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">method</span>, <span class="ruby-keyword">true</span>)
+    <span class="ruby-comment"># If we&#39;re here then we haven&#39;t found among non-private methods</span>
+    <span class="ruby-comment"># but found among all methods. Which means that the given method is private.</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-operator">!</span><span class="ruby-identifier">match_attribute_method?</span>(<span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span>).<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to_without_attributes-3F">
+            
+              <b>respond_to_without_attributes?</b>(method, include_private_methods = false)
+            
+            <a href="../../classes/ActiveModel/AttributeMethods.html#method-i-respond_to_without_attributes-3F" name="method-i-respond_to_without_attributes-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A <code>Person</code> instance with a <code>name</code> attribute can ask
+<code>person.respond_to?(:name)</code>,
+<code>person.respond_to?(:name=)</code>, and
+<code>person.respond_to?(:name?)</code> which will all return
+<code>true</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

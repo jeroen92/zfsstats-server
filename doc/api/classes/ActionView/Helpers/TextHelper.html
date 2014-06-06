@@ -1,0 +1,928 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::TextHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::TextHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/text_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The <a href="TextHelper.html">TextHelper</a> module provides a set of
+methods for filtering, formatting and transforming strings, which can
+reduce the amount of inline Ruby code in your views. These helper methods
+extend Action View making them callable within your template files.</p>
+
+<h4 id="label-Sanitization">Sanitization</h4>
+
+<p>Most text helpers by default sanitize the given content, but do not escape
+it. This means <a href="../../HTML.html">HTML</a> tags will appear in the
+page but all malicious code will be removed. Let&#39;s look at some
+examples using the <code>simple_format</code> method:</p>
+
+<pre class="ruby"><span class="ruby-identifier">simple_format</span>(<span class="ruby-string">&#39;&lt;a href=&quot;http://example.com/&quot;&gt;Example&lt;/a&gt;&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;&lt;a href=\&quot;http://example.com/\&quot;&gt;Example&lt;/a&gt;&lt;/p&gt;&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-string">&#39;&lt;a href=&quot;javascript:alert(\no!\)&quot;&gt;Example&lt;/a&gt;&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;&lt;a&gt;Example&lt;/a&gt;&lt;/p&gt;&quot;</span>
+</pre>
+
+<p>If you want to escape all content, you should invoke the <code>h</code>
+method before calling the text helper.</p>
+
+<pre class="ruby"><span class="ruby-identifier">simple_format</span> <span class="ruby-identifier">h</span>(<span class="ruby-string">&#39;&lt;a href=&quot;http://example.com/&quot;&gt;Example&lt;/a&gt;&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;&amp;lt;a href=\&quot;http://example.com/\&quot;&amp;gt;Example&amp;lt;/a&amp;gt;&lt;/p&gt;&quot;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-concat">concat</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-current_cycle">current_cycle</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cycle">cycle</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-excerpt">excerpt</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-highlight">highlight</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-pluralize">pluralize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset_cycle">reset_cycle</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-safe_concat">safe_concat</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-simple_format">simple_format</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-truncate">truncate</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-word_wrap">word_wrap</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="SanitizeHelper.html">
+              ActionView::Helpers::SanitizeHelper
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="TagHelper.html">
+              ActionView::Helpers::TagHelper
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-concat">
+            
+              <b>concat</b>(string)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-concat" name="method-i-concat" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The preferred method of outputting text in your views is to use the &lt;%=
+“text” %&gt; eRuby syntax. The regular <em>puts</em> and <em>print</em>
+methods do not operate as expected in an eRuby code block. If you
+absolutely must output text within a non-output code block (i.e., &lt;%
+%&gt;), you can use the concat method.</p>
+
+<pre>&lt;%
+    concat &quot;hello&quot;
+    # is the equivalent of &lt;%= &quot;hello&quot; %&gt;
+
+    if logged_in
+      concat &quot;Logged in!&quot;
+    else
+      concat link_to(&#39;login&#39;, action: :login)
+    end
+    # will either display &quot;Logged in!&quot; or a login link
+%&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-concat_source')" id="l_method-i-concat_source">show</a>
+                
+              </p>
+              <div id="method-i-concat_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">concat</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">output_buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-current_cycle">
+            
+              <b>current_cycle</b>(name = &quot;default&quot;)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-current_cycle" name="method-i-current_cycle" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the current cycle string after a cycle has been started. Useful for
+complex table highlighting or any other design need which requires the
+current cycle string in more than one place.</p>
+
+<pre># Alternate background colors
+@items = [1,2,3,4]
+&lt;% @items.each do |item| %&gt;
+  &lt;div style=&quot;background-color:&lt;%= cycle(&quot;red&quot;,&quot;white&quot;,&quot;blue&quot;) %&gt;&quot;&gt;
+    &lt;span style=&quot;background-color:&lt;%= current_cycle %&gt;&quot;&gt;&lt;%= item %&gt;&lt;/span&gt;
+  &lt;/div&gt;
+&lt;% end %&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-current_cycle_source')" id="l_method-i-current_cycle_source">show</a>
+                
+              </p>
+              <div id="method-i-current_cycle_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 334</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">current_cycle</span>(<span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;default&quot;</span>)
+  <span class="ruby-identifier">cycle</span> = <span class="ruby-identifier">get_cycle</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">cycle</span>.<span class="ruby-identifier">current_value</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cycle</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cycle">
+            
+              <b>cycle</b>(first_value, *values)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-cycle" name="method-i-cycle" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Creates a Cycle object whose <em>to_s</em> method cycles through elements
+of an array every time it is called. This can be used for example, to
+alternate classes for table rows. You can use named cycles to allow nesting
+in loops. Passing a <a href="../../Hash.html">Hash</a> as the last
+parameter with a <code>:name</code> key will create a named cycle. The
+default name for a cycle without a <code>:name</code> key is
+<code>&quot;default&quot;</code>. You can manually reset a cycle by calling
+<a href="TextHelper.html#method-i-reset_cycle">#reset_cycle</a> and passing
+the name of the cycle. The current cycle string can be obtained anytime
+using the <a
+href="TextHelper.html#method-i-current_cycle">#current_cycle</a> method.</p>
+
+<pre> # Alternate CSS classes for even and odd numbers...
+ @items = [1,2,3,4]
+ &lt;table&gt;
+ &lt;% @items.each do |item| %&gt;
+   &lt;tr class=&quot;&lt;%= cycle(&quot;odd&quot;, &quot;even&quot;) -%&gt;&quot;&gt;
+     &lt;td&gt;item&lt;/td&gt;
+   &lt;/tr&gt;
+ &lt;% end %&gt;
+ &lt;/table&gt;
+
+ # Cycle CSS classes for rows, and text colors for values within each row
+ @items = x = [{first: &#39;Robert&#39;, middle: &#39;Daniel&#39;, last: &#39;James&#39;},
+              {first: &#39;Emily&#39;, middle: &#39;Shannon&#39;, maiden: &#39;Pike&#39;, last: &#39;Hicks&#39;},
+             {first: &#39;June&#39;, middle: &#39;Dae&#39;, last: &#39;Jones&#39;}]
+ &lt;% @items.each do |item| %&gt;
+   &lt;tr class=&quot;&lt;%= cycle(&quot;odd&quot;, &quot;even&quot;, name: &quot;row_class&quot;) -%&gt;&quot;&gt;
+     &lt;td&gt;
+       &lt;% item.values.each do |value| %&gt;
+         &lt;%# Create a named cycle &quot;colors&quot; %&gt;
+         &lt;span style=&quot;color:&lt;%= cycle(&quot;red&quot;, &quot;green&quot;, &quot;blue&quot;, name: &quot;colors&quot;) -%&gt;&quot;&gt;
+           &lt;%= value %&gt;
+         &lt;/span&gt;
+       &lt;% end %&gt;
+       &lt;% reset_cycle(&quot;colors&quot;) %&gt;
+     &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;% end %&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cycle_source')" id="l_method-i-cycle_source">show</a>
+                
+              </p>
+              <div id="method-i-cycle_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 310</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cycle</span>(<span class="ruby-identifier">first_value</span>, *<span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">name</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:name</span>, <span class="ruby-string">&#39;default&#39;</span>)
+
+  <span class="ruby-identifier">values</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">first_value</span>)
+
+  <span class="ruby-identifier">cycle</span> = <span class="ruby-identifier">get_cycle</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cycle</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">cycle</span>.<span class="ruby-identifier">values</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">values</span>
+    <span class="ruby-identifier">cycle</span> = <span class="ruby-identifier">set_cycle</span>(<span class="ruby-identifier">name</span>, <span class="ruby-constant">Cycle</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">values</span>))
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">cycle</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-excerpt">
+            
+              <b>excerpt</b>(text, phrase, options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-excerpt" name="method-i-excerpt" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Extracts an excerpt from <code>text</code> that matches the first instance
+of <code>phrase</code>. The <code>:radius</code> option expands the excerpt
+on each side of the first occurrence of <code>phrase</code> by the number
+of characters defined in <code>:radius</code> (which defaults to 100). If
+the excerpt radius overflows the beginning or end of the <code>text</code>,
+then the <code>:omission</code> option (which defaults to “…”) will be
+prepended/appended accordingly. Use the <code>:separator</code> option to
+choose the delimitation. The resulting string will be stripped in any case.
+If the <code>phrase</code> isn&#39;t found, nil is returned.</p>
+
+<pre class="ruby"><span class="ruby-identifier">excerpt</span>(<span class="ruby-string">&#39;This is an example&#39;</span>, <span class="ruby-string">&#39;an&#39;</span>, <span class="ruby-identifier">radius</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>)
+<span class="ruby-comment"># =&gt; ...s is an exam...</span>
+
+<span class="ruby-identifier">excerpt</span>(<span class="ruby-string">&#39;This is an example&#39;</span>, <span class="ruby-string">&#39;is&#39;</span>, <span class="ruby-identifier">radius</span><span class="ruby-operator">:</span> <span class="ruby-value">5</span>)
+<span class="ruby-comment"># =&gt; This is a...</span>
+
+<span class="ruby-identifier">excerpt</span>(<span class="ruby-string">&#39;This is an example&#39;</span>, <span class="ruby-string">&#39;is&#39;</span>)
+<span class="ruby-comment"># =&gt; This is an example</span>
+
+<span class="ruby-identifier">excerpt</span>(<span class="ruby-string">&#39;This next thing is an example&#39;</span>, <span class="ruby-string">&#39;ex&#39;</span>, <span class="ruby-identifier">radius</span><span class="ruby-operator">:</span> <span class="ruby-value">2</span>)
+<span class="ruby-comment"># =&gt; ...next...</span>
+
+<span class="ruby-identifier">excerpt</span>(<span class="ruby-string">&#39;This is also an example&#39;</span>, <span class="ruby-string">&#39;an&#39;</span>, <span class="ruby-identifier">radius</span><span class="ruby-operator">:</span> <span class="ruby-value">8</span>, <span class="ruby-identifier">omission</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&lt;chop&gt; &#39;</span>)
+<span class="ruby-comment"># =&gt; &lt;chop&gt; is also an example</span>
+
+<span class="ruby-identifier">excerpt</span>(<span class="ruby-string">&#39;This is a very beautiful morning&#39;</span>, <span class="ruby-string">&#39;very&#39;</span>, <span class="ruby-identifier">separator</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39; &#39;</span>, <span class="ruby-identifier">radius</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
+<span class="ruby-comment"># =&gt; ...a very beautiful...</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-excerpt_source')" id="l_method-i-excerpt_source">show</a>
+                
+              </p>
+              <div id="method-i-excerpt_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">excerpt</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">phrase</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">phrase</span>
+
+  <span class="ruby-identifier">separator</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:separator</span>, <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-identifier">phrase</span>    = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">phrase</span>)
+  <span class="ruby-identifier">regex</span>     = <span class="ruby-node">/#{phrase}/</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">matches</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">regex</span>)
+  <span class="ruby-identifier">phrase</span> = <span class="ruby-identifier">matches</span>[<span class="ruby-number">0</span>]
+
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">separator</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">regex</span>)
+      <span class="ruby-identifier">regex</span> = <span class="ruby-identifier">phrase</span> = <span class="ruby-identifier">value</span>
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">first_part</span>, <span class="ruby-identifier">second_part</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">regex</span>, <span class="ruby-number">2</span>)
+
+  <span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">first_part</span>   = <span class="ruby-identifier">cut_excerpt_part</span>(<span class="ruby-value">:first</span>, <span class="ruby-identifier">first_part</span>, <span class="ruby-identifier">separator</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">postfix</span>, <span class="ruby-identifier">second_part</span> = <span class="ruby-identifier">cut_excerpt_part</span>(<span class="ruby-value">:second</span>, <span class="ruby-identifier">second_part</span>, <span class="ruby-identifier">separator</span>, <span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">prefix</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">first_part</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">separator</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">phrase</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">separator</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">second_part</span>).<span class="ruby-identifier">strip</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">postfix</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-highlight">
+            
+              <b>highlight</b>(text, phrases, options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-highlight" name="method-i-highlight" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Highlights one or more <code>phrases</code> everywhere in <code>text</code>
+by inserting it into a <code>:highlighter</code> string. The highlighter
+can be specialized by passing <code>:highlighter</code> as a single-quoted
+string with <code>\1</code> where the phrase is to be inserted (defaults to
+&#39;&lt;mark&gt;1&lt;/mark&gt;&#39;)</p>
+
+<pre class="ruby"><span class="ruby-identifier">highlight</span>(<span class="ruby-string">&#39;You searched for: rails&#39;</span>, <span class="ruby-string">&#39;rails&#39;</span>)
+<span class="ruby-comment"># =&gt; You searched for: &lt;mark&gt;rails&lt;/mark&gt;</span>
+
+<span class="ruby-identifier">highlight</span>(<span class="ruby-string">&#39;You searched for: ruby, rails, dhh&#39;</span>, <span class="ruby-string">&#39;actionpack&#39;</span>)
+<span class="ruby-comment"># =&gt; You searched for: ruby, rails, dhh</span>
+
+<span class="ruby-identifier">highlight</span>(<span class="ruby-string">&#39;You searched for: rails&#39;</span>, [<span class="ruby-string">&#39;for&#39;</span>, <span class="ruby-string">&#39;rails&#39;</span>], <span class="ruby-identifier">highlighter</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&lt;em&gt;\1&lt;/em&gt;&#39;</span>)
+<span class="ruby-comment"># =&gt; You searched &lt;em&gt;for&lt;/em&gt;: &lt;em&gt;rails&lt;/em&gt;</span>
+
+<span class="ruby-identifier">highlight</span>(<span class="ruby-string">&#39;You searched for: rails&#39;</span>, <span class="ruby-string">&#39;rails&#39;</span>, <span class="ruby-identifier">highlighter</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;&lt;a href=&quot;search?q=\1&quot;&gt;\1&lt;/a&gt;&#39;</span>)
+<span class="ruby-comment"># =&gt; You searched for: &lt;a href=&quot;search?q=rails&quot;&gt;rails&lt;/a&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-highlight_source')" id="l_method-i-highlight_source">show</a>
+                
+              </p>
+              <div id="method-i-highlight_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">highlight</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">phrases</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">text</span> = <span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">text</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:sanitize</span>, <span class="ruby-keyword">true</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">phrases</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">text</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">highlighter</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:highlighter</span>, <span class="ruby-string">&#39;&lt;mark&gt;\1&lt;/mark&gt;&#39;</span>)
+    <span class="ruby-identifier">match</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">phrases</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">p</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
+    <span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-node">/(#{match})(?![^&lt;]*?&gt;)/</span>, <span class="ruby-identifier">highlighter</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">html_safe</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-pluralize">
+            
+              <b>pluralize</b>(count, singular, plural = nil)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-pluralize" name="method-i-pluralize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Attempts to pluralize the <code>singular</code> word unless
+<code>count</code> is 1. If <code>plural</code> is supplied, it will use
+that when count is &gt; 1, otherwise it will use the Inflector to determine
+the plural form.</p>
+
+<pre class="ruby"><span class="ruby-identifier">pluralize</span>(<span class="ruby-value">1</span>, <span class="ruby-string">&#39;person&#39;</span>)
+<span class="ruby-comment"># =&gt; 1 person</span>
+
+<span class="ruby-identifier">pluralize</span>(<span class="ruby-value">2</span>, <span class="ruby-string">&#39;person&#39;</span>)
+<span class="ruby-comment"># =&gt; 2 people</span>
+
+<span class="ruby-identifier">pluralize</span>(<span class="ruby-value">3</span>, <span class="ruby-string">&#39;person&#39;</span>, <span class="ruby-string">&#39;users&#39;</span>)
+<span class="ruby-comment"># =&gt; 3 users</span>
+
+<span class="ruby-identifier">pluralize</span>(<span class="ruby-value">0</span>, <span class="ruby-string">&#39;person&#39;</span>)
+<span class="ruby-comment"># =&gt; 0 people</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-pluralize_source')" id="l_method-i-pluralize_source">show</a>
+                
+              </p>
+              <div id="method-i-pluralize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">pluralize</span>(<span class="ruby-identifier">count</span>, <span class="ruby-identifier">singular</span>, <span class="ruby-identifier">plural</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">word</span> = <span class="ruby-keyword">if</span> (<span class="ruby-identifier">count</span> <span class="ruby-operator">==</span> <span class="ruby-number">1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">count</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^1(\.0+)?$/</span>)
+    <span class="ruby-identifier">singular</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">plural</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">singular</span>.<span class="ruby-identifier">pluralize</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-node">&quot;#{count || 0} #{word}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset_cycle">
+            
+              <b>reset_cycle</b>(name = &quot;default&quot;)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-reset_cycle" name="method-i-reset_cycle" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Resets a cycle so that it starts from the first element the next time it is
+called. Pass in <code>name</code> to reset a named cycle.</p>
+
+<pre># Alternate CSS classes for even and odd numbers...
+@items = [[1,2,3,4], [5,6,3], [3,4,5,6,7,4]]
+&lt;table&gt;
+&lt;% @items.each do |item| %&gt;
+  &lt;tr class=&quot;&lt;%= cycle(&quot;even&quot;, &quot;odd&quot;) -%&gt;&quot;&gt;
+      &lt;% item.each do |value| %&gt;
+        &lt;span style=&quot;color:&lt;%= cycle(&quot;#333&quot;, &quot;#666&quot;, &quot;#999&quot;, name: &quot;colors&quot;) -%&gt;&quot;&gt;
+          &lt;%= value %&gt;
+        &lt;/span&gt;
+      &lt;% end %&gt;
+
+      &lt;% reset_cycle(&quot;colors&quot;) %&gt;
+  &lt;/tr&gt;
+&lt;% end %&gt;
+&lt;/table&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset_cycle_source')" id="l_method-i-reset_cycle_source">show</a>
+                
+              </p>
+              <div id="method-i-reset_cycle_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 357</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset_cycle</span>(<span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;default&quot;</span>)
+  <span class="ruby-identifier">cycle</span> = <span class="ruby-identifier">get_cycle</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">cycle</span>.<span class="ruby-identifier">reset</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cycle</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-safe_concat">
+            
+              <b>safe_concat</b>(string)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-safe_concat" name="method-i-safe_concat" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-safe_concat_source')" id="l_method-i-safe_concat_source">show</a>
+                
+              </p>
+              <div id="method-i-safe_concat_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">safe_concat</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">output_buffer</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:safe_concat</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">output_buffer</span>.<span class="ruby-identifier">safe_concat</span>(<span class="ruby-identifier">string</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">concat</span>(<span class="ruby-identifier">string</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-simple_format">
+            
+              <b>simple_format</b>(text, html_options = {}, options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-simple_format" name="method-i-simple_format" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>text</code> transformed into <a
+href="../../HTML.html">HTML</a> using simple formatting rules. Two or more
+consecutive newlines(<code>\n\n</code>) are considered as a paragraph and
+wrapped in <code>&lt;p&gt;</code> tags. One newline (<code>\n</code>) is
+considered as a linebreak and a <code>&lt;br /&gt;</code> tag is appended.
+This method does not remove the newlines from the <code>text</code>.</p>
+
+<p>You can pass any <a href="../../HTML.html">HTML</a> attributes into
+<code>html_options</code>. These will be added to all created paragraphs.</p>
+
+<h4 id="method-i-simple_format-label-Options">Options</h4>
+<ul><li>
+<p><code>:sanitize</code> - If <code>false</code>, does not sanitize
+<code>text</code>.</p>
+</li><li>
+<p><code>:wrapper_tag</code> - <a href="../../String.html">String</a>
+representing the wrapper tag, defaults to <code>&quot;p&quot;</code></p>
+</li></ul>
+
+<h4 id="method-i-simple_format-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-identifier">my_text</span> = <span class="ruby-string">&quot;Here is some basic text...\n...with a line break.&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-identifier">my_text</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;Here is some basic text...\n&lt;br /&gt;...with a line break.&lt;/p&gt;&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-identifier">my_text</span>, {}, <span class="ruby-identifier">wrapper_tag</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;div&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;div&gt;Here is some basic text...\n&lt;br /&gt;...with a line break.&lt;/div&gt;&quot;</span>
+
+<span class="ruby-identifier">more_text</span> = <span class="ruby-string">&quot;We want to put a paragraph...\n\n...right there.&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-identifier">more_text</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;We want to put a paragraph...&lt;/p&gt;\n\n&lt;p&gt;...right there.&lt;/p&gt;&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-string">&quot;Look ma! A class!&quot;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;description&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p class=&#39;description&#39;&gt;Look ma! A class!&lt;/p&gt;&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-string">&quot;&lt;blink&gt;Unblinkable.&lt;/blink&gt;&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;Unblinkable.&lt;/p&gt;&quot;</span>
+
+<span class="ruby-identifier">simple_format</span>(<span class="ruby-string">&quot;&lt;blink&gt;Blinkable!&lt;/blink&gt; It&#39;s true.&quot;</span>, {}, <span class="ruby-identifier">sanitize</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;&lt;blink&gt;Blinkable!&lt;/span&gt; It&#39;s true.&lt;/p&gt;&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-simple_format_source')" id="l_method-i-simple_format_source">show</a>
+                
+              </p>
+              <div id="method-i-simple_format_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">simple_format</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">html_options</span> = {}, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">wrapper_tag</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:wrapper_tag</span>, <span class="ruby-value">:p</span>)
+
+  <span class="ruby-identifier">text</span> = <span class="ruby-identifier">sanitize</span>(<span class="ruby-identifier">text</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:sanitize</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">paragraphs</span> = <span class="ruby-identifier">split_paragraphs</span>(<span class="ruby-identifier">text</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">paragraphs</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">wrapper_tag</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">html_options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">paragraphs</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">paragraph</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">content_tag</span>(<span class="ruby-identifier">wrapper_tag</span>, <span class="ruby-identifier">paragraph</span>, <span class="ruby-identifier">html_options</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:sanitize</span>])
+    }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>).<span class="ruby-identifier">html_safe</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-truncate">
+            
+              <b>truncate</b>(text, options = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-truncate" name="method-i-truncate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Truncates a given <code>text</code> after a given <code>:length</code> if
+<code>text</code> is longer than <code>:length</code> (defaults to 30). The
+last characters will be replaced with the <code>:omission</code> (defaults
+to “…”) for a total length not exceeding <code>:length</code>.</p>
+
+<p>Pass a <code>:separator</code> to truncate <code>text</code> at a natural
+break.</p>
+
+<p>Pass a block if you want to show extra content when the text is truncated.</p>
+
+<p>The result is marked as HTML-safe, but it is escaped by default, unless
+<code>:escape</code> is <code>false</code>. Care should be taken if
+<code>text</code> contains <a href="../../HTML.html">HTML</a> tags or
+entities, because truncation may produce invalid <a
+href="../../HTML.html">HTML</a> (such as unbalanced or incomplete tags).</p>
+
+<pre class="ruby"><span class="ruby-identifier">truncate</span>(<span class="ruby-string">&quot;Once upon a time in a world far far away&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;Once upon a time in a world...&quot;</span>
+
+<span class="ruby-identifier">truncate</span>(<span class="ruby-string">&quot;Once upon a time in a world far far away&quot;</span>, <span class="ruby-identifier">length</span><span class="ruby-operator">:</span> <span class="ruby-value">17</span>)
+<span class="ruby-comment"># =&gt; &quot;Once upon a ti...&quot;</span>
+
+<span class="ruby-identifier">truncate</span>(<span class="ruby-string">&quot;Once upon a time in a world far far away&quot;</span>, <span class="ruby-identifier">length</span><span class="ruby-operator">:</span> <span class="ruby-value">17</span>, <span class="ruby-identifier">separator</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;Once upon a...&quot;</span>
+
+<span class="ruby-identifier">truncate</span>(<span class="ruby-string">&quot;And they found that many people were sleeping better.&quot;</span>, <span class="ruby-identifier">length</span><span class="ruby-operator">:</span> <span class="ruby-value">25</span>, <span class="ruby-identifier">omission</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;... (continued)&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;And they f... (continued)&quot;</span>
+
+<span class="ruby-identifier">truncate</span>(<span class="ruby-string">&quot;&lt;p&gt;Once upon a time in a world far far away&lt;/p&gt;&quot;</span>)
+<span class="ruby-comment"># =&gt; &quot;&lt;p&gt;Once upon a time in a wo...&quot;</span>
+
+<span class="ruby-identifier">truncate</span>(<span class="ruby-string">&quot;Once upon a time in a world far far away&quot;</span>) { <span class="ruby-identifier">link_to</span> <span class="ruby-string">&quot;Continue&quot;</span>, <span class="ruby-node">&quot;#&quot;</span> }
+<span class="ruby-comment"># =&gt; &quot;Once upon a time in a wo...&lt;a href=&quot;#&quot;&gt;Continue&lt;/a&gt;&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-truncate_source')" id="l_method-i-truncate_source">show</a>
+                
+              </p>
+              <div id="method-i-truncate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">truncate</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span>
+    <span class="ruby-identifier">length</span>  = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:length</span>, <span class="ruby-number">30</span>)
+
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">text</span>.<span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">length</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">content</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:escape</span>] <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">content</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-operator">:</span> <span class="ruby-constant">ERB</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span>.<span class="ruby-identifier">html_escape</span>(<span class="ruby-identifier">content</span>)
+    <span class="ruby-identifier">content</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">capture</span>(&amp;<span class="ruby-identifier">block</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">text</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">content</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-word_wrap">
+            
+              <b>word_wrap</b>(text, options = {})
+            
+            <a href="../../../classes/ActionView/Helpers/TextHelper.html#method-i-word_wrap" name="method-i-word_wrap" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Wraps the <code>text</code> into lines no longer than
+<code>line_width</code> width. This method breaks on the first whitespace
+character that does not exceed <code>line_width</code> (which is 80 by
+default).</p>
+
+<pre class="ruby"><span class="ruby-identifier">word_wrap</span>(<span class="ruby-string">&#39;Once upon a time&#39;</span>)
+<span class="ruby-comment"># =&gt; Once upon a time</span>
+
+<span class="ruby-identifier">word_wrap</span>(<span class="ruby-string">&#39;Once upon a time, in a kingdom called Far Far Away, a king fell ill, and finding a successor to the throne turned out to be more trouble than anyone could have imagined...&#39;</span>)
+<span class="ruby-comment"># =&gt; Once upon a time, in a kingdom called Far Far Away, a king fell ill, and finding\na successor to the throne turned out to be more trouble than anyone could have\nimagined...</span>
+
+<span class="ruby-identifier">word_wrap</span>(<span class="ruby-string">&#39;Once upon a time&#39;</span>, <span class="ruby-identifier">line_width</span><span class="ruby-operator">:</span> <span class="ruby-value">8</span>)
+<span class="ruby-comment"># =&gt; Once\nupon a\ntime</span>
+
+<span class="ruby-identifier">word_wrap</span>(<span class="ruby-string">&#39;Once upon a time&#39;</span>, <span class="ruby-identifier">line_width</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
+<span class="ruby-comment"># =&gt; Once\nupon\na\ntime</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-word_wrap_source')" id="l_method-i-word_wrap_source">show</a>
+                
+              </p>
+              <div id="method-i-word_wrap_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/text_helper.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">word_wrap</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">line_width</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:line_width</span>, <span class="ruby-number">80</span>)
+
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">line_width</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-node">/(.{1,#{line_width}})(\s+|$)/</span>, <span class="ruby-string">&quot;\\1\n&quot;</span>).<span class="ruby-identifier">strip</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">line</span>
+  <span class="ruby-keyword">end</span> * <span class="ruby-string">&quot;\n&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

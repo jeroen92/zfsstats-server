@@ -1,0 +1,1290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::FinderMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::FinderMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/finder_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-apply_join_dependency">apply_join_dependency</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-construct_join_dependency_for_association_find">construct_join_dependency_for_association_find</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-construct_limited_ids_condition">construct_limited_ids_condition</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-construct_relation_for_association_calculations">construct_relation_for_association_calculations</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-construct_relation_for_association_find">construct_relation_for_association_find</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-exists-3F">exists?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find">find</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_by">find_by</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_by-21">find_by!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_first">find_first</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_last">find_last</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_one">find_one</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_some">find_some</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_take">find_take</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_with_associations">find_with_associations</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_with_ids">find_with_ids</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-first">first</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-first-21">first!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-last">last</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-last-21">last!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-take">take</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-take-21">take!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-using_limitable_reflections-3F">using_limitable_reflections?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-exists-3F">
+            
+              <b>exists?</b>(conditions = :none)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-exists-3F" name="method-i-exists-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns truthy if a record exists in the table that matches the
+<code>id</code> or conditions given, or falsy otherwise. The argument can
+take six forms:</p>
+<ul><li>
+<p><a href="../Integer.html">Integer</a> - Finds the record with this primary
+key.</p>
+</li><li>
+<p><a href="../String.html">String</a> - Finds the record with a primary key
+corresponding to this string (such as <code>&#39;5&#39;</code>).</p>
+</li><li>
+<p><a href="../Array.html">Array</a> - Finds the record that matches these
+<code>find</code>-style conditions (such as <code>[&#39;color = ?&#39;,
+&#39;red&#39;]</code>).</p>
+</li><li>
+<p><a href="../Hash.html">Hash</a> - Finds the record that matches these
+<code>find</code>-style conditions (such as <code>{color:
+&#39;red&#39;}</code>).</p>
+</li><li>
+<p><code>false</code> - Returns always <code>false</code>.</p>
+</li><li>
+<p>No args - Returns <code>false</code> if the table is empty,
+<code>true</code> otherwise.</p>
+</li></ul>
+
+<p>For more information about specifying conditions as a <a
+href="../Hash.html">Hash</a> or <a href="../Array.html">Array</a>, see the
+Conditions section in the introduction to <a
+href="Base.html">ActiveRecord::Base</a>.</p>
+
+<p>Note: You can&#39;t pass in a condition as a string (like <code>name =
+&#39;Jamie&#39;</code>), since it would be sanitized and then queried
+against the primary key column, like <code>id = &#39;name =
+\'Jamie\'&#39;</code>.</p>
+
+<pre>Person.exists?(5)
+Person.exists?(&#39;5&#39;)
+Person.exists?([&#39;name LIKE ?&#39;, &quot;%#{query}%&quot;])
+Person.exists?(name: &#39;David&#39;)
+Person.exists?(false)
+Person.exists?</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exists-3F_source')" id="l_method-i-exists-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-exists-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exists?</span>(<span class="ruby-identifier">conditions</span> = <span class="ruby-value">:none</span>)
+  <span class="ruby-identifier">conditions</span> = <span class="ruby-identifier">conditions</span>.<span class="ruby-identifier">id</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">Base</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">conditions</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">conditions</span>
+
+  <span class="ruby-identifier">join_dependency</span> = <span class="ruby-identifier">construct_join_dependency_for_association_find</span>
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">construct_relation_for_association_find</span>(<span class="ruby-identifier">join_dependency</span>)
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:select</span>, <span class="ruby-value">:order</span>).<span class="ruby-identifier">select</span>(<span class="ruby-string">&quot;1 AS one&quot;</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-number">1</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">conditions</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>, <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">eq</span>(<span class="ruby-identifier">conditions</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">conditions</span> <span class="ruby-operator">!=</span> <span class="ruby-value">:none</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">select_value</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-node">&quot;#{name} Exists&quot;</span>, <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">bind_values</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ThrowResult</span>
+  <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find">
+            
+              <b>find</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find" name="method-i-find" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Find by id - This can either be a specific id (1), a list of ids (1, 5, 6),
+or an array of ids ([5, 6, 10]). If no record can be found for all of the
+listed ids, then <a href="RecordNotFound.html">RecordNotFound</a> will be
+raised. If the primary key is an integer, find by id coerces its arguments
+using <code>to_i</code>.</p>
+
+<pre>Person.find(1)       # returns the object for ID = 1
+Person.find(&quot;1&quot;)     # returns the object for ID = 1
+Person.find(1, 2, 6) # returns an array for objects with IDs in (1, 2, 6)
+Person.find([7, 17]) # returns an array for objects with IDs in (7, 17)
+Person.find([1])     # returns an array for the object with ID = 1
+Person.where(&quot;administrator = 1&quot;).order(&quot;created_on DESC&quot;).find(1)</pre>
+
+<p>Note that returned records may not be in the same order as the ids you
+provide since database rows are unordered. Give an explicit
+<code>order</code> to ensure the results are sorted.</p>
+
+<h4 id="method-i-find-label-Find+with+lock">Find with lock</h4>
+
+<p>Example for find with a lock: Imagine two concurrent transactions: each
+will read <code>person.visits == 2</code>, add 1 to it, and save, resulting
+in two saves of <code>person.visits = 3</code>. By locking the row, the
+second transaction has to wait until the first is finished; we get the
+expected <code>person.visits == 4</code>.</p>
+
+<pre>Person.transaction do
+  person = Person.lock(true).find(1)
+  person.visits += 1
+  person.save!
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_source')" id="l_method-i-find_source">show</a>
+                
+              </p>
+              <div id="method-i-find_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span>*<span class="ruby-identifier">block_args</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>(*<span class="ruby-identifier">block_args</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">find_with_ids</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_by">
+            
+              <b>find_by</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_by" name="method-i-find_by" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Finds the first record matching the specified conditions. There is no
+implied ordering so if order matters, you should specify it yourself.</p>
+
+<p>If no record is found, returns <code>nil</code>.</p>
+
+<pre>Post.find_by name: &#39;Spartacus&#39;, rating: 4
+Post.find_by &quot;published_at &lt; ?&quot;, 2.weeks.ago</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_by_source')" id="l_method-i-find_by_source">show</a>
+                
+              </p>
+              <div id="method-i-find_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_by</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">where</span>(*<span class="ruby-identifier">args</span>).<span class="ruby-identifier">take</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_by-21">
+            
+              <b>find_by!</b>(*args)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_by-21" name="method-i-find_by-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Like <code>find_by</code>, except that if no record is found, raises an
+<code>ActiveRecord::RecordNotFound</code> error.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_by-21_source')" id="l_method-i-find_by-21_source">show</a>
+                
+              </p>
+              <div id="method-i-find_by-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_by!</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">where</span>(*<span class="ruby-identifier">args</span>).<span class="ruby-identifier">take!</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-first">
+            
+              <b>first</b>(limit = nil)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-first" name="method-i-first" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Find the first record (or first N records if a parameter is supplied). If
+no order is defined it will order by primary key.</p>
+
+<pre>Person.first # returns the first object fetched by SELECT * FROM people
+Person.where([&quot;user_name = ?&quot;, user_name]).first
+Person.where([&quot;user_name = :u&quot;, { u: user_name }]).first
+Person.order(&quot;created_on DESC&quot;).offset(5).first
+Person.first(3) # returns the first three objects fetched by SELECT * FROM people LIMIT 3</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-first_source')" id="l_method-i-first_source">show</a>
+                
+              </p>
+              <div id="method-i-first_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">first</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_values</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">primary_key</span>
+      <span class="ruby-identifier">order</span>(<span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">asc</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>).<span class="ruby-identifier">to_a</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>).<span class="ruby-identifier">to_a</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">find_first</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-first-21">
+            
+              <b>first!</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-first-21" name="method-i-first-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Same as <code>first</code> but raises
+<code>ActiveRecord::RecordNotFound</code> if no record is found. Note that
+<code>first!</code> accepts no arguments.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-first-21_source')" id="l_method-i-first-21_source">show</a>
+                
+              </p>
+              <div id="method-i-first-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">first!</span>
+  <span class="ruby-identifier">first</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last">
+            
+              <b>last</b>(limit = nil)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-last" name="method-i-last" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Find the last record (or last N records if a parameter is supplied). If no
+order is defined it will order by primary key.</p>
+
+<pre>Person.last # returns the last object fetched by SELECT * FROM people
+Person.where([&quot;user_name = ?&quot;, user_name]).last
+Person.order(&quot;created_on DESC&quot;).offset(5).last
+Person.last(3) # returns the last three objects fetched by SELECT * FROM people.</pre>
+
+<p>Take note that in that last case, the results are sorted in ascending
+order:</p>
+
+<pre>[#&lt;Person id:2&gt;, #&lt;Person id:3&gt;, #&lt;Person id:4&gt;]</pre>
+
+<p>and not:</p>
+
+<pre>[#&lt;Person id:4&gt;, #&lt;Person id:3&gt;, #&lt;Person id:2&gt;]</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last_source')" id="l_method-i-last_source">show</a>
+                
+              </p>
+              <div id="method-i-last_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">order_values</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">primary_key</span>
+      <span class="ruby-identifier">order</span>(<span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">desc</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>).<span class="ruby-identifier">reverse</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">last</span>(<span class="ruby-identifier">limit</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">find_last</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last-21">
+            
+              <b>last!</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-last-21" name="method-i-last-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Same as <code>last</code> but raises
+<code>ActiveRecord::RecordNotFound</code> if no record is found. Note that
+<code>last!</code> accepts no arguments.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last-21_source')" id="l_method-i-last-21_source">show</a>
+                
+              </p>
+              <div id="method-i-last-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last!</span>
+  <span class="ruby-identifier">last</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-take">
+            
+              <b>take</b>(limit = nil)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-take" name="method-i-take" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Gives a record (or N records if a parameter is supplied) without any
+implied order. The order will depend on the database implementation. If an
+order is supplied it will be respected.</p>
+
+<pre>Person.take # returns an object fetched by SELECT * FROM people LIMIT 1
+Person.take(5) # returns 5 objects fetched by SELECT * FROM people LIMIT 5
+Person.where([&quot;name LIKE &#39;%?&#39;&quot;, name]).take</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-take_source')" id="l_method-i-take_source">show</a>
+                
+              </p>
+              <div id="method-i-take_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">take</span>(<span class="ruby-identifier">limit</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">limit</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">limit</span>(<span class="ruby-identifier">limit</span>).<span class="ruby-identifier">to_a</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">find_take</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-take-21">
+            
+              <b>take!</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-take-21" name="method-i-take-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Same as <code>take</code> but raises
+<code>ActiveRecord::RecordNotFound</code> if no record is found. Note that
+<code>take!</code> accepts no arguments.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-take-21_source')" id="l_method-i-take-21_source">show</a>
+                
+              </p>
+              <div id="method-i-take-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">take!</span>
+  <span class="ruby-identifier">take</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-apply_join_dependency">
+            
+              <b>apply_join_dependency</b>(relation, join_dependency)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-apply_join_dependency" name="method-i-apply_join_dependency" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-apply_join_dependency_source')" id="l_method-i-apply_join_dependency_source">show</a>
+                
+              </p>
+              <div id="method-i-apply_join_dependency_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 229</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">apply_join_dependency</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-identifier">join_dependency</span>)
+  <span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">join_associations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">association</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">association</span>.<span class="ruby-identifier">join_relation</span>(<span class="ruby-identifier">relation</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">limitable_reflections</span> = <span class="ruby-identifier">using_limitable_reflections?</span>(<span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">reflections</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">limitable_reflections</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">limit_value</span>
+    <span class="ruby-identifier">limited_id_condition</span> = <span class="ruby-identifier">construct_limited_ids_condition</span>(<span class="ruby-identifier">relation</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:select</span>))
+    <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">limited_id_condition</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">except</span>(<span class="ruby-value">:limit</span>, <span class="ruby-value">:offset</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">limitable_reflections</span>
+
+  <span class="ruby-identifier">relation</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-construct_join_dependency_for_association_find">
+            
+              <b>construct_join_dependency_for_association_find</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-construct_join_dependency_for_association_find" name="method-i-construct_join_dependency_for_association_find" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-construct_join_dependency_for_association_find_source')" id="l_method-i-construct_join_dependency_for_association_find_source">show</a>
+                
+              </p>
+              <div id="method-i-construct_join_dependency_for_association_find_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 212</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">construct_join_dependency_for_association_find</span>
+  <span class="ruby-identifier">including</span> = (<span class="ruby-identifier">eager_load_values</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">includes_values</span>).<span class="ruby-identifier">uniq</span>
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Associations</span><span class="ruby-operator">::</span><span class="ruby-constant">JoinDependency</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@klass</span>, <span class="ruby-identifier">including</span>, [])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-construct_limited_ids_condition">
+            
+              <b>construct_limited_ids_condition</b>(relation)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-construct_limited_ids_condition" name="method-i-construct_limited_ids_condition" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-construct_limited_ids_condition_source')" id="l_method-i-construct_limited_ids_condition_source">show</a>
+                
+              </p>
+              <div id="method-i-construct_limited_ids_condition_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">construct_limited_ids_condition</span>(<span class="ruby-identifier">relation</span>)
+  <span class="ruby-identifier">orders</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">order_values</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">presence</span> }.<span class="ruby-identifier">compact</span>
+  <span class="ruby-identifier">values</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">distinct</span>(<span class="ruby-node">&quot;#{quoted_table_name}.#{primary_key}&quot;</span>, <span class="ruby-identifier">orders</span>)
+
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">select</span>(<span class="ruby-identifier">values</span>)
+
+  <span class="ruby-identifier">id_rows</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">select_all</span>(<span class="ruby-identifier">relation</span>.<span class="ruby-identifier">arel</span>, <span class="ruby-string">&#39;SQL&#39;</span>, <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">bind_values</span>)
+  <span class="ruby-identifier">ids_array</span> = <span class="ruby-identifier">id_rows</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-identifier">row</span>[<span class="ruby-identifier">primary_key</span>]}
+
+  <span class="ruby-identifier">ids_array</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">ThrowResult</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">in</span>(<span class="ruby-identifier">ids_array</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-construct_relation_for_association_calculations">
+            
+              <b>construct_relation_for_association_calculations</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-construct_relation_for_association_calculations" name="method-i-construct_relation_for_association_calculations" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-construct_relation_for_association_calculations_source')" id="l_method-i-construct_relation_for_association_calculations_source">show</a>
+                
+              </p>
+              <div id="method-i-construct_relation_for_association_calculations_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">construct_relation_for_association_calculations</span>
+  <span class="ruby-identifier">including</span> = (<span class="ruby-identifier">eager_load_values</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">includes_values</span>).<span class="ruby-identifier">uniq</span>
+  <span class="ruby-identifier">join_dependency</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Associations</span><span class="ruby-operator">::</span><span class="ruby-constant">JoinDependency</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@klass</span>, <span class="ruby-identifier">including</span>, <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">froms</span>.<span class="ruby-identifier">first</span>)
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">except</span>(<span class="ruby-value">:includes</span>, <span class="ruby-value">:eager_load</span>, <span class="ruby-value">:preload</span>)
+  <span class="ruby-identifier">apply_join_dependency</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-identifier">join_dependency</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-construct_relation_for_association_find">
+            
+              <b>construct_relation_for_association_find</b>(join_dependency)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-construct_relation_for_association_find" name="method-i-construct_relation_for_association_find" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-construct_relation_for_association_find_source')" id="l_method-i-construct_relation_for_association_find_source">show</a>
+                
+              </p>
+              <div id="method-i-construct_relation_for_association_find_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">construct_relation_for_association_find</span>(<span class="ruby-identifier">join_dependency</span>)
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">except</span>(<span class="ruby-value">:includes</span>, <span class="ruby-value">:eager_load</span>, <span class="ruby-value">:preload</span>, <span class="ruby-value">:select</span>).<span class="ruby-identifier">select</span>(<span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">columns</span>)
+  <span class="ruby-identifier">apply_join_dependency</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-identifier">join_dependency</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_first">
+            
+              <b>find_first</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_first" name="method-i-find_first" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_first_source')" id="l_method-i-find_first_source">show</a>
+                
+              </p>
+              <div id="method-i-find_first_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 319</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_first</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">loaded?</span>
+    <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@first</span> <span class="ruby-operator">||=</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">with_default_scope</span>.<span class="ruby-identifier">order_values</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">primary_key</span>
+        <span class="ruby-identifier">order</span>(<span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">asc</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-number">1</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">first</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">limit</span>(<span class="ruby-number">1</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">first</span>
+      <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_last">
+            
+              <b>find_last</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_last" name="method-i-find_last" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_last_source')" id="l_method-i-find_last_source">show</a>
+                
+              </p>
+              <div id="method-i-find_last_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 332</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_last</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">loaded?</span>
+    <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@last</span> <span class="ruby-operator">||=</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">offset_value</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">limit_value</span>
+        <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">last</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">reverse_order</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-number">1</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">first</span>
+      <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_one">
+            
+              <b>find_one</b>(id)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_one" name="method-i-find_one" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_one_source')" id="l_method-i-find_one_source">show</a>
+                
+              </p>
+              <div id="method-i-find_one_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 275</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_one</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-identifier">id</span> = <span class="ruby-identifier">id</span>.<span class="ruby-identifier">id</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">id</span>
+
+  <span class="ruby-identifier">column</span> = <span class="ruby-identifier">columns_hash</span>[<span class="ruby-identifier">primary_key</span>]
+  <span class="ruby-identifier">substitute</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">substitute_at</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">bind_values</span>.<span class="ruby-identifier">length</span>)
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">eq</span>(<span class="ruby-identifier">substitute</span>))
+  <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">bind_values</span> <span class="ruby-operator">+=</span> [[<span class="ruby-identifier">column</span>, <span class="ruby-identifier">id</span>]]
+  <span class="ruby-identifier">record</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">take</span>
+
+  <span class="ruby-identifier">raise_record_not_found_exception!</span>(<span class="ruby-identifier">id</span>, <span class="ruby-number">0</span>, <span class="ruby-number">1</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">record</span>
+
+  <span class="ruby-identifier">record</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_some">
+            
+              <b>find_some</b>(ids)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_some" name="method-i-find_some" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_some_source')" id="l_method-i-find_some_source">show</a>
+                
+              </p>
+              <div id="method-i-find_some_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 289</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_some</span>(<span class="ruby-identifier">ids</span>)
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">where</span>(<span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">in</span>(<span class="ruby-identifier">ids</span>)).<span class="ruby-identifier">to_a</span>
+
+  <span class="ruby-identifier">expected_size</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">limit_value</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">limit_value</span>
+      <span class="ruby-identifier">limit_value</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># 11 ids with limit 3, offset 9 should give 2 results.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">offset_value</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">offset_value</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">expected_size</span>)
+    <span class="ruby-identifier">expected_size</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">offset_value</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">expected_size</span>
+    <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise_record_not_found_exception!</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">result</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">expected_size</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_take">
+            
+              <b>find_take</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_take" name="method-i-find_take" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_take_source')" id="l_method-i-find_take_source">show</a>
+                
+              </p>
+              <div id="method-i-find_take_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 311</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_take</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">loaded?</span>
+    <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@take</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">limit</span>(<span class="ruby-number">1</span>).<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_with_associations">
+            
+              <b>find_with_associations</b>()
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_with_associations" name="method-i-find_with_associations" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_with_associations_source')" id="l_method-i-find_with_associations_source">show</a>
+                
+              </p>
+              <div id="method-i-find_with_associations_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_with_associations</span>
+  <span class="ruby-identifier">join_dependency</span> = <span class="ruby-identifier">construct_join_dependency_for_association_find</span>
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">construct_relation_for_association_find</span>(<span class="ruby-identifier">join_dependency</span>)
+  <span class="ruby-identifier">rows</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">select_all</span>(<span class="ruby-identifier">relation</span>, <span class="ruby-string">&#39;SQL&#39;</span>, <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">bind_values</span>.<span class="ruby-identifier">dup</span>)
+  <span class="ruby-identifier">join_dependency</span>.<span class="ruby-identifier">instantiate</span>(<span class="ruby-identifier">rows</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">ThrowResult</span>
+  []
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_with_ids">
+            
+              <b>find_with_ids</b>(*ids)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-find_with_ids" name="method-i-find_with_ids" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_with_ids_source')" id="l_method-i-find_with_ids_source">show</a>
+                
+              </p>
+              <div id="method-i-find_with_ids_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_with_ids</span>(*<span class="ruby-identifier">ids</span>)
+  <span class="ruby-identifier">expects_array</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Array</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">expects_array</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">ids</span> = <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">uniq</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">ids</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-number">0</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RecordNotFound</span>, <span class="ruby-node">&quot;Couldn&#39;t find #{@klass.name} without an ID&quot;</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-number">1</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">find_one</span>(<span class="ruby-identifier">ids</span>.<span class="ruby-identifier">first</span>)
+    <span class="ruby-identifier">expects_array</span> <span class="ruby-operator">?</span> [ <span class="ruby-identifier">result</span> ] <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">find_some</span>(<span class="ruby-identifier">ids</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-using_limitable_reflections-3F">
+            
+              <b>using_limitable_reflections?</b>(reflections)
+            
+            <a href="../../classes/ActiveRecord/FinderMethods.html#method-i-using_limitable_reflections-3F" name="method-i-using_limitable_reflections-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-using_limitable_reflections-3F_source')" id="l_method-i-using_limitable_reflections-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-using_limitable_reflections-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb, line 345</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">using_limitable_reflections?</span>(<span class="ruby-identifier">reflections</span>)
+  <span class="ruby-identifier">reflections</span>.<span class="ruby-identifier">none?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">collection?</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

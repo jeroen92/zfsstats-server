@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveModel::Naming</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveModel::Naming 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/naming_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Active+Model+Naming">Active Model Naming</h2>
+
+<p>Creates a <code>model_name</code> method on your object.</p>
+
+<p>To implement, just extend <a href="Naming.html">ActiveModel::Naming</a> in
+your object:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BookCover</span>
+  <span class="ruby-identifier">extend</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>        <span class="ruby-comment"># =&gt; &quot;BookCover&quot;</span>
+<span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">human</span>  <span class="ruby-comment"># =&gt; &quot;Book cover&quot;</span>
+
+<span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">i18n_key</span>              <span class="ruby-comment"># =&gt; :book_cover</span>
+<span class="ruby-constant">BookModule</span><span class="ruby-operator">::</span><span class="ruby-constant">BookCover</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">i18n_key</span>  <span class="ruby-comment"># =&gt; :&quot;book_module/book_cover&quot;</span>
+</pre>
+
+<p>Providing the functionality that <a
+href="Naming.html">ActiveModel::Naming</a> provides in your object is
+required to pass the Active <a href="Model.html">Model</a> <a
+href="Lint.html">Lint</a> test. So either extending the provided method
+below, or rolling your own is required.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-model_name">model_name</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-param_key">param_key</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-plural">plural</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-route_key">route_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-singular">singular</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-singular_route_key">singular_route_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-uncountable-3F">uncountable?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-param_key">
+            
+              <b>param_key</b>(record_or_class)
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-c-param_key" name="method-c-param_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns string to use for params names. It differs for namespaced models
+regarding whether it&#39;s inside isolated engine.</p>
+
+<pre class="ruby"><span class="ruby-comment"># For isolated engine:</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">param_key</span>(<span class="ruby-constant">Blog</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>) <span class="ruby-comment">#=&gt; post</span>
+
+<span class="ruby-comment"># For shared engine:</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">param_key</span>(<span class="ruby-constant">Blog</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>) <span class="ruby-comment">#=&gt; blog_post</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-param_key_source')" id="l_method-c-param_key_source">show</a>
+                
+              </p>
+              <div id="method-c-param_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 296</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">param_key</span>(<span class="ruby-identifier">record_or_class</span>)
+  <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">param_key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-plural">
+            
+              <b>plural</b>(record_or_class)
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-c-plural" name="method-c-plural" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the plural class name of a record or class.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">plural</span>(<span class="ruby-identifier">post</span>)             <span class="ruby-comment"># =&gt; &quot;posts&quot;</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">plural</span>(<span class="ruby-constant">Highrise</span><span class="ruby-operator">::</span><span class="ruby-constant">Person</span>) <span class="ruby-comment"># =&gt; &quot;highrise_people&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-plural_source')" id="l_method-c-plural_source">show</a>
+                
+              </p>
+              <div id="method-c-plural_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">plural</span>(<span class="ruby-identifier">record_or_class</span>)
+  <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">plural</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-route_key">
+            
+              <b>route_key</b>(record_or_class)
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-c-route_key" name="method-c-route_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns string to use while generating route names. It differs for
+namespaced models regarding whether it&#39;s inside isolated engine.</p>
+
+<pre class="ruby"><span class="ruby-comment"># For isolated engine:</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">route_key</span>(<span class="ruby-constant">Blog</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>) <span class="ruby-comment">#=&gt; posts</span>
+
+<span class="ruby-comment"># For shared engine:</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">route_key</span>(<span class="ruby-constant">Blog</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>) <span class="ruby-comment">#=&gt; blog_posts</span>
+</pre>
+
+<p>The route key also considers if the noun is uncountable and, in such cases,
+automatically appends _index.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-route_key_source')" id="l_method-c-route_key_source">show</a>
+                
+              </p>
+              <div id="method-c-route_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">route_key</span>(<span class="ruby-identifier">record_or_class</span>)
+  <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">route_key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-singular">
+            
+              <b>singular</b>(record_or_class)
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-c-singular" name="method-c-singular" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the singular class name of a record or class.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">singular</span>(<span class="ruby-identifier">post</span>)             <span class="ruby-comment"># =&gt; &quot;post&quot;</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">singular</span>(<span class="ruby-constant">Highrise</span><span class="ruby-operator">::</span><span class="ruby-constant">Person</span>) <span class="ruby-comment"># =&gt; &quot;highrise_person&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-singular_source')" id="l_method-c-singular_source">show</a>
+                
+              </p>
+              <div id="method-c-singular_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 249</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">singular</span>(<span class="ruby-identifier">record_or_class</span>)
+  <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">singular</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-singular_route_key">
+            
+              <b>singular_route_key</b>(record_or_class)
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-c-singular_route_key" name="method-c-singular_route_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns string to use while generating route names. It differs for
+namespaced models regarding whether it&#39;s inside isolated engine.</p>
+
+<pre class="ruby"><span class="ruby-comment"># For isolated engine:</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">singular_route_key</span>(<span class="ruby-constant">Blog</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>) <span class="ruby-comment">#=&gt; post</span>
+
+<span class="ruby-comment"># For shared engine:</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">singular_route_key</span>(<span class="ruby-constant">Blog</span><span class="ruby-operator">::</span><span class="ruby-constant">Post</span>) <span class="ruby-comment">#=&gt; blog_post</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-singular_route_key_source')" id="l_method-c-singular_route_key_source">show</a>
+                
+              </p>
+              <div id="method-c-singular_route_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 269</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">singular_route_key</span>(<span class="ruby-identifier">record_or_class</span>)
+  <span class="ruby-identifier">model_name_from_record_or_class</span>(<span class="ruby-identifier">record_or_class</span>).<span class="ruby-identifier">singular_route_key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-uncountable-3F">
+            
+              <b>uncountable?</b>(record_or_class)
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-c-uncountable-3F" name="method-c-uncountable-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Identifies whether the class name of a record or class is uncountable.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">uncountable?</span>(<span class="ruby-constant">Sheep</span>) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Naming</span>.<span class="ruby-identifier">uncountable?</span>(<span class="ruby-constant">Post</span>)  <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-uncountable-3F_source')" id="l_method-c-uncountable-3F_source">show</a>
+                
+              </p>
+              <div id="method-c-uncountable-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 257</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">uncountable?</span>(<span class="ruby-identifier">record_or_class</span>)
+  <span class="ruby-identifier">plural</span>(<span class="ruby-identifier">record_or_class</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">singular</span>(<span class="ruby-identifier">record_or_class</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-model_name">
+            
+              <b>model_name</b>()
+            
+            <a href="../../classes/ActiveModel/Naming.html#method-i-model_name" name="method-i-model_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an <a href="Name.html">ActiveModel::Name</a> object for module. It
+can be used to retrieve all kinds of naming-related information (See <a
+href="Name.html">ActiveModel::Name</a> for more information).</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Model</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">model_name</span>          <span class="ruby-comment"># =&gt; Person</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">class</span>    <span class="ruby-comment"># =&gt; ActiveModel::Name</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">singular</span> <span class="ruby-comment"># =&gt; &quot;person&quot;</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">model_name</span>.<span class="ruby-identifier">plural</span>   <span class="ruby-comment"># =&gt; &quot;people&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-model_name_source')" id="l_method-i-model_name_source">show</a>
+                
+              </p>
+              <div id="method-i-model_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/naming.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">model_name</span>
+  <span class="ruby-ivar">@_model_name</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">namespace</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parents</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">n</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:use_relative_model_naming?</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">use_relative_model_naming?</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Name</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">namespace</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ZFS Stats Login</title>
+  <%= stylesheet_link_tag controller_name, "application" %>
+  <%= javascript_include_tag controller_name %>
+  <%= csrf_meta_tags %>
+</head>
+<body id="session-body">
+<div class="container">
+	<div class="form-signin">
+    <h2 class="form-signin-heading">Sign in to ZFS-Stats</h2>
+    <div id="error">
+	    <% flash.each do |name, msg| %>
+	    	<b><%= content_tag :div, msg %></b>
+			<% end %>
+		</div>
+    <%= form_tag sessions_path do %>
+			<%= text_field_tag :email, params[:email], { placeholder: 'E-mail', class: 'form-control autofocus', type: 'email', required: '', autofocus: '' } %>
+			<%= password_field_tag :password, params[:password], { placeholder: 'Password', class: 'form-control', type: 'password', required: ''}  %>
+			<div id="actions"><%= submit_tag "Log In", { class: "btn btn-lg btn-warning btn-block" } %></div>
+		<% end %>
+	</div>
+</div>
+</body>
+</html>
+

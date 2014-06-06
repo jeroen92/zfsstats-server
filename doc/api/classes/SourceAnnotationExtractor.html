@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>SourceAnnotationExtractor</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            SourceAnnotationExtractor 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/source_annotation_extractor_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Implements the logic behind the rake tasks for annotations like</p>
+
+<pre>rake notes
+rake notes:optimize</pre>
+
+<p>and friends. See <code>rake -T notes</code> and
+<code>railties/lib/tasks/annotations.rake</code>.</p>
+
+<p><a href="SourceAnnotationExtractor/Annotation.html">Annotation</a> objects
+are triplets <code>:line</code>, <code>:tag</code>, <code>:text</code> that
+represent the line where the annotation lives, its tag, and its text. Note
+the filename is not stored.</p>
+
+<p>Annotations are looked for in comments and modulus whitespace they have to
+start with the tag optionally followed by a colon. Everything up to the end
+of the line (or closing <a href="ERB.html">ERB</a> comment tag) is
+considered to be their text.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="SourceAnnotationExtractor/Annotation.html">SourceAnnotationExtractor::Annotation</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-display">display</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-enumerate">enumerate</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-extract_annotations_from">extract_annotations_from</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find">find</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_in">find_in</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>tag</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-enumerate">
+            
+              <b>enumerate</b>(tag, options={})
+            
+            <a href="../classes/SourceAnnotationExtractor.html#method-c-enumerate" name="method-c-enumerate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Prints all annotations with tag <code>tag</code> under the root directories
+<code>app</code>, <code>config</code>, <code>db</code>, <code>lib</code>,
+and <code>test</code> (recursively).</p>
+
+<p>Additional directories may be added using a comma-delimited list set using
+<code>ENV['SOURCE_ANNOTATION_DIRECTORIES']</code>.</p>
+
+<p>Directories may also be explicitly set using the <code>:dirs</code> key in
+<code>options</code>.</p>
+
+<pre>SourceAnnotationExtractor.enumerate &#39;TODO|FIXME&#39;, dirs: %w(app lib), tag: true</pre>
+
+<p>If <code>options</code> has a <code>:tag</code> flag, it will be passed to
+each annotation&#39;s <code>to_s</code>.</p>
+
+<p>See <code>#find_in</code> for a list of file extensions that will be taken
+into account.</p>
+
+<p>This class method is the single entry point for the rake tasks.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-enumerate_source')" id="l_method-c-enumerate_source">show</a>
+                
+              </p>
+              <div id="method-c-enumerate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">enumerate</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-identifier">extractor</span> = <span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>)
+  <span class="ruby-identifier">dirs</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:dirs</span>) <span class="ruby-operator">||</span> <span class="ruby-constant">Annotation</span>.<span class="ruby-identifier">directories</span>
+  <span class="ruby-identifier">extractor</span>.<span class="ruby-identifier">display</span>(<span class="ruby-identifier">extractor</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">dirs</span>), <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(tag)
+            
+            <a href="../classes/SourceAnnotationExtractor.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">tag</span>)
+  <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">tag</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-display">
+            
+              <b>display</b>(results, options={})
+            
+            <a href="../classes/SourceAnnotationExtractor.html#method-i-display" name="method-i-display" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Prints the mapping from filenames to annotations in <code>results</code>
+ordered by filename. The <code>options</code> hash is passed to each
+annotation&#39;s <code>to_s</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-display_source')" id="l_method-i-display_source">show</a>
+                
+              </p>
+              <div id="method-i-display_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">display</span>(<span class="ruby-identifier">results</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:indent</span>] = <span class="ruby-identifier">results</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">map</span>(&amp;<span class="ruby-value">:line</span>) }.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">max</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-identifier">results</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{file}:&quot;</span>
+    <span class="ruby-identifier">results</span>[<span class="ruby-identifier">file</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">note</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  * #{note.to_s(options)}&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">puts</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-extract_annotations_from">
+            
+              <b>extract_annotations_from</b>(file, pattern)
+            
+            <a href="../classes/SourceAnnotationExtractor.html#method-i-extract_annotations_from" name="method-i-extract_annotations_from" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>If <code>file</code> is the filename of a file that contains annotations
+this method returns a hash with a single entry that maps <code>file</code>
+to an array of its annotations. Otherwise it returns an empty hash.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-extract_annotations_from_source')" id="l_method-i-extract_annotations_from_source">show</a>
+                
+              </p>
+              <div id="method-i-extract_annotations_from_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">extract_annotations_from</span>(<span class="ruby-identifier">file</span>, <span class="ruby-identifier">pattern</span>)
+  <span class="ruby-identifier">lineno</span> = <span class="ruby-number">0</span>
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">file</span>).<span class="ruby-identifier">inject</span>([]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">list</span>, <span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">lineno</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-identifier">list</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">pattern</span>
+    <span class="ruby-identifier">list</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Annotation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">lineno</span>, <span class="ruby-node">$1</span>, <span class="ruby-node">$2</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> {} <span class="ruby-operator">:</span> { <span class="ruby-identifier">file</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">result</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find">
+            
+              <b>find</b>(dirs)
+            
+            <a href="../classes/SourceAnnotationExtractor.html#method-i-find" name="method-i-find" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash that maps filenames under <code>dirs</code> (recursively) to
+arrays with their annotations.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_source')" id="l_method-i-find_source">show</a>
+                
+              </p>
+              <div id="method-i-find_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find</span>(<span class="ruby-identifier">dirs</span>)
+  <span class="ruby-identifier">dirs</span>.<span class="ruby-identifier">inject</span>({}) { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>, <span class="ruby-identifier">dir</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">find_in</span>(<span class="ruby-identifier">dir</span>)) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_in">
+            
+              <b>find_in</b>(dir)
+            
+            <a href="../classes/SourceAnnotationExtractor.html#method-i-find_in" name="method-i-find_in" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash that maps filenames under <code>dir</code> (recursively) to
+arrays with their annotations. Only files with annotations are included.
+Files with extension <code>.builder</code>, <code>.rb</code>,
+<code>.erb</code>, <code>.haml</code>, <code>.slim</code>,
+<code>.css</code>, <code>.scss</code>, <code>.js</code>,
+<code>.coffee</code>, and <code>.rake</code> are taken into account.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_in_source')" id="l_method-i-find_in_source">show</a>
+                
+              </p>
+              <div id="method-i-find_in_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/source_annotation_extractor.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_in</span>(<span class="ruby-identifier">dir</span>)
+  <span class="ruby-identifier">results</span> = {}
+
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{dir}/*&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">item</span>)[<span class="ruby-number">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">.</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">item</span>)
+      <span class="ruby-identifier">results</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">find_in</span>(<span class="ruby-identifier">item</span>))
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">pattern</span> =
+          <span class="ruby-keyword">case</span> <span class="ruby-identifier">item</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\.(builder|rb|coffee|rake)$/</span>
+            <span class="ruby-node">/#\s*(#{tag}):?\s*(.*)$/</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\.(css|scss|js)$/</span>
+            <span class="ruby-node">/\/\/\s*(#{tag}):?\s*(.*)$/</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\.erb$/</span>
+            <span class="ruby-node">/&lt;%\s*#\s*(#{tag}):?\s*(.*?)\s*%&gt;/</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\.haml$/</span>
+            <span class="ruby-node">/-\s*#\s*(#{tag}):?\s*(.*)$/</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\.slim$/</span>
+            <span class="ruby-node">/\/\s*\s*(#{tag}):?\s*(.*)$/</span>
+          <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span>
+          <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">results</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">extract_annotations_from</span>(<span class="ruby-identifier">item</span>, <span class="ruby-identifier">pattern</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">pattern</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">results</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

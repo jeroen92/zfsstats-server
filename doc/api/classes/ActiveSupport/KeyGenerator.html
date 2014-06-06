@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::KeyGenerator</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::KeyGenerator 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/key_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/key_generator.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="KeyGenerator.html">KeyGenerator</a> is a simple wrapper around
+OpenSSL&#39;s implementation of PBKDF2 It can be used to derive a number of
+keys for various purposes from a given secret. This lets rails applications
+have a single secure secret, but avoid reusing that key in multiple
+incompatible contexts.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-generate_key">generate_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(secret, options = {})
+            
+            <a href="../../classes/ActiveSupport/KeyGenerator.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/key_generator.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">secret</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@secret</span> = <span class="ruby-identifier">secret</span>
+  <span class="ruby-comment"># The default iterations are higher than required for our key derivation uses</span>
+  <span class="ruby-comment"># on the off chance someone uses this for password storage</span>
+  <span class="ruby-ivar">@iterations</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:iterations</span>] <span class="ruby-operator">||</span> <span class="ruby-number">2</span><span class="ruby-operator">**</span><span class="ruby-number">16</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-generate_key">
+            
+              <b>generate_key</b>(salt, key_size=64)
+            
+            <a href="../../classes/ActiveSupport/KeyGenerator.html#method-i-generate_key" name="method-i-generate_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a derived key suitable for use.  The default key_size is chosen to
+be compatible with the default settings of <a
+href="MessageVerifier.html">ActiveSupport::MessageVerifier</a>. i.e.
+OpenSSL::Digest::SHA1#block_length</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-generate_key_source')" id="l_method-i-generate_key_source">show</a>
+                
+              </p>
+              <div id="method-i-generate_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/key_generator.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">generate_key</span>(<span class="ruby-identifier">salt</span>, <span class="ruby-identifier">key_size</span>=<span class="ruby-number">64</span>)
+  <span class="ruby-constant">OpenSSL</span><span class="ruby-operator">::</span><span class="ruby-constant">PKCS5</span>.<span class="ruby-identifier">pbkdf2_hmac_sha1</span>(<span class="ruby-ivar">@secret</span>, <span class="ruby-identifier">salt</span>, <span class="ruby-ivar">@iterations</span>, <span class="ruby-identifier">key_size</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

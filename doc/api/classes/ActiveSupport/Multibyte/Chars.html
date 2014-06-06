@@ -1,0 +1,1060 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Multibyte::Chars</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::Multibyte::Chars 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/multibyte/chars_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="Chars.html">Chars</a> enables you to work transparently with UTF-8
+encoding in the Ruby <a href="../../String.html">String</a> class without
+having extensive knowledge about the encoding. A <a
+href="Chars.html">Chars</a> object accepts a string upon initialization and
+proxies <a href="../../String.html">String</a> methods in an encoding safe
+manner. All the normal <a href="../../String.html">String</a> methods are
+also implemented on the proxy.</p>
+
+<p><a href="../../String.html">String</a> methods are proxied through the <a
+href="Chars.html">Chars</a> object, and can be accessed through the
+<code>mb_chars</code> method. Methods which would normally return a <a
+href="../../String.html">String</a> object now return a <a
+href="Chars.html">Chars</a> object so methods can be chained.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;The Perfect String  &#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">normalize</span> <span class="ruby-comment"># =&gt; &quot;the perfect string&quot;</span>
+</pre>
+
+<p><a href="Chars.html">Chars</a> objects are perfectly interchangeable with
+<a href="../../String.html">String</a> objects as long as no explicit class
+checks are made. If certain methods do explicitly check the class, call
+<code>to_s</code> before you pass chars objects to them.</p>
+
+<pre>bad.explicit_checking_method &#39;T&#39;.mb_chars.downcase.to_s</pre>
+
+<p>The default <a href="Chars.html">Chars</a> implementation assumes that the
+encoding of the string is UTF-8, if you want to handle different encodings
+you can write your own multibyte string handler and configure it through <a
+href="../Multibyte.html#method-c-proxy_class">ActiveSupport::Multibyte.proxy_class</a>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">CharsForUTF32</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
+    <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">/</span> <span class="ruby-value">4</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">accepts?</span>(<span class="ruby-identifier">string</span>)
+    <span class="ruby-identifier">string</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">%</span> <span class="ruby-value">4</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Multibyte</span>.<span class="ruby-identifier">proxy_class</span> = <span class="ruby-constant">CharsForUTF32</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-capitalize">capitalize</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-compose">compose</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-consumes-3F">consumes?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-decompose">decompose</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-downcase">downcase</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-grapheme_length">grapheme_length</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-limit">limit</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-method_missing">method_missing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-normalize">normalize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to_missing-3F">respond_to_missing?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reverse">reverse</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-slice-21">slice!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-split">split</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-swapcase">swapcase</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-tidy_bytes">tidy_bytes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-titlecase">titlecase</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-titleize">titleize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-upcase">upcase</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            Comparable
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>to_s</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>to_str</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>wrapped_string</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-consumes-3F">
+            
+              <b>consumes?</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-c-consumes-3F" name="method-c-consumes-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> when the proxy class can handle the string.
+Returns <code>false</code> otherwise.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-consumes-3F_source')" id="l_method-c-consumes-3F_source">show</a>
+                
+              </p>
+              <div id="method-c-consumes-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">consumes?</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">string</span>.<span class="ruby-identifier">encoding</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Creates a new <a href="Chars.html">Chars</a> instance by wrapping
+<em>string</em>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-ivar">@wrapped_string</span> = <span class="ruby-identifier">string</span>
+  <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-constant">Encoding</span><span class="ruby-operator">::</span><span class="ruby-constant">UTF_8</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">frozen?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-capitalize">
+            
+              <b>capitalize</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-capitalize" name="method-i-capitalize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Converts the first character to uppercase and the remainder to lowercase.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;über&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">capitalize</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;Über&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-capitalize_source')" id="l_method-i-capitalize_source">show</a>
+                
+              </p>
+              <div id="method-i-capitalize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">capitalize</span>
+  (<span class="ruby-identifier">slice</span>(<span class="ruby-number">0</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">chars</span>(<span class="ruby-string">&#39;&#39;</span>)).<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> (<span class="ruby-identifier">slice</span>(<span class="ruby-number">1</span><span class="ruby-operator">..</span><span class="ruby-number">-1</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">chars</span>(<span class="ruby-string">&#39;&#39;</span>)).<span class="ruby-identifier">downcase</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-compose">
+            
+              <b>compose</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-compose" name="method-i-compose" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs composition on all the characters.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;é&#39;</span>.<span class="ruby-identifier">length</span>                       <span class="ruby-comment"># =&gt; 3</span>
+<span class="ruby-string">&#39;é&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">compose</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-comment"># =&gt; 2</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-compose_source')" id="l_method-i-compose_source">show</a>
+                
+              </p>
+              <div id="method-i-compose_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">compose</span>
+  <span class="ruby-identifier">chars</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">compose</span>(<span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;U*&#39;</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-decompose">
+            
+              <b>decompose</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-decompose" name="method-i-decompose" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs canonical decomposition on all the characters.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;é&#39;</span>.<span class="ruby-identifier">length</span>                         <span class="ruby-comment"># =&gt; 2</span>
+<span class="ruby-string">&#39;é&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">decompose</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-comment"># =&gt; 3</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-decompose_source')" id="l_method-i-decompose_source">show</a>
+                
+              </p>
+              <div id="method-i-decompose_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">decompose</span>
+  <span class="ruby-identifier">chars</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">decompose</span>(<span class="ruby-value">:canonical</span>, <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">codepoints</span>.<span class="ruby-identifier">to_a</span>).<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;U*&#39;</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-downcase">
+            
+              <b>downcase</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-downcase" name="method-i-downcase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Converts characters in the string to lowercase.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;VĚDA A VÝZKUM&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;věda a výzkum&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-downcase_source')" id="l_method-i-downcase_source">show</a>
+                
+              </p>
+              <div id="method-i-downcase_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">downcase</span>
+  <span class="ruby-identifier">chars</span> <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">downcase</span>(<span class="ruby-ivar">@wrapped_string</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-grapheme_length">
+            
+              <b>grapheme_length</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-grapheme_length" name="method-i-grapheme_length" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the number of grapheme clusters in the string.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;क्षि&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">length</span>   <span class="ruby-comment"># =&gt; 4</span>
+<span class="ruby-string">&#39;क्षि&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">grapheme_length</span> <span class="ruby-comment"># =&gt; 3</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-grapheme_length_source')" id="l_method-i-grapheme_length_source">show</a>
+                
+              </p>
+              <div id="method-i-grapheme_length_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">grapheme_length</span>
+  <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">unpack_graphemes</span>(<span class="ruby-ivar">@wrapped_string</span>).<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-limit">
+            
+              <b>limit</b>(limit)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-limit" name="method-i-limit" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Limits the byte size of the string to a number of bytes without breaking
+characters. Usable when the storage for a string is limited for some
+reason.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;こんにちは&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-value">7</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;こん&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-limit_source')" id="l_method-i-limit_source">show</a>
+                
+              </p>
+              <div id="method-i-limit_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">limit</span>(<span class="ruby-identifier">limit</span>)
+  <span class="ruby-identifier">slice</span>(<span class="ruby-number">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">translate_offset</span>(<span class="ruby-identifier">limit</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-method_missing">
+            
+              <b>method_missing</b>(method, *args, &amp;block)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-method_missing" name="method-i-method_missing" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Forward all undefined methods to the wrapped string.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-method_missing_source')" id="l_method-i-method_missing_source">show</a>
+                
+              </p>
+              <div id="method-i-method_missing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">method_missing</span>(<span class="ruby-identifier">method</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">method</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/!$/</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">method</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">method</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">result</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">chars</span>(<span class="ruby-identifier">result</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-normalize">
+            
+              <b>normalize</b>(form = nil)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-normalize" name="method-i-normalize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the KC normalization of the string by default. NFKC is considered
+the best normalization form for passing strings to databases and
+validations.</p>
+<ul><li>
+<p><code>form</code> - The form you want to normalize in. Should be one of the
+following: <code>:c</code>, <code>:kc</code>, <code>:d</code>, or
+<code>:kd</code>. Default is <a
+href="Unicode.html#attribute-i-default_normalization_form">ActiveSupport::Multibyte::Unicode#default_normalization_form</a></p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-normalize_source')" id="l_method-i-normalize_source">show</a>
+                
+              </p>
+              <div id="method-i-normalize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">normalize</span>(<span class="ruby-identifier">form</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">chars</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">normalize</span>(<span class="ruby-ivar">@wrapped_string</span>, <span class="ruby-identifier">form</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to_missing-3F">
+            
+              <b>respond_to_missing?</b>(method, include_private)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-respond_to_missing-3F" name="method-i-respond_to_missing-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if <em>obj</em> responds to the given method.
+Private methods are included in the search only if the optional second
+parameter evaluates to <code>true</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_to_missing-3F_source')" id="l_method-i-respond_to_missing-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_to_missing-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_to_missing?</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">include_private</span>)
+  <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">include_private</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reverse">
+            
+              <b>reverse</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-reverse" name="method-i-reverse" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Reverses all characters in the string.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;Café&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &#39;éfaC&#39;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reverse_source')" id="l_method-i-reverse_source">show</a>
+                
+              </p>
+              <div id="method-i-reverse_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reverse</span>
+  <span class="ruby-identifier">chars</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">unpack_graphemes</span>(<span class="ruby-ivar">@wrapped_string</span>).<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">pack</span>(<span class="ruby-string">&#39;U*&#39;</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-slice-21">
+            
+              <b>slice!</b>(*args)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-slice-21" name="method-i-slice-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Works like like <code>String#slice!</code>, but returns an instance of <a
+href="Chars.html">Chars</a>, or nil if the string was not modified.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-slice-21_source')" id="l_method-i-slice-21_source">show</a>
+                
+              </p>
+              <div id="method-i-slice-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">slice!</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">chars</span>(<span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">slice!</span>(*<span class="ruby-identifier">args</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-split">
+            
+              <b>split</b>(*args)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-split" name="method-i-split" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Works just like <code>String#split</code>, with the exception that the
+items in the resulting list are <a href="Chars.html">Chars</a> instances
+instead of <a href="../../String.html">String</a>. This makes chaining
+methods easier.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;Café périferôl&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/é/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">part</span><span class="ruby-operator">|</span> <span class="ruby-identifier">part</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">to_s</span> } <span class="ruby-comment"># =&gt; [&quot;CAF&quot;, &quot; P&quot;, &quot;RIFERÔL&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-split_source')" id="l_method-i-split_source">show</a>
+                
+              </p>
+              <div id="method-i-split_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">split</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@wrapped_string</span>.<span class="ruby-identifier">split</span>(*<span class="ruby-identifier">args</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">i</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-swapcase">
+            
+              <b>swapcase</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-swapcase" name="method-i-swapcase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Converts characters in the string to the opposite case.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;El Cañón&quot;.mb_chars.swapcase.to_s # =&gt; &quot;eL cAÑÓN&quot;
+</span></pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-swapcase_source')" id="l_method-i-swapcase_source">show</a>
+                
+              </p>
+              <div id="method-i-swapcase_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">swapcase</span>
+  <span class="ruby-identifier">chars</span> <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">swapcase</span>(<span class="ruby-ivar">@wrapped_string</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tidy_bytes">
+            
+              <b>tidy_bytes</b>(force = false)
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-tidy_bytes" name="method-i-tidy_bytes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Replaces all ISO-8859-1 or CP1252 characters by their UTF-8 equivalent
+resulting in a valid UTF-8 string.</p>
+
+<p>Passing <code>true</code> will forcibly tidy all bytes, assuming that the
+string&#39;s encoding is entirely CP1252 or ISO-8859-1.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tidy_bytes_source')" id="l_method-i-tidy_bytes_source">show</a>
+                
+              </p>
+              <div id="method-i-tidy_bytes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tidy_bytes</span>(<span class="ruby-identifier">force</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">chars</span>(<span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">tidy_bytes</span>(<span class="ruby-ivar">@wrapped_string</span>, <span class="ruby-identifier">force</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-titlecase">
+            
+              <b>titlecase</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-titlecase" name="method-i-titlecase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-titleize">
+            
+              <b>titleize</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-titleize" name="method-i-titleize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Capitalizes the first letter of every word, when possible.</p>
+
+<pre class="ruby"><span class="ruby-string">&quot;ÉL QUE SE ENTERÓ&quot;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">titleize</span>    <span class="ruby-comment"># =&gt; &quot;Él Que Se Enteró&quot;</span>
+<span class="ruby-string">&quot;日本語&quot;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">titleize</span>                 <span class="ruby-comment"># =&gt; &quot;日本語&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Chars.html#method-i-titlecase">titlecase</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-titleize_source')" id="l_method-i-titleize_source">show</a>
+                
+              </p>
+              <div id="method-i-titleize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">titleize</span>
+  <span class="ruby-identifier">chars</span>(<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\b(&#39;?\S)/</span>) { <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">upcase</span>(<span class="ruby-node">$1</span>)})
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-upcase">
+            
+              <b>upcase</b>()
+            
+            <a href="../../../classes/ActiveSupport/Multibyte/Chars.html#method-i-upcase" name="method-i-upcase" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Converts characters in the string to uppercase.</p>
+
+<pre class="ruby"><span class="ruby-string">&#39;Laurent, où sont les tests ?&#39;</span>.<span class="ruby-identifier">mb_chars</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-comment"># =&gt; &quot;LAURENT, OÙ SONT LES TESTS ?&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-upcase_source')" id="l_method-i-upcase_source">show</a>
+                
+              </p>
+              <div id="method-i-upcase_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/multibyte/chars.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">upcase</span>
+  <span class="ruby-identifier">chars</span> <span class="ruby-constant">Unicode</span>.<span class="ruby-identifier">upcase</span>(<span class="ruby-ivar">@wrapped_string</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

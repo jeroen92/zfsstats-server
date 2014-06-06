@@ -1,0 +1,841 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ModelSchema::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ModelSchema::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/model_schema_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-column_defaults">column_defaults</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-column_names">column_names</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-columns">columns</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-columns_hash">columns_hash</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-content_columns">content_columns</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inheritance_column">inheritance_column</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-inheritance_column-3D">inheritance_column=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Q</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-quoted_table_name">quoted_table_name</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reset_column_information">reset_column_information</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-sequence_name">sequence_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-sequence_name-3D">sequence_name=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-table_exists-3F">table_exists?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-table_name">table_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-table_name-3D">table_name=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-column_defaults">
+            
+              <b>column_defaults</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-column_defaults" name="method-i-column_defaults" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash where the keys are column names and the values are default
+values when instantiating the AR object for this table.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-column_defaults_source')" id="l_method-i-column_defaults_source">show</a>
+                
+              </p>
+              <div id="method-i-column_defaults_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">column_defaults</span>
+  <span class="ruby-ivar">@column_defaults</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">c</span>.<span class="ruby-identifier">default</span>] }]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-column_names">
+            
+              <b>column_names</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-column_names" name="method-i-column_names" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of column names as strings.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-column_names_source')" id="l_method-i-column_names_source">show</a>
+                
+              </p>
+              <div id="method-i-column_names_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">column_names</span>
+  <span class="ruby-ivar">@column_names</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">column</span><span class="ruby-operator">|</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-columns">
+            
+              <b>columns</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-columns" name="method-i-columns" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of column objects for the table associated with this
+class.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-columns_source')" id="l_method-i-columns_source">show</a>
+                
+              </p>
+              <div id="method-i-columns_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 207</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">columns</span>
+  <span class="ruby-ivar">@columns</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">columns</span>(<span class="ruby-identifier">table_name</span>).<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">col</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">col</span> = <span class="ruby-identifier">col</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">col</span>.<span class="ruby-identifier">primary</span> = (<span class="ruby-identifier">col</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">primary_key</span>)
+    <span class="ruby-identifier">col</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-columns_hash">
+            
+              <b>columns_hash</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-columns_hash" name="method-i-columns_hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash of column objects for the table associated with this class.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-columns_hash_source')" id="l_method-i-columns_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-columns_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 216</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">columns_hash</span>
+  <span class="ruby-ivar">@columns_hash</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">columns</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">c</span>] }]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-content_columns">
+            
+              <b>content_columns</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-content_columns" name="method-i-content_columns" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of column objects where the primary id, all columns ending
+in “_id” or “_count”, and columns used for single table inheritance have
+been removed.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-content_columns_source')" id="l_method-i-content_columns_source">show</a>
+                
+              </p>
+              <div id="method-i-content_columns_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 252</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">content_columns</span>
+  <span class="ruby-ivar">@content_columns</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">columns</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">primary</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(_id|_count)$/</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">inheritance_column</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inheritance_column">
+            
+              <b>inheritance_column</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-inheritance_column" name="method-i-inheritance_column" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defines the name of the table column which will store the class name on
+single-table inheritance situations.</p>
+
+<p>The default inheritance column name is <code>type</code>, which means
+it&#39;s a reserved word inside Active Record. To be able to use
+single-table inheritance with another column name, or to use the column
+<code>type</code> in your own model for something else, you can set
+<code>inheritance_column</code>:</p>
+
+<pre>self.inheritance_column = &#39;zoink&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inheritance_column_source')" id="l_method-i-inheritance_column_source">show</a>
+                
+              </p>
+              <div id="method-i-inheritance_column_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inheritance_column</span>
+  (<span class="ruby-ivar">@inheritance_column</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">nil</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">superclass</span>.<span class="ruby-identifier">inheritance_column</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inheritance_column-3D">
+            
+              <b>inheritance_column=</b>(value)
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-inheritance_column-3D" name="method-i-inheritance_column-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the value of <a
+href="ClassMethods.html#method-i-inheritance_column">#inheritance_column</a></p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inheritance_column-3D_source')" id="l_method-i-inheritance_column-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-inheritance_column-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inheritance_column=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@inheritance_column</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-ivar">@explicit_inheritance_column</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-quoted_table_name">
+            
+              <b>quoted_table_name</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-quoted_table_name" name="method-i-quoted_table_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a quoted version of the table name, used to construct SQL
+statements.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-quoted_table_name_source')" id="l_method-i-quoted_table_name_source">show</a>
+                
+              </p>
+              <div id="method-i-quoted_table_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">quoted_table_name</span>
+  <span class="ruby-ivar">@quoted_table_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">quote_table_name</span>(<span class="ruby-identifier">table_name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset_column_information">
+            
+              <b>reset_column_information</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-reset_column_information" name="method-i-reset_column_information" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Resets all the cached information about columns, which will cause them to
+be reloaded on the next request.</p>
+
+<p>The most common usage pattern for this method is probably in a migration,
+when just after creating a table you want to populate it with some default
+values, eg:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">CreateJobLevels</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">up</span>
+    <span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">job_levels</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> :<span class="ruby-identifier">id</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> :<span class="ruby-identifier">name</span>
+
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">timestamps</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-constant">JobLevel</span>.<span class="ruby-identifier">reset_column_information</span>
+    <span class="ruby-node">%w{assistant executive manager director}</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">type</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">JobLevel</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">type</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">down</span>
+    <span class="ruby-identifier">drop_table</span> :<span class="ruby-identifier">job_levels</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset_column_information_source')" id="l_method-i-reset_column_information_source">show</a>
+                
+              </p>
+              <div id="method-i-reset_column_information_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 295</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset_column_information</span>
+  <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">clear_cache!</span>
+  <span class="ruby-identifier">undefine_attribute_methods</span>
+  <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">clear_table_cache!</span>(<span class="ruby-identifier">table_name</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">table_exists?</span>
+
+  <span class="ruby-ivar">@arel_engine</span>          = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@column_defaults</span>      = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@column_names</span>         = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@columns</span>              = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@columns_hash</span>         = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@column_types</span>         = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@content_columns</span>      = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@dynamic_methods_hash</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@inheritance_column</span>   = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@explicit_inheritance_column</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@explicit_inheritance_column</span>
+  <span class="ruby-ivar">@relation</span>             = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sequence_name">
+            
+              <b>sequence_name</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-sequence_name" name="method-i-sequence_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sequence_name_source')" id="l_method-i-sequence_name_source">show</a>
+                
+              </p>
+              <div id="method-i-sequence_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sequence_name</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">base_class</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>
+    <span class="ruby-ivar">@sequence_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">reset_sequence_name</span>
+  <span class="ruby-keyword">else</span>
+    (<span class="ruby-ivar">@sequence_name</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">nil</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">base_class</span>.<span class="ruby-identifier">sequence_name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-sequence_name-3D">
+            
+              <b>sequence_name=</b>(value)
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-sequence_name-3D" name="method-i-sequence_name-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the name of the sequence to use when generating ids to the given
+value, or (if the value is nil or false) to the value returned by the given
+block. This is required for Oracle and is useful for any database which
+relies on sequences for primary key generation.</p>
+
+<p>If a sequence name is not explicitly set when using Oracle or Firebird, it
+will default to the commonly used pattern of: #{<a
+href="ClassMethods.html#method-i-table_name">#table_name</a>}_seq</p>
+
+<p>If a sequence name is not explicitly set when using PostgreSQL, it will
+discover the sequence corresponding to your primary key for you.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Project</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_name</span> = <span class="ruby-string">&quot;projectseq&quot;</span>   <span class="ruby-comment"># default would have been &quot;project_seq&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sequence_name-3D_source')" id="l_method-i-sequence_name-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-sequence_name-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sequence_name=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@sequence_name</span>          = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-ivar">@explicit_sequence_name</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-table_exists-3F">
+            
+              <b>table_exists?</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-table_exists-3F" name="method-i-table_exists-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Indicates whether the table associated with this class exists</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-table_exists-3F_source')" id="l_method-i-table_exists-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-table_exists-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 202</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">table_exists?</span>
+  <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">schema_cache</span>.<span class="ruby-identifier">table_exists?</span>(<span class="ruby-identifier">table_name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-table_name">
+            
+              <b>table_name</b>()
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-table_name" name="method-i-table_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Guesses the table name (in forced lower-case) based on the name of the
+class in the inheritance hierarchy descending directly from <a
+href="../Base.html">ActiveRecord::Base</a>. So if the hierarchy looks like:
+Reply &lt; Message &lt; <a href="../Base.html">ActiveRecord::Base</a>, then
+Message is used to guess the table name even when called on Reply. The
+rules used to do the guess are handled by the Inflector class in Active
+Support, which knows almost all common English inflections. You can add new
+inflections in config/initializers/inflections.rb.</p>
+
+<p>Nested classes are given table names prefixed by the singular form of the
+parent&#39;s table name. Enclosing modules are not considered.</p>
+
+<h4 id="method-i-table_name-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Invoice</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">file</span>                  <span class="ruby-keyword">class</span>               <span class="ruby-identifier">table_name</span>
+<span class="ruby-identifier">invoice</span>.<span class="ruby-identifier">rb</span>            <span class="ruby-constant">Invoice</span>             <span class="ruby-identifier">invoices</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Invoice</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">class</span> <span class="ruby-constant">Lineitem</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">file</span>                  <span class="ruby-keyword">class</span>               <span class="ruby-identifier">table_name</span>
+<span class="ruby-identifier">invoice</span>.<span class="ruby-identifier">rb</span>            <span class="ruby-constant">Invoice</span><span class="ruby-operator">::</span><span class="ruby-constant">Lineitem</span>   <span class="ruby-identifier">invoice_lineitems</span>
+
+<span class="ruby-keyword">module</span> <span class="ruby-constant">Invoice</span>
+  <span class="ruby-keyword">class</span> <span class="ruby-constant">Lineitem</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">file</span>                  <span class="ruby-keyword">class</span>               <span class="ruby-identifier">table_name</span>
+<span class="ruby-identifier">invoice</span><span class="ruby-operator">/</span><span class="ruby-identifier">lineitem</span>.<span class="ruby-identifier">rb</span>   <span class="ruby-constant">Invoice</span><span class="ruby-operator">::</span><span class="ruby-constant">Lineitem</span>   <span class="ruby-identifier">lineitems</span>
+</pre>
+
+<p>Additionally, the class-level <code>table_name_prefix</code> is prepended
+and the <code>table_name_suffix</code> is appended. So if you have “myapp_”
+as a prefix, the table name guess for an Invoice class becomes
+“myapp_invoices”. Invoice::Lineitem becomes “myapp_invoice_lineitems”.</p>
+
+<p>You can also set your own table name explicitly:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Mouse</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">table_name</span> = <span class="ruby-string">&quot;mice&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Alternatively, you can override the <a
+href="ClassMethods.html#method-i-table_name">#table_name</a> method to
+define your own computation. (Possibly using <code>super</code> to
+manipulate the default table name.) Example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Post</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">table_name</span>
+    <span class="ruby-string">&quot;special_&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-constant">Post</span>.<span class="ruby-identifier">table_name</span> <span class="ruby-comment"># =&gt; &quot;special_posts&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-table_name_source')" id="l_method-i-table_name_source">show</a>
+                
+              </p>
+              <div id="method-i-table_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">table_name</span>
+  <span class="ruby-identifier">reset_table_name</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@table_name</span>)
+  <span class="ruby-ivar">@table_name</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-table_name-3D">
+            
+              <b>table_name=</b>(value)
+            
+            <a href="../../../classes/ActiveRecord/ModelSchema/ClassMethods.html#method-i-table_name-3D" name="method-i-table_name-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the table name explicitly. Example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Project</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">table_name</span> = <span class="ruby-string">&quot;project&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You can also just define your own <code>self.table_name</code> method; see
+the documentation for ActiveRecord::Base#table_name.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-table_name-3D_source')" id="l_method-i-table_name-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-table_name-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">table_name=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@table_name</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@table_name</span>
+    <span class="ruby-identifier">reset_column_information</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">connected?</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@table_name</span>        = <span class="ruby-identifier">value</span>
+  <span class="ruby-ivar">@quoted_table_name</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@arel_table</span>        = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@sequence_name</span>     = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@explicit_sequence_name</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@explicit_sequence_name</span>
+  <span class="ruby-ivar">@relation</span>          = <span class="ruby-constant">Relation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">arel_table</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

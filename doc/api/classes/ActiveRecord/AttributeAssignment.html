@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeAssignment</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeAssignment 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_assignment_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_assignment.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assign_attributes">assign_attributes</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-attributes-3D">attributes=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assign_attributes">
+            
+              <b>assign_attributes</b>(new_attributes)
+            
+            <a href="../../classes/ActiveRecord/AttributeAssignment.html#method-i-assign_attributes" name="method-i-assign_attributes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Allows you to set all the attributes by passing in a hash of attributes
+with keys matching the attribute names (which again matches the column
+names).</p>
+
+<p>If the passed hash responds to <code>permitted?</code> method and the
+return value of this method is <code>false</code> an
+<code>ActiveModel::ForbiddenAttributesError</code> exception is raised.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="AttributeAssignment.html#method-i-attributes-3D">attributes=</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assign_attributes_source')" id="l_method-i-assign_attributes_source">show</a>
+                
+              </p>
+              <div id="method-i-assign_attributes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_assignment.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assign_attributes</span>(<span class="ruby-identifier">new_attributes</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">new_attributes</span>.<span class="ruby-identifier">blank?</span>
+
+  <span class="ruby-identifier">attributes</span>                  = <span class="ruby-identifier">new_attributes</span>.<span class="ruby-identifier">stringify_keys</span>
+  <span class="ruby-identifier">multi_parameter_attributes</span>  = []
+  <span class="ruby-identifier">nested_parameter_attributes</span> = []
+
+  <span class="ruby-identifier">attributes</span> = <span class="ruby-identifier">sanitize_for_mass_assignment</span>(<span class="ruby-identifier">attributes</span>)
+
+  <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&quot;(&quot;</span>)
+      <span class="ruby-identifier">multi_parameter_attributes</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span> ]
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">nested_parameter_attributes</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span> ]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">_assign_attribute</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">assign_nested_parameter_attributes</span>(<span class="ruby-identifier">nested_parameter_attributes</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">nested_parameter_attributes</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">assign_multiparameter_attributes</span>(<span class="ruby-identifier">multi_parameter_attributes</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">multi_parameter_attributes</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-attributes-3D">
+            
+              <b>attributes=</b>(new_attributes)
+            
+            <a href="../../classes/ActiveRecord/AttributeAssignment.html#method-i-attributes-3D" name="method-i-attributes-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeMethods::PrimaryKey</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods::PrimaryKey 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/primary_key_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="PrimaryKey/ClassMethods.html">ActiveRecord::AttributeMethods::PrimaryKey::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-attribute_method-3F">attribute_method?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-id">id</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-id-3D">id=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-id-3F">id?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-id_before_type_cast">id_before_type_cast</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_key">to_key</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-id">
+            
+              <b>id</b>()
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/PrimaryKey.html#method-i-id" name="method-i-id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the primary key value.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-id_source')" id="l_method-i-id_source">show</a>
+                
+              </p>
+              <div id="method-i-id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">id</span>
+  <span class="ruby-identifier">sync_with_transaction_state</span>
+  <span class="ruby-identifier">read_attribute</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-id-3D">
+            
+              <b>id=</b>(value)
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/PrimaryKey.html#method-i-id-3D" name="method-i-id-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the primary key value.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-id-3D_source')" id="l_method-i-id-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-id-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">id=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">sync_with_transaction_state</span>
+  <span class="ruby-identifier">write_attribute</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span>, <span class="ruby-identifier">value</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-id-3F">
+            
+              <b>id?</b>()
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/PrimaryKey.html#method-i-id-3F" name="method-i-id-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Queries the primary key value.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-id-3F_source')" id="l_method-i-id-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-id-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">id?</span>
+  <span class="ruby-identifier">sync_with_transaction_state</span>
+  <span class="ruby-identifier">query_attribute</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-id_before_type_cast">
+            
+              <b>id_before_type_cast</b>()
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/PrimaryKey.html#method-i-id_before_type_cast" name="method-i-id_before_type_cast" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the primary key value before type cast.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-id_before_type_cast_source')" id="l_method-i-id_before_type_cast_source">show</a>
+                
+              </p>
+              <div id="method-i-id_before_type_cast_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">id_before_type_cast</span>
+  <span class="ruby-identifier">sync_with_transaction_state</span>
+  <span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">primary_key</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_key">
+            
+              <b>to_key</b>()
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/PrimaryKey.html#method-i-to_key" name="method-i-to_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns this record&#39;s primary key value wrapped in an <a
+href="../../Array.html">Array</a> if one is available.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_key_source')" id="l_method-i-to_key_source">show</a>
+                
+              </p>
+              <div id="method-i-to_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_key</span>
+  <span class="ruby-identifier">sync_with_transaction_state</span>
+  <span class="ruby-identifier">key</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">id</span>
+  [<span class="ruby-identifier">key</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-attribute_method-3F">
+            
+              <b>attribute_method?</b>(attr_name)
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/PrimaryKey.html#method-i-attribute_method-3F" name="method-i-attribute_method-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attribute_method-3F_source')" id="l_method-i-attribute_method-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-attribute_method-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attribute_method?</span>(<span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;id&#39;</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

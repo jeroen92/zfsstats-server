@@ -1,0 +1,401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::CacheHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::CacheHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/cache_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/cache_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cache">cache</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cache_fragment_name">cache_fragment_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cache_if">cache_if</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-cache_unless">cache_unless</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cache">
+            
+              <b>cache</b>(name = {}, options = nil, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/CacheHelper.html#method-i-cache" name="method-i-cache" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This helper exposes a method for caching fragments of a view rather than an
+entire action or page. This technique is useful caching pieces like menus,
+lists of newstopics, static <a href="../../HTML.html">HTML</a> fragments,
+and so on. This method takes a block that contains the content you wish to
+cache.</p>
+
+<p>The best way to use this is by doing key-based cache expiration on top of a
+cache store like Memcached that&#39;ll automatically kick out old entries.
+For more on key-based expiration, see: <a
+href="http://37signals.com/svn/posts/3113-how-key-based-cache-expiration-works">37signals.com/svn/posts/3113-how-key-based-cache-expiration-works</a></p>
+
+<p>When using this method, you list the cache dependency as the name of the
+cache, like so:</p>
+
+<pre>&lt;% cache project do %&gt;
+  &lt;b&gt;All the topics on this project&lt;/b&gt;
+  &lt;%= render project.topics %&gt;
+&lt;% end %&gt;</pre>
+
+<p>This approach will assume that when a new topic is added, you&#39;ll touch
+the project. The cache key generated from this call will be something like:</p>
+
+<pre class="ruby"><span class="ruby-identifier">views</span><span class="ruby-operator">/</span><span class="ruby-identifier">projects</span><span class="ruby-operator">/</span><span class="ruby-value">123</span><span class="ruby-operator">-</span><span class="ruby-value">20120806214154</span><span class="ruby-operator">/</span><span class="ruby-value">7</span><span class="ruby-identifier">a1156131a6928cb0026877f8b749ac9</span>
+      <span class="ruby-operator">^</span><span class="ruby-identifier">class</span>   <span class="ruby-operator">^</span><span class="ruby-identifier">id</span> <span class="ruby-operator">^</span><span class="ruby-identifier">updated_at</span>    <span class="ruby-operator">^</span><span class="ruby-identifier">template</span> <span class="ruby-identifier">tree</span> <span class="ruby-identifier">digest</span>
+</pre>
+
+<p>The cache is thus automatically bumped whenever the project updated_at is
+touched.</p>
+
+<p>If your template cache depends on multiple sources (try to avoid this to
+keep things simple), you can name all these dependencies as part of an
+array:</p>
+
+<pre>&lt;% cache [ project, current_user ] do %&gt;
+  &lt;b&gt;All the topics on this project&lt;/b&gt;
+  &lt;%= render project.topics %&gt;
+&lt;% end %&gt;</pre>
+
+<p>This will include both records as part of the cache key and updating either
+of them will expire the cache.</p>
+
+<h4 id="method-i-cache-label-Template+digest"><a href="../Template.html">Template</a> digest</h4>
+
+<p>The template digest that&#39;s added to the cache key is computed by taking
+an md5 of the contents of the entire template file. This ensures that your
+caches will automatically expire when you change the template file.</p>
+
+<p>Note that the md5 is taken of the entire template file, not just what&#39;s
+within the cache do/end call. So it&#39;s possible that changing something
+outside of that call will still expire the cache.</p>
+
+<p>Additionally, the digestor will automatically look through your template
+file for explicit and implicit dependencies, and include those as part of
+the digest.</p>
+
+<p>The digestor can be bypassed by passing skip_digest: true as an option to
+the cache call:</p>
+
+<pre>&lt;% cache project, skip_digest: true do %&gt;
+  &lt;b&gt;All the topics on this project&lt;/b&gt;
+  &lt;%= render project.topics %&gt;
+&lt;% end %&gt;</pre>
+
+<h4 id="method-i-cache-label-Implicit+dependencies">Implicit dependencies</h4>
+
+<p>Most template dependencies can be derived from calls to render in the
+template itself. Here are some examples of render calls that Cache Digests
+knows how to decode:</p>
+
+<pre class="ruby"><span class="ruby-identifier">render</span> <span class="ruby-identifier">partial</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;comments/comment&quot;</span>, <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">commentable</span>.<span class="ruby-identifier">comments</span>
+<span class="ruby-identifier">render</span> <span class="ruby-string">&quot;comments/comments&quot;</span>
+<span class="ruby-identifier">render</span> <span class="ruby-string">&#39;comments/comments&#39;</span>
+<span class="ruby-identifier">render</span>(<span class="ruby-string">&#39;comments/comments&#39;</span>)
+
+<span class="ruby-identifier">render</span> <span class="ruby-string">&quot;header&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">render</span>(<span class="ruby-string">&quot;comments/header&quot;</span>)
+
+<span class="ruby-identifier">render</span>(<span class="ruby-ivar">@topic</span>)         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">render</span>(<span class="ruby-string">&quot;topics/topic&quot;</span>)
+<span class="ruby-identifier">render</span>(<span class="ruby-identifier">topics</span>)         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">render</span>(<span class="ruby-string">&quot;topics/topic&quot;</span>)
+<span class="ruby-identifier">render</span>(<span class="ruby-identifier">message</span>.<span class="ruby-identifier">topics</span>) =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">render</span>(<span class="ruby-string">&quot;topics/topic&quot;</span>)
+</pre>
+
+<p>It&#39;s not possible to derive all render calls like that, though. Here
+are a few examples of things that can&#39;t be derived:</p>
+
+<pre>render group_of_attachments
+render @project.documents.where(published: true).order(&#39;created_at&#39;)</pre>
+
+<p>You will have to rewrite those to the explicit form:</p>
+
+<pre>render partial: &#39;attachments/attachment&#39;, collection: group_of_attachments
+render partial: &#39;documents/document&#39;, collection: @project.documents.where(published: true).order(&#39;created_at&#39;)</pre>
+
+<h3 id="method-i-cache-label-Explicit+dependencies">Explicit dependencies</h3>
+
+<p>Some times you&#39;ll have template dependencies that can&#39;t be derived
+at all. This is typically the case when you have template rendering that
+happens in helpers. Here&#39;s an example:</p>
+
+<pre>&lt;%= render_sortable_todolists @project.todolists %&gt;</pre>
+
+<p>You&#39;ll need to use a special comment format to call those out:</p>
+
+<pre>&lt;%# Template Dependency: todolists/todolist %&gt;
+&lt;%= render_sortable_todolists @project.todolists %&gt;</pre>
+
+<p>The pattern used to match these is /# <a
+href="../Template.html">Template</a> Dependency: ([^ ]+)/, so it&#39;s
+important that you type it out just so. You can only declare one template
+dependency per line.</p>
+
+<h3 id="method-i-cache-label-External+dependencies">External dependencies</h3>
+
+<p>If you use a helper method, for example, inside of a cached block and you
+then update that helper, you&#39;ll have to bump the cache as well. It
+doesn&#39;t really matter how you do it, but the md5 of the template file
+must change. One recommendation is to simply be explicit in a comment,
+like:</p>
+
+<pre>&lt;%# Helper Dependency Updated: May 6, 2012 at 6pm %&gt;
+&lt;%= some_helper_method(person) %&gt;</pre>
+
+<p>Now all you&#39;ll have to do is change that timestamp when the helper
+method changes.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_source')" id="l_method-i-cache_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/cache_helper.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache</span>(<span class="ruby-identifier">name</span> = {}, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">perform_caching</span>
+    <span class="ruby-identifier">safe_concat</span>(<span class="ruby-identifier">fragment_for</span>(<span class="ruby-identifier">cache_fragment_name</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>), <span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>))
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cache_fragment_name">
+            
+              <b>cache_fragment_name</b>(name = {}, options = nil)
+            
+            <a href="../../../classes/ActionView/Helpers/CacheHelper.html#method-i-cache_fragment_name" name="method-i-cache_fragment_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This helper returns the name of a cache key for a given fragment cache
+call. By supplying skip_digest: true to cache, the digestion of cache
+fragments can be manually bypassed. This is useful when cache fragments
+cannot be manually expired unless you know the exact key which is the case
+when using memcached.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_fragment_name_source')" id="l_method-i-cache_fragment_name_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_fragment_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/cache_helper.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache_fragment_name</span>(<span class="ruby-identifier">name</span> = {}, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">skip_digest</span> = <span class="ruby-identifier">options</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:skip_digest</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">skip_digest</span>
+    <span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">fragment_name_with_digest</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cache_if">
+            
+              <b>cache_if</b>(condition, name = {}, options = nil, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/CacheHelper.html#method-i-cache_if" name="method-i-cache_if" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Cache fragments of a view if <code>condition</code> is true</p>
+
+<pre>&lt;%= cache_if admin?, project do %&gt;
+  &lt;b&gt;All the topics on this project&lt;/b&gt;
+  &lt;%= render project.topics %&gt;
+&lt;% end %&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_if_source')" id="l_method-i-cache_if_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_if_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/cache_helper.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache_if</span>(<span class="ruby-identifier">condition</span>, <span class="ruby-identifier">name</span> = {}, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">condition</span>
+    <span class="ruby-identifier">cache</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">yield</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-cache_unless">
+            
+              <b>cache_unless</b>(condition, name = {}, options = nil, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/CacheHelper.html#method-i-cache_unless" name="method-i-cache_unless" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Cache fragments of a view unless <code>condition</code> is true</p>
+
+<pre>&lt;%= cache_unless admin?, project do %&gt;
+  &lt;b&gt;All the topics on this project&lt;/b&gt;
+  &lt;%= render project.topics %&gt;
+&lt;% end %&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cache_unless_source')" id="l_method-i-cache_unless_source">show</a>
+                
+              </p>
+              <div id="method-i-cache_unless_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/cache_helper.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cache_unless</span>(<span class="ruby-identifier">condition</span>, <span class="ruby-identifier">name</span> = {}, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">cache_if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">condition</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::JSON::Encoding::Encoder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::JSON::Encoding::Encoder 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/json/encoding_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-as_json">as_json</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encode">encode</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-escape">escape</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-options_for">options_for</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>options</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(options = nil)
+            
+            <a href="../../../../classes/ActiveSupport/JSON/Encoding/Encoder.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span> <span class="ruby-operator">||</span> {}
+  <span class="ruby-ivar">@seen</span> = <span class="ruby-constant">Set</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-as_json">
+            
+              <b>as_json</b>(value, use_options = true)
+            
+            <a href="../../../../classes/ActiveSupport/JSON/Encoding/Encoder.html#method-i-as_json" name="method-i-as_json" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>like encode, but only calls <a
+href="Encoder.html#method-i-as_json">#as_json</a>, without encoding to
+string.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-as_json_source')" id="l_method-i-as_json_source">show</a>
+                
+              </p>
+              <div id="method-i-as_json_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">as_json</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">use_options</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">check_for_circular_references</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">use_options</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">value</span>)) <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">as_json</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-encode">
+            
+              <b>encode</b>(value, use_options = true)
+            
+            <a href="../../../../classes/ActiveSupport/JSON/Encoding/Encoder.html#method-i-encode" name="method-i-encode" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encode_source')" id="l_method-i-encode_source">show</a>
+                
+              </p>
+              <div id="method-i-encode_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encode</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">use_options</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">check_for_circular_references</span>(<span class="ruby-identifier">value</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">jsonified</span> = <span class="ruby-identifier">use_options</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">as_json</span>(<span class="ruby-identifier">options_for</span>(<span class="ruby-identifier">value</span>)) <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">as_json</span>
+    <span class="ruby-identifier">jsonified</span>.<span class="ruby-identifier">encode_json</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-escape">
+            
+              <b>escape</b>(string)
+            
+            <a href="../../../../classes/ActiveSupport/JSON/Encoding/Encoder.html#method-i-escape" name="method-i-escape" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-escape_source')" id="l_method-i-escape_source">show</a>
+                
+              </p>
+              <div id="method-i-escape_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">escape</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">string</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-options_for">
+            
+              <b>options_for</b>(value)
+            
+            <a href="../../../../classes/ActiveSupport/JSON/Encoding/Encoder.html#method-i-options_for" name="method-i-options_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-options_for_source')" id="l_method-i-options_for_source">show</a>
+                
+              </p>
+              <div id="method-i-options_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/json/encoding.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">options_for</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-comment"># hashes and arrays need to get encoder in the options, so that</span>
+    <span class="ruby-comment"># they can detect circular references.</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:encoder</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

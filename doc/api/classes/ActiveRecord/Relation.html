@@ -1,0 +1,2264 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Relation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Relation 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/merger_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/merger.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+Relation">Active Record <a href="Relation.html">Relation</a></h1>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-3D-3D">==</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-any-3F">any?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-blank-3F">blank?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-build">build</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-create-21">create!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-delete_all">delete_all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-destroy">destroy</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-destroy_all">destroy_all</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-eager_loading-3F">eager_loading?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-empty-3F">empty?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-explain">explain</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find_or_create_by">find_or_create_by</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_or_create_by-21">find_or_create_by!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_or_initialize_by">find_or_initialize_by</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-initialize_copy">initialize_copy</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-insert">insert</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-inspect">inspect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-joined_includes_values">joined_includes_values</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-load">load</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-many-3F">many?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-pretty_print">pretty_print</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-reload">reload</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reset">reset</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-scope_for_create">scope_for_create</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-scoping">scoping</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-size">size</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_a">to_a</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_sql">to_sql</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-uniq_value">uniq_value</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-update_all">update_all</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-values">values</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-where_values_hash">where_values_hash</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="FinderMethods.html">
+              ActiveRecord::FinderMethods
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Calculations.html">
+              ActiveRecord::Calculations
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="SpawnMethods.html">
+              ActiveRecord::SpawnMethods
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="QueryMethods.html">
+              ActiveRecord::QueryMethods
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Batches.html">
+              ActiveRecord::Batches
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Explain.html">
+              ActiveRecord::Explain
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">JoinOperation</td>
+            <td>=</td>
+            <td class="attr-value">Struct.new(:relation, :join_class, :on)</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">MULTI_VALUE_METHODS</td>
+            <td>=</td>
+            <td class="attr-value">[:includes, :eager_load, :preload, :select, :group,
+:order, :joins, :where, :having, :bind, :references,
+:extending]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">SINGLE_VALUE_METHODS</td>
+            <td>=</td>
+            <td class="attr-value">[:limit, :offset, :lock, :readonly, :from, :reordering,
+:reverse_order, :distinct, :create_with, :uniq]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">VALUE_METHODS</td>
+            <td>=</td>
+            <td class="attr-value">MULTI_VALUE_METHODS + SINGLE_VALUE_METHODS</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>default_scoped</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>default_scoped?</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>klass</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>loaded</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>loaded?</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>model</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>proxy_association</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>table</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(klass, table, values = {})
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">table</span>, <span class="ruby-identifier">values</span> = {})
+  <span class="ruby-ivar">@klass</span>             = <span class="ruby-identifier">klass</span>
+  <span class="ruby-ivar">@table</span>             = <span class="ruby-identifier">table</span>
+  <span class="ruby-ivar">@values</span>            = <span class="ruby-identifier">values</span>
+  <span class="ruby-ivar">@implicit_readonly</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@loaded</span>            = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@default_scoped</span>    = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-3D-3D">
+            
+              <b>==</b>(other)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-3D-3D" name="method-i-3D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compares two relations for equality.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3D-3D_source')" id="l_method-i-3D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-3D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 539</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-keyword ruby-title">other</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">other</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Relation</span>
+    <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_sql</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">to_sql</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">to_a</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-any-3F">
+            
+              <b>any?</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-any-3F" name="method-i-any-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if there are any records.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-any-3F_source')" id="l_method-i-any-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-any-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 241</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">any?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span>*<span class="ruby-identifier">block_args</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>(*<span class="ruby-identifier">block_args</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-operator">!</span><span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-blank-3F">
+            
+              <b>blank?</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-blank-3F" name="method-i-blank-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if relation is blank.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-blank-3F_source')" id="l_method-i-blank-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-blank-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 563</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">blank?</span>
+  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">blank?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-build">
+            
+              <b>build</b>(*args, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-build" name="method-i-build" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>(*args, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Tries to create a new record with the same scoped attributes defined in the
+relation. Returns the initialized object if validation fails.</p>
+
+<p>Expects arguments in the same format as <code>Base.create</code>.</p>
+
+<h4 id="method-i-create-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Oscar&#39;</span>)
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">create</span> <span class="ruby-comment"># #&lt;User id: 3, name: &quot;oscar&quot;, ...&gt;</span>
+
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;fxn&#39;</span>)
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">create</span> <span class="ruby-comment"># #&lt;User id: 4, name: &quot;fxn&quot;, ...&gt;</span>
+
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">create</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;tenderlove&#39;</span> }
+<span class="ruby-comment"># #&lt;User id: 5, name: &quot;tenderlove&quot;, ...&gt;</span>
+
+<span class="ruby-identifier">users</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>) <span class="ruby-comment"># validation on name</span>
+<span class="ruby-comment"># #&lt;User id: nil, name: nil, ...&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">scoping</span> { <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">create</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-create-21">
+            
+              <b>create!</b>(*args, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-create-21" name="method-i-create-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Similar to <a href="Relation.html#method-i-create">create</a>, but calls
+<code>create!</code> on the base class. Raises an exception if a validation
+error occurs.</p>
+
+<p>Expects arguments in the same format as <code>Base.create!</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create-21_source')" id="l_method-i-create-21_source">show</a>
+                
+              </p>
+              <div id="method-i-create-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 127</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create!</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">scoping</span> { <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">create!</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(id_or_array)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Deletes the row with a primary key matching the <code>id</code> argument,
+using a SQL <code>DELETE</code> statement, and returns the number of rows
+deleted. Active Record objects are not instantiated, so the object&#39;s
+callbacks are not executed, including any <code>:dependent</code>
+association options.</p>
+
+<p>You can delete multiple rows at once by passing an <a
+href="../Array.html">Array</a> of <code>id</code>s.</p>
+
+<p>Note: Although it is often much faster than the alternative,
+<code>#destroy</code>, skipping callbacks might bypass business logic in
+your application that ensures referential integrity or performs other
+essential jobs.</p>
+
+<h4 id="method-i-delete-label-Examples">Examples</h4>
+
+<pre># Delete a single row
+Todo.delete(1)
+
+# Delete multiple rows
+Todo.delete([2,3,4])</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 459</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">id_or_array</span>)
+  <span class="ruby-identifier">where</span>(<span class="ruby-identifier">primary_key</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">id_or_array</span>).<span class="ruby-identifier">delete_all</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete_all">
+            
+              <b>delete_all</b>(conditions = nil)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-delete_all" name="method-i-delete_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Deletes the records matching <code>conditions</code> without instantiating
+the records first, and hence not calling the <code>destroy</code> method
+nor invoking callbacks. This is a single SQL DELETE statement that goes
+straight to the database, much more efficient than
+<code>destroy_all</code>. Be careful with relations though, in particular
+<code>:dependent</code> rules defined on associations are not honored.
+Returns the number of rows affected.</p>
+
+<pre>Post.delete_all(&quot;person_id = 5 AND (category = &#39;Something&#39; OR category = &#39;Else&#39;)&quot;)
+Post.delete_all([&quot;person_id = ? AND (category = ? OR category = ?)&quot;, 5, &#39;Something&#39;, &#39;Else&#39;])
+Post.where(person_id: 5).where(category: [&#39;Something&#39;, &#39;Else&#39;]).delete_all</pre>
+
+<p>Both calls delete the affected posts all at once with a single DELETE
+statement. If you need to destroy dependent associations or call your
+<code>before_*</code> or <code>after_destroy</code> callbacks, use the
+<code>destroy_all</code> method instead.</p>
+
+<p>If a limit scope is supplied, <code>delete_all</code> raises an <a
+href="../ActiveRecord.html">ActiveRecord</a> error:</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">limit</span>(<span class="ruby-value">100</span>).<span class="ruby-identifier">delete_all</span>
+<span class="ruby-comment"># =&gt; ActiveRecord::ActiveRecordError: delete_all doesn&#39;t support limit scope</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_all_source')" id="l_method-i-delete_all_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 418</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete_all</span>(<span class="ruby-identifier">conditions</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ActiveRecordError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;delete_all doesn&#39;t support limit scope&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">limit_value</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">conditions</span>
+    <span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>).<span class="ruby-identifier">delete_all</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">stmt</span> = <span class="ruby-constant">Arel</span><span class="ruby-operator">::</span><span class="ruby-constant">DeleteManager</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">engine</span>)
+    <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">from</span>(<span class="ruby-identifier">table</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">with_default_scope</span>.<span class="ruby-identifier">joins_values</span>.<span class="ruby-identifier">any?</span>
+      <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">join_to_delete</span>(<span class="ruby-identifier">stmt</span>, <span class="ruby-identifier">arel</span>, <span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>])
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">wheres</span> = <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">constraints</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">affected</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">stmt</span>, <span class="ruby-string">&#39;SQL&#39;</span>, <span class="ruby-identifier">bind_values</span>)
+
+    <span class="ruby-identifier">reset</span>
+    <span class="ruby-identifier">affected</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-destroy">
+            
+              <b>destroy</b>(id)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-destroy" name="method-i-destroy" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Destroy an object (or multiple objects) that has the given id. The object
+is instantiated first, therefore all callbacks and filters are fired off
+before the object is deleted. This method is less efficient than
+ActiveRecord#delete but allows cleanup methods and other actions to be run.</p>
+
+<p>This essentially finds the object (or multiple objects) with the given id,
+creates a new object from the attributes, and then calls destroy on it.</p>
+
+<h4 id="method-i-destroy-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>id</code> - Can be either an <a href="../Integer.html">Integer</a> or
+an <a href="../Array.html">Array</a> of Integers.</p>
+</li></ul>
+
+<h4 id="method-i-destroy-label-Examples">Examples</h4>
+
+<pre># Destroy a single object
+Todo.destroy(1)
+
+# Destroy multiple objects
+todos = [1,2,3]
+Todo.destroy(todos)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-destroy_source')" id="l_method-i-destroy_source">show</a>
+                
+              </p>
+              <div id="method-i-destroy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 391</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">destroy</span>(<span class="ruby-identifier">id</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">id</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">one_id</span><span class="ruby-operator">|</span> <span class="ruby-identifier">destroy</span>(<span class="ruby-identifier">one_id</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>).<span class="ruby-identifier">destroy</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-destroy_all">
+            
+              <b>destroy_all</b>(conditions = nil)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-destroy_all" name="method-i-destroy_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Destroys the records matching <code>conditions</code> by instantiating each
+record and calling its <code>destroy</code> method. Each object&#39;s
+callbacks are executed (including <code>:dependent</code> association
+options). Returns the collection of objects that were destroyed; each will
+be frozen, to reflect that no changes should be made (since they can&#39;t
+be persisted).</p>
+
+<p>Note: Instantiation, callback execution, and deletion of each record can be
+time consuming when you&#39;re removing many records at once. It generates
+at least one SQL <code>DELETE</code> query per record (or possibly more, to
+enforce your callbacks). If you want to delete many rows quickly, without
+concern for their associations or callbacks, use <code>delete_all</code>
+instead.</p>
+
+<h4 id="method-i-destroy_all-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>conditions</code> - A string, array, or hash that specifies which
+records to destroy. If omitted, all records are destroyed. See the
+Conditions section in the introduction to <a
+href="Base.html">ActiveRecord::Base</a> for more information.</p>
+</li></ul>
+
+<h4 id="method-i-destroy_all-label-Examples">Examples</h4>
+
+<pre>Person.destroy_all(&quot;last_login &lt; &#39;2004-04-04&#39;&quot;)
+Person.destroy_all(status: &quot;inactive&quot;)
+Person.where(age: 0..18).destroy_all</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-destroy_all_source')" id="l_method-i-destroy_all_source">show</a>
+                
+              </p>
+              <div id="method-i-destroy_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 364</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">destroy_all</span>(<span class="ruby-identifier">conditions</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">conditions</span>
+    <span class="ruby-identifier">where</span>(<span class="ruby-identifier">conditions</span>).<span class="ruby-identifier">destroy_all</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">object</span><span class="ruby-operator">|</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">destroy</span> }.<span class="ruby-identifier">tap</span> { <span class="ruby-identifier">reset</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-eager_loading-3F">
+            
+              <b>eager_loading?</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-eager_loading-3F" name="method-i-eager_loading-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if relation needs eager loading.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-eager_loading-3F_source')" id="l_method-i-eager_loading-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-eager_loading-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 518</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eager_loading?</span>
+  <span class="ruby-ivar">@should_eager_load</span> <span class="ruby-operator">||=</span>
+    <span class="ruby-identifier">eager_load_values</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">||</span>
+    <span class="ruby-identifier">includes_values</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">joined_includes_values</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">references_eager_loaded_tables?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-empty-3F">
+            
+              <b>empty?</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-empty-3F" name="method-i-empty-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if there are no records.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-empty-3F_source')" id="l_method-i-empty-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-empty-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">empty?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">loaded?</span>
+
+  <span class="ruby-identifier">c</span> = <span class="ruby-identifier">count</span>
+  <span class="ruby-identifier">c</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:zero?</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">zero?</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-explain">
+            
+              <b>explain</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-explain" name="method-i-explain" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Runs EXPLAIN on the query or queries triggered by this relation and returns
+the result as a string. The string is formatted imitating the ones printed
+by the database shell.</p>
+
+<p>Note that this method actually runs the queries, since the results of some
+are needed by the next ones when eager loading is going on.</p>
+
+<p>Please see further details in the <a
+href="http://guides.rubyonrails.org/active_record_querying.html#running-explain">Active
+Record Query Interface guide</a>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-explain_source')" id="l_method-i-explain_source">show</a>
+                
+              </p>
+              <div id="method-i-explain_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">explain</span>
+  <span class="ruby-identifier">exec_explain</span>(<span class="ruby-identifier">collecting_queries_for_explain</span> { <span class="ruby-identifier">exec_queries</span> })
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_or_create_by">
+            
+              <b>find_or_create_by</b>(attributes, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-find_or_create_by" name="method-i-find_or_create_by" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Finds the first record with the given attributes, or creates a record with
+the attributes if one is not found:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Find the first user named &quot;Penélope&quot; or create a new one.</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Penélope&#39;</span>)
+<span class="ruby-comment"># =&gt; #&lt;User id: 1, first_name: &quot;Penélope&quot;, last_name: nil&gt;</span>
+
+<span class="ruby-comment"># Find the first user named &quot;Penélope&quot; or create a new one.</span>
+<span class="ruby-comment"># We already have one so the existing record will be returned.</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Penélope&#39;</span>)
+<span class="ruby-comment"># =&gt; #&lt;User id: 1, first_name: &quot;Penélope&quot;, last_name: nil&gt;</span>
+
+<span class="ruby-comment"># Find the first user named &quot;Scarlett&quot; or create a new one with</span>
+<span class="ruby-comment"># a particular last name.</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">create_with</span>(<span class="ruby-identifier">last_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Johansson&#39;</span>).<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Scarlett&#39;</span>)
+<span class="ruby-comment"># =&gt; #&lt;User id: 2, first_name: &quot;Scarlett&quot;, last_name: &quot;Johansson&quot;&gt;</span>
+</pre>
+
+<p>This method accepts a block, which is passed down to <code>create</code>.
+The last example above can be alternatively written this way:</p>
+
+<pre class="ruby"><span class="ruby-comment"># Find the first user named &quot;Scarlett&quot; or create a new one with a</span>
+<span class="ruby-comment"># different last name.</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">find_or_create_by</span>(<span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Scarlett&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">user</span>.<span class="ruby-identifier">last_name</span> = <span class="ruby-string">&#39;Johansson&#39;</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; #&lt;User id: 2, first_name: &quot;Scarlett&quot;, last_name: &quot;Johansson&quot;&gt;</span>
+</pre>
+
+<p>This method always returns a record, but if creation was attempted and
+failed due to validation errors it won&#39;t be persisted, you get what
+<code>create</code> returns in such situation.</p>
+
+<p>Please note *this method is not atomic*, it runs first a SELECT, and if
+there are no results an INSERT is attempted. If there are other threads or
+processes there is a race condition between both calls and it could be the
+case that you end up with two similar records.</p>
+
+<p>Whether that is a problem or not depends on the logic of the application,
+but in the particular case in which rows have a UNIQUE constraint an
+exception may be raised, just retry:</p>
+
+<pre>begin
+  CreditAccount.find_or_create_by(user_id: user.id)
+rescue ActiveRecord::RecordNotUnique
+  retry
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_or_create_by_source')" id="l_method-i-find_or_create_by_source">show</a>
+                
+              </p>
+              <div id="method-i-find_or_create_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_or_create_by</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">attributes</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">create</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_or_create_by-21">
+            
+              <b>find_or_create_by!</b>(attributes, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-find_or_create_by-21" name="method-i-find_or_create_by-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Like <code>find_or_create_by</code>, but calls <code>create!</code> so an
+exception is raised if the created record is invalid.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_or_create_by-21_source')" id="l_method-i-find_or_create_by-21_source">show</a>
+                
+              </p>
+              <div id="method-i-find_or_create_by-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_or_create_by!</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">attributes</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">create!</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_or_initialize_by">
+            
+              <b>find_or_initialize_by</b>(attributes, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-find_or_initialize_by" name="method-i-find_or_initialize_by" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Like <code>find_or_create_by</code>, but calls <code>new</code> instead of
+<code>create</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_or_initialize_by_source')" id="l_method-i-find_or_initialize_by_source">show</a>
+                
+              </p>
+              <div id="method-i-find_or_initialize_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_or_initialize_by</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">attributes</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">new</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-initialize_copy">
+            
+              <b>initialize_copy</b>(other)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-initialize_copy" name="method-i-initialize_copy" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-initialize_copy_source')" id="l_method-i-initialize_copy_source">show</a>
+                
+              </p>
+              <div id="method-i-initialize_copy_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-comment"># This method is a hot spot, so for now, use Hash[] to dup the hash.</span>
+  <span class="ruby-comment">#   https://bugs.ruby-lang.org/issues/7166</span>
+  <span class="ruby-ivar">@values</span>        = <span class="ruby-constant">Hash</span>[<span class="ruby-ivar">@values</span>]
+  <span class="ruby-ivar">@values</span>[<span class="ruby-value">:bind</span>] = <span class="ruby-ivar">@values</span>[<span class="ruby-value">:bind</span>].<span class="ruby-identifier">dup</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@values</span>.<span class="ruby-identifier">key?</span> <span class="ruby-value">:bind</span>
+  <span class="ruby-identifier">reset</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert">
+            
+              <b>insert</b>(values)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-insert" name="method-i-insert" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-insert_source')" id="l_method-i-insert_source">show</a>
+                
+              </p>
+              <div id="method-i-insert_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">insert</span>(<span class="ruby-identifier">values</span>)
+  <span class="ruby-identifier">primary_key_value</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">primary_key</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Hash</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">values</span>
+    <span class="ruby-identifier">primary_key_value</span> = <span class="ruby-identifier">values</span>[<span class="ruby-identifier">values</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">k</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">primary_key</span>
+    }]
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">primary_key_value</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">prefetch_primary_key?</span>(<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">table_name</span>)
+      <span class="ruby-identifier">primary_key_value</span> = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">next_sequence_value</span>(<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">sequence_name</span>)
+      <span class="ruby-identifier">values</span>[<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">arel_table</span>[<span class="ruby-identifier">klass</span>.<span class="ruby-identifier">primary_key</span>]] = <span class="ruby-identifier">primary_key_value</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">im</span> = <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">create_insert</span>
+  <span class="ruby-identifier">im</span>.<span class="ruby-identifier">into</span> <span class="ruby-ivar">@table</span>
+
+  <span class="ruby-identifier">conn</span> = <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>
+
+  <span class="ruby-identifier">substitutes</span> = <span class="ruby-identifier">values</span>.<span class="ruby-identifier">sort_by</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">arel_attr</span>,<span class="ruby-identifier">_</span><span class="ruby-operator">|</span> <span class="ruby-identifier">arel_attr</span>.<span class="ruby-identifier">name</span> }
+  <span class="ruby-identifier">binds</span>       = <span class="ruby-identifier">substitutes</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arel_attr</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    [<span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">columns_hash</span>[<span class="ruby-identifier">arel_attr</span>.<span class="ruby-identifier">name</span>], <span class="ruby-identifier">value</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">substitutes</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tuple</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tuple</span>[<span class="ruby-number">1</span>] = <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">substitute_at</span>(<span class="ruby-identifier">binds</span>[<span class="ruby-identifier">i</span>][<span class="ruby-number">0</span>], <span class="ruby-identifier">i</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-comment"># empty insert</span>
+    <span class="ruby-identifier">im</span>.<span class="ruby-identifier">values</span> = <span class="ruby-constant">Arel</span>.<span class="ruby-identifier">sql</span>(<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">empty_insert_statement_value</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">im</span>.<span class="ruby-identifier">insert</span> <span class="ruby-identifier">substitutes</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">conn</span>.<span class="ruby-identifier">insert</span>(
+    <span class="ruby-identifier">im</span>,
+    <span class="ruby-string">&#39;SQL&#39;</span>,
+    <span class="ruby-identifier">primary_key</span>,
+    <span class="ruby-identifier">primary_key_value</span>,
+    <span class="ruby-keyword">nil</span>,
+    <span class="ruby-identifier">binds</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inspect">
+            
+              <b>inspect</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-inspect" name="method-i-inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inspect_source')" id="l_method-i-inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 571</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
+  <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">take</span>([<span class="ruby-identifier">limit_value</span>, <span class="ruby-number">11</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">min</span>).<span class="ruby-identifier">map!</span>(&amp;<span class="ruby-value">:inspect</span>)
+  <span class="ruby-identifier">entries</span>[<span class="ruby-number">10</span>] = <span class="ruby-string">&#39;...&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-number">11</span>
+
+  <span class="ruby-node">&quot;#&lt;#{self.class.name} [#{entries.join(&#39;, &#39;)}]&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-joined_includes_values">
+            
+              <b>joined_includes_values</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-joined_includes_values" name="method-i-joined_includes_values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Joins that are also marked for preloading. In which case we should just
+eager load them. Note that this is a naive implementation because we could
+have strings and symbols which represent the same association, but that
+aren&#39;t matched by this. Also, we could have nested hashes which
+partially match, e.g. { a: :b } &amp; { a: [:b, :c] }</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-joined_includes_values_source')" id="l_method-i-joined_includes_values_source">show</a>
+                
+              </p>
+              <div id="method-i-joined_includes_values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 528</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">joined_includes_values</span>
+  <span class="ruby-identifier">includes_values</span> &amp; <span class="ruby-identifier">joins_values</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load">
+            
+              <b>load</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-load" name="method-i-load" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Causes the records to be loaded from the database if they have not been
+loaded already. You can use this if for some reason you need to explicitly
+load some records before actually using them. The return value is the
+relation itself, not the records.</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">published</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">load</span> <span class="ruby-comment"># =&gt; #&lt;ActiveRecord::Relation&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-load_source')" id="l_method-i-load_source">show</a>
+                
+              </p>
+              <div id="method-i-load_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 469</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">load</span>
+  <span class="ruby-identifier">exec_queries</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">loaded?</span>
+
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-many-3F">
+            
+              <b>many?</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-many-3F" name="method-i-many-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if there is more than one record.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-many-3F_source')" id="l_method-i-many-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-many-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 250</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">many?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+    <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">many?</span> { <span class="ruby-operator">|</span>*<span class="ruby-identifier">block_args</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span>(*<span class="ruby-identifier">block_args</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">limit_value</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">many?</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-new">
+            
+              <b>new</b>(*args, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-new" name="method-i-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Initializes new record from relation while maintaining the current scope.</p>
+
+<p>Expects arguments in the same format as <code>Base.new</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">users</span> = <span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;DHH&#39;</span>)
+<span class="ruby-identifier">user</span> = <span class="ruby-identifier">users</span>.<span class="ruby-identifier">new</span> <span class="ruby-comment"># =&gt; #&lt;User id: nil, name: &quot;DHH&quot;, created_at: nil, updated_at: nil&gt;</span>
+</pre>
+
+<p>You can also pass a block to new with the new record as argument:</p>
+
+<pre class="ruby"><span class="ruby-identifier">user</span> = <span class="ruby-identifier">users</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">user</span><span class="ruby-operator">|</span> <span class="ruby-identifier">user</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;Oscar&#39;</span> }
+<span class="ruby-identifier">user</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; Oscar</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Relation.html#method-i-build">build</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-new_source')" id="l_method-i-new_source">show</a>
+                
+              </p>
+              <div id="method-i-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">scoping</span> { <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">new</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-pretty_print">
+            
+              <b>pretty_print</b>(q)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-pretty_print" name="method-i-pretty_print" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-pretty_print_source')" id="l_method-i-pretty_print_source">show</a>
+                
+              </p>
+              <div id="method-i-pretty_print_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 548</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">pretty_print</span>(<span class="ruby-identifier">q</span>)
+  <span class="ruby-identifier">q</span>.<span class="ruby-identifier">pp</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_a</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reload">
+            
+              <b>reload</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-reload" name="method-i-reload" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Forces reloading of relation.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reload_source')" id="l_method-i-reload_source">show</a>
+                
+              </p>
+              <div id="method-i-reload_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 476</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reload</span>
+  <span class="ruby-identifier">reset</span>
+  <span class="ruby-identifier">load</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reset">
+            
+              <b>reset</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-reset" name="method-i-reset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reset_source')" id="l_method-i-reset_source">show</a>
+                
+              </p>
+              <div id="method-i-reset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 481</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reset</span>
+  <span class="ruby-ivar">@first</span> = <span class="ruby-ivar">@last</span> = <span class="ruby-ivar">@to_sql</span> = <span class="ruby-ivar">@order_clause</span> = <span class="ruby-ivar">@scope_for_create</span> = <span class="ruby-ivar">@arel</span> = <span class="ruby-ivar">@loaded</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@should_eager_load</span> = <span class="ruby-ivar">@join_dependency</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@records</span> = []
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-scope_for_create">
+            
+              <b>scope_for_create</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-scope_for_create" name="method-i-scope_for_create" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-scope_for_create_source')" id="l_method-i-scope_for_create_source">show</a>
+                
+              </p>
+              <div id="method-i-scope_for_create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 513</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">scope_for_create</span>
+  <span class="ruby-ivar">@scope_for_create</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">where_values_hash</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">create_with_value</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-scoping">
+            
+              <b>scoping</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-scoping" name="method-i-scoping" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Scope all queries to the current scope.</p>
+
+<pre class="ruby"><span class="ruby-constant">Comment</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">post_id</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">scoping</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-constant">Comment</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; SELECT &quot;comments&quot;.* FROM &quot;comments&quot; WHERE &quot;comments&quot;.&quot;post_id&quot; = 1 ORDER BY &quot;comments&quot;.&quot;id&quot; ASC LIMIT 1</span>
+</pre>
+
+<p>Please check unscoped if you want to remove all previous scopes (including
+the default_scope) during the execution of a block.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-scoping_source')" id="l_method-i-scoping_source">show</a>
+                
+              </p>
+              <div id="method-i-scoping_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">scoping</span>
+  <span class="ruby-identifier">previous</span>, <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">current_scope</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">current_scope</span>, <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">current_scope</span> = <span class="ruby-identifier">previous</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-size">
+            
+              <b>size</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-size" name="method-i-size" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns size of the records.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-size_source')" id="l_method-i-size_source">show</a>
+                
+              </p>
+              <div id="method-i-size_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">size</span>
+  <span class="ruby-identifier">loaded?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_a">
+            
+              <b>to_a</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-to_a" name="method-i-to_a" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Converts relation objects to <a href="../Array.html">Array</a>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_a_source')" id="l_method-i-to_a_source">show</a>
+                
+              </p>
+              <div id="method-i-to_a_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_a</span>
+  <span class="ruby-identifier">load</span>
+  <span class="ruby-ivar">@records</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_sql">
+            
+              <b>to_sql</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-to_sql" name="method-i-to_sql" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns sql statement for the relation.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Oscar&#39;</span>).<span class="ruby-identifier">to_sql</span>
+<span class="ruby-comment"># =&gt; SELECT &quot;users&quot;.* FROM &quot;users&quot;  WHERE &quot;users&quot;.&quot;name&quot; = &#39;Oscar&#39;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_sql_source')" id="l_method-i-to_sql_source">show</a>
+                
+              </p>
+              <div id="method-i-to_sql_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 492</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_sql</span>
+  <span class="ruby-ivar">@to_sql</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">to_sql</span>(<span class="ruby-identifier">arel</span>, <span class="ruby-identifier">bind_values</span>.<span class="ruby-identifier">dup</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-uniq_value">
+            
+              <b>uniq_value</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-uniq_value" name="method-i-uniq_value" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><code>uniq</code> and <code>uniq!</code> are silently deprecated.
+<code>uniq_value</code> delegates to <code>distinct_value</code> to
+maintain backwards compatibility. Use <code>distinct_value</code> instead.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-uniq_value_source')" id="l_method-i-uniq_value_source">show</a>
+                
+              </p>
+              <div id="method-i-uniq_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 534</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">uniq_value</span>
+  <span class="ruby-identifier">distinct_value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>(id, attributes)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Updates an object (or multiple objects) and saves it to the database, if
+validations pass. The resulting object is returned whether the object was
+saved successfully to the database or not.</p>
+
+<h4 id="method-i-update-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>id</code> - This should be the id or an array of ids to be updated.</p>
+</li><li>
+<p><code>attributes</code> - This should be a hash of attributes or an array
+of hashes.</p>
+</li></ul>
+
+<h4 id="method-i-update-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-comment"># Updates one record</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">update</span>(<span class="ruby-value">15</span>, <span class="ruby-identifier">user_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Samuel&#39;</span>, <span class="ruby-identifier">group</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;expert&#39;</span>)
+
+<span class="ruby-comment"># Updates multiple records</span>
+<span class="ruby-identifier">people</span> = { <span class="ruby-value">1</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-string">&quot;first_name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;David&quot;</span> }, <span class="ruby-value">2</span> =<span class="ruby-operator">&gt;</span> { <span class="ruby-string">&quot;first_name&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;Jeremy&quot;</span> } }
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">people</span>.<span class="ruby-identifier">keys</span>, <span class="ruby-identifier">people</span>.<span class="ruby-identifier">values</span>)
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update</span>(<span class="ruby-identifier">id</span>, <span class="ruby-identifier">attributes</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">id</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">id</span>.<span class="ruby-identifier">map</span>.<span class="ruby-identifier">with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">one_id</span>, <span class="ruby-identifier">idx</span><span class="ruby-operator">|</span> <span class="ruby-identifier">update</span>(<span class="ruby-identifier">one_id</span>, <span class="ruby-identifier">attributes</span>[<span class="ruby-identifier">idx</span>]) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">object</span> = <span class="ruby-identifier">find</span>(<span class="ruby-identifier">id</span>)
+    <span class="ruby-identifier">object</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">attributes</span>)
+    <span class="ruby-identifier">object</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update_all">
+            
+              <b>update_all</b>(updates)
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-update_all" name="method-i-update_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Updates all records with details given if they match a set of conditions
+supplied, limits and order can also be supplied. This method constructs a
+single SQL UPDATE statement and sends it straight to the database. It does
+not instantiate the involved models and it does not trigger Active Record
+callbacks or validations.</p>
+
+<h4 id="method-i-update_all-label-Parameters">Parameters</h4>
+<ul><li>
+<p><code>updates</code> - A string, array, or hash representing the SET part
+of an SQL statement.</p>
+</li></ul>
+
+<h4 id="method-i-update_all-label-Examples">Examples</h4>
+
+<pre># Update all customers with the given attributes
+Customer.update_all wants_email: true
+
+# Update all books with &#39;Rails&#39; in their title
+Book.where(&#39;title LIKE ?&#39;, &#39;%Rails%&#39;).update_all(author: &#39;David&#39;)
+
+# Update all books that match conditions, but limit it to 5 ordered by date
+Book.where(&#39;title LIKE ?&#39;, &#39;%Rails%&#39;).order(:created_at).limit(5).update_all(author: &#39;David&#39;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_all_source')" id="l_method-i-update_all_source">show</a>
+                
+              </p>
+              <div id="method-i-update_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update_all</span>(<span class="ruby-identifier">updates</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Empty list of attributes to change&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">updates</span>.<span class="ruby-identifier">blank?</span>
+
+  <span class="ruby-identifier">stmt</span> = <span class="ruby-constant">Arel</span><span class="ruby-operator">::</span><span class="ruby-constant">UpdateManager</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">engine</span>)
+
+  <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">set</span> <span class="ruby-constant">Arel</span>.<span class="ruby-identifier">sql</span>(<span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:sanitize_sql_for_assignment</span>, <span class="ruby-identifier">updates</span>))
+  <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">table</span>(<span class="ruby-identifier">table</span>)
+  <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">key</span> = <span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>]
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">with_default_scope</span>.<span class="ruby-identifier">joins_values</span>.<span class="ruby-identifier">any?</span>
+    <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">join_to_update</span>(<span class="ruby-identifier">stmt</span>, <span class="ruby-identifier">arel</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">take</span>(<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">limit</span>)
+    <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">order</span>(*<span class="ruby-identifier">arel</span>.<span class="ruby-identifier">orders</span>)
+    <span class="ruby-identifier">stmt</span>.<span class="ruby-identifier">wheres</span> = <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">constraints</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@klass</span>.<span class="ruby-identifier">connection</span>.<span class="ruby-identifier">update</span> <span class="ruby-identifier">stmt</span>, <span class="ruby-string">&#39;SQL&#39;</span>, <span class="ruby-identifier">bind_values</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-values">
+            
+              <b>values</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-values" name="method-i-values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-values_source')" id="l_method-i-values_source">show</a>
+                
+              </p>
+              <div id="method-i-values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 567</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">values</span>
+  <span class="ruby-constant">Hash</span>[<span class="ruby-ivar">@values</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-where_values_hash">
+            
+              <b>where_values_hash</b>()
+            
+            <a href="../../classes/ActiveRecord/Relation.html#method-i-where_values_hash" name="method-i-where_values_hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash of where conditions.</p>
+
+<pre class="ruby"><span class="ruby-constant">User</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Oscar&#39;</span>).<span class="ruby-identifier">where_values_hash</span>
+<span class="ruby-comment"># =&gt; {name: &quot;Oscar&quot;}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-where_values_hash_source')" id="l_method-i-where_values_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-where_values_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb, line 500</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">where_values_hash</span>
+  <span class="ruby-identifier">equalities</span> = <span class="ruby-identifier">with_default_scope</span>.<span class="ruby-identifier">where_values</span>.<span class="ruby-identifier">grep</span>(<span class="ruby-constant">Arel</span><span class="ruby-operator">::</span><span class="ruby-constant">Nodes</span><span class="ruby-operator">::</span><span class="ruby-constant">Equality</span>).<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">node</span>.<span class="ruby-identifier">left</span>.<span class="ruby-identifier">relation</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">table_name</span>
+  }
+
+  <span class="ruby-identifier">binds</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">bind_values</span>.<span class="ruby-identifier">find_all</span>(&amp;<span class="ruby-value">:first</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">column</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">v</span>] }]
+
+  <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">equalities</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">where</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">name</span> = <span class="ruby-identifier">where</span>.<span class="ruby-identifier">left</span>.<span class="ruby-identifier">name</span>
+    [<span class="ruby-identifier">name</span>, <span class="ruby-identifier">binds</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>) { <span class="ruby-identifier">where</span>.<span class="ruby-identifier">right</span> }]
+  }]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

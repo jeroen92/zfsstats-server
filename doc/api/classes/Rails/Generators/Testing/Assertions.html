@@ -1,0 +1,568 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Generators::Testing::Assertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            Rails::Generators::Testing::Assertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/testing/assertions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_class_method">assert_class_method</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_directory">assert_directory</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_field_default_value">assert_field_default_value</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_field_type">assert_field_type</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_file">assert_file</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_instance_method">assert_instance_method</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_method">assert_method</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_migration">assert_migration</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_directory">assert_no_directory</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_file">assert_no_file</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_migration">assert_no_migration</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_class_method">
+            
+              <b>assert_class_method</b>(method, content, &amp;block)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_class_method" name="method-i-assert_class_method" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts the given class method exists in the given content. This method
+does not detect class methods inside (class &lt;&lt; self), only class
+methods which starts with “self.”. When a block is given, it yields the
+content of the method.</p>
+
+<pre class="ruby"><span class="ruby-identifier">assert_migration</span> <span class="ruby-string">&quot;db/migrate/create_products.rb&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">migration</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">assert_class_method</span> :<span class="ruby-identifier">up</span>, <span class="ruby-identifier">migration</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">up</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">assert_match</span>(<span class="ruby-regexp">/create_table/</span>, <span class="ruby-identifier">up</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_class_method_source')" id="l_method-i-assert_class_method_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_class_method_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_class_method</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">content</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">assert_instance_method</span> <span class="ruby-node">&quot;self.#{method}&quot;</span>, <span class="ruby-identifier">content</span>, &amp;<span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_directory">
+            
+              <b>assert_directory</b>(relative, *contents)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_directory" name="method-i-assert_directory" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_field_default_value">
+            
+              <b>assert_field_default_value</b>(attribute_type, value)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_field_default_value" name="method-i-assert_field_default_value" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts the given attribute type gets a proper default value:</p>
+
+<pre>assert_field_default_value :string, &quot;MyString&quot;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_field_default_value_source')" id="l_method-i-assert_field_default_value_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_field_default_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_field_default_value</span>(<span class="ruby-identifier">attribute_type</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">create_generated_attribute</span>(<span class="ruby-identifier">attribute_type</span>).<span class="ruby-identifier">default</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_field_type">
+            
+              <b>assert_field_type</b>(attribute_type, field_type)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_field_type" name="method-i-assert_field_type" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts the given attribute type gets translated to a field type properly:</p>
+
+<pre>assert_field_type :date, :date_select</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_field_type_source')" id="l_method-i-assert_field_type_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_field_type_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_field_type</span>(<span class="ruby-identifier">attribute_type</span>, <span class="ruby-identifier">field_type</span>)
+  <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">field_type</span>, <span class="ruby-identifier">create_generated_attribute</span>(<span class="ruby-identifier">attribute_type</span>).<span class="ruby-identifier">field_type</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_file">
+            
+              <b>assert_file</b>(relative, *contents)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_file" name="method-i-assert_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts a given file exists. You need to supply an absolute path or a path
+relative to the configured destination:</p>
+
+<pre>assert_file &quot;config/environment.rb&quot;</pre>
+
+<p>You can also give extra arguments. If the argument is a regexp, it will
+check if the regular expression matches the given file content. If it&#39;s
+a string, it compares the file with the given string:</p>
+
+<pre>assert_file &quot;config/environment.rb&quot;, /initialize/</pre>
+
+<p>Finally, when a block is given, it yields the file content:</p>
+
+<pre class="ruby"><span class="ruby-identifier">assert_file</span> <span class="ruby-string">&quot;app/controllers/products_controller.rb&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">controller</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">assert_instance_method</span> :<span class="ruby-identifier">index</span>, <span class="ruby-identifier">controller</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">assert_match</span>(<span class="ruby-regexp">/Product\.all/</span>, <span class="ruby-identifier">index</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Assertions.html#method-i-assert_directory">assert_directory</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_file_source')" id="l_method-i-assert_file_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_file</span>(<span class="ruby-identifier">relative</span>, *<span class="ruby-identifier">contents</span>)
+  <span class="ruby-identifier">absolute</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">relative</span>, <span class="ruby-identifier">destination_root</span>)
+  <span class="ruby-identifier">assert</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">absolute</span>), <span class="ruby-node">&quot;Expected file #{relative.inspect} to exist, but does not&quot;</span>
+
+  <span class="ruby-identifier">read</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">absolute</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">contents</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">read</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+
+  <span class="ruby-identifier">contents</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">content</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">content</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+        <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">content</span>, <span class="ruby-identifier">read</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Regexp</span>
+        <span class="ruby-identifier">assert_match</span> <span class="ruby-identifier">content</span>, <span class="ruby-identifier">read</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_instance_method">
+            
+              <b>assert_instance_method</b>(method, content)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_instance_method" name="method-i-assert_instance_method" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts the given method exists in the given content. When a block is
+given, it yields the content of the method.</p>
+
+<pre class="ruby"><span class="ruby-identifier">assert_file</span> <span class="ruby-string">&quot;app/controllers/products_controller.rb&quot;</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">controller</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">assert_instance_method</span> :<span class="ruby-identifier">index</span>, <span class="ruby-identifier">controller</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">assert_match</span>(<span class="ruby-regexp">/Product\.all/</span>, <span class="ruby-identifier">index</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Assertions.html#method-i-assert_method">assert_method</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_instance_method_source')" id="l_method-i-assert_instance_method_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_instance_method_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_instance_method</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">content</span>)
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">content</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(\s+)def #{method}(\(.+\))?(.*?)\n\1end/</span>, <span class="ruby-node">&quot;Expected to have method #{method}&quot;</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-node">$3</span>.<span class="ruby-identifier">strip</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_method">
+            
+              <b>assert_method</b>(method, content)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_method" name="method-i-assert_method" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_migration">
+            
+              <b>assert_migration</b>(relative, *contents, &amp;block)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_migration" name="method-i-assert_migration" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts a given migration exists. You need to supply an absolute path or a
+path relative to the configured destination:</p>
+
+<pre>assert_migration &quot;db/migrate/create_products.rb&quot;</pre>
+
+<p>This method manipulates the given path and tries to find any migration
+which matches the migration name. For example, the call above is converted
+to:</p>
+
+<pre>assert_file &quot;db/migrate/003_create_products.rb&quot;</pre>
+
+<p>Consequently, <a
+href="Assertions.html#method-i-assert_migration">#assert_migration</a>
+accepts the same arguments has assert_file.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_migration_source')" id="l_method-i-assert_migration_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_migration_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_migration</span>(<span class="ruby-identifier">relative</span>, *<span class="ruby-identifier">contents</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">file_name</span> = <span class="ruby-identifier">migration_file_name</span>(<span class="ruby-identifier">relative</span>)
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">file_name</span>, <span class="ruby-node">&quot;Expected migration #{relative} to exist, but was not found&quot;</span>
+  <span class="ruby-identifier">assert_file</span> <span class="ruby-identifier">file_name</span>, *<span class="ruby-identifier">contents</span>, &amp;<span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_directory">
+            
+              <b>assert_no_directory</b>(relative)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_no_directory" name="method-i-assert_no_directory" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_file">
+            
+              <b>assert_no_file</b>(relative)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_no_file" name="method-i-assert_no_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts a given file does not exist. You need to supply an absolute path or
+a path relative to the configured destination:</p>
+
+<pre>assert_no_file &quot;config/random.rb&quot;</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Assertions.html#method-i-assert_no_directory">assert_no_directory</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_file_source')" id="l_method-i-assert_no_file_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_file</span>(<span class="ruby-identifier">relative</span>)
+  <span class="ruby-identifier">absolute</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-identifier">relative</span>, <span class="ruby-identifier">destination_root</span>)
+  <span class="ruby-identifier">assert</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">absolute</span>), <span class="ruby-node">&quot;Expected file #{relative.inspect} to not exist, but does&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_migration">
+            
+              <b>assert_no_migration</b>(relative)
+            
+            <a href="../../../../classes/Rails/Generators/Testing/Assertions.html#method-i-assert_no_migration" name="method-i-assert_no_migration" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts a given migration does not exist. You need to supply an absolute
+path or a path relative to the configured destination:</p>
+
+<pre>assert_no_migration &quot;db/migrate/create_products.rb&quot;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_migration_source')" id="l_method-i-assert_no_migration_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_migration_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_migration</span>(<span class="ruby-identifier">relative</span>)
+  <span class="ruby-identifier">file_name</span> = <span class="ruby-identifier">migration_file_name</span>(<span class="ruby-identifier">relative</span>)
+  <span class="ruby-identifier">assert_nil</span> <span class="ruby-identifier">file_name</span>, <span class="ruby-node">&quot;Expected migration #{relative} to not exist, but found #{file_name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

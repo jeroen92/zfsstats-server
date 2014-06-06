@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>HTML::WhiteListSanitizer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            HTML::WhiteListSanitizer 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Sanitizer.html">HTML::Sanitizer</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/vendor/html-scanner/html/sanitizer_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/vendor/html-scanner/html/sanitizer.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-contains_bad_protocols-3F">contains_bad_protocols?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-process_attributes_for">process_attributes_for</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-process_node">process_node</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-sanitize_css">sanitize_css</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-tokenize">tokenize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-sanitize_css">
+            
+              <b>sanitize_css</b>(style)
+            
+            <a href="../../classes/HTML/WhiteListSanitizer.html#method-i-sanitize_css" name="method-i-sanitize_css" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sanitizes a block of css code. Used by <a
+href="Sanitizer.html#method-i-sanitize">sanitize</a> when it comes across a
+style attribute</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-sanitize_css_source')" id="l_method-i-sanitize_css_source">show</a>
+                
+              </p>
+              <div id="method-i-sanitize_css_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/vendor/html-scanner/html/sanitizer.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">sanitize_css</span>(<span class="ruby-identifier">style</span>)
+  <span class="ruby-comment"># disallow urls</span>
+  <span class="ruby-identifier">style</span> = <span class="ruby-identifier">style</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/url\s*\(\s*[^\s)]+?\s*\)\s*/</span>, <span class="ruby-string">&#39; &#39;</span>)
+
+  <span class="ruby-comment"># gauntlet</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">style</span> <span class="ruby-operator">!~</span> <span class="ruby-node">/\A([:,;#%.\sa-zA-Z0-9!]|\w-\w|\[\s\w]+\|\&quot;[\s\w]+\&quot;|\([\d,\s]+\))*\z/</span> <span class="ruby-operator">||</span>
+      <span class="ruby-identifier">style</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/\A(\s*[-\w]+\s*:\s*[^:;]*(;|$)\s*)*\z/</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">clean</span> = []
+  <span class="ruby-identifier">style</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/([-\w]+)\s*:\s*([^:;]*)/</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">prop</span>,<span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">allowed_css_properties</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">prop</span>.<span class="ruby-identifier">downcase</span>)
+      <span class="ruby-identifier">clean</span> <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-identifier">prop</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;;&#39;</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">shorthand_css_properties</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">prop</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>)[<span class="ruby-number">0</span>].<span class="ruby-identifier">downcase</span>)
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">split</span>().<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">keyword</span><span class="ruby-operator">|</span>
+        <span class="ruby-operator">!</span><span class="ruby-identifier">allowed_css_keywords</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">keyword</span>) <span class="ruby-operator">&amp;&amp;</span>
+          <span class="ruby-identifier">keyword</span> <span class="ruby-operator">!~</span> <span class="ruby-node">/\A(#[0-9a-f]+|rgb\(\d+%?,\d*%?,?\d*%?\)?|\d{0,2}\.?\d{0,2}(cm|em|ex|in|mm|pc|pt|px|%|,|\))?)\z/</span>
+      <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">clean</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">prop</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;;&#39;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">clean</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-contains_bad_protocols-3F">
+            
+              <b>contains_bad_protocols?</b>(attr_name, value)
+            
+            <a href="../../classes/HTML/WhiteListSanitizer.html#method-i-contains_bad_protocols-3F" name="method-i-contains_bad_protocols-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-contains_bad_protocols-3F_source')" id="l_method-i-contains_bad_protocols-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-contains_bad_protocols-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/vendor/html-scanner/html/sanitizer.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">contains_bad_protocols?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">uri_attributes</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr_name</span>) <span class="ruby-operator">&amp;&amp;</span>
+  (<span class="ruby-identifier">value</span> <span class="ruby-operator">=~</span> <span class="ruby-node">/(^[^\/:]*):|(&amp;#0*58)|(&amp;#x70)|(&amp;#x0*3a)|(%|&amp;#37;)3A/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">allowed_protocols</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">value</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">protocol_separator</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">strip</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-process_attributes_for">
+            
+              <b>process_attributes_for</b>(node, options)
+            
+            <a href="../../classes/HTML/WhiteListSanitizer.html#method-i-process_attributes_for" name="method-i-process_attributes_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_attributes_for_source')" id="l_method-i-process_attributes_for_source">show</a>
+                
+              </p>
+              <div id="method-i-process_attributes_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/vendor/html-scanner/html/sanitizer.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process_attributes_for</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">attributes</span>
+  <span class="ruby-identifier">node</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">attr_name</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">value</span> = <span class="ruby-identifier">node</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-identifier">attr_name</span>].<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>[<span class="ruby-value">:attributes</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">attr_name</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">contains_bad_protocols?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">node</span>.<span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">attr_name</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">node</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-identifier">attr_name</span>] = <span class="ruby-identifier">attr_name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;style&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sanitize_css</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">CGI</span><span class="ruby-operator">::</span><span class="ruby-identifier">escapeHTML</span>(<span class="ruby-constant">CGI</span><span class="ruby-operator">::</span><span class="ruby-identifier">unescapeHTML</span>(<span class="ruby-identifier">value</span>))
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-process_node">
+            
+              <b>process_node</b>(node, result, options)
+            
+            <a href="../../classes/HTML/WhiteListSanitizer.html#method-i-process_node" name="method-i-process_node" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_node_source')" id="l_method-i-process_node_source">show</a>
+                
+              </p>
+              <div id="method-i-process_node_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/vendor/html-scanner/html/sanitizer.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process_node</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">result</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">case</span> <span class="ruby-identifier">node</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Tag</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">closing</span> <span class="ruby-operator">==</span> <span class="ruby-value">:close</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:parent</span>].<span class="ruby-identifier">shift</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">options</span>[<span class="ruby-value">:parent</span>].<span class="ruby-identifier">unshift</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">name</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">process_attributes_for</span> <span class="ruby-identifier">node</span>, <span class="ruby-identifier">options</span>
+
+      <span class="ruby-identifier">options</span>[<span class="ruby-value">:tags</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">node</span>.<span class="ruby-identifier">name</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">node</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">bad_tags</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:parent</span>].<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/&lt;/</span>, <span class="ruby-string">&quot;&amp;lt;&quot;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tokenize">
+            
+              <b>tokenize</b>(text, options)
+            
+            <a href="../../classes/HTML/WhiteListSanitizer.html#method-i-tokenize" name="method-i-tokenize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tokenize_source')" id="l_method-i-tokenize_source">show</a>
+                
+              </p>
+              <div id="method-i-tokenize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/vendor/html-scanner/html/sanitizer.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tokenize</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:parent</span>] = []
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:attributes</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">allowed_attributes</span>
+  <span class="ruby-identifier">options</span>[<span class="ruby-value">:tags</span>]       <span class="ruby-operator">||=</span> <span class="ruby-identifier">allowed_tags</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

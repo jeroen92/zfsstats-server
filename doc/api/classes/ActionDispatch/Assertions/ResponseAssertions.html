@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Assertions::ResponseAssertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Assertions::ResponseAssertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/testing/assertions/response_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/response.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A small suite of assertions that test responses from Rails applications.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_redirected_to">assert_redirected_to</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_response">assert_response</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_redirected_to">
+            
+              <b>assert_redirected_to</b>(options = {}, message=nil)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/ResponseAssertions.html#method-i-assert_redirected_to" name="method-i-assert_redirected_to" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assert that the redirection options passed in match those of the redirect
+called in the latest action. This match can be partial, such that
+<code>assert_redirected_to(controller: &quot;weblog&quot;)</code> will also
+match the redirection of <code>redirect_to(controller: &quot;weblog&quot;,
+action: &quot;show&quot;)</code> and so on.</p>
+
+<pre># assert that the redirection was to the &quot;index&quot; action on the WeblogController
+assert_redirected_to controller: &quot;weblog&quot;, action: &quot;index&quot;
+
+# assert that the redirection was to the named route login_url
+assert_redirected_to login_url
+
+# assert that the redirection was to the url for @customer
+assert_redirected_to @customer
+
+# asserts that the redirection matches the regular expression
+assert_redirected_to %r(\Ahttp://example.org)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_redirected_to_source')" id="l_method-i-assert_redirected_to_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_redirected_to_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/response.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_redirected_to</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">message</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">assert_response</span>(<span class="ruby-value">:redirect</span>, <span class="ruby-identifier">message</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span> <span class="ruby-operator">===</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">location</span>
+
+  <span class="ruby-identifier">redirect_is</span>       = <span class="ruby-identifier">normalize_argument_to_redirection</span>(<span class="ruby-ivar">@response</span>.<span class="ruby-identifier">location</span>)
+  <span class="ruby-identifier">redirect_expected</span> = <span class="ruby-identifier">normalize_argument_to_redirection</span>(<span class="ruby-identifier">options</span>)
+
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;Expected response to be a redirect to &lt;#{redirect_expected}&gt; but was a redirect to &lt;#{redirect_is}&gt;&quot;</span>
+  <span class="ruby-identifier">assert_operator</span> <span class="ruby-identifier">redirect_expected</span>, <span class="ruby-value">:===</span>, <span class="ruby-identifier">redirect_is</span>, <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_response">
+            
+              <b>assert_response</b>(type, message = nil)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/ResponseAssertions.html#method-i-assert_response" name="method-i-assert_response" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that the response is one of the following types:</p>
+<ul><li>
+<p><code>:success</code>   - Status code was in the 200-299 range</p>
+</li><li>
+<p><code>:redirect</code>  - Status code was in the 300-399 range</p>
+</li><li>
+<p><code>:missing</code>   - Status code was 404</p>
+</li><li>
+<p><code>:error</code>     - Status code was in the 500-599 range</p>
+</li></ul>
+
+<p>You can also pass an explicit status number like
+<code>assert_response(501)</code> or its symbolic equivalent
+<code>assert_response(:not_implemented)</code>. See
+Rack::Utils::SYMBOL_TO_STATUS_CODE for a full list.</p>
+
+<pre># assert that the response was a redirection
+assert_response :redirect
+
+# assert that the response code was status code 401 (unauthorized)
+assert_response 401</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_response_source')" id="l_method-i-assert_response_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_response_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/response.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_response</span>(<span class="ruby-identifier">type</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;Expected response to be a &lt;#{type}&gt;, but was &lt;#{@response.response_code}&gt;&quot;</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">Symbol</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">type</span>
+    <span class="ruby-keyword">if</span> [<span class="ruby-value">:success</span>, <span class="ruby-value">:missing</span>, <span class="ruby-value">:redirect</span>, <span class="ruby-value">:error</span>].<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">type</span>)
+      <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;#{type}?&quot;</span>), <span class="ruby-identifier">message</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">code</span> = <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span><span class="ruby-operator">::</span><span class="ruby-constant">SYMBOL_TO_STATUS_CODE</span>[<span class="ruby-identifier">type</span>]
+      <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">code</span>, <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">response_code</span>, <span class="ruby-identifier">message</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">type</span>, <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">response_code</span>, <span class="ruby-identifier">message</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

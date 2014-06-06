@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Persistence::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Persistence::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/persistence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/persistence.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-instantiate">instantiate</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-create">
+            
+              <b>create</b>(attributes = nil, &amp;block)
+            
+            <a href="../../../classes/ActiveRecord/Persistence/ClassMethods.html#method-i-create" name="method-i-create" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Creates an object (or multiple objects) and saves it to the database, if
+validations pass. The resulting object is returned whether the object was
+saved successfully to the database or not.</p>
+
+<p>The <code>attributes</code> parameter can be either a <a
+href="../../Hash.html">Hash</a> or an <a href="../../Array.html">Array</a>
+of Hashes. These Hashes describe the attributes on the objects that are to
+be created.</p>
+
+<p><code>create</code> respects mass-assignment security and accepts either
+<code>:as</code> or <code>:without_protection</code> options in the
+<code>options</code> parameter.</p>
+
+<h4 id="method-i-create-label-Examples">Examples</h4>
+
+<pre class="ruby"><span class="ruby-comment"># Create a single new object</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Jamie&#39;</span>)
+
+<span class="ruby-comment"># Create an Array of new objects</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>([{ <span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Jamie&#39;</span> }, { <span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Jeremy&#39;</span> }])
+
+<span class="ruby-comment"># Create a single object and pass it into a block to set other attributes.</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Jamie&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">is_admin</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Creating an Array of new objects using a block, where the block is executed for each object:</span>
+<span class="ruby-constant">User</span>.<span class="ruby-identifier">create</span>([{ <span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Jamie&#39;</span> }, { <span class="ruby-identifier">first_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Jeremy&#39;</span> }]) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">u</span>.<span class="ruby-identifier">is_admin</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-create_source')" id="l_method-i-create_source">show</a>
+                
+              </p>
+              <div id="method-i-create_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/persistence.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">create</span>(<span class="ruby-identifier">attributes</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">attributes</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">attr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">create</span>(<span class="ruby-identifier">attr</span>, &amp;<span class="ruby-identifier">block</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">object</span> = <span class="ruby-identifier">new</span>(<span class="ruby-identifier">attributes</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">object</span>.<span class="ruby-identifier">save</span>
+    <span class="ruby-identifier">object</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-instantiate">
+            
+              <b>instantiate</b>(record, column_types = {})
+            
+            <a href="../../../classes/ActiveRecord/Persistence/ClassMethods.html#method-i-instantiate" name="method-i-instantiate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Given an attributes hash, <code>instantiate</code> returns a new instance
+of the appropriate class.</p>
+
+<p>For example, <code>Post.all</code> may return Comments, Messages, and
+Emails by storing the record&#39;s subclass in a <code>type</code>
+attribute. By calling <code>instantiate</code> instead of <code>new</code>,
+finder methods ensure they get new instances of the appropriate class for
+each record.</p>
+
+<p>See +ActiveRecord::Inheritance#discriminate_class_for_record+ to see how
+this “single-table” inheritance mapping is implemented.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-instantiate_source')" id="l_method-i-instantiate_source">show</a>
+                
+              </p>
+              <div id="method-i-instantiate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/persistence.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">instantiate</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">column_types</span> = {})
+  <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">discriminate_class_for_record</span>(<span class="ruby-identifier">record</span>)
+  <span class="ruby-identifier">column_types</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">decorate_columns</span>(<span class="ruby-identifier">column_types</span>.<span class="ruby-identifier">dup</span>)
+  <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">allocate</span>.<span class="ruby-identifier">init_with</span>(<span class="ruby-string">&#39;attributes&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">record</span>, <span class="ruby-string">&#39;column_types&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">column_types</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,137 @@
+<div>
+	<div class="device-unit device-measurement-group" >
+		<div class="device-measurement-group-header">
+			<h2>ARC Statistics</h2>
+			<p>Measurements regarding first level cache memory</p>
+			<a class="btn btn-primary" ng-show="!showArcVisible" ng-click="toggleArcVisible()">Show</a>
+			<a class="btn btn-warning" ng-show="showArcVisible" ng-click="toggleArcVisible()">Hide</a>
+		</div>
+		<div class="row">
+			<div ng-show="showArcVisible" ng-repeat="measurement in device.measurements" ng-switch on="measurement.measurement.name">
+				<div ng-switch-when="arcHits" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Hits</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="arcMisses" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Misses</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="arcSize" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Size</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="arcDataSize" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Data Size</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="device-unit device-measurement-group">
+		<div class="device-measurement-group-header">
+			<h2>L2ARC Statistics</h2>
+			<p>Measurements regarding second level cache memory</p>
+			<a class="btn btn-primary" ng-show="!showL2arcVisible" ng-click="toggleL2arcVisible()">Show</a>
+			<a class="btn btn-warning" ng-show="showL2arcVisible" ng-click="toggleL2arcVisible()">Hide</a>
+		</div>
+		<div class="row">
+			<div ng-show="showL2arcVisible" ng-repeat="measurement in device.measurements" ng-switch on="measurement.measurement.name">
+				<div ng-switch-when="l2arcHits" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Hits</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="l2arcMisses" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Misses</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="bytesReadL2arc" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Bytes read</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="bytesWriteL2arc" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Bytes write</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="device-unit device-measurement-group" >
+		<div class="device-measurement-group-header">
+			<h2>Common Statistics</h2>
+			<p>Measurements regarding common server statistics</p>
+			<a class="btn btn-primary" ng-show="!showCommonVisible" ng-click="toggleCommonVisible()">Show</a>
+			<a class="btn btn-warning" ng-show="showCommonVisible" ng-click="toggleCommonVisible()">Hide</a>
+		</div>
+		<div class="row">
+			<div ng-show="showCommonVisible" ng-repeat="measurement in device.measurements" ng-switch on="measurement.measurement.name">
+				<div ng-switch-when="bytesRead" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Bytes read</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+
+				<div ng-switch-when="bytesWrite" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Bytes write</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

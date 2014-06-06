@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Helpers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Helpers 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/helpers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/helpers.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The Rails framework provides a large number of helpers for working with
+assets, dates, forms, numbers and model objects, to name a few. These
+helpers are available to all templates by default.</p>
+
+<p>In addition to using the standard template helpers provided, creating
+custom helpers to extract complicated logic or reusable functionality is
+strongly encouraged. By default, each controller will include all helpers.</p>
+
+<p>In previous versions of Rails the controller will include a helper whose
+name matches that of the controller, e.g., <code>MyController</code> will
+automatically include <code>MyHelper</code>. To return old behavior set
+<code>config.action_controller.include_all_helpers</code> to
+<code>false</code>.</p>
+
+<p>Additional helpers can be specified using the <code>helper</code> class
+method in <a href="Base.html">ActionController::Base</a> or any controller
+which inherits from it.</p>
+
+<p>The <code>to_s</code> method from the Time class can be wrapped in a helper
+method to display a custom message if a Time object is blank:</p>
+
+<pre class="ruby"><span class="ruby-keyword">module</span> <span class="ruby-constant">FormattedTimeHelper</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">format_time</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">format</span>=:<span class="ruby-identifier">long</span>, <span class="ruby-identifier">blank_message</span>=<span class="ruby-string">&quot;&amp;nbsp;&quot;</span>)
+    <span class="ruby-identifier">time</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">blank_message</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">format</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>FormattedTimeHelper can now be included in a controller, using the
+<code>helper</code> class method:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">EventsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">helper</span> <span class="ruby-constant">FormattedTimeHelper</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-ivar">@events</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">all</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Then, in any view rendered by <code>EventController</code>, the
+<code>format_time</code> method can be called:</p>
+
+<pre>&lt;% @events.each do |event| -%&gt;
+  &lt;p&gt;
+    &lt;%= format_time(event.time, :short, &quot;N/A&quot;) %&gt; | &lt;%= event.name %&gt;
+  &lt;/p&gt;
+&lt;% end -%&gt;</pre>
+
+<p>Finally, assuming we have two event instances, one which has a time and one
+which does not, the output might look like this:</p>
+
+<pre>23 Aug 11:30 | Carolina Railhawks Soccer Match
+N/A | Carolina Railhaws Training Workshop</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Helpers/ClassMethods.html">ActionController::Helpers::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../AbstractController/Helpers.html">
+              AbstractController::Helpers
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>helpers_path</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

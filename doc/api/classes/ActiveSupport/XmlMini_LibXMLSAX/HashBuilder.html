@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::XmlMini_LibXMLSAX::HashBuilder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::XmlMini_LibXMLSAX::HashBuilder 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/xml_mini/libxmlsax_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="../../Class.html">Class</a> that will build the hash while the XML
+document is being parsed using SAX events.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-current_hash">current_hash</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-on_cdata_block">on_cdata_block</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-on_characters">on_characters</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-on_end_document">on_end_document</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-on_end_element">on_end_element</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-on_start_document">on_start_document</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-on_start_element">on_start_element</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            LibXML::XML::SaxParser::Callbacks
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">CONTENT_KEY</td>
+            <td>=</td>
+            <td class="attr-value">&#39;__content__&#39;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HASH_SIZE_KEY</td>
+            <td>=</td>
+            <td class="attr-value">&#39;__hash_size__&#39;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>hash</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-current_hash">
+            
+              <b>current_hash</b>()
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-current_hash" name="method-i-current_hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-current_hash_source')" id="l_method-i-current_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-current_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">current_hash</span>
+  <span class="ruby-ivar">@hash_stack</span>.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-on_cdata_block">
+            
+              <b>on_cdata_block</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-on_cdata_block" name="method-i-on_cdata_block" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-on_characters">
+            
+              <b>on_characters</b>(string)
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-on_characters" name="method-i-on_characters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="HashBuilder.html#method-i-on_cdata_block">on_cdata_block</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-on_characters_source')" id="l_method-i-on_characters_source">show</a>
+                
+              </p>
+              <div id="method-i-on_characters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">on_characters</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">current_hash</span>[<span class="ruby-constant">CONTENT_KEY</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-on_end_document">
+            
+              <b>on_end_document</b>()
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-on_end_document" name="method-i-on_end_document" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-on_end_document_source')" id="l_method-i-on_end_document_source">show</a>
+                
+              </p>
+              <div id="method-i-on_end_document_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">on_end_document</span>
+  <span class="ruby-ivar">@hash</span> = <span class="ruby-ivar">@hash_stack</span>.<span class="ruby-identifier">pop</span>
+  <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-constant">CONTENT_KEY</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-on_end_element">
+            
+              <b>on_end_element</b>(name)
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-on_end_element" name="method-i-on_end_element" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-on_end_element_source')" id="l_method-i-on_end_element_source">show</a>
+                
+              </p>
+              <div id="method-i-on_end_element_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">on_end_element</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_hash</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">current_hash</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-constant">HASH_SIZE_KEY</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">current_hash</span>[<span class="ruby-constant">CONTENT_KEY</span>].<span class="ruby-identifier">blank?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">current_hash</span>[<span class="ruby-constant">CONTENT_KEY</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">current_hash</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-constant">CONTENT_KEY</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@hash_stack</span>.<span class="ruby-identifier">pop</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-on_start_document">
+            
+              <b>on_start_document</b>()
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-on_start_document" name="method-i-on_start_document" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-on_start_document_source')" id="l_method-i-on_start_document_source">show</a>
+                
+              </p>
+              <div id="method-i-on_start_document_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">on_start_document</span>
+  <span class="ruby-ivar">@hash</span> = { <span class="ruby-constant">CONTENT_KEY</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span> }
+  <span class="ruby-ivar">@hash_stack</span> = [<span class="ruby-ivar">@hash</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-on_start_element">
+            
+              <b>on_start_element</b>(name, attrs = {})
+            
+            <a href="../../../classes/ActiveSupport/XmlMini_LibXMLSAX/HashBuilder.html#method-i-on_start_element" name="method-i-on_start_element" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-on_start_element_source')" id="l_method-i-on_start_element_source">show</a>
+                
+              </p>
+              <div id="method-i-on_start_element_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/xml_mini/libxmlsax.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">on_start_element</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">attrs</span> = {})
+  <span class="ruby-identifier">new_hash</span> = { <span class="ruby-constant">CONTENT_KEY</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span> }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">attrs</span>)
+  <span class="ruby-identifier">new_hash</span>[<span class="ruby-constant">HASH_SIZE_KEY</span>] = <span class="ruby-identifier">new_hash</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">current_hash</span>[<span class="ruby-identifier">name</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">current_hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">new_hash</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>  <span class="ruby-keyword">then</span> <span class="ruby-identifier">current_hash</span>[<span class="ruby-identifier">name</span>] = [<span class="ruby-identifier">current_hash</span>[<span class="ruby-identifier">name</span>], <span class="ruby-identifier">new_hash</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>   <span class="ruby-keyword">then</span> <span class="ruby-identifier">current_hash</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">new_hash</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@hash_stack</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">new_hash</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionHandling</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionHandling 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql2_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql2_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/sqlite3_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/sqlite3_adapter.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_handling_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-connected-3F">connected?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-connection">connection</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-connection_config">connection_config</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-connection_id">connection_id</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-connection_id-3D">connection_id=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-connection_pool">connection_pool</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-establish_connection">establish_connection</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-remove_connection">remove_connection</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-retrieve_connection">retrieve_connection</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-connected-3F">
+            
+              <b>connected?</b>()
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-connected-3F" name="method-i-connected-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> if Active Record is connected.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-connected-3F_source')" id="l_method-i-connected-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-connected-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">connected?</span>
+  <span class="ruby-identifier">connection_handler</span>.<span class="ruby-identifier">connected?</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-connection">
+            
+              <b>connection</b>()
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-connection" name="method-i-connection" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the connection currently associated with the class. This can also
+be used to “borrow” the connection to do database work unrelated to any of
+the specific Active Records.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-connection_source')" id="l_method-i-connection_source">show</a>
+                
+              </p>
+              <div id="method-i-connection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">connection</span>
+  <span class="ruby-identifier">retrieve_connection</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-connection_config">
+            
+              <b>connection_config</b>()
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-connection_config" name="method-i-connection_config" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the configuration of the associated connection as a hash:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">connection_config</span>
+<span class="ruby-comment"># =&gt; {pool: 5, timeout: 5000, database: &quot;db/development.sqlite3&quot;, adapter: &quot;sqlite3&quot;}</span>
+</pre>
+
+<p>Please use only for reading.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-connection_config_source')" id="l_method-i-connection_config_source">show</a>
+                
+              </p>
+              <div id="method-i-connection_config_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">connection_config</span>
+  <span class="ruby-identifier">connection_pool</span>.<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">config</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-connection_id">
+            
+              <b>connection_id</b>()
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-connection_id" name="method-i-connection_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-connection_id_source')" id="l_method-i-connection_id_source">show</a>
+                
+              </p>
+              <div id="method-i-connection_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">connection_id</span>
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RuntimeRegistry</span>.<span class="ruby-identifier">connection_id</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-connection_id-3D">
+            
+              <b>connection_id=</b>(connection_id)
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-connection_id-3D" name="method-i-connection_id-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-connection_id-3D_source')" id="l_method-i-connection_id-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-connection_id-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">connection_id=</span>(<span class="ruby-identifier">connection_id</span>)
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">RuntimeRegistry</span>.<span class="ruby-identifier">connection_id</span> = <span class="ruby-identifier">connection_id</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-connection_pool">
+            
+              <b>connection_pool</b>()
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-connection_pool" name="method-i-connection_pool" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-connection_pool_source')" id="l_method-i-connection_pool_source">show</a>
+                
+              </p>
+              <div id="method-i-connection_pool_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">connection_pool</span>
+  <span class="ruby-identifier">connection_handler</span>.<span class="ruby-identifier">retrieve_connection_pool</span>(<span class="ruby-keyword">self</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConnectionNotEstablished</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-establish_connection">
+            
+              <b>establish_connection</b>(spec = ENV[&quot;DATABASE_URL&quot;])
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-establish_connection" name="method-i-establish_connection" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Establishes the connection to the database. Accepts a hash as input where
+the <code>:adapter</code> key must be specified with the name of a database
+adapter (in lower-case) example for regular databases (MySQL, Postgresql,
+etc):</p>
+
+<pre>ActiveRecord::Base.establish_connection(
+  adapter:  &quot;mysql&quot;,
+  host:     &quot;localhost&quot;,
+  username: &quot;myuser&quot;,
+  password: &quot;mypass&quot;,
+  database: &quot;somedatabase&quot;
+)</pre>
+
+<p>Example for SQLite database:</p>
+
+<pre>ActiveRecord::Base.establish_connection(
+  adapter:  &quot;sqlite&quot;,
+  database: &quot;path/to/dbfile&quot;
+)</pre>
+
+<p>Also accepts keys as strings (for parsing from YAML for example):</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">establish_connection</span>(
+  <span class="ruby-string">&quot;adapter&quot;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;sqlite&quot;</span>,
+  <span class="ruby-string">&quot;database&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;path/to/dbfile&quot;</span>
+)
+</pre>
+
+<p>Or a URL:</p>
+
+<pre>ActiveRecord::Base.establish_connection(
+  &quot;postgres://myuser:mypass@localhost/somedatabase&quot;
+)</pre>
+
+<p>The exceptions <a href="AdapterNotSpecified.html">AdapterNotSpecified</a>,
+<a href="AdapterNotFound.html">AdapterNotFound</a> and ArgumentError may be
+returned on an error.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-establish_connection_source')" id="l_method-i-establish_connection_source">show</a>
+                
+              </p>
+              <div id="method-i-establish_connection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">establish_connection</span>(<span class="ruby-identifier">spec</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;DATABASE_URL&quot;</span>])
+  <span class="ruby-identifier">resolver</span> = <span class="ruby-constant">ConnectionAdapters</span><span class="ruby-operator">::</span><span class="ruby-constant">ConnectionSpecification</span><span class="ruby-operator">::</span><span class="ruby-constant">Resolver</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">spec</span>, <span class="ruby-identifier">configurations</span>
+  <span class="ruby-identifier">spec</span> = <span class="ruby-identifier">resolver</span>.<span class="ruby-identifier">spec</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">adapter_method</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">AdapterNotFound</span>, <span class="ruby-node">&quot;database configuration specifies nonexistent #{spec.config[:adapter]} adapter&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">remove_connection</span>
+  <span class="ruby-identifier">connection_handler</span>.<span class="ruby-identifier">establish_connection</span> <span class="ruby-keyword">self</span>, <span class="ruby-identifier">spec</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-remove_connection">
+            
+              <b>remove_connection</b>(klass = self)
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-remove_connection" name="method-i-remove_connection" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-remove_connection_source')" id="l_method-i-remove_connection_source">show</a>
+                
+              </p>
+              <div id="method-i-remove_connection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">remove_connection</span>(<span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>)
+  <span class="ruby-identifier">connection_handler</span>.<span class="ruby-identifier">remove_connection</span>(<span class="ruby-identifier">klass</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-retrieve_connection">
+            
+              <b>retrieve_connection</b>()
+            
+            <a href="../../classes/ActiveRecord/ConnectionHandling.html#method-i-retrieve_connection" name="method-i-retrieve_connection" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-retrieve_connection_source')" id="l_method-i-retrieve_connection_source">show</a>
+                
+              </p>
+              <div id="method-i-retrieve_connection_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">retrieve_connection</span>
+  <span class="ruby-identifier">connection_handler</span>.<span class="ruby-identifier">retrieve_connection</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

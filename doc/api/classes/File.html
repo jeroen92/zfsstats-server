@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>File</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            File 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/core_ext/file/atomic_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/file/atomic.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-atomic_write">atomic_write</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-atomic_write">
+            
+              <b>atomic_write</b>(file_name, temp_dir = Dir.tmpdir)
+            
+            <a href="../classes/File.html#method-c-atomic_write" name="method-c-atomic_write" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Write to a file atomically. Useful for situations where you don&#39;t want
+other processes or threads to see half-written files.</p>
+
+<pre class="ruby"><span class="ruby-constant">File</span>.<span class="ruby-identifier">atomic_write</span>(<span class="ruby-string">&#39;important.file&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;hello&#39;</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If your temp directory is not on the same filesystem as the file you&#39;re
+trying to write, you can provide a different temporary directory.</p>
+
+<pre class="ruby"><span class="ruby-constant">File</span>.<span class="ruby-identifier">atomic_write</span>(<span class="ruby-string">&#39;/data/something.important&#39;</span>, <span class="ruby-string">&#39;/data/tmp&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;hello&#39;</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-atomic_write_source')" id="l_method-c-atomic_write_source">show</a>
+                
+              </p>
+              <div id="method-c-atomic_write_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/core_ext/file/atomic.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">atomic_write</span>(<span class="ruby-identifier">file_name</span>, <span class="ruby-identifier">temp_dir</span> = <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">tmpdir</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;tempfile&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">Tempfile</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;fileutils&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">FileUtils</span>)
+
+  <span class="ruby-identifier">temp_file</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">file_name</span>), <span class="ruby-identifier">temp_dir</span>)
+  <span class="ruby-identifier">temp_file</span>.<span class="ruby-identifier">binmode</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-identifier">temp_file</span>
+  <span class="ruby-identifier">temp_file</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">file_name</span>)
+    <span class="ruby-comment"># Get original file permissions</span>
+    <span class="ruby-identifier">old_stat</span> = <span class="ruby-identifier">stat</span>(<span class="ruby-identifier">file_name</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># If not possible, probe which are the default permissions in the</span>
+    <span class="ruby-comment"># destination directory.</span>
+    <span class="ruby-identifier">old_stat</span> = <span class="ruby-identifier">probe_stat_in</span>(<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">file_name</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Overwrite original file with temp file</span>
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mv</span>(<span class="ruby-identifier">temp_file</span>.<span class="ruby-identifier">path</span>, <span class="ruby-identifier">file_name</span>)
+
+  <span class="ruby-comment"># Set correct permissions on new file</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">chown</span>(<span class="ruby-identifier">old_stat</span>.<span class="ruby-identifier">uid</span>, <span class="ruby-identifier">old_stat</span>.<span class="ruby-identifier">gid</span>, <span class="ruby-identifier">file_name</span>)
+    <span class="ruby-comment"># This operation will affect filesystem ACL&#39;s</span>
+    <span class="ruby-identifier">chmod</span>(<span class="ruby-identifier">old_stat</span>.<span class="ruby-identifier">mode</span>, <span class="ruby-identifier">file_name</span>)
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">EPERM</span>
+    <span class="ruby-comment"># Changing file ownership failed, moving on.</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

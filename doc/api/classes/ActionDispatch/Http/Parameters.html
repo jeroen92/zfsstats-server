@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Http::Parameters</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Http::Parameters 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/http/parameters_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/parameters.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-parameters">parameters</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-params">params</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-path_parameters">path_parameters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-symbolized_path_parameters">symbolized_path_parameters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(env)
+            
+            <a href="../../../classes/ActionDispatch/Http/Parameters.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/parameters.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@symbolized_path_params</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-parameters">
+            
+              <b>parameters</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/Parameters.html#method-i-parameters" name="method-i-parameters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns both GET and POST parameters in a single hash.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Parameters.html#method-i-params">params</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-parameters_source')" id="l_method-i-parameters_source">show</a>
+                
+              </p>
+              <div id="method-i-parameters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/parameters.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parameters</span>
+  <span class="ruby-ivar">@env</span>[<span class="ruby-string">&quot;action_dispatch.request.parameters&quot;</span>] <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">params</span> = <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">request_parameters</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">query_parameters</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">EOFError</span>
+      <span class="ruby-identifier">query_parameters</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">path_parameters</span>)
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">with_indifferent_access</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-params">
+            
+              <b>params</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/Parameters.html#method-i-params" name="method-i-params" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-path_parameters">
+            
+              <b>path_parameters</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/Parameters.html#method-i-path_parameters" name="method-i-path_parameters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash with the parameters used to form the path of the request.
+Returned hash keys are strings:</p>
+
+<pre class="ruby">{<span class="ruby-string">&#39;action&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;my_action&#39;</span>, <span class="ruby-string">&#39;controller&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;my_controller&#39;</span>}
+</pre>
+
+<p>See <code>symbolized_path_parameters</code> for symbolized keys.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-path_parameters_source')" id="l_method-i-path_parameters_source">show</a>
+                
+              </p>
+              <div id="method-i-path_parameters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/parameters.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">path_parameters</span>
+  <span class="ruby-ivar">@env</span>[<span class="ruby-string">&quot;action_dispatch.request.path_parameters&quot;</span>] <span class="ruby-operator">||=</span> {}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-symbolized_path_parameters">
+            
+              <b>symbolized_path_parameters</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/Parameters.html#method-i-symbolized_path_parameters" name="method-i-symbolized_path_parameters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The same as <code>path_parameters</code> with explicitly symbolized keys.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-symbolized_path_parameters_source')" id="l_method-i-symbolized_path_parameters_source">show</a>
+                
+              </p>
+              <div id="method-i-symbolized_path_parameters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/parameters.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">symbolized_path_parameters</span>
+  <span class="ruby-ivar">@symbolized_path_params</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">path_parameters</span>.<span class="ruby-identifier">symbolize_keys</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeMethods::TimeZoneConversion::ClassMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods::TimeZoneConversion::ClassMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/time_zone_conversion_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/time_zone_conversion.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-define_method_attribute-3D">define_method_attribute=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-define_method_attribute-3D">
+            
+              <b>define_method_attribute=</b>(attr_name)
+            
+            <a href="../../../../classes/ActiveRecord/AttributeMethods/TimeZoneConversion/ClassMethods.html#method-i-define_method_attribute-3D" name="method-i-define_method_attribute-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Defined for all <code>datetime</code> and <code>timestamp</code> attributes
+when <code>time_zone_aware_attributes</code> are enabled. This enhanced
+write method will automatically convert the time passed to it to the zone
+stored in <a href="../../../Time.html#method-c-zone">Time.zone</a>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-define_method_attribute-3D_source')" id="l_method-i-define_method_attribute-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-define_method_attribute-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/time_zone_conversion.rb, line 33</span>
+        <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">define_method_attribute=</span>(<span class="ruby-identifier">attr_name</span>)
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">create_time_zone_conversion_attribute?</span>(<span class="ruby-identifier">attr_name</span>, <span class="ruby-identifier">columns_hash</span>[<span class="ruby-identifier">attr_name</span>])
+            <span class="ruby-identifier">method_body</span>, <span class="ruby-identifier">line</span> = <span class="ruby-string">&quot;              def #{attr_name}=(time)
+                time_with_zone = time.respond_to?(:in_time_zone) ? time.in_time_zone : nil
+                previous_time = attribute_changed?(&quot;#{attr_name}&quot;) ? changed_attributes[&quot;#{attr_name}&quot;] : read_attribute(:#{attr_name})
+                write_attribute(:#{attr_name}, time)
+                #{attr_name}_will_change! if previous_time != time_with_zone
+                @attributes_cache[&quot;#{attr_name}&quot;] = time_with_zone
+              end
+&quot;</span>, <span class="ruby-keyword">__LINE__</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>
+            <span class="ruby-identifier">generated_attribute_methods</span>.<span class="ruby-identifier">module_eval</span>(<span class="ruby-identifier">method_body</span>, <span class="ruby-keyword">__FILE__</span>, <span class="ruby-identifier">line</span>)
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-keyword">super</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

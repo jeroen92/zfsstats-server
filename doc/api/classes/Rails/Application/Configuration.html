@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Application::Configuration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Application::Configuration 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Engine/Configuration.html">Rails::Engine::Configuration</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/application/configuration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-colorize_logging">colorize_logging</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-colorize_logging-3D">colorize_logging=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-database_configuration">database_configuration</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encoding-3D">encoding=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-log_level">log_level</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-paths">paths</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-session_store">session_store</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-threadsafe-21">threadsafe!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-whiny_nils-3D">whiny_nils=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>allow_concurrency</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>asset_host</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>assets</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>autoflush_log</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>beginning_of_week</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>cache_classes</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>cache_store</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>consider_all_requests_local</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>console</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>eager_load</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>encoding</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>exceptions_app</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>file_watcher</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>filter_parameters</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>filter_redirect</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>force_ssl</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>helpers_paths</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>log_formatter</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [W]
+            </td>
+            <td class='attr-name'>log_level</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>log_tags</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>logger</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>railties_order</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>relative_url_root</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>reload_classes_only_on_change</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>secret_key_base</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>secret_token</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>serve_static_assets</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>session_options</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>ssl_options</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>static_cache_control</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>time_zone</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(*)
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(*)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">encoding</span> = <span class="ruby-string">&quot;utf-8&quot;</span>
+  <span class="ruby-ivar">@allow_concurrency</span>             = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@consider_all_requests_local</span>   = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@filter_parameters</span>             = []
+  <span class="ruby-ivar">@filter_redirect</span>               = []
+  <span class="ruby-ivar">@helpers_paths</span>                 = []
+  <span class="ruby-ivar">@serve_static_assets</span>           = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@static_cache_control</span>          = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@force_ssl</span>                     = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@ssl_options</span>                   = {}
+  <span class="ruby-ivar">@session_store</span>                 = <span class="ruby-value">:cookie_store</span>
+  <span class="ruby-ivar">@session_options</span>               = {}
+  <span class="ruby-ivar">@time_zone</span>                     = <span class="ruby-string">&quot;UTC&quot;</span>
+  <span class="ruby-ivar">@beginning_of_week</span>             = <span class="ruby-value">:monday</span>
+  <span class="ruby-ivar">@log_level</span>                     = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@middleware</span>                    = <span class="ruby-identifier">app_middleware</span>
+  <span class="ruby-ivar">@generators</span>                    = <span class="ruby-identifier">app_generators</span>
+  <span class="ruby-ivar">@cache_store</span>                   = [ <span class="ruby-value">:file_store</span>, <span class="ruby-node">&quot;#{root}/tmp/cache/&quot;</span> ]
+  <span class="ruby-ivar">@railties_order</span>                = [<span class="ruby-value">:all</span>]
+  <span class="ruby-ivar">@relative_url_root</span>             = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&quot;RAILS_RELATIVE_URL_ROOT&quot;</span>]
+  <span class="ruby-ivar">@reload_classes_only_on_change</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@file_watcher</span>                  = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">FileUpdateChecker</span>
+  <span class="ruby-ivar">@exceptions_app</span>                = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@autoflush_log</span>                 = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@log_formatter</span>                 = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Logger</span><span class="ruby-operator">::</span><span class="ruby-constant">SimpleFormatter</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@eager_load</span>                    = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@secret_token</span>                  = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@secret_key_base</span>               = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@assets</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">OrderedOptions</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">enabled</span>                  = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">paths</span>                    = []
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">precompile</span>               = [ <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">path</span>, <span class="ruby-identifier">fn</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fn</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/app\/assets/</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-node">%w(.js .css)</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">extname</span>(<span class="ruby-identifier">path</span>)) },
+                                       <span class="ruby-regexp">/(?:\/|\|\A)application\.(css|js)$/</span> ]
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">prefix</span>                   = <span class="ruby-string">&quot;/assets&quot;</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">version</span>                  = <span class="ruby-string">&#39;1.0&#39;</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">debug</span>                    = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">compile</span>                  = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">digest</span>                   = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">cache_store</span>              = [ <span class="ruby-value">:file_store</span>, <span class="ruby-node">&quot;#{root}/tmp/cache/assets/#{Rails.env}/&quot;</span> ]
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">js_compressor</span>            = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">css_compressor</span>           = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">initialize_on_precompile</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@assets</span>.<span class="ruby-identifier">logger</span>                   = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-colorize_logging">
+            
+              <b>colorize_logging</b>()
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-colorize_logging" name="method-i-colorize_logging" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-colorize_logging_source')" id="l_method-i-colorize_logging_source">show</a>
+                
+              </p>
+              <div id="method-i-colorize_logging_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">colorize_logging</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">LogSubscriber</span>.<span class="ruby-identifier">colorize_logging</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-colorize_logging-3D">
+            
+              <b>colorize_logging=</b>(val)
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-colorize_logging-3D" name="method-i-colorize_logging-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-colorize_logging-3D_source')" id="l_method-i-colorize_logging-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-colorize_logging-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">colorize_logging=</span>(<span class="ruby-identifier">val</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">LogSubscriber</span>.<span class="ruby-identifier">colorize_logging</span> = <span class="ruby-identifier">val</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generators</span>.<span class="ruby-identifier">colorize_logging</span> = <span class="ruby-identifier">val</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-database_configuration">
+            
+              <b>database_configuration</b>()
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-database_configuration" name="method-i-database_configuration" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Loads and returns the configuration of the database.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-database_configuration_source')" id="l_method-i-database_configuration_source">show</a>
+                
+              </p>
+              <div id="method-i-database_configuration_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">database_configuration</span>
+  <span class="ruby-identifier">yaml</span> = <span class="ruby-identifier">paths</span>[<span class="ruby-string">&quot;config/database&quot;</span>].<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exists?</span>(<span class="ruby-identifier">yaml</span>)
+    <span class="ruby-identifier">require</span> <span class="ruby-string">&quot;erb&quot;</span>
+    <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load</span> <span class="ruby-constant">ERB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">IO</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">yaml</span>)).<span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;DATABASE_URL&#39;</span>]
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Could not load database configuration. No such file - #{yaml}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Psych</span><span class="ruby-operator">::</span><span class="ruby-constant">SyntaxError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;YAML syntax error occurred while parsing #{paths[&quot;config/database&quot;].first}. &quot;</span>                <span class="ruby-string">&quot;Please note that YAML must be consistently indented using spaces. Tabs are not allowed. &quot;</span>                <span class="ruby-node">&quot;Error: #{e.message}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-encoding-3D">
+            
+              <b>encoding=</b>(value)
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-encoding-3D" name="method-i-encoding-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encoding-3D_source')" id="l_method-i-encoding-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-encoding-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encoding=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@encoding</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-identifier">silence_warnings</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">default_external</span> = <span class="ruby-identifier">value</span>
+    <span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">default_internal</span> = <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-log_level">
+            
+              <b>log_level</b>()
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-log_level" name="method-i-log_level" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-log_level_source')" id="l_method-i-log_level_source">show</a>
+                
+              </p>
+              <div id="method-i-log_level_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">log_level</span>
+  <span class="ruby-ivar">@log_level</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">env</span>.<span class="ruby-identifier">production?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:info</span> <span class="ruby-operator">:</span> <span class="ruby-value">:debug</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-paths">
+            
+              <b>paths</b>()
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-paths" name="method-i-paths" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-paths_source')" id="l_method-i-paths_source">show</a>
+                
+              </p>
+              <div id="method-i-paths_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">paths</span>
+  <span class="ruby-ivar">@paths</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">paths</span> = <span class="ruby-keyword">super</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;config/database&quot;</span>,    <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;config/database.yml&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;config/environment&quot;</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;config/environment.rb&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;lib/templates&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;log&quot;</span>,                <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;log/#{Rails.env}.log&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;public&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;public/javascripts&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;public/stylesheets&quot;</span>
+    <span class="ruby-identifier">paths</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;tmp&quot;</span>
+    <span class="ruby-identifier">paths</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-session_store">
+            
+              <b>session_store</b>(*args)
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-session_store" name="method-i-session_store" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-session_store_source')" id="l_method-i-session_store_source">show</a>
+                
+              </p>
+              <div id="method-i-session_store_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">session_store</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-ivar">@session_store</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:disabled</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-value">:active_record_store</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span><span class="ruby-operator">::</span><span class="ruby-constant">ActiveRecordStore</span>
+      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;`ActiveRecord::SessionStore` is extracted out of Rails into a gem. &quot;</span>                  <span class="ruby-string">&quot;Please add `activerecord-session_store` to your Gemfile to use it.&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span>
+      <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Session</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-ivar">@session_store</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">camelize</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@session_store</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@session_store</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span>
+    <span class="ruby-ivar">@session_options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">||</span> {}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-threadsafe-21">
+            
+              <b>threadsafe!</b>()
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-threadsafe-21" name="method-i-threadsafe-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-threadsafe-21_source')" id="l_method-i-threadsafe-21_source">show</a>
+                
+              </p>
+              <div id="method-i-threadsafe-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">threadsafe!</span>
+  <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;config.threadsafe! is deprecated. Rails applications &quot;</span>                    <span class="ruby-string">&quot;behave by default as thread safe in production as long as config.cache_classes and &quot;</span>                    <span class="ruby-string">&quot;config.eager_load are set to true&quot;</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-ivar">@cache_classes</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@eager_load</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-whiny_nils-3D">
+            
+              <b>whiny_nils=</b>(*)
+            
+            <a href="../../../classes/Rails/Application/Configuration.html#method-i-whiny_nils-3D" name="method-i-whiny_nils-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-whiny_nils-3D_source')" id="l_method-i-whiny_nils-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-whiny_nils-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/application/configuration.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">whiny_nils=</span>(*)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;config.whiny_nils option is deprecated and no longer works&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

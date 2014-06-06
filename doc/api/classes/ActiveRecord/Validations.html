@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Validations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Validations 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/associated_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/associated.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/presence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/presence.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/uniqueness_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/uniqueness.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+Validations">Active Record <a href="Validations.html">Validations</a></h1>
+
+<p>Active Record includes the majority of its validations from
+<code>ActiveModel::Validations</code> all of which accept the
+<code>:on</code> argument to define the context where the validations are
+active. Active Record will always supply either the context of
+<code>:create</code> or <code>:update</code> dependent on whether the model
+is a <code>new_record?</code>.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Validations/ClassMethods.html">ActiveRecord::Validations::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-save">save</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-save-21">save!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-valid-3F">valid?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../ActiveModel/Validations.html">
+              ActiveModel::Validations
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-save">
+            
+              <b>save</b>(options={})
+            
+            <a href="../../classes/ActiveRecord/Validations.html#method-i-save" name="method-i-save" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The validation process on save can be skipped by passing <code>validate:
+false</code>. The regular <a
+href="Validations.html#method-i-save">#save</a> method is replaced with
+this when the validations module is mixed in, which it is by default.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-save_source')" id="l_method-i-save_source">show</a>
+                
+              </p>
+              <div id="method-i-save_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb, line 50</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">save</span>(<span class="ruby-identifier">options</span>={})
+  <span class="ruby-identifier">perform_validations</span>(<span class="ruby-identifier">options</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">super</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-save-21">
+            
+              <b>save!</b>(options={})
+            
+            <a href="../../classes/ActiveRecord/Validations.html#method-i-save-21" name="method-i-save-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Attempts to save the record just like <a
+href="Validations.html#method-i-save">#save</a> but will raise a
+<code>RecordInvalid</code> exception instead of returning
+<code>false</code> if the record is not valid.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-save-21_source')" id="l_method-i-save-21_source">show</a>
+                
+              </p>
+              <div id="method-i-save-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">save!</span>(<span class="ruby-identifier">options</span>={})
+  <span class="ruby-identifier">perform_validations</span>(<span class="ruby-identifier">options</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">super</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">RecordInvalid</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-valid-3F">
+            
+              <b>valid?</b>(context = nil)
+            
+            <a href="../../classes/ActiveRecord/Validations.html#method-i-valid-3F" name="method-i-valid-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Runs all the validations within the specified context. Returns
+<code>true</code> if no errors are found, <code>false</code> otherwise.</p>
+
+<p>If the argument is <code>false</code> (default is <code>nil</code>), the
+context is set to <code>:create</code> if <code>new_record?</code> is
+<code>true</code>, and to <code>:update</code> if it is not.</p>
+
+<p><a href="Validations.html">Validations</a> with no <code>:on</code> option
+will run no matter the context. <a href="Validations.html">Validations</a>
+with some <code>:on</code> option will only run in the specified context.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-valid-3F_source')" id="l_method-i-valid-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-valid-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">valid?</span>(<span class="ruby-identifier">context</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">context</span> <span class="ruby-operator">||=</span> (<span class="ruby-identifier">new_record?</span> <span class="ruby-operator">?</span> <span class="ruby-value">:create</span> <span class="ruby-operator">:</span> <span class="ruby-value">:update</span>)
+  <span class="ruby-identifier">output</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">context</span>)
+  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">output</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

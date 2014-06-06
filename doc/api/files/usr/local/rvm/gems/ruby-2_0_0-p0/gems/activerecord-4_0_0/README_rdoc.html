@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>README.rdoc</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            README.rdoc
+        </h1>
+        <ul class="files">
+            
+            <li>
+                /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/README.rdoc
+                
+            </li>
+            <li>Last modified: 2013-07-25 11:47:10 +0200</li>
+        </ul>
+    </div>
+
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+--+Object-relational+mapping+put+on+rails">Active Record – Object-relational mapping put on rails</h1>
+
+<p>Active Record connects classes to relational database tables to establish
+an almost zero-configuration persistence layer for applications. The
+library provides a base class that, when subclassed, sets up a mapping
+between the new class and an existing table in the database. In the context
+of an application, these classes are commonly referred to as
+<strong>models</strong>. Models can also be connected to other models; this
+is done by defining <strong>associations</strong>.</p>
+
+<p>Active Record relies heavily on naming in that it uses class and
+association names to establish mappings between respective database tables
+and foreign key columns. Although these mappings can be defined explicitly,
+it&#39;s recommended to follow naming conventions, especially when getting
+started with the library.</p>
+
+<p>A short rundown of some of the major features:</p>
+<ul><li>
+<p>Automated mapping between classes and tables, attributes and columns.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Product</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">The</span> <span class="ruby-constant">Product</span> <span class="ruby-keyword">class</span> <span class="ruby-identifier">is</span> <span class="ruby-identifier">automatically</span> <span class="ruby-identifier">mapped</span> <span class="ruby-identifier">to</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">table</span> <span class="ruby-identifier">named</span> <span class="ruby-string">&quot;products&quot;</span>,
+<span class="ruby-identifier">which</span> <span class="ruby-identifier">might</span> <span class="ruby-identifier">look</span> <span class="ruby-identifier">like</span> <span class="ruby-identifier">this</span><span class="ruby-operator">:</span>
+
+<span class="ruby-constant">CREATE</span> <span class="ruby-constant">TABLE</span> <span class="ruby-identifier">products</span> (
+  <span class="ruby-identifier">id</span> <span class="ruby-identifier">int</span>(<span class="ruby-value">11</span>) <span class="ruby-constant">NOT</span> <span class="ruby-constant">NULL</span> <span class="ruby-identifier">auto_increment</span>,
+  <span class="ruby-identifier">name</span> <span class="ruby-identifier">varchar</span>(<span class="ruby-value">255</span>),
+  <span class="ruby-constant">PRIMARY</span> <span class="ruby-constant">KEY</span>  (<span class="ruby-identifier">id</span>)
+);
+
+<span class="ruby-constant">This</span> <span class="ruby-identifier">would</span> <span class="ruby-identifier">also</span> <span class="ruby-identifier">define</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">following</span> <span class="ruby-identifier">accessors</span><span class="ruby-operator">:</span> <span class="ruby-node">%xProduct#name`</span> <span class="ruby-keyword">and</span>
+<span class="ruby-node">%xProduct#name=(new_name)`</span>
+</pre>
+
+<p><a href="../../../../../../../../classes/ActiveRecord/Base.html">Learn
+more</a></p>
+</li><li>
+<p>Associations between objects defined by simple class methods.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Firm</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">has_many</span>   :<span class="ruby-identifier">clients</span>
+  <span class="ruby-identifier">has_one</span>    :<span class="ruby-identifier">account</span>
+  <span class="ruby-identifier">belongs_to</span> :<span class="ruby-identifier">conglomerate</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a
+href="../../../../../../../../classes/ActiveRecord/Associations/ClassMethods.html">Learn
+more</a></p>
+</li><li>
+<p>Aggregations of value objects.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Account</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">composed_of</span> :<span class="ruby-identifier">balance</span>, <span class="ruby-identifier">class_name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Money&#39;</span>,
+              <span class="ruby-identifier">mapping</span><span class="ruby-operator">:</span> <span class="ruby-node">%w(balance amount)</span>
+  <span class="ruby-identifier">composed_of</span> :<span class="ruby-identifier">address</span>,
+              <span class="ruby-identifier">mapping</span><span class="ruby-operator">:</span> [<span class="ruby-node">%w(address_street street)</span>, <span class="ruby-node">%w(address_city city)</span>]
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a
+href="../../../../../../../../classes/ActiveRecord/Aggregations/ClassMethods.html">Learn
+more</a></p>
+</li><li>
+<p>Validation rules that can differ for new or existing objects.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Account</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">validates</span> :<span class="ruby-identifier">subdomain</span>, :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">email_address</span>, :<span class="ruby-identifier">password</span>, <span class="ruby-identifier">presence</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">validates</span> :<span class="ruby-identifier">subdomain</span>, <span class="ruby-identifier">uniqueness</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">validates</span> :<span class="ruby-identifier">terms_of_service</span>, <span class="ruby-identifier">acceptance</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">on</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">create</span>
+  <span class="ruby-identifier">validates</span> :<span class="ruby-identifier">password</span>, :<span class="ruby-identifier">email_address</span>, <span class="ruby-identifier">confirmation</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">on</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">create</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a
+href="../../../../../../../../classes/ActiveRecord/Validations.html">Learn
+more</a></p>
+</li><li>
+<p>Callbacks available for the entire life cycle (instantiation, saving,
+destroying, validating, etc.).</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_destroy</span> :<span class="ruby-identifier">invalidate_payment_plan</span>
+  <span class="ruby-comment"># the `invalidate_payment_plan` method gets called just before Person#destroy</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="../../../../../../../../classes/ActiveRecord/Callbacks.html">Learn
+more</a></p>
+</li><li>
+<p>Inheritance hierarchies.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Company</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>; <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Firm</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Company</span>; <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Client</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Company</span>; <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PriorityClient</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Client</span>; <span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="../../../../../../../../classes/ActiveRecord/Base.html">Learn
+more</a></p>
+</li><li>
+<p>Transactions.</p>
+
+<pre># Database transaction
+Account.transaction do
+  david.withdrawal(100)
+  mary.deposit(100)
+end</pre>
+
+<p><a
+href="../../../../../../../../classes/ActiveRecord/Transactions/ClassMethods.html">Learn
+more</a></p>
+</li><li>
+<p>Reflections on columns, associations, and aggregations.</p>
+
+<pre class="ruby"><span class="ruby-identifier">reflection</span> = <span class="ruby-constant">Firm</span>.<span class="ruby-identifier">reflect_on_association</span>(:<span class="ruby-identifier">clients</span>)
+<span class="ruby-identifier">reflection</span>.<span class="ruby-identifier">klass</span> <span class="ruby-comment"># =&gt; Client (class)</span>
+<span class="ruby-constant">Firm</span>.<span class="ruby-identifier">columns</span> <span class="ruby-comment"># Returns an array of column descriptors for the firms table</span>
+</pre>
+
+<p><a
+href="../../../../../../../../classes/ActiveRecord/Reflection/ClassMethods.html">Learn
+more</a></p>
+</li><li>
+<p>Database abstraction through simple adapters.</p>
+
+<pre># connect to SQLite3
+ActiveRecord::Base.establish_connection(adapter: &#39;sqlite3&#39;, database: &#39;dbfile.sqlite3&#39;)
+
+# connect to MySQL with authentication
+ActiveRecord::Base.establish_connection(
+  adapter:  &#39;mysql2&#39;,
+  host:     &#39;localhost&#39;,
+  username: &#39;me&#39;,
+  password: &#39;secret&#39;,
+  database: &#39;activerecord&#39;
+)</pre>
+
+<p><a href="../../../../../../../../classes/ActiveRecord/Base.html">Learn
+more</a> and read about the built-in support for <a
+href="../../../../../../../../classes/ActiveRecord/ConnectionAdapters/MysqlAdapter.html">MySQL</a>,
+<a
+href="../../../../../../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLAdapter.html">PostgreSQL</a>,
+and <a
+href="../../../../../../../../classes/ActiveRecord/ConnectionAdapters/SQLite3Adapter.html">SQLite3</a>.</p>
+</li><li>
+<p>Logging support for <a href="http://log4r.rubyforge.org">Log4r</a> and <a
+href="http://www.ruby-doc.org/stdlib/libdoc/logger/rdoc">Logger</a>.</p>
+
+<pre>ActiveRecord::Base.logger = ActiveSupport::Logger.new(STDOUT)
+ActiveRecord::Base.logger = Log4r::Logger.new(&#39;Application Log&#39;)</pre>
+</li><li>
+<p>Database agnostic schema management with Migrations.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">AddSystemSettings</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migration</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">up</span>
+    <span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">system_settings</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  :<span class="ruby-identifier">name</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  :<span class="ruby-identifier">label</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">text</span>    :<span class="ruby-identifier">value</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span>  :<span class="ruby-identifier">type</span>
+      <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> :<span class="ruby-identifier">position</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-constant">SystemSetting</span>.<span class="ruby-identifier">create</span> <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;notice&#39;</span>, <span class="ruby-identifier">label</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Use notice?&#39;</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">down</span>
+    <span class="ruby-identifier">drop_table</span> :<span class="ruby-identifier">system_settings</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="../../../../../../../../classes/ActiveRecord/Migration.html">Learn
+more</a></p>
+</li></ul>
+
+<h2 id="label-Philosophy">Philosophy</h2>
+
+<p>Active Record is an implementation of the object-relational mapping (ORM)
+<a
+href="http://www.martinfowler.com/eaaCatalog/activeRecord.html">pattern</a>
+by the same name described by Martin Fowler:</p>
+
+<pre>&quot;An object that wraps a row in a database table or view,
+encapsulates the database access, and adds domain logic on that data.&quot;</pre>
+
+<p>Active Record attempts to provide a coherent wrapper as a solution for the
+inconvenience that is object-relational mapping. The prime directive for
+this mapping has been to minimize the amount of code needed to build a
+real-world domain model. This is made possible by relying on a number of
+conventions that make it easy for Active Record to infer complex relations
+and structures from a minimal amount of explicit direction.</p>
+
+<p>Convention over Configuration:</p>
+<ul><li>
+<p>No XML-files!</p>
+</li><li>
+<p>Lots of reflection and run-time extension</p>
+</li><li>
+<p>Magic is not inherently a bad word</p>
+</li></ul>
+
+<p>Admit the Database:</p>
+<ul><li>
+<p>Lets you drop down to SQL for odd cases and performance</p>
+</li><li>
+<p>Doesn&#39;t attempt to duplicate or replace data definitions</p>
+</li></ul>
+
+<h2 id="label-Download+and+installation">Download and installation</h2>
+
+<p>The latest version of Active Record can be installed with RubyGems:</p>
+
+<pre>% [sudo] gem install activerecord</pre>
+
+<p>Source code can be downloaded as part of the <a
+href="../../../../../../../../classes/Rails.html">Rails</a> project on
+GitHub:</p>
+<ul><li>
+<p><a
+href="https://github.com/rails/rails/tree/master/activerecord">github.com/rails/rails/tree/master/activerecord</a></p>
+</li></ul>
+
+<h2 id="label-License">License</h2>
+
+<p>Active Record is released under the MIT license:</p>
+<ul><li>
+<p><a
+href="http://www.opensource.org/licenses/MIT">www.opensource.org/licenses/MIT</a></p>
+</li></ul>
+
+<h2 id="label-Support">Support</h2>
+
+<p>API documentation is at:</p>
+<ul><li>
+<p><a href="http://api.rubyonrails.org">api.rubyonrails.org</a></p>
+</li></ul>
+
+<p>Bug reports and feature requests can be filed with the rest for the Ruby on
+<a href="../../../../../../../../classes/Rails.html">Rails</a> project
+here:</p>
+<ul><li>
+<p><a
+href="https://github.com/rails/rails/issues">github.com/rails/rails/issues</a></p>
+</li></ul>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>

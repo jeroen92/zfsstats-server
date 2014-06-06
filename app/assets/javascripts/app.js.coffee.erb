@@ -1,0 +1,20 @@
+#= require_self
+#= require_tree ./services
+#= require_tree ./controllers
+#= require_tree ./filters
+
+@Zfsstats = angular.module('Zfsstats', ['Service', 'ui.bootstrap', 'ngRoute', 'ngAnimate'])
+
+Zfsstats.config(['$routeProvider', '$locationProvider', ($routeProvider, $locationProvider) ->
+	$locationProvider.html5Mode(true)
+	$routeProvider
+		.when('/dashboard', { templateUrl: '<%= asset_path "dashboard/index.html" %>', controller: 'DashboardController' } )
+		.when('/devices/:deviceId', { templateUrl: "<%= asset_path 'devices/show.html' %>", controller: 'DeviceCtrl' } )
+		.when('/servers/:serverId', { templateUrl: "<%= asset_path 'servers/show.html' %>", controller: 'ServerCtrl' } )
+		.when('/servers/:serverId/jobs', { templateUrl: "<%= asset_path 'servers/jobs/index.html' %>", controller: 'ServerJobsController' } )
+		.otherwise({ redirectTo: '/dashboard' })
+])
+
+$(document).on('ready page:load', ->
+  angular.bootstrap(document, ['Zfsstats'])
+)

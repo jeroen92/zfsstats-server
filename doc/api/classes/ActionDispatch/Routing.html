@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Routing</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Routing 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/inspector_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/mapper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/mapper.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/polymorphic_routes_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/polymorphic_routes.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/redirection_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/redirection.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/route_set_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/route_set.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/routes_proxy_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/routes_proxy.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/url_for_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/url_for.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The routing module provides URL rewriting in native Ruby. It&#39;s a way to
+redirect incoming requests to controllers and actions. This replaces
+mod_rewrite rules. Best of all, Rails&#39; Routing works with any web
+server. Routes are defined in <code>config/routes.rb</code>.</p>
+
+<p>Think of creating routes as drawing a map for your requests. The map tells
+them where to go based on some predefined pattern:</p>
+
+<pre>AppName::Application.routes.draw do
+  Pattern 1 tells some request to go to one place
+  Pattern 2 tell them to go to another
+  ...
+end</pre>
+
+<p>The following symbols are special:</p>
+
+<pre>:controller maps to your controller name
+:action     maps to an action with your controllers</pre>
+
+<p>Other names simply map to a parameter as in the case of <code>:id</code>.</p>
+
+<h2 id="label-Resources">Resources</h2>
+
+<p>Resource routing allows you to quickly declare all of the common routes for
+a given resourceful controller. Instead of declaring separate routes for
+your <code>index</code>, <code>show</code>, <code>new</code>,
+<code>edit</code>, <code>create</code>, <code>update</code> and
+<code>destroy</code> actions, a resourceful route declares them in a single
+line of code:</p>
+
+<pre>resources :photos</pre>
+
+<p>Sometimes, you have a resource that clients always look up without
+referencing an ID. A common example, /profile always shows the profile of
+the currently logged in user. In this case, you can use a singular resource
+to map /profile (rather than /profile/:id) to the show action.</p>
+
+<pre>resource :profile</pre>
+
+<p>It&#39;s common to have resources that are logically children of other
+resources:</p>
+
+<pre>resources :magazines do
+  resources :ads
+end</pre>
+
+<p>You may wish to organize groups of controllers under a namespace. Most
+commonly, you might group a number of administrative controllers under an
+<code>admin</code> namespace. You would place these controllers under the
+<code>app/controllers/admin</code> directory, and you can group them
+together in your router:</p>
+
+<pre>namespace &quot;admin&quot; do
+  resources :posts, :comments
+end</pre>
+
+<p>Alternately, you can add prefixes to your path without using a separate
+directory by using <code>scope</code>. <code>scope</code> takes additional
+options which apply to all enclosed routes.</p>
+
+<pre>scope path: &quot;/cpanel&quot;, as: &#39;admin&#39; do
+  resources :posts, :comments
+end</pre>
+
+<p>For more, see <code>Routing::Mapper::Resources#resources</code>,
+<code>Routing::Mapper::Scoping#namespace</code>, and
+<code>Routing::Mapper::Scoping#scope</code>.</p>
+
+<h2 id="label-Non-resourceful+routes">Non-resourceful routes</h2>
+
+<p>For routes that don&#39;t fit the <code>resources</code> mold, you can use
+the HTTP helper methods <code>get</code>, <code>post</code>,
+<code>patch</code>, <code>put</code> and <code>delete</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&#39;post/:id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;posts#show&#39;</span>
+<span class="ruby-identifier">post</span> <span class="ruby-string">&#39;post/:id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;posts#create_comment&#39;</span>
+</pre>
+
+<p>If your route needs to respond to more than one HTTP method (or all
+methods) then using the <code>:via</code> option on <code>match</code> is
+preferable.</p>
+
+<pre class="ruby"><span class="ruby-identifier">match</span> <span class="ruby-string">&#39;post/:id&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;posts#show&#39;</span>, <span class="ruby-identifier">via</span><span class="ruby-operator">:</span> [:<span class="ruby-identifier">get</span>, :<span class="ruby-identifier">post</span>]
+</pre>
+
+<p>Now, if you POST to <code>/posts/:id</code>, it will route to the
+<code>create_comment</code> action. A GET on the same URL will route to the
+<code>show</code> action.</p>
+
+<h2 id="label-Named+routes">Named routes</h2>
+
+<p>Routes can be named by passing an <code>:as</code> option, allowing for
+easy reference within your source as <code>name_of_route_url</code> for the
+full URL and <code>name_of_route_path</code> for the <a
+href="../URI.html">URI</a> path.</p>
+
+<p>Example:</p>
+
+<pre class="ruby"><span class="ruby-comment"># In routes.rb</span>
+<span class="ruby-identifier">get</span> <span class="ruby-string">&#39;/login&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;accounts#login&#39;</span>, <span class="ruby-identifier">as</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;login&#39;</span>
+
+<span class="ruby-comment"># With render, redirect_to, tests, etc.</span>
+<span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">login_url</span>
+</pre>
+
+<p>Arguments can be passed as well.</p>
+
+<pre>redirect_to show_item_path(id: 25)</pre>
+
+<p>Use <code>root</code> as a shorthand to name a route for the root path “/”.</p>
+
+<pre class="ruby"><span class="ruby-comment"># In routes.rb</span>
+<span class="ruby-identifier">root</span> <span class="ruby-identifier">to</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;blogs#index&#39;</span>
+
+<span class="ruby-comment"># would recognize http://www.example.com/ as</span>
+<span class="ruby-identifier">params</span> = { <span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;blogs&#39;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;index&#39;</span> }
+
+<span class="ruby-comment"># and provide these named routes</span>
+<span class="ruby-identifier">root_url</span>   <span class="ruby-comment"># =&gt; &#39;http://www.example.com/&#39;</span>
+<span class="ruby-identifier">root_path</span>  <span class="ruby-comment"># =&gt; &#39;/&#39;</span>
+</pre>
+
+<p>Note: when using <code>controller</code>, the route is simply named after
+the method you call on the block parameter rather than map.</p>
+
+<pre class="ruby"><span class="ruby-comment"># In routes.rb</span>
+<span class="ruby-identifier">controller</span> :<span class="ruby-identifier">blog</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;blog/show&#39;</span>     =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">list</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;blog/delete&#39;</span>   =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">delete</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;blog/edit/:id&#39;</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">edit</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># provides named routes for show, delete, and edit</span>
+<span class="ruby-identifier">link_to</span> <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">title</span>, <span class="ruby-identifier">show_path</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">id</span>)
+</pre>
+
+<h2 id="label-Pretty+URLs">Pretty URLs</h2>
+
+<p>Routes can generate pretty URLs. For example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&#39;/articles/:year/:month/:day&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;articles#find_by_id&#39;</span>, <span class="ruby-identifier">constraints</span><span class="ruby-operator">:</span> {
+  <span class="ruby-identifier">year</span><span class="ruby-operator">:</span>       <span class="ruby-regexp">/\d{4}/</span>,
+  <span class="ruby-identifier">month</span><span class="ruby-operator">:</span>      <span class="ruby-regexp">/\d{1,2}/</span>,
+  <span class="ruby-identifier">day</span><span class="ruby-operator">:</span>        <span class="ruby-regexp">/\d{1,2}/</span>
+}
+</pre>
+
+<p>Using the route above, the URL “<a
+href="http://localhost:3000/articles/2005/11/06">localhost:3000/articles/2005/11/06</a>”
+maps to</p>
+
+<pre>params = {year: &#39;2005&#39;, month: &#39;11&#39;, day: &#39;06&#39;}</pre>
+
+<h2 id="label-Regular+Expressions+and+parameters">Regular Expressions and parameters</h2>
+
+<p>You can specify a regular expression to define a format for a parameter.</p>
+
+<pre class="ruby"><span class="ruby-identifier">controller</span> <span class="ruby-string">&#39;geocode&#39;</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;geocode/:postalcode&#39;</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">show</span>, <span class="ruby-identifier">constraints</span><span class="ruby-operator">:</span> {
+    <span class="ruby-identifier">postalcode</span><span class="ruby-operator">:</span> <span class="ruby-regexp">/\d{5}(-\d{4})?/</span>
+  }
+</pre>
+
+<p>Constraints can include the &#39;ignorecase&#39; and &#39;extended
+syntax&#39; regular expression modifiers:</p>
+
+<pre class="ruby"><span class="ruby-identifier">controller</span> <span class="ruby-string">&#39;geocode&#39;</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;geocode/:postalcode&#39;</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">show</span>, <span class="ruby-identifier">constraints</span><span class="ruby-operator">:</span> {
+    <span class="ruby-identifier">postalcode</span><span class="ruby-operator">:</span> <span class="ruby-regexp">/hx\d\d\s\d[a-z]{2}/</span>
+  }
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">controller</span> <span class="ruby-string">&#39;geocode&#39;</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;geocode/:postalcode&#39;</span> =<span class="ruby-operator">&gt;</span> :<span class="ruby-identifier">show</span>, <span class="ruby-identifier">constraints</span><span class="ruby-operator">:</span> {
+    <span class="ruby-identifier">postalcode</span><span class="ruby-operator">:</span> <span class="ruby-node">/# Postcode format
+       \d{5} #Prefix
+       (-\d{4})? #Suffix
+       /</span>
+  }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Using the multiline modifier will raise an <code>ArgumentError</code>.
+Encoding regular expression modifiers are silently ignored. The match will
+always use the default encoding or ASCII.</p>
+
+<h2 id="label-External+redirects">External redirects</h2>
+
+<p>You can redirect any path to another path using the redirect helper in your
+router:</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/stories&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">redirect</span>(<span class="ruby-string">&quot;/posts&quot;</span>)
+</pre>
+
+<h2 id="label-Unicode+character+routes">Unicode character routes</h2>
+
+<p>You can specify unicode character routes in your router:</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&quot;こんにちは&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">&quot;welcome#index&quot;</span>
+</pre>
+
+<h2 id="label-Routing+to+Rack+Applications"><a href="Routing.html">Routing</a> to Rack Applications</h2>
+
+<p>Instead of a <a href="../String.html">String</a>, like
+<code>posts#index</code>, which corresponds to the index action in the
+PostsController, you can specify any Rack application as the endpoint for a
+matcher:</p>
+
+<pre class="ruby"><span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/application.js&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">Sprockets</span>
+</pre>
+
+<h2 id="label-Reloading+routes">Reloading routes</h2>
+
+<p>You can reload routes if you feel you must:</p>
+
+<pre>Rails.application.reload_routes!</pre>
+
+<p>This will clear all named routes and reload routes.rb if the file has been
+modified from last load. To absolutely force reloading, use
+<code>reload!</code>.</p>
+
+<h2 id="label-Testing+Routes">Testing Routes</h2>
+
+<p>The two main methods for testing your routes:</p>
+
+<h3 id="label-assert_routing"><code>assert_routing</code></h3>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">test_movie_route_properly_splits</span>
+ <span class="ruby-identifier">opts</span> = {<span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;plugin&quot;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;checkout&quot;</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;2&quot;</span>}
+ <span class="ruby-identifier">assert_routing</span> <span class="ruby-string">&quot;plugin/checkout/2&quot;</span>, <span class="ruby-identifier">opts</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><code>assert_routing</code> lets you test whether or not the route properly
+resolves into options.</p>
+
+<h3 id="label-assert_recognizes"><code>assert_recognizes</code></h3>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">test_route_has_options</span>
+ <span class="ruby-identifier">opts</span> = {<span class="ruby-identifier">controller</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;plugin&quot;</span>, <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;show&quot;</span>, <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;12&quot;</span>}
+ <span class="ruby-identifier">assert_recognizes</span> <span class="ruby-identifier">opts</span>, <span class="ruby-string">&quot;/plugins/show/12&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Note the subtle difference between the two: <code>assert_routing</code>
+tests that a URL fits options while <code>assert_recognizes</code> tests
+that a URL breaks into parameters properly.</p>
+
+<p>In tests you can simply pass the URL or named route to <code>get</code> or
+<code>post</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">send_to_jail</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-string">&#39;/jail&#39;</span>
+  <span class="ruby-identifier">assert_response</span> :<span class="ruby-identifier">success</span>
+  <span class="ruby-identifier">assert_template</span> <span class="ruby-string">&quot;jail/front&quot;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">goes_to_login</span>
+  <span class="ruby-identifier">get</span> <span class="ruby-identifier">login_url</span>
+  <span class="ruby-comment">#...</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-View+a+list+of+all+your+routes">View a list of all your routes</h2>
+
+<pre>rake routes</pre>
+
+<p>Target specific controllers by prefixing the command with
+<code>CONTROLLER=x</code>.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Routing/PolymorphicRoutes.html">ActionDispatch::Routing::PolymorphicRoutes</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Routing/Redirection.html">ActionDispatch::Routing::Redirection</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Routing/UrlFor.html">ActionDispatch::Routing::UrlFor</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Routing/ConsoleFormatter.html">ActionDispatch::Routing::ConsoleFormatter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Routing/HtmlTableFormatter.html">ActionDispatch::Routing::HtmlTableFormatter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Routing/Mapper.html">ActionDispatch::Routing::Mapper</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Routing/PathRedirect.html">ActionDispatch::Routing::PathRedirect</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Routing/RouteWrapper.html">ActionDispatch::Routing::RouteWrapper</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">SEPARATORS</td>
+            <td>=</td>
+            <td class="attr-value">%w( / . ? )</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HTTP_METHODS</td>
+            <td>=</td>
+            <td class="attr-value">[:get, :head, :post, :patch, :put, :delete, :options]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+              </div>
+
+    </div>
+  </body>
+</html>    

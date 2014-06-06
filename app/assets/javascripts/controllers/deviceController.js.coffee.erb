@@ -1,0 +1,93 @@
+@DeviceCtrl = ($scope, $routeParams, Device, Measurement) ->
+	$scope.stylesheet = 'devices'
+
+	$scope.chartCreated = false
+
+	$scope.toggleArcVisible = ->
+	  $scope.showArcVisible = !$scope.showArcVisible
+
+	$scope.toggleL2arcVisible = ->
+	  $scope.showL2arcVisible = !$scope.showL2arcVisible
+
+	$scope.toggleCommonVisible = ->
+	  $scope.showCommonVisible = !$scope.showCommonVisible
+
+	$scope.toggleStorageVisible = ->
+	  $scope.showStorageVisible = !$scope.showStorageVisible
+
+	Device.get deviceId: $routeParams.deviceId, (device) ->
+		$scope.device = device
+		switch angular.lowercase(device.type)
+			when 'zpool' then $scope.partialUrl = "<%= asset_path 'partials/zpool.html' %>"
+			when 'zfs' then $scope.partialUrl = "<%= asset_path 'partials/zfs.html' %>"
+	$scope.editDescriptionVisible = false
+
+	$scope.loadMeasurement = (measurementId) ->
+		Measurement.get measurementId: measurementId, (measurement) ->
+			if !$scope.chartCreated
+				createChart measurement
+				$scope.chartCreated = true
+				$scope.chart.setSize(angular.element('#device-measurement-data').width(), angular.element('#device-chart').height())
+				console.log 'setting size'
+			else
+				$scope.chart.addSeries measurement
+			setMeasurementLoaded measurementId
+
+	$scope.unloadMeasurement = (measurementId) ->
+		if $scope.chart.series.length > 2
+			angular.forEach $scope.device.measurements, (measurement, measurementIndex) ->
+				if measurementId == measurement.measurement.id
+					angular.forEach $scope.chart.series, (serie, serieIndex) ->
+						if serie.name == measurement.measurement.name
+							$scope.chart.series[serieIndex].remove()
+		else
+			$scope.chart.destroy()
+			$scope.chartCreated = false
+		setMeasurementLoaded measurementId
+
+	setMeasurementLoaded = (measurementId) ->
+		angular.forEach $scope.device.measurements, (deviceMeasurement) ->
+			if deviceMeasurement.measurement.id == measurementId
+				deviceMeasurement.measurement.loaded ^= true
+	
+	createChart = (seriesData) ->
+		chartOptions =
+			chart:
+				height: 400
+				renderTo: 'device-chart'
+				backgroundColor:'rgba(255, 255, 255, 0.2)'
+			navigator:
+				adaptToUpdatedData: false
+			scrollbar:
+				liveRedraw: false
+			rangeSelector:
+				buttons: [{
+					type: 'hour'
+					count: 1
+					text: '1h'
+					}, {
+					type: 'day'
+					count: 1
+					text: '1d'
+					}, {
+					type: 'week'
+					count: 1
+					text: '1w'
+					}, {
+					type: 'month'
+					count: 1
+					text: '1m'
+					}, {
+					type: 'year'
+					count: 1
+					text: '1y'
+				}]
+				inputEnabled: false
+				selected: 0
+			series:
+				[seriesData]
+		Highcharts.setOptions(
+			global:
+				useUTC: false
+		)
+		$scope.chart = new Highcharts.StockChart(chartOptions);

@@ -1,0 +1,88 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require font-awesome
+ */
+
+@import "animate";
+@import "bootstrap";
+@import "font-awesome";
+@import "*";
+
+html,
+body {
+  height: 100%;
+}
+
+.footer {
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	border-top: 1px solid #eeeeee;
+}
+
+.footer-text {
+	margin: 20px 0;
+}
+
+#wrap {
+  min-height: 100%;
+  height: auto;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+.container {
+	padding-top: 15px;
+}
+
+.jumbotron-small {
+	@extend .jumbotron;
+	padding: 1em;
+	position: relative;
+	margin-bottom: 0.7em;
+	background-color: rgb(248, 248, 248);
+}
+
+.navbar-brand {
+	color: #DB8F00 !important;
+}
+
+.navigation-link {
+	color: #828282;
+	&:hover {
+		color: #DB8F00;
+		text-decoration: none;
+	}
+}
+
+.navigation-link-bottom-left {
+	@extend .navigation-link;
+	left: 1em;
+	bottom: 0.5em;
+	position: absolute;
+}
+
+.navigation-link-bottom-right {
+	@extend .navigation-link;
+	bottom: 0.5em;
+	right: 1em;
+	position: absolute;
+}
+
+.animation-fading.ng-enter {
+	-webkit-animation: fadeIn 1s;
+    -moz-animation: fadeIn 1s;
+    -ms-animation: fadeIn 1s;
+	animation: fadeIn 1s;
+}

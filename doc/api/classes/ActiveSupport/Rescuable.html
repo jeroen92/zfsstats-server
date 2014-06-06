@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Rescuable</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Rescuable 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/rescuable_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/rescuable.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="Rescuable.html">Rescuable</a> module adds support for easier
+exception handling.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Rescuable/ClassMethods.html">ActiveSupport::Rescuable::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-handler_for_rescue">handler_for_rescue</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-rescue_with_handler">rescue_with_handler</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-handler_for_rescue">
+            
+              <b>handler_for_rescue</b>(exception)
+            
+            <a href="../../classes/ActiveSupport/Rescuable.html#method-i-handler_for_rescue" name="method-i-handler_for_rescue" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-handler_for_rescue_source')" id="l_method-i-handler_for_rescue_source">show</a>
+                
+              </p>
+              <div id="method-i-handler_for_rescue_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/rescuable.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">handler_for_rescue</span>(<span class="ruby-identifier">exception</span>)
+  <span class="ruby-comment"># We go from right to left because pairs are pushed onto rescue_handlers</span>
+  <span class="ruby-comment"># as rescue_from declarations are found.</span>
+  <span class="ruby-identifier">_</span>, <span class="ruby-identifier">rescuer</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">rescue_handlers</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">detect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass_name</span>, <span class="ruby-identifier">handler</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># The purpose of allowing strings in rescue_from is to support the</span>
+    <span class="ruby-comment"># declaration of handler associations for exception classes whose</span>
+    <span class="ruby-comment"># definition is yet unknown.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># Since this loop needs the constants it would be inconsistent to</span>
+    <span class="ruby-comment"># assume they should exist at this point. An early raised exception</span>
+    <span class="ruby-comment"># could trigger some other handler and the array could include</span>
+    <span class="ruby-comment"># precisely a string whose corresponding constant has not yet been</span>
+    <span class="ruby-comment"># seen. This is why we are tolerant to unknown constants.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># Note that this tolerance only matters if the exception was given as</span>
+    <span class="ruby-comment"># a string, otherwise a NameError will be raised by the interpreter</span>
+    <span class="ruby-comment"># itself when rescue_from CONSTANT is executed.</span>
+    <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">klass_name</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">klass</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">klass_name</span>.<span class="ruby-identifier">constantize</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">exception</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-identifier">klass</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">rescuer</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Symbol</span>
+    <span class="ruby-identifier">method</span>(<span class="ruby-identifier">rescuer</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Proc</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">rescuer</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span>
+      <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-identifier">instance_exec</span>(&amp;<span class="ruby-identifier">rescuer</span>) }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_exception</span><span class="ruby-operator">|</span> <span class="ruby-identifier">instance_exec</span>(<span class="ruby-identifier">_exception</span>, &amp;<span class="ruby-identifier">rescuer</span>) }
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rescue_with_handler">
+            
+              <b>rescue_with_handler</b>(exception)
+            
+            <a href="../../classes/ActiveSupport/Rescuable.html#method-i-rescue_with_handler" name="method-i-rescue_with_handler" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Tries to rescue the exception by looking up and calling a registered
+handler.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rescue_with_handler_source')" id="l_method-i-rescue_with_handler_source">show</a>
+                
+              </p>
+              <div id="method-i-rescue_with_handler_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/rescuable.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rescue_with_handler</span>(<span class="ruby-identifier">exception</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">handler</span> = <span class="ruby-identifier">handler_for_rescue</span>(<span class="ruby-identifier">exception</span>)
+    <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">arity</span> <span class="ruby-operator">!=</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">exception</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">handler</span>.<span class="ruby-identifier">call</span>
+    <span class="ruby-keyword">true</span> <span class="ruby-comment"># don&#39;t rely on the return value of the handler</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

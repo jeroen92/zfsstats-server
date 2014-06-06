@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::SpawnMethods</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::SpawnMethods 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/spawn_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/spawn_methods.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-except">except</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-merge">merge</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-only">only</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-except">
+            
+              <b>except</b>(*skips)
+            
+            <a href="../../classes/ActiveRecord/SpawnMethods.html#method-i-except" name="method-i-except" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Removes from the query the condition(s) specified in <code>skips</code>.</p>
+
+<pre>Post.order(&#39;id asc&#39;).except(:order)                  # discards the order condition
+Post.where(&#39;id &gt; 10&#39;).order(&#39;id asc&#39;).except(:where) # discards the where condition but keeps the order</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-except_source')" id="l_method-i-except_source">show</a>
+                
+              </p>
+              <div id="method-i-except_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/spawn_methods.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">except</span>(*<span class="ruby-identifier">skips</span>)
+  <span class="ruby-identifier">relation_with</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">except</span>(*<span class="ruby-identifier">skips</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-merge">
+            
+              <b>merge</b>(other)
+            
+            <a href="../../classes/ActiveRecord/SpawnMethods.html#method-i-merge" name="method-i-merge" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Merges in the conditions from <code>other</code>, if <code>other</code> is
+an <code>ActiveRecord::Relation</code>. Returns an array representing the
+intersection of the resulting records with <code>other</code>, if
+<code>other</code> is an array.</p>
+
+<pre>Post.where(published: true).joins(:comments).merge( Comment.where(spam: false) )
+# Performs a single join query with both where conditions.
+
+recent_posts = Post.order(&#39;created_at DESC&#39;).first(5)
+Post.where(published: true).merge(recent_posts)
+# Returns the intersection of all published posts with the 5 most recently created posts.
+# (This is just an example. You&#39;d probably want to do this with a single query!)</pre>
+
+<p>Procs will be evaluated by merge:</p>
+
+<pre class="ruby"><span class="ruby-constant">Post</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">published</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>).<span class="ruby-identifier">merge</span>(<span class="ruby-operator">-</span><span class="ruby-operator">&gt;</span> { <span class="ruby-identifier">joins</span>(:<span class="ruby-identifier">comments</span>) })
+<span class="ruby-comment"># =&gt; Post.where(published: true).joins(:comments)</span>
+</pre>
+
+<p>This is mainly intended for sharing common conditions between multiple
+associations.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-merge_source')" id="l_method-i-merge_source">show</a>
+                
+              </p>
+              <div id="method-i-merge_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/spawn_methods.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">merge</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-identifier">to_a</span> &amp; <span class="ruby-identifier">other</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">other</span>
+    <span class="ruby-identifier">spawn</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-only">
+            
+              <b>only</b>(*onlies)
+            
+            <a href="../../classes/ActiveRecord/SpawnMethods.html#method-i-only" name="method-i-only" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Removes any condition from the query other than the one(s) specified in
+<code>onlies</code>.</p>
+
+<pre>Post.order(&#39;id asc&#39;).only(:where)         # discards the order condition
+Post.order(&#39;id asc&#39;).only(:where, :order) # uses the specified order</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-only_source')" id="l_method-i-only_source">show</a>
+                
+              </p>
+              <div id="method-i-only_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/spawn_methods.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">only</span>(*<span class="ruby-identifier">onlies</span>)
+  <span class="ruby-identifier">relation_with</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">slice</span>(*<span class="ruby-identifier">onlies</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

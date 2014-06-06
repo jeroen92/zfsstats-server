@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Testing::Assertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Testing::Assertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/testing/assertions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/assertions.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_blank">assert_blank</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_difference">assert_difference</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_difference">assert_no_difference</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_not">assert_not</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_present">assert_present</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_blank">
+            
+              <b>assert_blank</b>(object, message=nil)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_blank" name="method-i-assert_blank" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Test if an expression is blank. Passes if <code>object.blank?</code> is
+<code>true</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">assert_blank</span> []   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">assert_blank</span> [[]] <span class="ruby-comment"># =&gt; [[]] is not blank</span>
+</pre>
+
+<p>An error message can be specified.</p>
+
+<pre>assert_blank [], &#39;this should be blank&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_blank_source')" id="l_method-i-assert_blank_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_blank_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/assertions.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_blank</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;&quot;assert_blank&quot; is deprecated. Please use &quot;assert object.blank?&quot; instead&#39;</span>)
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;#{object.inspect} is not blank&quot;</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">blank?</span>, <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_difference">
+            
+              <b>assert_difference</b>(expression, difference = 1, message = nil, &amp;block)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_difference" name="method-i-assert_difference" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Test numeric difference between the return value of an expression as a
+result of what is evaluated in the yielded block.</p>
+
+<pre>assert_difference &#39;Article.count&#39; do
+  post :create, article: {...}
+end</pre>
+
+<p>An arbitrary expression is passed in and evaluated.</p>
+
+<pre>assert_difference &#39;assigns(:article).comments(:reload).size&#39; do
+  post :create, comment: {...}
+end</pre>
+
+<p>An arbitrary positive or negative difference can be specified. The default
+is <code>1</code>.</p>
+
+<pre>assert_difference &#39;Article.count&#39;, -1 do
+  post :delete, id: ...
+end</pre>
+
+<p>An array of expressions can also be passed in and evaluated.</p>
+
+<pre>assert_difference [ &#39;Article.count&#39;, &#39;Post.count&#39; ], 2 do
+  post :create, article: {...}
+end</pre>
+
+<p>A lambda or a list of lambdas can be passed in and evaluated:</p>
+
+<pre>assert_difference -&gt;{ Article.count }, 2 do
+  post :create, article: {...}
+end
+
+assert_difference [-&gt;{ Article.count }, -&gt;{ Post.count }], 2 do
+  post :create, article: {...}
+end</pre>
+
+<p>An error message can be specified.</p>
+
+<pre>assert_difference &#39;Article.count&#39;, -1, &#39;An Article should be destroyed&#39; do
+  post :delete, id: ...
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_difference_source')" id="l_method-i-assert_difference_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_difference_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/assertions.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">difference</span> = <span class="ruby-number">1</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">expressions</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">expression</span>)
+
+  <span class="ruby-identifier">exps</span> = <span class="ruby-identifier">expressions</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">lambda</span> { <span class="ruby-identifier">eval</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">block</span>.<span class="ruby-identifier">binding</span>) }
+  }
+  <span class="ruby-identifier">before</span> = <span class="ruby-identifier">exps</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">call</span> }
+
+  <span class="ruby-keyword">yield</span>
+
+  <span class="ruby-identifier">expressions</span>.<span class="ruby-identifier">zip</span>(<span class="ruby-identifier">exps</span>).<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">e</span>), <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">error</span>  = <span class="ruby-node">&quot;#{code.inspect} didn&#39;t change by #{difference}&quot;</span>
+    <span class="ruby-identifier">error</span>  = <span class="ruby-node">&quot;#{message}.\n#{error}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">message</span>
+    <span class="ruby-identifier">assert_equal</span>(<span class="ruby-identifier">before</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">difference</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">call</span>, <span class="ruby-identifier">error</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_difference">
+            
+              <b>assert_no_difference</b>(expression, message = nil, &amp;block)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_no_difference" name="method-i-assert_no_difference" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assertion that the numeric result of evaluating an expression is not
+changed before and after invoking the passed in block.</p>
+
+<pre>assert_no_difference &#39;Article.count&#39; do
+  post :create, article: invalid_attributes
+end</pre>
+
+<p>An error message can be specified.</p>
+
+<pre>assert_no_difference &#39;Article.count&#39;, &#39;An Article should not be created&#39; do
+  post :create, article: invalid_attributes
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_difference_source')" id="l_method-i-assert_no_difference_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_difference_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/assertions.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_difference</span>(<span class="ruby-identifier">expression</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">assert_difference</span> <span class="ruby-identifier">expression</span>, <span class="ruby-number">0</span>, <span class="ruby-identifier">message</span>, &amp;<span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_not">
+            
+              <b>assert_not</b>(object, message = nil)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_not" name="method-i-assert_not" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assert that an expression is not truthy. Passes if <code>object</code> is
+<code>nil</code> or <code>false</code>. “Truthy” means “considered true in
+a conditional” like <code>if foo</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">assert_not</span> <span class="ruby-keyword">nil</span>    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">assert_not</span> <span class="ruby-keyword">false</span>  <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">assert_not</span> <span class="ruby-string">&#39;foo&#39;</span>  <span class="ruby-comment"># =&gt; &#39;foo&#39; is not nil or false</span>
+</pre>
+
+<p>An error message can be specified.</p>
+
+<pre>assert_not foo, &#39;foo should be false&#39;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_not_source')" id="l_method-i-assert_not_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_not_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/assertions.rb, line 17</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_not</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;Expected #{mu_pp(object)} to be nil or false&quot;</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-operator">!</span><span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_present">
+            
+              <b>assert_present</b>(object, message=nil)
+            
+            <a href="../../../classes/ActiveSupport/Testing/Assertions.html#method-i-assert_present" name="method-i-assert_present" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Test if an expression is not blank. Passes if <code>object.present?</code>
+is <code>true</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">assert_present</span>({ <span class="ruby-identifier">data</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;x&#39;</span> }) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">assert_present</span>({})            <span class="ruby-comment"># =&gt; {} is blank</span>
+</pre>
+
+<p>An error message can be specified.</p>
+
+<pre>assert_present({ data: &#39;x&#39; }, &#39;this should not be blank&#39;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_present_source')" id="l_method-i-assert_present_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_present_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/testing/assertions.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_present</span>(<span class="ruby-identifier">object</span>, <span class="ruby-identifier">message</span>=<span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;&quot;assert_present&quot; is deprecated. Please use &quot;assert object.present?&quot; instead&#39;</span>)
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;#{object.inspect} is blank&quot;</span>
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">object</span>.<span class="ruby-identifier">present?</span>, <span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

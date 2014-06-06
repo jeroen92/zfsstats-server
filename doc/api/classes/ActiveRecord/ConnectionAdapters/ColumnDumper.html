@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::ColumnDumper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::ConnectionAdapters::ColumnDumper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_dumper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_dumper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The goal of this module is to move Adapter specific column definitions to
+the Adapter instead of having it in the schema dumper itself. This code
+represents the normal case. We can then redefine how certain data types may
+be handled in the schema dumper on the Adapter level by over-writing this
+code inside the database specific adapters</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-column_spec">column_spec</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-migration_keys">migration_keys</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-prepare_column_options">prepare_column_options</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-column_spec">
+            
+              <b>column_spec</b>(column, types)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/ColumnDumper.html#method-i-column_spec" name="method-i-column_spec" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-column_spec_source')" id="l_method-i-column_spec_source">show</a>
+                
+              </p>
+              <div id="method-i-column_spec_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_dumper.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">column_spec</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">types</span>)
+  <span class="ruby-identifier">spec</span> = <span class="ruby-identifier">prepare_column_options</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">types</span>)
+  (<span class="ruby-identifier">spec</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> [<span class="ruby-value">:name</span>, <span class="ruby-value">:type</span>]).<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">spec</span>[<span class="ruby-identifier">k</span>].<span class="ruby-identifier">insert</span>(<span class="ruby-number">0</span>, <span class="ruby-node">&quot;#{k.to_s}: &quot;</span>)}
+  <span class="ruby-identifier">spec</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-migration_keys">
+            
+              <b>migration_keys</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/ColumnDumper.html#method-i-migration_keys" name="method-i-migration_keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Lists the valid migration options</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-migration_keys_source')" id="l_method-i-migration_keys_source">show</a>
+                
+              </p>
+              <div id="method-i-migration_keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_dumper.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">migration_keys</span>
+  [<span class="ruby-value">:name</span>, <span class="ruby-value">:limit</span>, <span class="ruby-value">:precision</span>, <span class="ruby-value">:scale</span>, <span class="ruby-value">:default</span>, <span class="ruby-value">:null</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prepare_column_options">
+            
+              <b>prepare_column_options</b>(column, types)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/ColumnDumper.html#method-i-prepare_column_options" name="method-i-prepare_column_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This can be overridden on a Adapter level basis to support other extended
+datatypes (Example: Adding an array option in the <a
+href="PostgreSQLAdapter.html">PostgreSQLAdapter</a>)</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prepare_column_options_source')" id="l_method-i-prepare_column_options_source">show</a>
+                
+              </p>
+              <div id="method-i-prepare_column_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_dumper.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prepare_column_options</span>(<span class="ruby-identifier">column</span>, <span class="ruby-identifier">types</span>)
+  <span class="ruby-identifier">spec</span> = {}
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:name</span>]      = <span class="ruby-identifier">column</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">inspect</span>
+
+  <span class="ruby-comment"># AR has an optimization which handles zero-scale decimals as integers. This</span>
+  <span class="ruby-comment"># code ensures that the dumper still dumps the column as a decimal.</span>
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:type</span>]      = <span class="ruby-keyword">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span> <span class="ruby-operator">==</span> <span class="ruby-value">:integer</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-regexp">/^(numeric|decimal)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">sql_type</span>
+                       <span class="ruby-string">&#39;decimal&#39;</span>
+                     <span class="ruby-keyword">else</span>
+                       <span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>
+                     <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:limit</span>]     = <span class="ruby-identifier">column</span>.<span class="ruby-identifier">limit</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">limit</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">types</span>[<span class="ruby-identifier">column</span>.<span class="ruby-identifier">type</span>][<span class="ruby-value">:limit</span>] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">spec</span>[<span class="ruby-value">:type</span>] <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;decimal&#39;</span>
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:precision</span>] = <span class="ruby-identifier">column</span>.<span class="ruby-identifier">precision</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">precision</span>
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:scale</span>]     = <span class="ruby-identifier">column</span>.<span class="ruby-identifier">scale</span>.<span class="ruby-identifier">inspect</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">scale</span>
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:null</span>]      = <span class="ruby-string">&#39;false&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">null</span>
+  <span class="ruby-identifier">spec</span>[<span class="ruby-value">:default</span>]   = <span class="ruby-identifier">default_string</span>(<span class="ruby-identifier">column</span>.<span class="ruby-identifier">default</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">column</span>.<span class="ruby-identifier">has_default?</span>
+  <span class="ruby-identifier">spec</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

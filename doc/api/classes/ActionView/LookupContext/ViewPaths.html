@@ -1,0 +1,461 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::LookupContext::ViewPaths</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::LookupContext::ViewPaths 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/lookup_context_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="../Helpers.html">Helpers</a> related to template lookup using the
+lookup context information.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-detail_args_for">detail_args_for</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-exists-3F">exists?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find">find</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_all">find_all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_template">find_template</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-template_exists-3F">template_exists?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-view_paths-3D">view_paths=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-with_fallbacks">with_fallbacks</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>html_fallback_for_js</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>view_paths</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-exists-3F">
+            
+              <b>exists?</b>(name, prefixes = [], partial = false, keys = [], options = {})
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-exists-3F" name="method-i-exists-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="ViewPaths.html#method-i-template_exists-3F">template_exists?</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-exists-3F_source')" id="l_method-i-exists-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-exists-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">exists?</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">prefixes</span> = [], <span class="ruby-identifier">partial</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">keys</span> = [], <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@view_paths</span>.<span class="ruby-identifier">exists?</span>(*<span class="ruby-identifier">args_for_lookup</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">prefixes</span>, <span class="ruby-identifier">partial</span>, <span class="ruby-identifier">keys</span>, <span class="ruby-identifier">options</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find">
+            
+              <b>find</b>(name, prefixes = [], partial = false, keys = [], options = {})
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-find" name="method-i-find" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="ViewPaths.html#method-i-find_template">find_template</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_source')" id="l_method-i-find_source">show</a>
+                
+              </p>
+              <div id="method-i-find_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">prefixes</span> = [], <span class="ruby-identifier">partial</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">keys</span> = [], <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@view_paths</span>.<span class="ruby-identifier">find</span>(*<span class="ruby-identifier">args_for_lookup</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">prefixes</span>, <span class="ruby-identifier">partial</span>, <span class="ruby-identifier">keys</span>, <span class="ruby-identifier">options</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_all">
+            
+              <b>find_all</b>(name, prefixes = [], partial = false, keys = [], options = {})
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-find_all" name="method-i-find_all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_all_source')" id="l_method-i-find_all_source">show</a>
+                
+              </p>
+              <div id="method-i-find_all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_all</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">prefixes</span> = [], <span class="ruby-identifier">partial</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">keys</span> = [], <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-ivar">@view_paths</span>.<span class="ruby-identifier">find_all</span>(*<span class="ruby-identifier">args_for_lookup</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">prefixes</span>, <span class="ruby-identifier">partial</span>, <span class="ruby-identifier">keys</span>, <span class="ruby-identifier">options</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_template">
+            
+              <b>find_template</b>(name, prefixes = [], partial = false, keys = [], options = {})
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-find_template" name="method-i-find_template" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-template_exists-3F">
+            
+              <b>template_exists?</b>(name, prefixes = [], partial = false, keys = [], options = {})
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-template_exists-3F" name="method-i-template_exists-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-view_paths-3D">
+            
+              <b>view_paths=</b>(paths)
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-view_paths-3D" name="method-i-view_paths-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Whenever setting view paths, makes a copy so we can manipulate then in
+instance objects as we wish.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-view_paths-3D_source')" id="l_method-i-view_paths-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-view_paths-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">view_paths=</span>(<span class="ruby-identifier">paths</span>)
+  <span class="ruby-ivar">@view_paths</span> = <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">PathSet</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Array</span>(<span class="ruby-identifier">paths</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-with_fallbacks">
+            
+              <b>with_fallbacks</b>()
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-with_fallbacks" name="method-i-with_fallbacks" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Add fallbacks to the view paths. Useful in cases you are rendering a :file.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-with_fallbacks_source')" id="l_method-i-with_fallbacks_source">show</a>
+                
+              </p>
+              <div id="method-i-with_fallbacks_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">with_fallbacks</span>
+  <span class="ruby-identifier">added_resolvers</span> = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">fallbacks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">resolver</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">resolver</span>)
+    <span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">resolver</span>)
+    <span class="ruby-identifier">added_resolvers</span> <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-identifier">added_resolvers</span>.<span class="ruby-identifier">times</span> { <span class="ruby-identifier">view_paths</span>.<span class="ruby-identifier">pop</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-detail_args_for">
+            
+              <b>detail_args_for</b>(options)
+            
+            <a href="../../../classes/ActionView/LookupContext/ViewPaths.html#method-i-detail_args_for" name="method-i-detail_args_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compute details hash and key according to user options (e.g. passed from
+render).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-detail_args_for_source')" id="l_method-i-detail_args_for_source">show</a>
+                
+              </p>
+              <div id="method-i-detail_args_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/lookup_context.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">detail_args_for</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@details</span>, <span class="ruby-identifier">details_key</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-comment"># most common path.</span>
+  <span class="ruby-identifier">user_details</span> = <span class="ruby-ivar">@details</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+  [<span class="ruby-identifier">user_details</span>, <span class="ruby-constant">DetailsKey</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">user_details</span>)]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

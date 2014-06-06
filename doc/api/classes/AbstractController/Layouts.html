@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AbstractController::Layouts</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            AbstractController::Layouts 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/abstract_controller/layouts_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/layouts.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="Layouts.html">Layouts</a> reverse the common pattern of including
+shared headers and footers in many templates to isolate changes in repeated
+setups. The inclusion pattern has pages that look like this:</p>
+
+<pre>&lt;%= render &quot;shared/header&quot; %&gt;
+Hello World
+&lt;%= render &quot;shared/footer&quot; %&gt;</pre>
+
+<p>This approach is a decent way of keeping common structures isolated from
+the changing content, but it&#39;s verbose and if you ever want to change
+the structure of these two includes, you&#39;ll have to change all the
+templates.</p>
+
+<p>With layouts, you can flip it around and have the common structure know
+where to insert changing content. This means that the header and footer are
+only mentioned in one place, like this:</p>
+
+<pre>// The header part of this layout
+&lt;%= yield %&gt;
+// The footer part of this layout</pre>
+
+<p>And then you have content pages that look like this:</p>
+
+<pre>hello world</pre>
+
+<p>At rendering time, the content page is computed and then inserted in the
+layout, like this:</p>
+
+<pre>// The header part of this layout
+hello world
+// The footer part of this layout</pre>
+
+<h2 id="label-Accessing+shared+variables">Accessing shared variables</h2>
+
+<p><a href="Layouts.html">Layouts</a> have access to variables specified in
+the content pages and vice versa. This allows you to have layouts with
+references that won&#39;t materialize before rendering time:</p>
+
+<pre>&lt;h1&gt;&lt;%= @page_title %&gt;&lt;/h1&gt;
+&lt;%= yield %&gt;</pre>
+
+<p>…and content pages that fulfill these references <em>at</em> rendering
+time:</p>
+
+<pre>&lt;% @page_title = &quot;Welcome&quot; %&gt;
+Off-world colonies offers you a chance to start a new life</pre>
+
+<p>The result after rendering is:</p>
+
+<pre>&lt;h1&gt;Welcome&lt;/h1&gt;
+Off-world colonies offers you a chance to start a new life</pre>
+
+<h2 id="label-Layout+assignment">Layout assignment</h2>
+
+<p>You can either specify a layout declaratively (using the layout class
+method) or give it the same name as your controller, and place it in
+<code>app/views/layouts</code>. If a subclass does not have a layout
+specified, it inherits its layout using normal Ruby inheritance.</p>
+
+<p>For instance, if you have PostsController and a template named
+<code>app/views/layouts/posts.html.erb</code>, that template will be used
+for all actions in PostsController and controllers inheriting from
+PostsController.</p>
+
+<p>If you use a module, for instance Weblog::PostsController, you will need a
+template named <code>app/views/layouts/weblog/posts.html.erb</code>.</p>
+
+<p>Since all your controllers inherit from ApplicationController, they will
+use <code>app/views/layouts/application.html.erb</code> if no other layout
+is specified or provided.</p>
+
+<h2 id="label-Inheritance+Examples">Inheritance Examples</h2>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">BankController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># bank.html.erb exists</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">ExchangeController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">BankController</span>
+  <span class="ruby-comment"># exchange.html.erb exists</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">CurrencyController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">BankController</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">InformationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">BankController</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-string">&quot;information&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">TellerController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">InformationController</span>
+  <span class="ruby-comment"># teller.html.erb exists</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">EmployeeController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">InformationController</span>
+  <span class="ruby-comment"># employee.html.erb exists</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-keyword">nil</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">VaultController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">BankController</span>
+  <span class="ruby-identifier">layout</span> :<span class="ruby-identifier">access_level_layout</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">TillController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">BankController</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-keyword">false</span>
+</pre>
+
+<p>In these examples, we have three implicit lookup scenarios:</p>
+<ul><li>
+<p>The BankController uses the “bank” layout.</p>
+</li><li>
+<p>The ExchangeController uses the “exchange” layout.</p>
+</li><li>
+<p>The CurrencyController inherits the layout from BankController.</p>
+</li></ul>
+
+<p>However, when a layout is explicitly set, the explicitly set layout wins:</p>
+<ul><li>
+<p>The InformationController uses the “information” layout, explicitly set.</p>
+</li><li>
+<p>The TellerController also uses the “information” layout, because the parent
+explicitly set it.</p>
+</li><li>
+<p>The EmployeeController uses the “employee” layout, because it set the
+layout to nil, resetting the parent configuration.</p>
+</li><li>
+<p>The VaultController chooses a layout dynamically by calling the
+<code>access_level_layout</code> method.</p>
+</li><li>
+<p>The TillController does not use a layout at all.</p>
+</li></ul>
+
+<h2 id="label-Types+of+layouts">Types of layouts</h2>
+
+<p><a href="Layouts.html">Layouts</a> are basically just regular templates,
+but the name of this template needs not be specified statically. Sometimes
+you want to alternate layouts depending on runtime information, such as
+whether someone is logged in or not. This can be done either by specifying
+a method reference as a symbol or using an inline method (as a proc).</p>
+
+<p>The method reference is the preferred approach to variable layouts and is
+used like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WeblogController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> :<span class="ruby-identifier">writers_and_readers</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-comment"># fetching posts</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">writers_and_readers</span>
+      <span class="ruby-identifier">logged_in?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;writer_layout&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;reader_layout&quot;</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Now when a new request for the index action is processed, the layout will
+vary depending on whether the person accessing is logged in or not.</p>
+
+<p>If you want to use an inline method, such as a proc, do something like
+this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WeblogController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-identifier">proc</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">controller</span><span class="ruby-operator">|</span> <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">logged_in?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;writer_layout&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;reader_layout&quot;</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>If an argument isn&#39;t given to the proc, it&#39;s evaluated in the
+context of the current controller anyway.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WeblogController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-identifier">proc</span> { <span class="ruby-identifier">logged_in?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;writer_layout&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;reader_layout&quot;</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Of course, the most common way of specifying a layout is still just as a
+plain template name:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WeblogController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-string">&quot;weblog_standard&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>The template will be looked always in <code>app/views/layouts/</code>
+folder. But you can point <code>layouts</code> folder direct also.
+<code>layout &quot;layouts/demo&quot;</code> is the same as <code>layout
+&quot;demo&quot;</code>.</p>
+
+<p>Setting the layout to nil forces it to be looked up in the filesystem and
+fallbacks to the parent behavior if none exists. Setting it to nil is
+useful to re-enable template lookup overriding a previous configuration set
+in the parent:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-string">&quot;application&quot;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-comment"># Will use &quot;application&quot; layout</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">CommentsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+  <span class="ruby-comment"># Will search for &quot;comments&quot; layout and fallback &quot;application&quot; layout</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-Conditional+layouts">Conditional layouts</h2>
+
+<p>If you have a layout that by default is applied to all the actions of a
+controller, you still have the option of rendering a given action or set of
+actions without a layout, or restricting a layout to only a single action
+or a set of actions. The <code>:only</code> and <code>:except</code>
+options can be passed to the layout call. For example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WeblogController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-string">&quot;weblog_standard&quot;</span>, <span class="ruby-identifier">except</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">rss</span>
+
+  <span class="ruby-comment"># ...</span>
+
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This will assign “weblog_standard” as the WeblogController&#39;s layout for
+all actions except for the <code>rss</code> action, which will be rendered
+directly, without wrapping a layout around the rendered view.</p>
+
+<p>Both the <code>:only</code> and <code>:except</code> condition can accept
+an arbitrary number of method references, so #<code>except: [ :rss,
+:text_only ]</code> is valid, as is <code>except: :rss</code>.</p>
+
+<h2 id="label-Using+a+different+layout+in+the+action+render+call">Using a different layout in the action render call</h2>
+
+<p>If most of your actions use the same layout, it makes perfect sense to
+define a controller-wide layout as described above. Sometimes you&#39;ll
+have exceptions where one action wants to use a different layout than the
+rest of the controller. You can do this by passing a <code>:layout</code>
+option to the <code>render</code> call. For example:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">WeblogController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">layout</span> <span class="ruby-string">&quot;weblog_standard&quot;</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">help</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-identifier">action</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;help&quot;</span>, <span class="ruby-identifier">layout</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;help&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This will override the controller-wide “weblog_standard” layout, and will
+render the help action with the “help” layout instead.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Layouts/ClassMethods.html">AbstractController::Layouts::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-action_has_layout-3F">action_has_layout?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Rendering.html">
+              AbstractController::Rendering
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-action_has_layout-3F">
+            
+              <b>action_has_layout?</b>()
+            
+            <a href="../../classes/AbstractController/Layouts.html#method-i-action_has_layout-3F" name="method-i-action_has_layout-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Controls whether an action should be rendered using a layout. If you want
+to disable any <code>layout</code> settings for the current action so that
+it is rendered without a layout then either override this method in your
+controller to return false for that action or set the
+<code>action_has_layout</code> attribute to false before rendering.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-action_has_layout-3F_source')" id="l_method-i-action_has_layout-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-action_has_layout-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/layouts.rb, line 361</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">action_has_layout?</span>
+  <span class="ruby-ivar">@_action_has_layout</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

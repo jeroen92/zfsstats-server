@@ -1,0 +1,685 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Generators</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            Rails::Generators 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/commands/application_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/commands/application.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/actions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/actions.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/active_model_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/active_model.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/app_base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/app_base.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/base.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/generated_attribute_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/generated_attribute.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/migration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/migration.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/named_base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/named_base.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/app/app_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/app/app_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/assets/assets_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/assets/assets_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/controller/controller_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/controller/controller_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/generator/generator_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/generator/generator_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/helper/helper_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/helper/helper_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/integration_test/integration_test_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/integration_test/integration_test_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/migration/migration_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/migration/migration_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/model/model_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/model/model_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/plugin_new/plugin_new_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/plugin_new/plugin_new_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/resource/resource_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/resource/resource_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/resource_route/resource_route_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/resource_route/resource_route_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/scaffold/scaffold_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/scaffold/scaffold_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/scaffold_controller/scaffold_controller_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/scaffold_controller/scaffold_controller_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/rails/task/task_generator_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/rails/task/task_generator.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/resource_helpers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/resource_helpers.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/test_case_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/test_case.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/testing/assertions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/assertions.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/testing/behaviour_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/behaviour.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/generators/testing/setup_and_teardown_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators/testing/setup_and_teardown.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Generators/Actions.html">Rails::Generators::Actions</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Generators/Migration.html">Rails::Generators::Migration</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Generators/Testing.html">Rails::Generators::Testing</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Generators/ActiveModel.html">Rails::Generators::ActiveModel</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Generators/Base.html">Rails::Generators::Base</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Generators/NamedBase.html">Rails::Generators::NamedBase</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Generators/TestCase.html">Rails::Generators::TestCase</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-fallbacks">fallbacks</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-help">help</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-hidden_namespaces">hidden_namespaces</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-hide_namespace">hide_namespace</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-hide_namespaces">hide_namespaces</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-invoke">invoke</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-no_color-21">no_color!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-subclasses">subclasses</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_ALIASES</td>
+            <td>=</td>
+            <td class="attr-value">{
+rails: {
+actions: &#39;-a&#39;,
+orm: &#39;-o&#39;,
+javascripts: &#39;-j&#39;,
+javascript_engine: &#39;-je&#39;,
+resource_controller: &#39;-c&#39;,
+scaffold_controller: &#39;-c&#39;,
+stylesheets: &#39;-y&#39;,
+stylesheet_engine: &#39;-se&#39;,
+template_engine: &#39;-e&#39;,
+test_framework: &#39;-t&#39;
+},
+
+test_unit: {
+fixture_replacement: &#39;-r&#39;,
+}
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_OPTIONS</td>
+            <td>=</td>
+            <td class="attr-value">{
+rails: {
+assets: true,
+force_plural: false,
+helper: true,
+integration_tool: nil,
+javascripts: true,
+javascript_engine: :js,
+orm: false,
+resource_controller: :controller,
+resource_route: true,
+scaffold_controller: :scaffold_controller,
+stylesheets: true,
+stylesheet_engine: :css,
+test_framework: false,
+template_engine: :erb
+}
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">RAILS_DEV_PATH</td>
+            <td>=</td>
+            <td class="attr-value">File.expand_path(&quot;../../../../../..&quot;, File.dirname(__FILE__))</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>We need to store the <a
+href="Generators.html#RAILS_DEV_PATH">RAILS_DEV_PATH</a> in a constant,
+otherwise the path can change in Ruby 1.8.7 when we FileUtils.cd.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">RESERVED_NAMES</td>
+            <td>=</td>
+            <td class="attr-value">%w[application destroy plugin runner test]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-fallbacks">
+            
+              <b>fallbacks</b>()
+            
+            <a href="../../classes/Rails/Generators.html#method-c-fallbacks" name="method-c-fallbacks" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Hold configured generators fallbacks. If a plugin developer wants a
+generator group to fallback to another group in case of missing generators,
+they can add a fallback.</p>
+
+<p>For example, shoulda is considered a test_framework and is an extension of
+test_unit. However, most part of shoulda generators are similar to
+test_unit ones.</p>
+
+<p>Shoulda then can tell generators to search for test_unit generators when
+some of them are not available by adding a fallback:</p>
+
+<pre>Rails::Generators.fallbacks[:shoulda] = :test_unit</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-fallbacks_source')" id="l_method-c-fallbacks_source">show</a>
+                
+              </p>
+              <div id="method-c-fallbacks_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">fallbacks</span>
+  <span class="ruby-ivar">@fallbacks</span> <span class="ruby-operator">||=</span> {}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-help">
+            
+              <b>help</b>(command = &#39;generate&#39;)
+            
+            <a href="../../classes/Rails/Generators.html#method-c-help" name="method-c-help" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Show help message with available generators.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-help_source')" id="l_method-c-help_source">show</a>
+                
+              </p>
+              <div id="method-c-help_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 200</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">help</span>(<span class="ruby-identifier">command</span> = <span class="ruby-string">&#39;generate&#39;</span>)
+  <span class="ruby-identifier">lookup!</span>
+
+  <span class="ruby-identifier">namespaces</span> = <span class="ruby-identifier">subclasses</span>.<span class="ruby-identifier">map</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">namespace</span> }
+  <span class="ruby-identifier">namespaces</span>.<span class="ruby-identifier">sort!</span>
+
+  <span class="ruby-identifier">groups</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">h</span>,<span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">k</span>] = [] }
+  <span class="ruby-identifier">namespaces</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">namespace</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">base</span> = <span class="ruby-identifier">namespace</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">groups</span>[<span class="ruby-identifier">base</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">namespace</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Usage: rails #{command} GENERATOR [args] [options]&quot;</span>
+  <span class="ruby-identifier">puts</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;General options:&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  -h, [--help]     # Print generator&#39;s options and usage&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  -p, [--pretend]  # Run but do not make any changes&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  -f, [--force]    # Overwrite files that already exist&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  -s, [--skip]     # Skip files that already exist&quot;</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  -q, [--quiet]    # Suppress status output&quot;</span>
+  <span class="ruby-identifier">puts</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Please choose a generator below.&quot;</span>
+  <span class="ruby-identifier">puts</span>
+
+  <span class="ruby-comment"># Print Rails defaults first.</span>
+  <span class="ruby-identifier">rails</span> = <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;rails&quot;</span>)
+  <span class="ruby-identifier">rails</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^rails:/</span>, <span class="ruby-string">&#39;&#39;</span>) }
+  <span class="ruby-identifier">rails</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;app&quot;</span>)
+  <span class="ruby-identifier">rails</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&quot;plugin_new&quot;</span>)
+  <span class="ruby-identifier">print_list</span>(<span class="ruby-string">&quot;rails&quot;</span>, <span class="ruby-identifier">rails</span>)
+
+  <span class="ruby-identifier">hidden_namespaces</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span>) }
+
+  <span class="ruby-identifier">groups</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span>, <span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print_list</span>(<span class="ruby-identifier">b</span>, <span class="ruby-identifier">n</span>) }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-hidden_namespaces">
+            
+              <b>hidden_namespaces</b>()
+            
+            <a href="../../classes/Rails/Generators.html#method-c-hidden_namespaces" name="method-c-hidden_namespaces" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-hidden_namespaces_source')" id="l_method-c-hidden_namespaces_source">show</a>
+                
+              </p>
+              <div id="method-c-hidden_namespaces_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">hidden_namespaces</span>
+  <span class="ruby-ivar">@hidden_namespaces</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">orm</span>      = <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails</span>][<span class="ruby-value">:orm</span>]
+    <span class="ruby-identifier">test</span>     = <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails</span>][<span class="ruby-value">:test_framework</span>]
+    <span class="ruby-identifier">template</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails</span>][<span class="ruby-value">:template_engine</span>]
+    <span class="ruby-identifier">css</span>      = <span class="ruby-identifier">options</span>[<span class="ruby-value">:rails</span>][<span class="ruby-value">:stylesheet_engine</span>]
+
+    [
+      <span class="ruby-string">&quot;rails&quot;</span>,
+      <span class="ruby-string">&quot;resource_route&quot;</span>,
+      <span class="ruby-node">&quot;#{orm}:migration&quot;</span>,
+      <span class="ruby-node">&quot;#{orm}:model&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:controller&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:helper&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:integration&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:mailer&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:model&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:scaffold&quot;</span>,
+      <span class="ruby-node">&quot;#{test}:view&quot;</span>,
+      <span class="ruby-node">&quot;#{template}:controller&quot;</span>,
+      <span class="ruby-node">&quot;#{template}:scaffold&quot;</span>,
+      <span class="ruby-node">&quot;#{template}:mailer&quot;</span>,
+      <span class="ruby-node">&quot;#{css}:scaffold&quot;</span>,
+      <span class="ruby-node">&quot;#{css}:assets&quot;</span>,
+      <span class="ruby-string">&quot;css:assets&quot;</span>,
+      <span class="ruby-string">&quot;css:scaffold&quot;</span>
+    ]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-hide_namespace">
+            
+              <b>hide_namespace</b>(*namespaces)
+            
+            <a href="../../classes/Rails/Generators.html#method-c-hide_namespace" name="method-c-hide_namespace" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-hide_namespaces">
+            
+              <b>hide_namespaces</b>(*namespaces)
+            
+            <a href="../../classes/Rails/Generators.html#method-c-hide_namespaces" name="method-c-hide_namespaces" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Generators.html#method-c-hide_namespace">hide_namespace</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-hide_namespaces_source')" id="l_method-c-hide_namespaces_source">show</a>
+                
+              </p>
+              <div id="method-c-hide_namespaces_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hide_namespaces</span>(*<span class="ruby-identifier">namespaces</span>)
+  <span class="ruby-identifier">hidden_namespaces</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">namespaces</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-invoke">
+            
+              <b>invoke</b>(namespace, args=ARGV, config={})
+            
+            <a href="../../classes/Rails/Generators.html#method-c-invoke" name="method-c-invoke" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Receives a namespace, arguments and the behavior to invoke the generator.
+It&#39;s used as the default entry point for generate, destroy and update
+commands.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-invoke_source')" id="l_method-c-invoke_source">show</a>
+                
+              </p>
+              <div id="method-c-invoke_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">invoke</span>(<span class="ruby-identifier">namespace</span>, <span class="ruby-identifier">args</span>=<span class="ruby-constant">ARGV</span>, <span class="ruby-identifier">config</span>={})
+  <span class="ruby-identifier">names</span> = <span class="ruby-identifier">namespace</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">find_by_namespace</span>(<span class="ruby-identifier">names</span>.<span class="ruby-identifier">pop</span>, <span class="ruby-identifier">names</span>.<span class="ruby-identifier">any?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;:&#39;</span>))
+    <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;--help&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">arguments</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">required?</span> }
+    <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">start</span>(<span class="ruby-identifier">args</span>, <span class="ruby-identifier">config</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Could not find generator #{namespace}.&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-no_color-21">
+            
+              <b>no_color!</b>()
+            
+            <a href="../../classes/Rails/Generators.html#method-c-no_color-21" name="method-c-no_color-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Remove the color from output.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-no_color-21_source')" id="l_method-c-no_color-21_source">show</a>
+                
+              </p>
+              <div id="method-c-no_color-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">no_color!</span>
+  <span class="ruby-constant">Thor</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">shell</span> = <span class="ruby-constant">Thor</span><span class="ruby-operator">::</span><span class="ruby-constant">Shell</span><span class="ruby-operator">::</span><span class="ruby-constant">Basic</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-subclasses">
+            
+              <b>subclasses</b>()
+            
+            <a href="../../classes/Rails/Generators.html#method-c-subclasses" name="method-c-subclasses" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Track all generators subclasses.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-subclasses_source')" id="l_method-c-subclasses_source">show</a>
+                
+              </p>
+              <div id="method-c-subclasses_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/generators.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">subclasses</span>
+  <span class="ruby-ivar">@subclasses</span> <span class="ruby-operator">||=</span> []
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

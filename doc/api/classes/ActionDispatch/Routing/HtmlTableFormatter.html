@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Routing::HtmlTableFormatter</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionDispatch::Routing::HtmlTableFormatter 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/routing/inspector_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-header">header</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-no_routes">no_routes</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-result">result</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-section">section</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-section_title">section_title</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(view)
+            
+            <a href="../../../classes/ActionDispatch/Routing/HtmlTableFormatter.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">view</span>)
+  <span class="ruby-ivar">@view</span> = <span class="ruby-identifier">view</span>
+  <span class="ruby-ivar">@buffer</span> = []
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-header">
+            
+              <b>header</b>(routes)
+            
+            <a href="../../../classes/ActionDispatch/Routing/HtmlTableFormatter.html#method-i-header" name="method-i-header" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>the header is part of the <a href="../../HTML.html">HTML</a> page, so we
+don&#39;t construct it here.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-header_source')" id="l_method-i-header_source">show</a>
+                
+              </p>
+              <div id="method-i-header_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">header</span>(<span class="ruby-identifier">routes</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-no_routes">
+            
+              <b>no_routes</b>()
+            
+            <a href="../../../classes/ActionDispatch/Routing/HtmlTableFormatter.html#method-i-no_routes" name="method-i-no_routes" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-no_routes_source')" id="l_method-i-no_routes_source">show</a>
+                
+              </p>
+              <div id="method-i-no_routes_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb, line 220</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">no_routes</span>
+        <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;          &lt;p&gt;You don&#39;t have any routes defined!&lt;/p&gt;
+          &lt;ul&gt;
+            &lt;li&gt;Please add some routes in &lt;tt&gt;config/routes.rb&lt;/tt&gt;.&lt;/li&gt;
+            &lt;li&gt;
+              For more information about routes, please see the Rails guide
+              &lt;a href=&quot;http://guides.rubyonrails.org/routing.html&quot;&gt;Rails Routing from the Outside In&lt;/a&gt;.
+            &lt;/li&gt;
+          &lt;/ul&gt;
+&quot;</span>.<span class="ruby-identifier">strip_heredoc</span>
+      <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-result">
+            
+              <b>result</b>()
+            
+            <a href="../../../classes/ActionDispatch/Routing/HtmlTableFormatter.html#method-i-result" name="method-i-result" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-result_source')" id="l_method-i-result_source">show</a>
+                
+              </p>
+              <div id="method-i-result_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb, line 233</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">result</span>
+  <span class="ruby-ivar">@view</span>.<span class="ruby-identifier">raw</span> <span class="ruby-ivar">@view</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">layout</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;routes/table&quot;</span>) {
+    <span class="ruby-ivar">@view</span>.<span class="ruby-identifier">raw</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-section">
+            
+              <b>section</b>(routes)
+            
+            <a href="../../../classes/ActionDispatch/Routing/HtmlTableFormatter.html#method-i-section" name="method-i-section" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-section_source')" id="l_method-i-section_source">show</a>
+                
+              </p>
+              <div id="method-i-section_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb, line 212</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">section</span>(<span class="ruby-identifier">routes</span>)
+  <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@view</span>.<span class="ruby-identifier">render</span>(<span class="ruby-identifier">partial</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;routes/route&quot;</span>, <span class="ruby-identifier">collection</span><span class="ruby-operator">:</span> <span class="ruby-identifier">routes</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-section_title">
+            
+              <b>section_title</b>(title)
+            
+            <a href="../../../classes/ActionDispatch/Routing/HtmlTableFormatter.html#method-i-section_title" name="method-i-section_title" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-section_title_source')" id="l_method-i-section_title_source">show</a>
+                
+              </p>
+              <div id="method-i-section_title_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/routing/inspector.rb, line 208</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">section_title</span>(<span class="ruby-identifier">title</span>)
+  <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">%Q(&lt;tr&gt;&lt;th colspan=&quot;4&quot;&gt;#{title}&lt;/th&gt;&lt;/tr&gt;)</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

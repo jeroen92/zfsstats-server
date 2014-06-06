@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::PostgreSQLColumn</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::PostgreSQLColumn 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Column.html">ActiveRecord::ConnectionAdapters::Column</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/array_parser_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/array_parser.rb</a></li>
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb</a></li>
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="PostgreSQLColumn/ArrayParser.html">ActiveRecord::ConnectionAdapters::PostgreSQLColumn::ArrayParser</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="PostgreSQLColumn/Cast.html">ActiveRecord::ConnectionAdapters::PostgreSQLColumn::Cast</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-extract_value_from_default">extract_value_from_default</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-type_cast">type_cast</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-extract_value_from_default">
+            
+              <b>extract_value_from_default</b>(default)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn.html#method-c-extract_value_from_default" name="method-c-extract_value_from_default" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Extracts the value from a PostgreSQL column default definition.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-extract_value_from_default_source')" id="l_method-c-extract_value_from_default_source">show</a>
+                
+              </p>
+              <div id="method-c-extract_value_from_default_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">extract_value_from_default</span>(<span class="ruby-identifier">default</span>)
+  <span class="ruby-comment"># This is a performance optimization for Ruby 1.9.2 in development.</span>
+  <span class="ruby-comment"># If the value is nil, we return nil straight away without checking</span>
+  <span class="ruby-comment"># the regular expressions. If we check each regular expression,</span>
+  <span class="ruby-comment"># Regexp#=== will call NilClass#to_str, which will trigger</span>
+  <span class="ruby-comment"># method_missing (defined by whiny nil in ActiveSupport) which</span>
+  <span class="ruby-comment"># makes this method very very slow.</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">default</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">default</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">default</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::(num|date|tstz|ts|int4|int8)range\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Numeric types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\(?(-?\d+(\.\d*)?\)?(::bigint)?)\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Character types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\(?&#39;(.*)&#39;::.*\b(?:character varying|bpchar|text)\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Binary data types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::bytea\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Date/time types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.+)&#39;::(?:time(?:stamp)? with(?:out)? time zone|date)\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::interval\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Boolean type</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;true&#39;</span>
+      <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;false&#39;</span>
+      <span class="ruby-keyword">false</span>
+    <span class="ruby-comment"># Geometric types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::(?:point|line|lseg|box|&quot;?path&quot;?|polygon|circle)\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Network address types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::(?:cidr|inet|macaddr)\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Bit string types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\AB&#39;(.*)&#39;::&quot;?bit(?: varying)?&quot;?\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># XML type</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::xml\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Arrays</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::&quot;?\D+&quot;?\[\]\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Hstore</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::hstore\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># JSON</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A&#39;(.*)&#39;::json\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-comment"># Object identifier types</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A-?\d+\z/</span>
+      <span class="ruby-node">$1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># Anything else is blank, some user type, or some function</span>
+      <span class="ruby-comment"># and we can&#39;t know the value of that, so return nil.</span>
+      <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-type_cast">
+            
+              <b>type_cast</b>(value)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/PostgreSQLColumn.html#method-i-type_cast" name="method-i-type_cast" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-type_cast_source')" id="l_method-i-type_cast_source">show</a>
+                
+              </p>
+              <div id="method-i-type_cast_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">type_cast</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">super</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">encoded?</span>
+
+  <span class="ruby-ivar">@oid_type</span>.<span class="ruby-identifier">type_cast</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

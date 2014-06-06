@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::RecordIdentifier</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::RecordIdentifier 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/record_identifier_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/record_identifier.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-dom_class">dom_class</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-dom_class">dom_class</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-dom_id">dom_id</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-dom_id">dom_id</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">MODULE_MESSAGE</td>
+            <td>=</td>
+            <td class="attr-value">&#39;Calling ActionController::RecordIdentifier.%s is deprecated and &#39; \
+&#39;will be removed in Rails 4.1, please call using ActionView::RecordIdentifier instead.&#39;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">INSTANCE_MESSAGE</td>
+            <td>=</td>
+            <td class="attr-value">&#39;%s method will no longer be included by default in controllers &#39; \
+&#39;since Rails 4.1. If you would like to use it in controllers, please include &#39; \
+&#39;ActionView::RecordIdentifier module.&#39;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-dom_class">
+            
+              <b>dom_class</b>(record, prefix = nil)
+            
+            <a href="../../classes/ActionController/RecordIdentifier.html#method-c-dom_class" name="method-c-dom_class" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-dom_class_source')" id="l_method-c-dom_class_source">show</a>
+                
+              </p>
+              <div id="method-c-dom_class_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/record_identifier.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-constant">MODULE_MESSAGE</span> <span class="ruby-operator">%</span> <span class="ruby-string">&#39;dom_class&#39;</span>)
+  <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordIdentifier</span>.<span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-dom_id">
+            
+              <b>dom_id</b>(record, prefix = nil)
+            
+            <a href="../../classes/ActionController/RecordIdentifier.html#method-c-dom_id" name="method-c-dom_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-dom_id_source')" id="l_method-c-dom_id_source">show</a>
+                
+              </p>
+              <div id="method-c-dom_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/record_identifier.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-constant">MODULE_MESSAGE</span> <span class="ruby-operator">%</span> <span class="ruby-string">&#39;dom_id&#39;</span>)
+  <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordIdentifier</span>.<span class="ruby-identifier">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-dom_class">
+            
+              <b>dom_class</b>(record, prefix = nil)
+            
+            <a href="../../classes/ActionController/RecordIdentifier.html#method-i-dom_class" name="method-i-dom_class" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dom_class_source')" id="l_method-i-dom_class_source">show</a>
+                
+              </p>
+              <div id="method-i-dom_class_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/record_identifier.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dom_class</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-constant">INSTANCE_MESSAGE</span> <span class="ruby-operator">%</span> <span class="ruby-string">&#39;dom_class&#39;</span>)
+  <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordIdentifier</span>.<span class="ruby-identifier">dom_class</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-dom_id">
+            
+              <b>dom_id</b>(record, prefix = nil)
+            
+            <a href="../../classes/ActionController/RecordIdentifier.html#method-i-dom_id" name="method-i-dom_id" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dom_id_source')" id="l_method-i-dom_id_source">show</a>
+                
+              </p>
+              <div id="method-i-dom_id_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/record_identifier.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-constant">INSTANCE_MESSAGE</span> <span class="ruby-operator">%</span> <span class="ruby-string">&#39;dom_id&#39;</span>)
+  <span class="ruby-constant">ActionView</span><span class="ruby-operator">::</span><span class="ruby-constant">RecordIdentifier</span>.<span class="ruby-identifier">dom_id</span>(<span class="ruby-identifier">record</span>, <span class="ruby-identifier">prefix</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

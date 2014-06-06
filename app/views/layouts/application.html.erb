@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head ng-app="Zfsstats">
+  <title>ZFS Stats</title>
+  <%= stylesheet_link_tag "application" %>
+  <%= javascript_include_tag "application" %>
+  <%= javascript_tag do %>
+  	window.userId = "<%= current_user.id %>"
+  <% end %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<div id="wrap">
+	<div class="container">
+		<nav class="navbar navbar-default" role="navigation">
+			<div class="navbar-header">
+	    	<a class="navbar-brand" href="#">ZFS-Stats</a>
+	    </div>
+
+	    <div class="collapse navbar-collapse">
+	    	<ul class="nav navbar-nav">
+	    		<li class="<%= 'active' if params[:controller] == 'dashboard' %>"><%= link_to 'Dashboard', {:controller => "dashboard", :action => "index"}, :target => '_self' %></li>
+					<li class="<%= 'active' if params[:controller] == 'servers' %>"><%= link_to 'Servers', {:controller => "servers", :action => "index"}, :target => '_self' %></li>
+					<li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to 'Users', { :controller => "users", :action => "index"}, :target => '_self' %></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<% if current_user %>
+						<p class="navbar-text">Welcome, <%= current_user.firstname %>.</p>
+						<li><%= link_to 'Log Out', session_path("current"), method: "delete" %></li>
+					<% else %> 
+						<li><%= link_to 'Log In', :controller => "sessions", :action => "new" %></li>
+					<% end %>
+				</ul>
+			</div>
+	  </nav>
+
+		<div>
+			<%= yield %>
+		</div>
+		
+	</div>
+</div>
+
+<div class="footer">
+	<p class="footer-text" align="center">ZFS-Stats <%= APP_VERSION %> - Jeroen Schutrup - <a href="http://jeroen92.nl">Jeroen92.nl</a></p>
+</div>
+
+</body>
+</html>

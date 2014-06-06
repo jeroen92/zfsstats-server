@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-md-4">	
+		<div class="job-information">
+			<div id="job-navigation">
+				<legend>Jobs - {{ server.name }}</legend>
+				<span>
+					<a class="navigation-link" style="float: left" ng-href="./"><i class="fa fa-arrow-left"></i> {{ server.name }}</a>
+				</span>
+			</div>
+			<div id="job-description">
+				<p>On this page are all tasks of server <i>{{ server.name }}</i> listed.</p>
+			</div>
+			<div id="job-specifications">
+				<table class="table table-striped table-bordered" style="font-size:12px;">
+				    <tr>
+				      <th class="job-information-table-header" colspan="2">Measurement Job Alerts</th>
+				    </tr>
+				    <tr>
+				      <td>Last day (24 hours)</td>
+				      <td>{{ measurementJob.alerts1D.length }}</td>
+				    </tr>
+				    <tr>
+				      <td>Last week</td>
+				      <td>{{ measurementJob.alerts1W.length }}</td>
+				    </tr>
+				    <tr>
+				      <td>Always</td>
+				      <td>{{ measurementJob.alertsInfinite.length }}</td>
+				    </tr>
+				  </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="job-unit">
+			<div class="row">
+				<div class="col-md-9">
+					<h2>Measurements</h2>
+					<p>
+						If you've enabled a measurement job, this ZFS server will query statistics regarding various metrics and send them to ZFS-Stats at a certain interval, which is configurable.
+					</p>
+				</div>
+
+				<div class="col-md-3 job-measurement-details" ng-show="measurementJob">
+					<div class="col-md-1 job-measurement-details-left">
+						<p ng-show="measurementJob.status"><b>Status</b> Enabled</p>
+						<p ng-show="!measurementJob.status"><b>Status</b> Disabled</p>
+						<p><b>Interval</b> {{ measurementJob.interval|seconds }}</p>
+					</div>
+					<div class="col-md-1 job-measurement-details-right">
+						<a ng-show="measurementJob.status" class="btn btn-large btn-danger" ng-click="toggleMeasurementActive()">Disable</a>
+						<a ng-show="!measurementJob.status" class="btn btn-large btn-success" ng-click="toggleMeasurementActive()">Enable</a>
+						<a class="btn btn-large btn-warning" ng-click="openEditMeasurementModal()">Edit</a>
+					</div>
+				</div>
+
+				<div class="col-md-3 measurement-details" ng-show="!measurementJob">
+					<div class="job-measurement-absent">
+						<p><b>This server doesn't contain a device where ZFS-Stats can gather statistics from.</b></p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

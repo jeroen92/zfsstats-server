@@ -1,0 +1,828 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::TestCase::Behavior</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::TestCase::Behavior 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/test_case_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Behavior/ClassMethods.html">ActionController::TestCase::Behavior::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-build_request">build_request</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-build_response">build_response</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get">get</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-head">head</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-paramify_values">paramify_values</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-patch">patch</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-post">post</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-process">process</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-put">put</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-setup_controller_request_and_response">setup_controller_request_and_response</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>X</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-xhr">xhr</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-xml_http_request">xml_http_request</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../../ActionDispatch/TestProcess.html">
+              ActionDispatch::TestProcess
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActiveSupport/Testing/ConstantLookup.html">
+              ActiveSupport::Testing::ConstantLookup
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../Testing.html">
+              ActionController::Testing
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../TemplateAssertions.html">
+              ActionController::TemplateAssertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../../ActionDispatch/Assertions.html">
+              ActionDispatch::Assertions
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>request</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>response</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-build_request">
+            
+              <b>build_request</b>()
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-build_request" name="method-i-build_request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-build_request_source')" id="l_method-i-build_request_source">show</a>
+                
+              </p>
+              <div id="method-i-build_request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 605</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">build_request</span>
+  <span class="ruby-constant">TestRequest</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-build_response">
+            
+              <b>build_response</b>()
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-build_response" name="method-i-build_response" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-build_response_source')" id="l_method-i-build_response_source">show</a>
+                
+              </p>
+              <div id="method-i-build_response_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 609</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">build_response</span>
+  <span class="ruby-constant">TestResponse</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(action, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Simulate a DELETE request with the given parameters and set/volley the
+response. See <code>get</code> for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 492</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">action</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-string">&quot;DELETE&quot;</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get">
+            
+              <b>get</b>(action, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Simulate a GET request with the given parameters.</p>
+<ul><li>
+<p><code>action</code>: The controller action to call.</p>
+</li><li>
+<p><code>parameters</code>: The HTTP parameters that you want to pass. This
+may be <code>nil</code>, a hash, or a string that is appropriately encoded
+(<code>application/x-www-form-urlencoded</code> or
+<code>multipart/form-data</code>).</p>
+</li><li>
+<p><code>session</code>: A hash of parameters to store in the session. This
+may be <code>nil</code>.</p>
+</li><li>
+<p><code>flash</code>: A hash of parameters to store in the flash. This may be
+<code>nil</code>.</p>
+</li></ul>
+
+<p>You can also simulate POST, PATCH, PUT, DELETE, HEAD, and OPTIONS requests
+with <code>post</code>, <code>patch</code>, <code>put</code>,
+<code>delete</code>, <code>head</code>, and <code>options</code>.</p>
+
+<p>Note that the request method is not verified. The different methods are
+available to make the tests more expressive.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                
+              </p>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 468</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">action</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-string">&quot;GET&quot;</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-head">
+            
+              <b>head</b>(action, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-head" name="method-i-head" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Simulate a HEAD request with the given parameters and set/volley the
+response. See <code>get</code> for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-head_source')" id="l_method-i-head_source">show</a>
+                
+              </p>
+              <div id="method-i-head_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 498</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">head</span>(<span class="ruby-identifier">action</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-string">&quot;HEAD&quot;</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-paramify_values">
+            
+              <b>paramify_values</b>(hash_or_array_or_value)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-paramify_values" name="method-i-paramify_values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-paramify_values_source')" id="l_method-i-paramify_values_source">show</a>
+                
+              </p>
+              <div id="method-i-paramify_values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 512</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">paramify_values</span>(<span class="ruby-identifier">hash_or_array_or_value</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">hash_or_array_or_value</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">hash_or_array_or_value</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">key</span>, <span class="ruby-identifier">paramify_values</span>(<span class="ruby-identifier">value</span>)] }]
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-identifier">hash_or_array_or_value</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">paramify_values</span>(<span class="ruby-identifier">i</span>)}
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Test</span><span class="ruby-operator">::</span><span class="ruby-constant">UploadedFile</span>, <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">UploadedFile</span>
+    <span class="ruby-identifier">hash_or_array_or_value</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">hash_or_array_or_value</span>.<span class="ruby-identifier">to_param</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-patch">
+            
+              <b>patch</b>(action, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-patch" name="method-i-patch" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Simulate a PATCH request with the given parameters and set/volley the
+response. See <code>get</code> for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-patch_source')" id="l_method-i-patch_source">show</a>
+                
+              </p>
+              <div id="method-i-patch_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 480</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">patch</span>(<span class="ruby-identifier">action</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-string">&quot;PATCH&quot;</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-post">
+            
+              <b>post</b>(action, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-post" name="method-i-post" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Simulate a POST request with the given parameters and set/volley the
+response. See <code>get</code> for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-post_source')" id="l_method-i-post_source">show</a>
+                
+              </p>
+              <div id="method-i-post_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 474</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">post</span>(<span class="ruby-identifier">action</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-string">&quot;POST&quot;</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-process">
+            
+              <b>process</b>(action, http_method = &#39;GET&#39;, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-process" name="method-i-process" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_source')" id="l_method-i-process_source">show</a>
+                
+              </p>
+              <div id="method-i-process_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 525</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">http_method</span> = <span class="ruby-string">&#39;GET&#39;</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">check_required_ivars</span>
+  <span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">args</span> = <span class="ruby-identifier">handle_old_process_api</span>(<span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">caller</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">http_method</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;HEAD&#39;</span>
+    <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;RAW_POST_DATA&#39;</span>] = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">shift</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">session</span>, <span class="ruby-identifier">flash</span> = <span class="ruby-identifier">args</span>
+
+  <span class="ruby-comment"># Ensure that numbers and symbols passed as params are converted to</span>
+  <span class="ruby-comment"># proper params, as is the case when engaging rack.</span>
+  <span class="ruby-identifier">parameters</span> = <span class="ruby-identifier">paramify_values</span>(<span class="ruby-identifier">parameters</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">html_format?</span>(<span class="ruby-identifier">parameters</span>)
+
+  <span class="ruby-ivar">@html_document</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:recycle!</span>)
+    <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Testing</span><span class="ruby-operator">::</span><span class="ruby-constant">Functional</span>)
+    <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">class_eval</span> { <span class="ruby-identifier">include</span> <span class="ruby-constant">Testing</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">recycle!</span>
+  <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">recycle!</span>
+  <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">recycle!</span>
+
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;REQUEST_METHOD&#39;</span>] = <span class="ruby-identifier">http_method</span>
+
+  <span class="ruby-identifier">parameters</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-identifier">controller_class_name</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">anonymous?</span> <span class="ruby-operator">?</span>
+    <span class="ruby-string">&quot;anonymous&quot;</span> <span class="ruby-operator">:</span>
+    <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">underscore</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/_controller$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">assign_parameters</span>(<span class="ruby-ivar">@routes</span>, <span class="ruby-identifier">controller_class_name</span>, <span class="ruby-identifier">action</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">parameters</span>)
+
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">session</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">session</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">session</span>
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">flash</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">flash</span> <span class="ruby-operator">||</span> {})
+
+  <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">request</span>  = <span class="ruby-ivar">@request</span>
+  <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">response</span> = <span class="ruby-ivar">@response</span>
+
+  <span class="ruby-identifier">build_request_uri</span>(<span class="ruby-identifier">action</span>, <span class="ruby-identifier">parameters</span>)
+
+  <span class="ruby-identifier">name</span> = <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">parameters</span>[<span class="ruby-value">:action</span>]
+
+  <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">process</span>(<span class="ruby-identifier">name</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">cookies</span> = <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;action_dispatch.cookies&#39;</span>]
+    <span class="ruby-identifier">cookies</span>.<span class="ruby-identifier">write</span>(<span class="ruby-ivar">@response</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">prepare!</span>
+
+  <span class="ruby-ivar">@assigns</span> = <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:view_assigns</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">view_assigns</span> <span class="ruby-operator">:</span> {}
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">session</span>[<span class="ruby-string">&#39;flash&#39;</span>] = <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">flash</span>.<span class="ruby-identifier">to_session_value</span>
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">session</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;flash&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">session</span>[<span class="ruby-string">&#39;flash&#39;</span>].<span class="ruby-identifier">blank?</span>
+  <span class="ruby-ivar">@response</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-put">
+            
+              <b>put</b>(action, *args)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-put" name="method-i-put" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Simulate a PUT request with the given parameters and set/volley the
+response. See <code>get</code> for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-put_source')" id="l_method-i-put_source">show</a>
+                
+              </p>
+              <div id="method-i-put_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 486</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">put</span>(<span class="ruby-identifier">action</span>, *<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">action</span>, <span class="ruby-string">&quot;PUT&quot;</span>, *<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-setup_controller_request_and_response">
+            
+              <b>setup_controller_request_and_response</b>()
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-setup_controller_request_and_response" name="method-i-setup_controller_request_and_response" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-setup_controller_request_and_response_source')" id="l_method-i-setup_controller_request_and_response_source">show</a>
+                
+              </p>
+              <div id="method-i-setup_controller_request_and_response_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 582</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">setup_controller_request_and_response</span>
+  <span class="ruby-ivar">@request</span>          = <span class="ruby-identifier">build_request</span>
+  <span class="ruby-ivar">@response</span>         = <span class="ruby-identifier">build_response</span>
+  <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">request</span> = <span class="ruby-ivar">@request</span>
+
+  <span class="ruby-ivar">@controller</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@controller</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">controller_class</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@controller</span>
+      <span class="ruby-keyword">begin</span>
+        <span class="ruby-ivar">@controller</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-keyword">rescue</span>
+        <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;could not construct controller #{klass}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@controller</span>
+    <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">request</span> = <span class="ruby-ivar">@request</span>
+    <span class="ruby-ivar">@controller</span>.<span class="ruby-identifier">params</span> = {}
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xhr">
+            
+              <b>xhr</b>(request_method, action, parameters = nil, session = nil, flash = nil)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-xhr" name="method-i-xhr" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xml_http_request">
+            
+              <b>xml_http_request</b>(request_method, action, parameters = nil, session = nil, flash = nil)
+            
+            <a href="../../../classes/ActionController/TestCase/Behavior.html#method-i-xml_http_request" name="method-i-xml_http_request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Behavior.html#method-i-xhr">xhr</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-xml_http_request_source')" id="l_method-i-xml_http_request_source">show</a>
+                
+              </p>
+              <div id="method-i-xml_http_request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 502</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">xml_http_request</span>(<span class="ruby-identifier">request_method</span>, <span class="ruby-identifier">action</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">session</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">flash</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;HTTP_X_REQUESTED_WITH&#39;</span>] = <span class="ruby-string">&#39;XMLHttpRequest&#39;</span>
+  <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;HTTP_ACCEPT&#39;</span>] <span class="ruby-operator">||=</span>  [<span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">JS</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>, <span class="ruby-string">&#39;text/xml&#39;</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">ALL</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+  <span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">request_method</span>, <span class="ruby-identifier">action</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">session</span>, <span class="ruby-identifier">flash</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>.<span class="ruby-identifier">delete</span> <span class="ruby-string">&#39;HTTP_X_REQUESTED_WITH&#39;</span>
+    <span class="ruby-ivar">@request</span>.<span class="ruby-identifier">env</span>.<span class="ruby-identifier">delete</span> <span class="ruby-string">&#39;HTTP_ACCEPT&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

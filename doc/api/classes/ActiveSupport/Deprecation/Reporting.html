@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Deprecation::Reporting</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Deprecation::Reporting 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/deprecation/reporting_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/reporting.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-deprecation_warning">deprecation_warning</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-silence">silence</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-warn">warn</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>gem_name</td>
+            <td class='attr-desc'><p>Name of gem where method is deprecated</p></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>silenced</td>
+            <td class='attr-desc'><p>Whether to print a message (silent mode)</p></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-deprecation_warning">
+            
+              <b>deprecation_warning</b>(deprecated_method_name, message = nil, caller_backtrace = nil)
+            
+            <a href="../../../classes/ActiveSupport/Deprecation/Reporting.html#method-i-deprecation_warning" name="method-i-deprecation_warning" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-deprecation_warning_source')" id="l_method-i-deprecation_warning_source">show</a>
+                
+              </p>
+              <div id="method-i-deprecation_warning_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/reporting.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deprecation_warning</span>(<span class="ruby-identifier">deprecated_method_name</span>, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">caller_backtrace</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">caller_backtrace</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">caller</span>(<span class="ruby-number">2</span>)
+  <span class="ruby-identifier">deprecated_method_warning</span>(<span class="ruby-identifier">deprecated_method_name</span>, <span class="ruby-identifier">message</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">warn</span>(<span class="ruby-identifier">msg</span>, <span class="ruby-identifier">caller_backtrace</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-silence">
+            
+              <b>silence</b>()
+            
+            <a href="../../../classes/ActiveSupport/Deprecation/Reporting.html#method-i-silence" name="method-i-silence" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Silence deprecation warnings within the block.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;something broke!&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;DEPRECATION WARNING: something broke! (called from your_code.rb:1)&quot;</span>
+
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">silence</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;something broke!&#39;</span>)
+<span class="ruby-keyword">end</span>
+<span class="ruby-comment"># =&gt; nil</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-silence_source')" id="l_method-i-silence_source">show</a>
+                
+              </p>
+              <div id="method-i-silence_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/reporting.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">silence</span>
+  <span class="ruby-identifier">old_silenced</span>, <span class="ruby-ivar">@silenced</span> = <span class="ruby-ivar">@silenced</span>, <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@silenced</span> = <span class="ruby-identifier">old_silenced</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-warn">
+            
+              <b>warn</b>(message = nil, callstack = nil)
+            
+            <a href="../../../classes/ActiveSupport/Deprecation/Reporting.html#method-i-warn" name="method-i-warn" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Outputs a deprecation warning to the output configured by
+<code>ActiveSupport::Deprecation.behavior</code>.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;something broke!&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;DEPRECATION WARNING: something broke! (called from your_code.rb:1)&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-warn_source')" id="l_method-i-warn_source">show</a>
+                
+              </p>
+              <div id="method-i-warn_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/deprecation/reporting.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">warn</span>(<span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">callstack</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">silenced</span>
+
+  <span class="ruby-identifier">callstack</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">caller</span>(<span class="ruby-number">2</span>)
+  <span class="ruby-identifier">deprecation_message</span>(<span class="ruby-identifier">callstack</span>, <span class="ruby-identifier">message</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">behavior</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">m</span>, <span class="ruby-identifier">callstack</span>) }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

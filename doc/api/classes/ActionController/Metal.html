@@ -1,0 +1,1005 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Metal</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::Metal 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../AbstractController/Base.html">AbstractController::Base</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><code>ActionController::Metal</code> is the simplest possible controller,
+providing a valid Rack interface without the additional niceties provided
+by <code>ActionController::Base</code>.</p>
+
+<p>A sample metal controller might look like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">HelloController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Metal</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">response_body</span> = <span class="ruby-string">&quot;Hello World!&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>And then to route requests to your metal controller, you would add
+something like this to <code>config/routes.rb</code>:</p>
+
+<pre>get &#39;hello&#39;, to: HelloController.action(:index)</pre>
+
+<p>The <code>action</code> method returns a valid Rack application for the
+Rails router to dispatch to.</p>
+
+<h2 id="label-Rendering+Helpers"><a href="Rendering.html">Rendering</a> <a href="Helpers.html">Helpers</a></h2>
+
+<p><code>ActionController::Metal</code> by default provides no utilities for
+rendering views, partials, or other responses aside from explicitly calling
+of <code>response_body=</code>, <code>content_type=</code>, and
+<code>status=</code>. To add the render helpers you&#39;re used to having
+in a normal controller, you can do the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">HelloController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Metal</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Rendering</span>
+  <span class="ruby-identifier">append_view_path</span> <span class="ruby-node">&quot;#{Rails.root}/app/views&quot;</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-identifier">render</span> <span class="ruby-string">&quot;hello/index&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-Redirection+Helpers">Redirection <a href="Helpers.html">Helpers</a></h2>
+
+<p>To add redirection helpers to your metal controller, do the following:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">HelloController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Metal</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Redirecting</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">Rails</span>.<span class="ruby-identifier">application</span>.<span class="ruby-identifier">routes</span>.<span class="ruby-identifier">url_helpers</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">root_url</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="label-Other+Helpers">Other <a href="Helpers.html">Helpers</a></h2>
+
+<p>You can refer to the modules included in
+<code>ActionController::Base</code> to see other features you can bring
+into your metal controller.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-action">action</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-call">call</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-content_type">content_type</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-content_type-3D">content_type=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-controller_name">controller_name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-controller_name">controller_name</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-env">env</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-location">location</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-location-3D">location=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-middleware">middleware</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-params">params</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-params-3D">params=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-performed-3F">performed?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-response_body-3D">response_body=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-status">status</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-status-3D">status=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-url_for">url_for</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-use">use</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-action">
+            
+              <b>action</b>(name, klass = ActionDispatch::Request)
+            
+            <a href="../../classes/ActionController/Metal.html#method-c-action" name="method-c-action" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a Rack endpoint for the given action name.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-action_source')" id="l_method-c-action_source">show</a>
+                
+              </p>
+              <div id="method-c-action_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 229</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">action</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">klass</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>)
+  <span class="ruby-identifier">middleware_stack</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">env</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new</span>.<span class="ruby-identifier">dispatch</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>))
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-call">
+            
+              <b>call</b>(env)
+            
+            <a href="../../classes/ActionController/Metal.html#method-c-call" name="method-c-call" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Makes the controller a Rack endpoint that runs the action in the given
+<code>env</code>&#39;s <code>action_dispatch.request.path_parameters</code>
+key.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-call_source')" id="l_method-c-call_source">show</a>
+                
+              </p>
+              <div id="method-c-call_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-identifier">action</span>(<span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;action_dispatch.request.path_parameters&#39;</span>][<span class="ruby-value">:action</span>]).<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-controller_name">
+            
+              <b>controller_name</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-c-controller_name" name="method-c-controller_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the last part of the controller&#39;s name, underscored, without
+the ending <code>Controller</code>. For instance, PostsController returns
+<code>posts</code>. Namespaces are left out, so Admin::PostsController
+returns <code>posts</code> as well.</p>
+
+<h4 id="method-c-controller_name-label-Returns">Returns</h4>
+<ul><li>
+<p><code>string</code></p>
+</li></ul>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-controller_name_source')" id="l_method-c-controller_name_source">show</a>
+                
+              </p>
+              <div id="method-c-controller_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 114</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">controller_name</span>
+  <span class="ruby-ivar">@controller_name</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">name</span>.<span class="ruby-identifier">demodulize</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/Controller$/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">underscore</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-middleware">
+            
+              <b>middleware</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-c-middleware" name="method-c-middleware" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Alias for <code>middleware_stack</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-middleware_source')" id="l_method-c-middleware_source">show</a>
+                
+              </p>
+              <div id="method-c-middleware_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">middleware</span>
+  <span class="ruby-identifier">middleware_stack</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 132</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>
+  <span class="ruby-ivar">@_headers</span> = {<span class="ruby-string">&quot;Content-Type&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;text/html&quot;</span>}
+  <span class="ruby-ivar">@_status</span> = <span class="ruby-number">200</span>
+  <span class="ruby-ivar">@_request</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@_response</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@_routes</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-use">
+            
+              <b>use</b>(*args, &amp;block)
+            
+            <a href="../../classes/ActionController/Metal.html#method-c-use" name="method-c-use" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Pushes the given Rack middleware and its arguments to the bottom of the
+middleware stack.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-use_source')" id="l_method-c-use_source">show</a>
+                
+              </p>
+              <div id="method-c-use_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">use</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">middleware_stack</span>.<span class="ruby-identifier">use</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-content_type">
+            
+              <b>content_type</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-content_type" name="method-i-content_type" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-content_type_source')" id="l_method-i-content_type_source">show</a>
+                
+              </p>
+              <div id="method-i-content_type_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">content_type</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Content-Type&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-content_type-3D">
+            
+              <b>content_type=</b>(type)
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-content_type-3D" name="method-i-content_type-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Basic implementations for <a
+href="Metal.html#method-i-content_type">#content_type</a>=, location=, and
+headers are provided to reduce the dependency on the <a
+href="RackDelegation.html">RackDelegation</a> module in Renderer and
+Redirector.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-content_type-3D_source')" id="l_method-i-content_type-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-content_type-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">content_type=</span>(<span class="ruby-identifier">type</span>)
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Content-Type&quot;</span>] = <span class="ruby-identifier">type</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-controller_name">
+            
+              <b>controller_name</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-controller_name" name="method-i-controller_name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Delegates to the class&#39; <code>controller_name</code></p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-controller_name_source')" id="l_method-i-controller_name_source">show</a>
+                
+              </p>
+              <div id="method-i-controller_name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 119</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">controller_name</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">controller_name</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-env">
+            
+              <b>env</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-env" name="method-i-env" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-env_source')" id="l_method-i-env_source">show</a>
+                
+              </p>
+              <div id="method-i-env_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">env</span>
+  <span class="ruby-ivar">@_env</span> <span class="ruby-operator">||=</span> {}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-location">
+            
+              <b>location</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-location" name="method-i-location" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-location_source')" id="l_method-i-location_source">show</a>
+                
+              </p>
+              <div id="method-i-location_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">location</span>
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Location&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-location-3D">
+            
+              <b>location=</b>(url)
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-location-3D" name="method-i-location-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-location-3D_source')" id="l_method-i-location-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-location-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">location=</span>(<span class="ruby-identifier">url</span>)
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;Location&quot;</span>] = <span class="ruby-identifier">url</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-params">
+            
+              <b>params</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-params" name="method-i-params" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-params_source')" id="l_method-i-params_source">show</a>
+                
+              </p>
+              <div id="method-i-params_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">params</span>
+  <span class="ruby-ivar">@_params</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">parameters</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-params-3D">
+            
+              <b>params=</b>(val)
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-params-3D" name="method-i-params-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-params-3D_source')" id="l_method-i-params-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-params-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 145</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">params=</span>(<span class="ruby-identifier">val</span>)
+  <span class="ruby-ivar">@_params</span> = <span class="ruby-identifier">val</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-performed-3F">
+            
+              <b>performed?</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-performed-3F" name="method-i-performed-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-performed-3F_source')" id="l_method-i-performed-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-performed-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">performed?</span>
+  <span class="ruby-identifier">response_body</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">response</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">committed?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-response_body-3D">
+            
+              <b>response_body=</b>(body)
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-response_body-3D" name="method-i-response_body-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-response_body-3D_source')" id="l_method-i-response_body-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-response_body-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">response_body=</span>(<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">body</span> = [<span class="ruby-identifier">body</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:each</span>)
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-status">
+            
+              <b>status</b>()
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-status" name="method-i-status" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-status_source')" id="l_method-i-status_source">show</a>
+                
+              </p>
+              <div id="method-i-status_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">status</span>
+  <span class="ruby-ivar">@_status</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-status-3D">
+            
+              <b>status=</b>(status)
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-status-3D" name="method-i-status-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-status-3D_source')" id="l_method-i-status-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-status-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">status=</span>(<span class="ruby-identifier">status</span>)
+  <span class="ruby-ivar">@_status</span> = <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">status_code</span>(<span class="ruby-identifier">status</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-url_for">
+            
+              <b>url_for</b>(string)
+            
+            <a href="../../classes/ActionController/Metal.html#method-i-url_for" name="method-i-url_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>basic <a href="Metal.html#method-i-url_for">#url_for</a> that can be
+overridden for more robust functionality</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_for_source')" id="l_method-i-url_for_source">show</a>
+                
+              </p>
+              <div id="method-i-url_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_for</span>(<span class="ruby-identifier">string</span>)
+  <span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

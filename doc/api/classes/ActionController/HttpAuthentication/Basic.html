@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::HttpAuthentication::Basic</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::HttpAuthentication::Basic 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/http_authentication_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Makes it dead easy to do HTTP Basic authentication.</p>
+
+<h3 id="label-Simple+Basic+example">Simple Basic example</h3>
+
+<pre class="ruby"> <span class="ruby-keyword">class</span> <span class="ruby-constant">PostsController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ApplicationController</span>
+   <span class="ruby-identifier">http_basic_authenticate_with</span> <span class="ruby-identifier">name</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;dhh&quot;</span>, <span class="ruby-identifier">password</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;secret&quot;</span>, <span class="ruby-identifier">except</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">index</span>
+
+   <span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+     <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;Everyone can see me!&quot;</span>
+   <span class="ruby-keyword">end</span>
+
+   <span class="ruby-keyword">def</span> <span class="ruby-identifier">edit</span>
+     <span class="ruby-identifier">render</span> <span class="ruby-identifier">text</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;I&#39;m only accessible if you know the password&quot;</span>
+   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h3 id="label-Advanced+Basic+example">Advanced Basic example</h3>
+
+<p>Here is a more advanced Basic example where only Atom feeds and the XML API
+is protected by HTTP authentication, the regular <a
+href="../../HTML.html">HTML</a> interface is protected by a session
+approach:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">ApplicationController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-identifier">before_action</span> :<span class="ruby-identifier">set_account</span>, :<span class="ruby-identifier">authenticate</span>
+
+  <span class="ruby-identifier">protected</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">set_account</span>
+      <span class="ruby-ivar">@account</span> = <span class="ruby-constant">Account</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">url_name</span><span class="ruby-operator">:</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">subdomains</span>.<span class="ruby-identifier">first</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">authenticate</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">ATOM</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">user</span> = <span class="ruby-identifier">authenticate_with_http_basic</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">u</span>, <span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@account</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">authenticate</span>(<span class="ruby-identifier">u</span>, <span class="ruby-identifier">p</span>) }
+          <span class="ruby-ivar">@current_user</span> = <span class="ruby-identifier">user</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">request_http_basic_authentication</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">session_authenticated?</span>
+          <span class="ruby-ivar">@current_user</span> = <span class="ruby-ivar">@account</span>.<span class="ruby-identifier">users</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">session</span>[:<span class="ruby-identifier">authenticated</span>][:<span class="ruby-identifier">user_id</span>])
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">redirect_to</span>(<span class="ruby-identifier">login_url</span>) <span class="ruby-keyword">and</span> <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In your integration tests, you can do something like this:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">test_access_granted_from_xml</span>
+  <span class="ruby-identifier">get</span>(
+    <span class="ruby-string">&quot;/notes/1.xml&quot;</span>, <span class="ruby-keyword">nil</span>,
+    <span class="ruby-string">&#39;HTTP_AUTHORIZATION&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">HttpAuthentication</span><span class="ruby-operator">::</span><span class="ruby-constant">Basic</span>.<span class="ruby-identifier">encode_credentials</span>(<span class="ruby-identifier">users</span>(:<span class="ruby-identifier">dhh</span>).<span class="ruby-identifier">name</span>, <span class="ruby-identifier">users</span>(:<span class="ruby-identifier">dhh</span>).<span class="ruby-identifier">password</span>)
+  )
+
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">status</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Basic/ControllerMethods.html">ActionController::HttpAuthentication::Basic::ControllerMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-authenticate">authenticate</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-authentication_request">authentication_request</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-decode_credentials">decode_credentials</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encode_credentials">encode_credentials</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-user_name_and_password">user_name_and_password</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-authenticate">
+            
+              <b>authenticate</b>(request, &amp;login_procedure)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Basic.html#method-i-authenticate" name="method-i-authenticate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-authenticate_source')" id="l_method-i-authenticate_source">show</a>
+                
+              </p>
+              <div id="method-i-authenticate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">authenticate</span>(<span class="ruby-identifier">request</span>, &amp;<span class="ruby-identifier">login_procedure</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">authorization</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-identifier">login_procedure</span>.<span class="ruby-identifier">call</span>(*<span class="ruby-identifier">user_name_and_password</span>(<span class="ruby-identifier">request</span>))
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-authentication_request">
+            
+              <b>authentication_request</b>(controller, realm)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Basic.html#method-i-authentication_request" name="method-i-authentication_request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-authentication_request_source')" id="l_method-i-authentication_request_source">show</a>
+                
+              </p>
+              <div id="method-i-authentication_request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">authentication_request</span>(<span class="ruby-identifier">controller</span>, <span class="ruby-identifier">realm</span>)
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">headers</span>[<span class="ruby-string">&quot;WWW-Authenticate&quot;</span>] = <span class="ruby-node">%Q(Basic realm=&quot;#{realm.gsub(/&quot;/, &quot;&quot;)}&quot;)</span>
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">response_body</span> = <span class="ruby-string">&quot;HTTP Basic: Access denied.\n&quot;</span>
+  <span class="ruby-identifier">controller</span>.<span class="ruby-identifier">status</span> = <span class="ruby-number">401</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-decode_credentials">
+            
+              <b>decode_credentials</b>(request)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Basic.html#method-i-decode_credentials" name="method-i-decode_credentials" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-decode_credentials_source')" id="l_method-i-decode_credentials_source">show</a>
+                
+              </p>
+              <div id="method-i-decode_credentials_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">decode_credentials</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-operator">::</span><span class="ruby-constant">Base64</span>.<span class="ruby-identifier">decode64</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">authorization</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>, <span class="ruby-number">2</span>).<span class="ruby-identifier">last</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-encode_credentials">
+            
+              <b>encode_credentials</b>(user_name, password)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Basic.html#method-i-encode_credentials" name="method-i-encode_credentials" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encode_credentials_source')" id="l_method-i-encode_credentials_source">show</a>
+                
+              </p>
+              <div id="method-i-encode_credentials_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encode_credentials</span>(<span class="ruby-identifier">user_name</span>, <span class="ruby-identifier">password</span>)
+  <span class="ruby-node">&quot;Basic #{::Base64.strict_encode64(&quot;#{user_name}:#{password}&quot;)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-user_name_and_password">
+            
+              <b>user_name_and_password</b>(request)
+            
+            <a href="../../../classes/ActionController/HttpAuthentication/Basic.html#method-i-user_name_and_password" name="method-i-user_name_and_password" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-user_name_and_password_source')" id="l_method-i-user_name_and_password_source">show</a>
+                
+              </p>
+              <div id="method-i-user_name_and_password_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/http_authentication.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">user_name_and_password</span>(<span class="ruby-identifier">request</span>)
+  <span class="ruby-identifier">decode_credentials</span>(<span class="ruby-identifier">request</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/:/</span>, <span class="ruby-number">2</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::RemoteIp::GetIp</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionDispatch::RemoteIp::GetIp 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/middleware/remote_ip_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/remote_ip.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The <a href="GetIp.html">GetIp</a> class exists as a way to defer
+processing of the request data into an actual IP address. If the <a
+href="../Request.html#method-i-remote_ip">ActionDispatch::Request#remote_ip</a>
+method is called, this class will calculate the value and then memoize it.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-calculate_ip">calculate_ip</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-filter_proxies">filter_proxies</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-ips_from">ips_from</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">VALID_IP</td>
+            <td>=</td>
+            <td class="attr-value">%r{
+(^(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[0-9]{1,2})(\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[0-9]{1,2})){3}$)                                                        | # ip v4
+(^(
+(([0-9A-Fa-f]{1,4}:){7}[0-9A-Fa-f]{1,4})                                                                                                                   | # ip v6 not abbreviated
+(([0-9A-Fa-f]{1,4}:){6}:[0-9A-Fa-f]{1,4})                                                                                                                  | # ip v6 with double colon in the end
+(([0-9A-Fa-f]{1,4}:){5}:([0-9A-Fa-f]{1,4}:)?[0-9A-Fa-f]{1,4})                                                                                              | # - ip addresses v6
+(([0-9A-Fa-f]{1,4}:){4}:([0-9A-Fa-f]{1,4}:){0,2}[0-9A-Fa-f]{1,4})                                                                                          | # - with
+(([0-9A-Fa-f]{1,4}:){3}:([0-9A-Fa-f]{1,4}:){0,3}[0-9A-Fa-f]{1,4})                                                                                          | # - double colon
+(([0-9A-Fa-f]{1,4}:){2}:([0-9A-Fa-f]{1,4}:){0,4}[0-9A-Fa-f]{1,4})                                                                                          | # - in the middle
+(([0-9A-Fa-f]{1,4}:){6} ((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3} (\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))                            | # ip v6 with compatible to v4
+(([0-9A-Fa-f]{1,4}:){1,5}:((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))                           | # ip v6 with compatible to v4
+(([0-9A-Fa-f]{1,4}:){1}:([0-9A-Fa-f]{1,4}:){0,4}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))     | # ip v6 with compatible to v4
+(([0-9A-Fa-f]{1,4}:){0,2}:([0-9A-Fa-f]{1,4}:){0,3}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))   | # ip v6 with compatible to v4
+(([0-9A-Fa-f]{1,4}:){0,3}:([0-9A-Fa-f]{1,4}:){0,2}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))   | # ip v6 with compatible to v4
+(([0-9A-Fa-f]{1,4}:){0,4}:([0-9A-Fa-f]{1,4}:){1}((\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))     | # ip v6 with compatible to v4
+(::([0-9A-Fa-f]{1,4}:){0,5}((\b((25[0-5])|(1\d{2})|(2[0-4]\d) |(\d{1,2}))\b)\.){3}(\b((25[0-5])|(1\d{2})|(2[0-4]\d)|(\d{1,2}))\b))                         | # ip v6 with compatible to v4
+([0-9A-Fa-f]{1,4}::([0-9A-Fa-f]{1,4}:){0,5}[0-9A-Fa-f]{1,4})                                                                                               | # ip v6 with compatible to v4
+(::([0-9A-Fa-f]{1,4}:){0,6}[0-9A-Fa-f]{1,4})                                                                                                               | # ip v6 with double colon at the beginning
+(([0-9A-Fa-f]{1,4}:){1,7}:)                                                                                                                                  # ip v6 without ending
+)$)
+}x</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>This constant contains a regular expression that validates every known form
+of IP v4 and v6 address, with or without abbreviations, adapted from <a
+href="https://gist.github.com/gazay/1289635">this gist</a>.</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(env, middleware)
+            
+            <a href="../../../classes/ActionDispatch/RemoteIp/GetIp.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/remote_ip.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">env</span>, <span class="ruby-identifier">middleware</span>)
+  <span class="ruby-ivar">@env</span>      = <span class="ruby-identifier">env</span>
+  <span class="ruby-ivar">@check_ip</span> = <span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">check_ip</span>
+  <span class="ruby-ivar">@proxies</span>  = <span class="ruby-identifier">middleware</span>.<span class="ruby-identifier">proxies</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-calculate_ip">
+            
+              <b>calculate_ip</b>()
+            
+            <a href="../../../classes/ActionDispatch/RemoteIp/GetIp.html#method-i-calculate_ip" name="method-i-calculate_ip" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sort through the various IP address headers, looking for the IP most likely
+to be the address of the actual remote client making this request.</p>
+
+<p>REMOTE_ADDR will be correct if the request is made directly against the
+Ruby process, on e.g. Heroku. When the request is proxied by another server
+like HAProxy or Nginx, the IP address that made the original request will
+be put in an X-Forwarded-For header. If there are multiple proxies, that
+header may contain a list of IPs. Other proxy services set the Client-Ip
+header instead, so we check that too.</p>
+
+<p>As discussed in <a
+href="http://blog.gingerlime.com/2012/rails-ip-spoofing-vulnerabilities-and-protection/">this
+post about Rails IP Spoofing</a>, while the first IP in the list is likely
+to be the “originating” IP, it could also have been set by the client
+maliciously.</p>
+
+<p>In order to find the first address that is (probably) accurate, we take the
+list of IPs, remove known and trusted proxies, and then take the last
+address left, which was presumably set by one of those proxies.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-calculate_ip_source')" id="l_method-i-calculate_ip_source">show</a>
+                
+              </p>
+              <div id="method-i-calculate_ip_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/remote_ip.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">calculate_ip</span>
+  <span class="ruby-comment"># Set by the Rack web server, this is a single value.</span>
+  <span class="ruby-identifier">remote_addr</span> = <span class="ruby-identifier">ips_from</span>(<span class="ruby-string">&#39;REMOTE_ADDR&#39;</span>).<span class="ruby-identifier">last</span>
+
+  <span class="ruby-comment"># Could be a CSV list and/or repeated headers that were concatenated.</span>
+  <span class="ruby-identifier">client_ips</span>    = <span class="ruby-identifier">ips_from</span>(<span class="ruby-string">&#39;HTTP_CLIENT_IP&#39;</span>).<span class="ruby-identifier">reverse</span>
+  <span class="ruby-identifier">forwarded_ips</span> = <span class="ruby-identifier">ips_from</span>(<span class="ruby-string">&#39;HTTP_X_FORWARDED_FOR&#39;</span>).<span class="ruby-identifier">reverse</span>
+
+  <span class="ruby-comment"># +Client-Ip+ and +X-Forwarded-For+ should not, generally, both be set.</span>
+  <span class="ruby-comment"># If they are both set, it means that this request passed through two</span>
+  <span class="ruby-comment"># proxies with incompatible IP header conventions, and there is no way</span>
+  <span class="ruby-comment"># for us to determine which header is the right one after the fact.</span>
+  <span class="ruby-comment"># Since we have no idea, we give up and explode.</span>
+  <span class="ruby-identifier">should_check_ip</span> = <span class="ruby-ivar">@check_ip</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">client_ips</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">should_check_ip</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">forwarded_ips</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">client_ips</span>.<span class="ruby-identifier">last</span>)
+    <span class="ruby-comment"># We don&#39;t know which came from the proxy, and which from the user</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">IpSpoofAttackError</span>, <span class="ruby-string">&quot;IP spoofing attack?! &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot;HTTP_CLIENT_IP=#{@env[&#39;HTTP_CLIENT_IP&#39;].inspect} &quot;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot;HTTP_X_FORWARDED_FOR=#{@env[&#39;HTTP_X_FORWARDED_FOR&#39;].inspect}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># We assume these things about the IP headers:</span>
+  <span class="ruby-comment">#</span>
+  <span class="ruby-comment">#   - X-Forwarded-For will be a list of IPs, one per proxy, or blank</span>
+  <span class="ruby-comment">#   - Client-Ip is propagated from the outermost proxy, or is blank</span>
+  <span class="ruby-comment">#   - REMOTE_ADDR will be the IP that made the request to Rack</span>
+  <span class="ruby-identifier">ips</span> = [<span class="ruby-identifier">forwarded_ips</span>, <span class="ruby-identifier">client_ips</span>, <span class="ruby-identifier">remote_addr</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>
+
+  <span class="ruby-comment"># If every single IP option is in the trusted list, just return REMOTE_ADDR</span>
+  <span class="ruby-identifier">filter_proxies</span>(<span class="ruby-identifier">ips</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">remote_addr</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>()
+            
+            <a href="../../../classes/ActionDispatch/RemoteIp/GetIp.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Memoizes the value returned by <a
+href="GetIp.html#method-i-calculate_ip">calculate_ip</a> and returns it for
+<a href="../Request.html">ActionDispatch::Request</a> to use.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_s_source')" id="l_method-i-to_s_source">show</a>
+                
+              </p>
+              <div id="method-i-to_s_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/remote_ip.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_s</span>
+  <span class="ruby-ivar">@ip</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">calculate_ip</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-filter_proxies">
+            
+              <b>filter_proxies</b>(ips)
+            
+            <a href="../../../classes/ActionDispatch/RemoteIp/GetIp.html#method-i-filter_proxies" name="method-i-filter_proxies" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-filter_proxies_source')" id="l_method-i-filter_proxies_source">show</a>
+                
+              </p>
+              <div id="method-i-filter_proxies_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/remote_ip.rb, line 180</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">filter_proxies</span>(<span class="ruby-identifier">ips</span>)
+  <span class="ruby-identifier">ips</span>.<span class="ruby-identifier">reject</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">ip</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ip</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@proxies</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ips_from">
+            
+              <b>ips_from</b>(header)
+            
+            <a href="../../../classes/ActionDispatch/RemoteIp/GetIp.html#method-i-ips_from" name="method-i-ips_from" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ips_from_source')" id="l_method-i-ips_from_source">show</a>
+                
+              </p>
+              <div id="method-i-ips_from_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/remote_ip.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ips_from</span>(<span class="ruby-identifier">header</span>)
+  <span class="ruby-comment"># Split the comma-separated list into an array of strings</span>
+  <span class="ruby-identifier">ips</span> = <span class="ruby-ivar">@env</span>[<span class="ruby-identifier">header</span>] <span class="ruby-operator">?</span> <span class="ruby-ivar">@env</span>[<span class="ruby-identifier">header</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[,\s]+/</span>) <span class="ruby-operator">:</span> []
+  <span class="ruby-comment"># Only return IPs that are valid according to the regex</span>
+  <span class="ruby-identifier">ips</span>.<span class="ruby-identifier">select</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">ip</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ip</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">VALID_IP</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

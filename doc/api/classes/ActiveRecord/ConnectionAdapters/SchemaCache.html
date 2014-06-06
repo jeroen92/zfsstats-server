@@ -1,0 +1,686 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::SchemaCache</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::SchemaCache 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/schema_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add">add</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear-21">clear!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-clear_table_cache-21">clear_table_cache!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-columns">columns</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-columns_hash">columns_hash</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-marshal_dump">marshal_dump</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-marshal_load">marshal_load</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-primary_keys">primary_keys</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-size">size</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-table_exists-3F">table_exists?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-tables">tables</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>connection</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>version</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(conn)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 9</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">conn</span>)
+  <span class="ruby-ivar">@connection</span> = <span class="ruby-identifier">conn</span>
+
+  <span class="ruby-ivar">@columns</span>      = {}
+  <span class="ruby-ivar">@columns_hash</span> = {}
+  <span class="ruby-ivar">@primary_keys</span> = {}
+  <span class="ruby-ivar">@tables</span>       = {}
+  <span class="ruby-identifier">prepare_default_proc</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-add">
+            
+              <b>add</b>(table_name)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-add" name="method-i-add" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Add internal cache for table with <code>table_name</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_source')" id="l_method-i-add_source">show</a>
+                
+              </p>
+              <div id="method-i-add_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add</span>(<span class="ruby-identifier">table_name</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">table_exists?</span>(<span class="ruby-identifier">table_name</span>)
+    <span class="ruby-ivar">@primary_keys</span>[<span class="ruby-identifier">table_name</span>]
+    <span class="ruby-ivar">@columns</span>[<span class="ruby-identifier">table_name</span>]
+    <span class="ruby-ivar">@columns_hash</span>[<span class="ruby-identifier">table_name</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear-21">
+            
+              <b>clear!</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-clear-21" name="method-i-clear-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clears out internal caches</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear-21_source')" id="l_method-i-clear-21_source">show</a>
+                
+              </p>
+              <div id="method-i-clear-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear!</span>
+  <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-ivar">@columns_hash</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-ivar">@primary_keys</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-ivar">@tables</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-ivar">@version</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear_table_cache-21">
+            
+              <b>clear_table_cache!</b>(table_name)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-clear_table_cache-21" name="method-i-clear_table_cache-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Clear out internal caches for table with <code>table_name</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_table_cache-21_source')" id="l_method-i-clear_table_cache-21_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_table_cache-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear_table_cache!</span>(<span class="ruby-identifier">table_name</span>)
+  <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">table_name</span>
+  <span class="ruby-ivar">@columns_hash</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">table_name</span>
+  <span class="ruby-ivar">@primary_keys</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">table_name</span>
+  <span class="ruby-ivar">@tables</span>.<span class="ruby-identifier">delete</span> <span class="ruby-identifier">table_name</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-columns">
+            
+              <b>columns</b>(table = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-columns" name="method-i-columns" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get the columns for a table</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-columns_source')" id="l_method-i-columns_source">show</a>
+                
+              </p>
+              <div id="method-i-columns_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">columns</span>(<span class="ruby-identifier">table</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">table</span>
+    <span class="ruby-ivar">@columns</span>[<span class="ruby-identifier">table</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;call columns with a table name!&#39;</span>)
+    <span class="ruby-ivar">@columns</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-columns_hash">
+            
+              <b>columns_hash</b>(table = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-columns_hash" name="method-i-columns_hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Get the columns for a table as a hash, key is the column name value is the
+column object.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-columns_hash_source')" id="l_method-i-columns_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-columns_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 65</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">columns_hash</span>(<span class="ruby-identifier">table</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">table</span>
+    <span class="ruby-ivar">@columns_hash</span>[<span class="ruby-identifier">table</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;call columns_hash with a table name!&#39;</span>)
+    <span class="ruby-ivar">@columns_hash</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-marshal_dump">
+            
+              <b>marshal_dump</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-marshal_dump" name="method-i-marshal_dump" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-marshal_dump_source')" id="l_method-i-marshal_dump_source">show</a>
+                
+              </p>
+              <div id="method-i-marshal_dump_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">marshal_dump</span>
+  <span class="ruby-comment"># if we get current version during initialization, it happens stack over flow.</span>
+  <span class="ruby-ivar">@version</span> = <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">current_version</span>
+  [<span class="ruby-ivar">@version</span>] <span class="ruby-operator">+</span> [<span class="ruby-ivar">@columns</span>, <span class="ruby-ivar">@columns_hash</span>, <span class="ruby-ivar">@primary_keys</span>, <span class="ruby-ivar">@tables</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">val</span>]
+  }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-marshal_load">
+            
+              <b>marshal_load</b>(array)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-marshal_load" name="method-i-marshal_load" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-marshal_load_source')" id="l_method-i-marshal_load_source">show</a>
+                
+              </p>
+              <div id="method-i-marshal_load_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">marshal_load</span>(<span class="ruby-identifier">array</span>)
+  <span class="ruby-ivar">@version</span>, <span class="ruby-ivar">@columns</span>, <span class="ruby-ivar">@columns_hash</span>, <span class="ruby-ivar">@primary_keys</span>, <span class="ruby-ivar">@tables</span> = <span class="ruby-identifier">array</span>
+  <span class="ruby-identifier">prepare_default_proc</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-primary_keys">
+            
+              <b>primary_keys</b>(table_name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-primary_keys" name="method-i-primary_keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-primary_keys_source')" id="l_method-i-primary_keys_source">show</a>
+                
+              </p>
+              <div id="method-i-primary_keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">primary_keys</span>(<span class="ruby-identifier">table_name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">table_name</span>
+    <span class="ruby-ivar">@primary_keys</span>[<span class="ruby-identifier">table_name</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;call primary_keys with a table name!&#39;</span>)
+    <span class="ruby-ivar">@primary_keys</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-size">
+            
+              <b>size</b>()
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-size" name="method-i-size" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-size_source')" id="l_method-i-size_source">show</a>
+                
+              </p>
+              <div id="method-i-size_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">size</span>
+  [<span class="ruby-ivar">@columns</span>, <span class="ruby-ivar">@columns_hash</span>, <span class="ruby-ivar">@primary_keys</span>, <span class="ruby-ivar">@tables</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">size</span>
+  }.<span class="ruby-identifier">inject</span> <span class="ruby-value">:+</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-table_exists-3F">
+            
+              <b>table_exists?</b>(name)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-table_exists-3F" name="method-i-table_exists-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A cached lookup for table existence.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-table_exists-3F_source')" id="l_method-i-table_exists-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-table_exists-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">table_exists?</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@tables</span>[<span class="ruby-identifier">name</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@tables</span>.<span class="ruby-identifier">key?</span> <span class="ruby-identifier">name</span>
+
+  <span class="ruby-ivar">@tables</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">table_exists?</span>(<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tables">
+            
+              <b>tables</b>(name = nil)
+            
+            <a href="../../../classes/ActiveRecord/ConnectionAdapters/SchemaCache.html#method-i-tables" name="method-i-tables" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-tables_source')" id="l_method-i-tables_source">show</a>
+                
+              </p>
+              <div id="method-i-tables_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">tables</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-ivar">@tables</span>[<span class="ruby-identifier">name</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&#39;call tables with a name!&#39;</span>)
+    <span class="ruby-ivar">@tables</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

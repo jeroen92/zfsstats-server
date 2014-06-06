@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Batches</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::Batches 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/batches_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/batches.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find_each">find_each</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_in_batches">find_in_batches</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-find_each">
+            
+              <b>find_each</b>(options = {})
+            
+            <a href="../../classes/ActiveRecord/Batches.html#method-i-find_each" name="method-i-find_each" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Looping through a collection of records from the database (using the
+<code>all</code> method, for example) is very inefficient since it will try
+to instantiate all the objects at once.</p>
+
+<p>In that case, batch processing methods allow you to work with the records
+in batches, thereby greatly reducing memory consumption.</p>
+
+<p>The <a href="Batches.html#method-i-find_each">find_each</a> method uses <a
+href="Batches.html#method-i-find_in_batches">find_in_batches</a> with a
+batch size of 1000 (or as specified by the <code>:batch_size</code>
+option).</p>
+
+<pre class="ruby"> <span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">find_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span>
+   <span class="ruby-identifier">person</span>.<span class="ruby-identifier">do_awesome_stuff</span>
+ <span class="ruby-keyword">end</span>
+
+ <span class="ruby-constant">Person</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;age &gt; 21&quot;</span>).<span class="ruby-identifier">find_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span>
+   <span class="ruby-identifier">person</span>.<span class="ruby-identifier">party_all_night!</span>
+ <span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">You</span> <span class="ruby-identifier">can</span> <span class="ruby-identifier">also</span> <span class="ruby-identifier">pass</span> <span class="ruby-identifier">the</span> <span class="ruby-operator">+</span>:<span class="ruby-identifier">start</span><span class="ruby-operator">+</span> <span class="ruby-identifier">option</span> <span class="ruby-identifier">to</span> <span class="ruby-identifier">specify</span>
+<span class="ruby-identifier">an</span> <span class="ruby-identifier">offset</span> <span class="ruby-identifier">to</span> <span class="ruby-identifier">control</span> <span class="ruby-identifier">the</span> <span class="ruby-identifier">starting</span> <span class="ruby-identifier">point</span>.
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_each_source')" id="l_method-i-find_each_source">show</a>
+                
+              </p>
+              <div id="method-i-find_each_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/batches.rb, line 24</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_each</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">find_in_batches</span>(<span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">records</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">records</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">record</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">record</span> }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_in_batches">
+            
+              <b>find_in_batches</b>(options = {})
+            
+            <a href="../../classes/ActiveRecord/Batches.html#method-i-find_in_batches" name="method-i-find_in_batches" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Yields each batch of records that was found by the find
+<code>options</code> as an array. The size of each batch is set by the
+<code>:batch_size</code> option; the default is 1000.</p>
+
+<p>You can control the starting point for the batch processing by supplying
+the <code>:start</code> option. This is especially useful if you want
+multiple workers dealing with the same processing queue. You can make
+worker 1 handle all the records between id 0 and 10,000 and worker 2 handle
+from 10,000 and beyond (by setting the <code>:start</code> option on that
+worker).</p>
+
+<p>It&#39;s not possible to set the order. That is automatically set to
+ascending on the primary key (“id ASC”) to make the batch ordering work.
+This also means that this method only works with integer-based primary
+keys. You can&#39;t set the limit either, that&#39;s used to control the
+batch sizes.</p>
+
+<pre class="ruby"><span class="ruby-constant">Person</span>.<span class="ruby-identifier">where</span>(<span class="ruby-string">&quot;age &gt; 21&quot;</span>).<span class="ruby-identifier">find_in_batches</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">sleep</span>(<span class="ruby-value">50</span>) <span class="ruby-comment"># Make sure it doesn&#39;t get too crowded in there!</span>
+  <span class="ruby-identifier">group</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span> <span class="ruby-identifier">person</span>.<span class="ruby-identifier">party_all_night!</span> }
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># Let&#39;s process the next 2000 records</span>
+<span class="ruby-constant">Person</span>.<span class="ruby-identifier">all</span>.<span class="ruby-identifier">find_in_batches</span>(<span class="ruby-identifier">start</span><span class="ruby-operator">:</span> <span class="ruby-value">2000</span>, <span class="ruby-identifier">batch_size</span><span class="ruby-operator">:</span> <span class="ruby-value">2000</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">group</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">group</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span> <span class="ruby-identifier">person</span>.<span class="ruby-identifier">party_all_night!</span> }
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_in_batches_source')" id="l_method-i-find_in_batches_source">show</a>
+                
+              </p>
+              <div id="method-i-find_in_batches_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/batches.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_in_batches</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-value">:start</span>, <span class="ruby-value">:batch_size</span>)
+
+  <span class="ruby-identifier">relation</span> = <span class="ruby-keyword">self</span>
+
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">orders</span>.<span class="ruby-identifier">blank?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">arel</span>.<span class="ruby-identifier">taken</span>.<span class="ruby-identifier">blank?</span>
+    <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">logger</span>.<span class="ruby-identifier">warn</span>(<span class="ruby-string">&quot;Scoped order and limit are ignored, it&#39;s forced to be batch order and batch size&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">start</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:start</span>)
+  <span class="ruby-identifier">batch_size</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:batch_size</span>) <span class="ruby-operator">||</span> <span class="ruby-number">1000</span>
+
+  <span class="ruby-identifier">relation</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">reorder</span>(<span class="ruby-identifier">batch_order</span>).<span class="ruby-identifier">limit</span>(<span class="ruby-identifier">batch_size</span>)
+  <span class="ruby-identifier">records</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">gteq</span>(<span class="ruby-identifier">start</span>)).<span class="ruby-identifier">to_a</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">to_a</span>
+
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">records</span>.<span class="ruby-identifier">any?</span>
+    <span class="ruby-identifier">records_size</span> = <span class="ruby-identifier">records</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-identifier">primary_key_offset</span> = <span class="ruby-identifier">records</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">id</span>
+
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">records</span>
+
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">records_size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">batch_size</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">primary_key_offset</span>
+      <span class="ruby-identifier">records</span> = <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">table</span>[<span class="ruby-identifier">primary_key</span>].<span class="ruby-identifier">gt</span>(<span class="ruby-identifier">primary_key_offset</span>)).<span class="ruby-identifier">to_a</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Primary key not included in the custom select clause&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

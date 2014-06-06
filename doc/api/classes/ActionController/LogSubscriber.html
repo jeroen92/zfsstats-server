@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::LogSubscriber</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionController::LogSubscriber 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../ActiveSupport/LogSubscriber.html">ActiveSupport::LogSubscriber</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/log_subscriber_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-halted_callback">halted_callback</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-logger">logger</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-process_action">process_action</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-redirect_to">redirect_to</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-send_data">send_data</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-send_file">send_file</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-start_processing">start_processing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-unpermitted_parameters">unpermitted_parameters</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">INTERNAL_PARAMS</td>
+            <td>=</td>
+            <td class="attr-value">%w(controller action format _method only_path)</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-halted_callback">
+            
+              <b>halted_callback</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-halted_callback" name="method-i-halted_callback" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-halted_callback_source')" id="l_method-i-halted_callback_source">show</a>
+                
+              </p>
+              <div id="method-i-halted_callback_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">halted_callback</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;Filter chain halted as #{event.payload[:filter]} rendered or redirected&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-logger">
+            
+              <b>logger</b>()
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-logger" name="method-i-logger" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-logger_source')" id="l_method-i-logger_source">show</a>
+                
+              </p>
+              <div id="method-i-logger_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">logger</span>
+  <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">logger</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-process_action">
+            
+              <b>process_action</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-process_action" name="method-i-process_action" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_action_source')" id="l_method-i-process_action_source">show</a>
+                
+              </p>
+              <div id="method-i-process_action_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process_action</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info?</span>
+
+  <span class="ruby-identifier">payload</span>   = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">payload</span>
+  <span class="ruby-identifier">additions</span> = <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">log_process_action</span>(<span class="ruby-identifier">payload</span>)
+
+  <span class="ruby-identifier">status</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:status</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">status</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">payload</span>[<span class="ruby-value">:exception</span>].<span class="ruby-identifier">present?</span>
+    <span class="ruby-identifier">exception_class_name</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:exception</span>].<span class="ruby-identifier">first</span>
+    <span class="ruby-identifier">status</span> = <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">ExceptionWrapper</span>.<span class="ruby-identifier">status_code_for_exception</span>(<span class="ruby-identifier">exception_class_name</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">message</span> = <span class="ruby-node">&quot;Completed #{status} #{Rack::Utils::HTTP_STATUS_CODES[status]} in #{event.duration.round}ms&quot;</span>
+  <span class="ruby-identifier">message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; (#{additions.join(&quot; | &quot;)})&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">additions</span>.<span class="ruby-identifier">blank?</span>
+
+  <span class="ruby-identifier">info</span>(<span class="ruby-identifier">message</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-redirect_to">
+            
+              <b>redirect_to</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-redirect_to" name="method-i-redirect_to" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-redirect_to_source')" id="l_method-i-redirect_to_source">show</a>
+                
+              </p>
+              <div id="method-i-redirect_to_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">redirect_to</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;Redirected to #{event.payload[:location]}&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_data">
+            
+              <b>send_data</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-send_data" name="method-i-send_data" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-send_data_source')" id="l_method-i-send_data_source">show</a>
+                
+              </p>
+              <div id="method-i-send_data_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">send_data</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;Sent data #{event.payload[:filename]} (#{event.duration.round(1)}ms)&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_file">
+            
+              <b>send_file</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-send_file" name="method-i-send_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-send_file_source')" id="l_method-i-send_file_source">show</a>
+                
+              </p>
+              <div id="method-i-send_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">send_file</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">info</span>(<span class="ruby-node">&quot;Sent file #{event.payload[:path]} (#{event.duration.round(1)}ms)&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-start_processing">
+            
+              <b>start_processing</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-start_processing" name="method-i-start_processing" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-start_processing_source')" id="l_method-i-start_processing_source">show</a>
+                
+              </p>
+              <div id="method-i-start_processing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">start_processing</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">logger</span>.<span class="ruby-identifier">info?</span>
+
+  <span class="ruby-identifier">payload</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">payload</span>
+  <span class="ruby-identifier">params</span>  = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:params</span>].<span class="ruby-identifier">except</span>(*<span class="ruby-constant">INTERNAL_PARAMS</span>)
+  <span class="ruby-identifier">format</span>  = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:format</span>]
+  <span class="ruby-identifier">format</span>  = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">format</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>)
+
+  <span class="ruby-identifier">info</span> <span class="ruby-node">&quot;Processing by #{payload[:controller]}##{payload[:action]} as #{format}&quot;</span>
+  <span class="ruby-identifier">info</span> <span class="ruby-node">&quot;  Parameters: #{params.inspect}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unpermitted_parameters">
+            
+              <b>unpermitted_parameters</b>(event)
+            
+            <a href="../../classes/ActionController/LogSubscriber.html#method-i-unpermitted_parameters" name="method-i-unpermitted_parameters" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-unpermitted_parameters_source')" id="l_method-i-unpermitted_parameters_source">show</a>
+                
+              </p>
+              <div id="method-i-unpermitted_parameters_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/log_subscriber.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unpermitted_parameters</span>(<span class="ruby-identifier">event</span>)
+  <span class="ruby-identifier">unpermitted_keys</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">payload</span>[<span class="ruby-value">:keys</span>]
+  <span class="ruby-identifier">debug</span>(<span class="ruby-node">&quot;Unpermitted parameters: #{unpermitted_keys.join(&quot;, &quot;)}&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

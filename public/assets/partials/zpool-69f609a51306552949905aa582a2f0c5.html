@@ -1,0 +1,41 @@
+<div>
+	<div class="device-unit device-measurement-group" >
+		<div class="device-measurement-group-header">
+			<h2>Storage</h2>
+			<p>Measurements regarding the used and total capacity</p>
+			<a class="btn btn-primary" ng-show="!showStorageVisible" ng-click="toggleStorageVisible()">Show</a>
+			<a class="btn btn-warning" ng-show="showStorageVisible" ng-click="toggleStorageVisible()">Hide</a>
+		</div>
+		<div class="row">
+			<div ng-show="showStorageVisible" ng-repeat="measurement in device.measurements" ng-switch on="measurement.measurement.name">
+				<div ng-switch-when="capacity" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Capacity</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+				<div ng-switch-when="used" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Used</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+				<div ng-switch-when="available" class="col-md-3">
+					<div class="device-unit device-measurement-tile">
+						<h3>Available</h3>
+						<p>
+							<a ng-show="measurement.measurement.loaded" ng-click="unloadMeasurement(measurement.measurement.id)" class="btn btn-large btn-danger">Unload</a>
+							<a ng-show="!measurement.measurement.loaded" ng-click="loadMeasurement(measurement.measurement.id)" class="btn btn-large btn-success">Load</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

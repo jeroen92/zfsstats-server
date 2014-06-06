@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::TemplateAssertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::TemplateAssertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/test_case_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_template">assert_template</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-process">process</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-setup_subscriptions">setup_subscriptions</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-teardown_subscriptions">teardown_subscriptions</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_template">
+            
+              <b>assert_template</b>(options = {}, message = nil)
+            
+            <a href="../../classes/ActionController/TemplateAssertions.html#method-i-assert_template" name="method-i-assert_template" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that the request was rendered with the appropriate template file or
+partials.</p>
+
+<pre># assert that the &quot;new&quot; view template was rendered
+assert_template &quot;new&quot;
+
+# assert that the exact template &quot;admin/posts/new&quot; was rendered
+assert_template %r{\Aadmin/posts/new\Z}
+
+# assert that the layout &#39;admin&#39; was rendered
+assert_template layout: &#39;admin&#39;
+assert_template layout: &#39;layouts/admin&#39;
+assert_template layout: :admin
+
+# assert that no layout was rendered
+assert_template layout: nil
+assert_template layout: false
+
+# assert that the &quot;_customer&quot; partial was rendered twice
+assert_template partial: &#39;_customer&#39;, count: 2
+
+# assert that no partials were rendered
+assert_template partial: false</pre>
+
+<p>In a view test case, you can also assert that specific locals are passed to
+partials:</p>
+
+<pre># assert that the &quot;_customer&quot; partial was rendered with a specific object
+assert_template partial: &#39;_customer&#39;, locals: { customer: @customer }</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_template_source')" id="l_method-i-assert_template_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_template_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_template</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">message</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-comment"># Force body to be read in case the template is being streamed.</span>
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">body</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">NilClass</span>, <span class="ruby-constant">Regexp</span>, <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">Symbol</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">options</span>
+    <span class="ruby-identifier">rendered</span> = <span class="ruby-ivar">@_templates</span>
+    <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">message</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;expecting &lt;%s&gt; but rendering with &lt;%s&gt;&quot;</span>,
+            <span class="ruby-identifier">options</span>.<span class="ruby-identifier">inspect</span>, <span class="ruby-identifier">rendered</span>.<span class="ruby-identifier">keys</span>)
+    <span class="ruby-identifier">matches_template</span> =
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+        <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">rendered</span>.<span class="ruby-identifier">any?</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span>, <span class="ruby-identifier">num</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">options_splited</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>)
+          <span class="ruby-identifier">t_splited</span> = <span class="ruby-identifier">t</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">File</span><span class="ruby-operator">::</span><span class="ruby-constant">SEPARATOR</span>)
+          <span class="ruby-identifier">t_splited</span>.<span class="ruby-identifier">last</span>(<span class="ruby-identifier">options_splited</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">options_splited</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Regexp</span>
+        <span class="ruby-identifier">rendered</span>.<span class="ruby-identifier">any?</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">t</span>,<span class="ruby-identifier">num</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">options</span>) }
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">NilClass</span>
+        <span class="ruby-identifier">rendered</span>.<span class="ruby-identifier">blank?</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">assert</span> <span class="ruby-identifier">matches_template</span>, <span class="ruby-identifier">msg</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-value">:layout</span>, <span class="ruby-value">:partial</span>, <span class="ruby-value">:locals</span>, <span class="ruby-value">:count</span>, <span class="ruby-value">:file</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:layout</span>)
+      <span class="ruby-identifier">expected_layout</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:layout</span>]
+      <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">message</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;expecting layout &lt;%s&gt; but action rendered &lt;%s&gt;&quot;</span>,
+              <span class="ruby-identifier">expected_layout</span>, <span class="ruby-ivar">@_layouts</span>.<span class="ruby-identifier">keys</span>)
+
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">expected_layout</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>, <span class="ruby-constant">Symbol</span>
+        <span class="ruby-identifier">assert_includes</span> <span class="ruby-ivar">@_layouts</span>.<span class="ruby-identifier">keys</span>, <span class="ruby-identifier">expected_layout</span>.<span class="ruby-identifier">to_s</span>, <span class="ruby-identifier">msg</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-constant">Regexp</span>
+        <span class="ruby-identifier">assert</span>(<span class="ruby-ivar">@_layouts</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">any?</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">l</span><span class="ruby-operator">|</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">expected_layout</span> }, <span class="ruby-identifier">msg</span>)
+      <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">false</span>
+        <span class="ruby-identifier">assert</span>(<span class="ruby-ivar">@_layouts</span>.<span class="ruby-identifier">empty?</span>, <span class="ruby-identifier">msg</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:file</span>]
+      <span class="ruby-identifier">assert_includes</span> <span class="ruby-ivar">@_files</span>.<span class="ruby-identifier">keys</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:file</span>]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">expected_partial</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:partial</span>]
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">expected_locals</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:locals</span>]
+        <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@_rendered_views</span>)
+          <span class="ruby-identifier">view</span> = <span class="ruby-identifier">expected_partial</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^_/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\/_(?=[^\/]+\z)/</span>, <span class="ruby-string">&#39;/&#39;</span>)
+
+          <span class="ruby-identifier">partial_was_not_rendered_msg</span> = <span class="ruby-string">&quot;expected %s to be rendered but it was not.&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">view</span>
+          <span class="ruby-identifier">assert_includes</span> <span class="ruby-ivar">@_rendered_views</span>.<span class="ruby-identifier">rendered_views</span>, <span class="ruby-identifier">view</span>, <span class="ruby-identifier">partial_was_not_rendered_msg</span>
+
+          <span class="ruby-identifier">msg</span> = <span class="ruby-string">&#39;expecting %s to be rendered with %s but was with %s&#39;</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">expected_partial</span>,
+                                                                         <span class="ruby-identifier">expected_locals</span>,
+                                                                         <span class="ruby-ivar">@_rendered_views</span>.<span class="ruby-identifier">locals_for</span>(<span class="ruby-identifier">view</span>)]
+          <span class="ruby-identifier">assert</span>(<span class="ruby-ivar">@_rendered_views</span>.<span class="ruby-identifier">view_rendered?</span>(<span class="ruby-identifier">view</span>, <span class="ruby-identifier">options</span>[<span class="ruby-value">:locals</span>]), <span class="ruby-identifier">msg</span>)
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;the :locals option to #assert_template is only supported in a ActionView::TestCase&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">expected_count</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:count</span>]
+        <span class="ruby-identifier">actual_count</span> = <span class="ruby-ivar">@_partials</span>[<span class="ruby-identifier">expected_partial</span>]
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">message</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;expecting %s to be rendered %s time(s) but rendered %s time(s)&quot;</span>,
+                 <span class="ruby-identifier">expected_partial</span>, <span class="ruby-identifier">expected_count</span>, <span class="ruby-identifier">actual_count</span>)
+        <span class="ruby-identifier">assert</span>(<span class="ruby-identifier">actual_count</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">expected_count</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">msg</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">message</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;expecting partial &lt;%s&gt; but action rendered &lt;%s&gt;&quot;</span>,
+                <span class="ruby-identifier">options</span>[<span class="ruby-value">:partial</span>], <span class="ruby-ivar">@_partials</span>.<span class="ruby-identifier">keys</span>)
+        <span class="ruby-identifier">assert_includes</span> <span class="ruby-ivar">@_partials</span>, <span class="ruby-identifier">expected_partial</span>, <span class="ruby-identifier">msg</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-value">:partial</span>)
+      <span class="ruby-identifier">assert</span> <span class="ruby-ivar">@_partials</span>.<span class="ruby-identifier">empty?</span>,
+        <span class="ruby-string">&quot;Expected no partials to be rendered&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;assert_template only accepts a String, Symbol, Hash, Regexp, or nil&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-process">
+            
+              <b>process</b>(*args)
+            
+            <a href="../../classes/ActionController/TemplateAssertions.html#method-i-process" name="method-i-process" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_source')" id="l_method-i-process_source">show</a>
+                
+              </p>
+              <div id="method-i-process_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-ivar">@_partials</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+  <span class="ruby-ivar">@_templates</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+  <span class="ruby-ivar">@_layouts</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-setup_subscriptions">
+            
+              <b>setup_subscriptions</b>()
+            
+            <a href="../../classes/ActionController/TemplateAssertions.html#method-i-setup_subscriptions" name="method-i-setup_subscriptions" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-setup_subscriptions_source')" id="l_method-i-setup_subscriptions_source">show</a>
+                
+              </p>
+              <div id="method-i-setup_subscriptions_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">setup_subscriptions</span>
+  <span class="ruby-ivar">@_partials</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+  <span class="ruby-ivar">@_templates</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+  <span class="ruby-ivar">@_layouts</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+  <span class="ruby-ivar">@_files</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-number">0</span>)
+
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">subscribe</span>(<span class="ruby-string">&quot;render_template.action_view&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_name</span>, <span class="ruby-identifier">_start</span>, <span class="ruby-identifier">_finish</span>, <span class="ruby-identifier">_id</span>, <span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:layout</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>
+      <span class="ruby-ivar">@_layouts</span>[<span class="ruby-identifier">path</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^layouts\/(.*)/</span>
+        <span class="ruby-ivar">@_layouts</span>[<span class="ruby-node">$1</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">subscribe</span>(<span class="ruby-string">&quot;!render_template.action_view&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_name</span>, <span class="ruby-identifier">_start</span>, <span class="ruby-identifier">_finish</span>, <span class="ruby-identifier">_id</span>, <span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:virtual_path</span>]
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">path</span>
+    <span class="ruby-identifier">partial</span> = <span class="ruby-identifier">path</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^.*\/_[^\/]*$/</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">partial</span>
+      <span class="ruby-ivar">@_partials</span>[<span class="ruby-identifier">path</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+      <span class="ruby-ivar">@_partials</span>[<span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;/&quot;</span>).<span class="ruby-identifier">last</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@_templates</span>[<span class="ruby-identifier">path</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">subscribe</span>(<span class="ruby-string">&quot;!render_template.action_view&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">_name</span>, <span class="ruby-identifier">_start</span>, <span class="ruby-identifier">_finish</span>, <span class="ruby-identifier">_id</span>, <span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">payload</span>[<span class="ruby-value">:virtual_path</span>] <span class="ruby-comment"># files don&#39;t have virtual path</span>
+
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">payload</span>[<span class="ruby-value">:identifier</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>
+      <span class="ruby-ivar">@_files</span>[<span class="ruby-identifier">path</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+      <span class="ruby-ivar">@_files</span>[<span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;/&quot;</span>).<span class="ruby-identifier">last</span>] <span class="ruby-operator">+=</span> <span class="ruby-number">1</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-teardown_subscriptions">
+            
+              <b>teardown_subscriptions</b>()
+            
+            <a href="../../classes/ActionController/TemplateAssertions.html#method-i-teardown_subscriptions" name="method-i-teardown_subscriptions" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-teardown_subscriptions_source')" id="l_method-i-teardown_subscriptions_source">show</a>
+                
+              </p>
+              <div id="method-i-teardown_subscriptions_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/test_case.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">teardown_subscriptions</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">unsubscribe</span>(<span class="ruby-string">&quot;render_template.action_view&quot;</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">unsubscribe</span>(<span class="ruby-string">&quot;!render_template.action_view&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

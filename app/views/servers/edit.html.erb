@@ -1,0 +1,39 @@
+<%= form_for(@server, :html => { :class => 'form-horizontal' }) do |f| %>
+  <h2><%= controller.action_name.capitalize %> Server</h2>
+
+  <div class="col-md-5">
+    <legend>Server information</legend>
+    <div class="form-group">
+      <%= f.label :name, 'Hostname', class: "control-label col-md-3" %>
+      <div class="col-md-9"><%= f.text_field :name, placeholder: "Hostname", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :fqdn, 'FQDN', class: "control-label col-md-3" %>
+      <div class="col-md-9"><%= f.text_field :fqdn, placeholder: "Fully Qualified Domain Name", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :IPv4Address, class: "control-label col-md-3" %>
+      <div class="col-md-9"><%= f.text_field :IPv4Address, placeholder: "IPv4 Address", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :IPv6Address, class: "control-label col-md-3" %>
+      <div class="col-md-9"><%= f.text_field :IPv6Address, placeholder: "IPv6 Address", class: "form-control" %></div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :description, class: "control-label col-md-3" %>
+      <div class="col-md-9"><%= f.text_area :description, placeholder: "Description", class: "form-control" %></div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="form-actions">
+      <%= f.submit :class => 'btn btn-primary' %>
+      <%= link_to 'Cancel', users_path, :class => 'btn btn-danger' %>
+    </div>
+  </div>
+<% end %>
+</div>

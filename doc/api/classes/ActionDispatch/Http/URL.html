@@ -1,0 +1,1003 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Http::URL</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Http::URL 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/http/url_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-domain">domain</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-extract_domain">extract_domain</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-extract_subdomain">extract_subdomain</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-extract_subdomains">extract_subdomains</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-host">host</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-host_with_port">host_with_port</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>O</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-optional_port">optional_port</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-port">port</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-port_string">port_string</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-protocol">protocol</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-raw_host_with_port">raw_host_with_port</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-server_port">server_port</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-standard_port">standard_port</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-standard_port-3F">standard_port?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-subdomain">subdomain</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-subdomains">subdomains</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-url">url</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-url_for">url_for</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">IP_HOST_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}$/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">HOST_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/(^.*:\/\/)?([^:]+)(?::(\d+$))?/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">PROTOCOL_REGEXP</td>
+            <td>=</td>
+            <td class="attr-value">/^([^:]+)(:)?(\/\/)?$/</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-extract_domain">
+            
+              <b>extract_domain</b>(host, tld_length = @@tld_length)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-c-extract_domain" name="method-c-extract_domain" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-extract_domain_source')" id="l_method-c-extract_domain_source">show</a>
+                
+              </p>
+              <div id="method-c-extract_domain_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 15</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">extract_domain</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span> = <span class="ruby-identifier">@@tld_length</span>)
+  <span class="ruby-identifier">host</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">last</span>(<span class="ruby-number">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">tld_length</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">named_host?</span>(<span class="ruby-identifier">host</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-extract_subdomain">
+            
+              <b>extract_subdomain</b>(host, tld_length = @@tld_length)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-c-extract_subdomain" name="method-c-extract_subdomain" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-extract_subdomain_source')" id="l_method-c-extract_subdomain_source">show</a>
+                
+              </p>
+              <div id="method-c-extract_subdomain_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">extract_subdomain</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span> = <span class="ruby-identifier">@@tld_length</span>)
+  <span class="ruby-identifier">extract_subdomains</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-extract_subdomains">
+            
+              <b>extract_subdomains</b>(host, tld_length = @@tld_length)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-c-extract_subdomains" name="method-c-extract_subdomains" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-extract_subdomains_source')" id="l_method-c-extract_subdomains_source">show</a>
+                
+              </p>
+              <div id="method-c-extract_subdomains_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">extract_subdomains</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span> = <span class="ruby-identifier">@@tld_length</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">named_host?</span>(<span class="ruby-identifier">host</span>)
+    <span class="ruby-identifier">parts</span> = <span class="ruby-identifier">host</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)
+    <span class="ruby-identifier">parts</span>[<span class="ruby-number">0</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-identifier">tld_length</span> <span class="ruby-operator">+</span> <span class="ruby-number">2</span>)]
+  <span class="ruby-keyword">else</span>
+    []
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(env)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@protocol</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@port</span>     = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-url_for">
+            
+              <b>url_for</b>(options = {})
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-c-url_for" name="method-c-url_for" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-url_for_source')" id="l_method-c-url_for_source">show</a>
+                
+              </p>
+              <div id="method-c-url_for_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_for</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">path</span>  = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:script_name</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&quot;/&quot;</span>)
+  <span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:path</span>).<span class="ruby-identifier">to_s</span>
+
+  <span class="ruby-identifier">params</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:params</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:params</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-value">:params</span>)
+  <span class="ruby-identifier">params</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">_</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_param</span>.<span class="ruby-identifier">nil?</span> }
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-identifier">build_host_url</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:trailing_slash</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;?&#39;</span>)
+      <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\?/</span>, <span class="ruby-string">&#39;/\&amp;&#39;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/[^\/]\z|\A\z/</span>, <span class="ruby-string">&#39;\&amp;/&#39;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;?#{params.to_query}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">params</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">result</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;##{Journey::Router::Utils.escape_fragment(options[:anchor].to_param.to_s)}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:anchor</span>]
+  <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-domain">
+            
+              <b>domain</b>(tld_length = @@tld_length)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-domain" name="method-i-domain" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the domain part of a host, such as “rubyonrails.org” in “<a
+href="http://www.rubyonrails.org">www.rubyonrails.org</a>”. You can specify
+a different <code>tld_length</code>, such as 2 to catch rubyonrails.co.uk
+in “<a href="http://www.rubyonrails.co.uk">www.rubyonrails.co.uk</a>”.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-domain_source')" id="l_method-i-domain_source">show</a>
+                
+              </p>
+              <div id="method-i-domain_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">domain</span>(<span class="ruby-identifier">tld_length</span> = <span class="ruby-identifier">@@tld_length</span>)
+  <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">URL</span>.<span class="ruby-identifier">extract_domain</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-host">
+            
+              <b>host</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-host" name="method-i-host" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the host for this request, such as example.com.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-host_source')" id="l_method-i-host_source">show</a>
+                
+              </p>
+              <div id="method-i-host_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">host</span>
+  <span class="ruby-identifier">raw_host_with_port</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/:\d+$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-host_with_port">
+            
+              <b>host_with_port</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-host_with_port" name="method-i-host_with_port" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a host:port string for this request, such as “example.com” or
+“example.com:8080”.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-host_with_port_source')" id="l_method-i-host_with_port_source">show</a>
+                
+              </p>
+              <div id="method-i-host_with_port_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">host_with_port</span>
+  <span class="ruby-node">&quot;#{host}#{port_string}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-optional_port">
+            
+              <b>optional_port</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-optional_port" name="method-i-optional_port" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a number port suffix like 8080 if the port number of this request
+is not the default HTTP port 80 or HTTPS port 443.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-optional_port_source')" id="l_method-i-optional_port_source">show</a>
+                
+              </p>
+              <div id="method-i-optional_port_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">optional_port</span>
+  <span class="ruby-identifier">standard_port?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">port</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-port">
+            
+              <b>port</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-port" name="method-i-port" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the port number of this request as an integer.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-port_source')" id="l_method-i-port_source">show</a>
+                
+              </p>
+              <div id="method-i-port_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">port</span>
+  <span class="ruby-ivar">@port</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">raw_host_with_port</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/:(\d+)$/</span>
+      <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">standard_port</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-port_string">
+            
+              <b>port_string</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-port_string" name="method-i-port_string" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string port suffix, including colon, like “:8080” if the port
+number of this request is not the default HTTP port 80 or HTTPS port 443.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-port_string_source')" id="l_method-i-port_string_source">show</a>
+                
+              </p>
+              <div id="method-i-port_string_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 210</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">port_string</span>
+  <span class="ruby-identifier">standard_port?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;:#{port}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-protocol">
+            
+              <b>protocol</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-protocol" name="method-i-protocol" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns &#39;https://&#39; if this is an <a href="../SSL.html">SSL</a>
+request and &#39;http://&#39; otherwise.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-protocol_source')" id="l_method-i-protocol_source">show</a>
+                
+              </p>
+              <div id="method-i-protocol_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">protocol</span>
+  <span class="ruby-ivar">@protocol</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">ssl?</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;https://&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;http://&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-raw_host_with_port">
+            
+              <b>raw_host_with_port</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-raw_host_with_port" name="method-i-raw_host_with_port" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the host for this request, such as “example.com”.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-raw_host_with_port_source')" id="l_method-i-raw_host_with_port_source">show</a>
+                
+              </p>
+              <div id="method-i-raw_host_with_port_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">raw_host_with_port</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">forwarded</span> = <span class="ruby-identifier">env</span>[<span class="ruby-string">&quot;HTTP_X_FORWARDED_HOST&quot;</span>]
+    <span class="ruby-identifier">forwarded</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/,\s?/</span>).<span class="ruby-identifier">last</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">env</span>[<span class="ruby-string">&#39;HTTP_HOST&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-node">&quot;#{env[&#39;SERVER_NAME&#39;] || env[&#39;SERVER_ADDR&#39;]}:#{env[&#39;SERVER_PORT&#39;]}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-server_port">
+            
+              <b>server_port</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-server_port" name="method-i-server_port" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-server_port_source')" id="l_method-i-server_port_source">show</a>
+                
+              </p>
+              <div id="method-i-server_port_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 214</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">server_port</span>
+  <span class="ruby-ivar">@env</span>[<span class="ruby-string">&#39;SERVER_PORT&#39;</span>].<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-standard_port">
+            
+              <b>standard_port</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-standard_port" name="method-i-standard_port" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the standard port number for this request&#39;s protocol.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-standard_port_source')" id="l_method-i-standard_port_source">show</a>
+                
+              </p>
+              <div id="method-i-standard_port_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">standard_port</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">protocol</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;https://&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-number">443</span>
+    <span class="ruby-keyword">else</span> <span class="ruby-number">80</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-standard_port-3F">
+            
+              <b>standard_port?</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-standard_port-3F" name="method-i-standard_port-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns whether this request is using the standard port</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-standard_port-3F_source')" id="l_method-i-standard_port-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-standard_port-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">standard_port?</span>
+  <span class="ruby-identifier">port</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">standard_port</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-subdomain">
+            
+              <b>subdomain</b>(tld_length = @@tld_length)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-subdomain" name="method-i-subdomain" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns all the subdomains as a string, so <code>&quot;dev.www&quot;</code>
+would be returned for “dev.www.rubyonrails.org”. You can specify a
+different <code>tld_length</code>, such as 2 to catch
+<code>&quot;www&quot;</code> instead of
+<code>&quot;www.rubyonrails&quot;</code> in “<a
+href="http://www.rubyonrails.co.uk">www.rubyonrails.co.uk</a>”.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-subdomain_source')" id="l_method-i-subdomain_source">show</a>
+                
+              </p>
+              <div id="method-i-subdomain_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 236</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">subdomain</span>(<span class="ruby-identifier">tld_length</span> = <span class="ruby-identifier">@@tld_length</span>)
+  <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">URL</span>.<span class="ruby-identifier">extract_subdomain</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-subdomains">
+            
+              <b>subdomains</b>(tld_length = @@tld_length)
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-subdomains" name="method-i-subdomains" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns all the subdomains as an array, so <code>[&quot;dev&quot;,
+&quot;www&quot;]</code> would be returned for “dev.www.rubyonrails.org”.
+You can specify a different <code>tld_length</code>, such as 2 to catch
+<code>[&quot;www&quot;]</code> instead of <code>[&quot;www&quot;,
+&quot;rubyonrails&quot;]</code> in “<a
+href="http://www.rubyonrails.co.uk">www.rubyonrails.co.uk</a>”.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-subdomains_source')" id="l_method-i-subdomains_source">show</a>
+                
+              </p>
+              <div id="method-i-subdomains_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">subdomains</span>(<span class="ruby-identifier">tld_length</span> = <span class="ruby-identifier">@@tld_length</span>)
+  <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">URL</span>.<span class="ruby-identifier">extract_subdomains</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">tld_length</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-url">
+            
+              <b>url</b>()
+            
+            <a href="../../../classes/ActionDispatch/Http/URL.html#method-i-url" name="method-i-url" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the complete <a href="URL.html">URL</a> used for this request.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_source')" id="l_method-i-url_source">show</a>
+                
+              </p>
+              <div id="method-i-url_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/url.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url</span>
+  <span class="ruby-identifier">protocol</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">host_with_port</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fullpath</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

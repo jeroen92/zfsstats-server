@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Gzip</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::Gzip 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/gzip_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/gzip.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A convenient wrapper for the zlib standard library that allows
+compression/decompression of strings with gzip.</p>
+
+<pre class="ruby"><span class="ruby-identifier">gzip</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Gzip</span>.<span class="ruby-identifier">compress</span>(<span class="ruby-string">&#39;compress me!&#39;</span>)
+<span class="ruby-comment"># =&gt; &quot;\x1F\x8B\b\x00o\x8D\xCDO\x00\x03K\xCE\xCF-(J-.V\xC8MU\x04\x00R&gt;n\x83\f\x00\x00\x00&quot;</span>
+
+<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Gzip</span>.<span class="ruby-identifier">decompress</span>(<span class="ruby-identifier">gzip</span>)
+<span class="ruby-comment"># =&gt; &quot;compress me!&quot;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="Gzip/Stream.html">ActiveSupport::Gzip::Stream</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-compress">compress</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-decompress">decompress</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-compress">
+            
+              <b>compress</b>(source, level=Zlib::DEFAULT_COMPRESSION, strategy=Zlib::DEFAULT_STRATEGY)
+            
+            <a href="../../classes/ActiveSupport/Gzip.html#method-c-compress" name="method-c-compress" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compresses a string using gzip.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-compress_source')" id="l_method-c-compress_source">show</a>
+                
+              </p>
+              <div id="method-c-compress_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/gzip.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">compress</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">level</span>=<span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_COMPRESSION</span>, <span class="ruby-identifier">strategy</span>=<span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_STRATEGY</span>)
+  <span class="ruby-identifier">output</span> = <span class="ruby-constant">Stream</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">gz</span> = <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipWriter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">output</span>, <span class="ruby-identifier">level</span>, <span class="ruby-identifier">strategy</span>)
+  <span class="ruby-identifier">gz</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-identifier">gz</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-identifier">output</span>.<span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-decompress">
+            
+              <b>decompress</b>(source)
+            
+            <a href="../../classes/ActiveSupport/Gzip.html#method-c-decompress" name="method-c-decompress" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Decompresses a gzipped string.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-decompress_source')" id="l_method-c-decompress_source">show</a>
+                
+              </p>
+              <div id="method-c-decompress_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/gzip.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">decompress</span>(<span class="ruby-identifier">source</span>)
+  <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipReader</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>)).<span class="ruby-identifier">read</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

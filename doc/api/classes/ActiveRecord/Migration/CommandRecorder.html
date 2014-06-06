@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Migration::CommandRecorder</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Migration::CommandRecorder 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/migration/command_recorder_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><code>ActiveRecord::Migration::CommandRecorder</code> records commands done
+during a migration and knows how to reverse those commands. The <a
+href="CommandRecorder.html">CommandRecorder</a> knows how to invert the
+following commands:</p>
+<ul><li>
+<p>add_column</p>
+</li><li>
+<p>add_index</p>
+</li><li>
+<p>add_timestamps</p>
+</li><li>
+<p>create_table</p>
+</li><li>
+<p>create_join_table</p>
+</li><li>
+<p>remove_timestamps</p>
+</li><li>
+<p>rename_column</p>
+</li><li>
+<p>rename_index</p>
+</li><li>
+<p>rename_table</p>
+</li></ul>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="CommandRecorder/StraightReversions.html">ActiveRecord::Migration::CommandRecorder::StraightReversions</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-change_table">change_table</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inverse_of">inverse_of</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-record">record</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-revert">revert</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="CommandRecorder/StraightReversions.html">
+              ActiveRecord::Migration::CommandRecorder::StraightReversions
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>commands</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>delegate</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>reverting</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(delegate = nil)
+            
+            <a href="../../../classes/ActiveRecord/Migration/CommandRecorder.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">delegate</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@commands</span> = []
+  <span class="ruby-ivar">@delegate</span> = <span class="ruby-identifier">delegate</span>
+  <span class="ruby-ivar">@reverting</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-change_table">
+            
+              <b>change_table</b>(table_name, options = {})
+            
+            <a href="../../../classes/ActiveRecord/Migration/CommandRecorder.html#method-i-change_table" name="method-i-change_table" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-change_table_source')" id="l_method-i-change_table_source">show</a>
+                
+              </p>
+              <div id="method-i-change_table_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">change_table</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">yield</span> <span class="ruby-constant">ConnectionAdapters</span><span class="ruby-operator">::</span><span class="ruby-constant">Table</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">table_name</span>, <span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inverse_of">
+            
+              <b>inverse_of</b>(command, args, &amp;block)
+            
+            <a href="../../../classes/ActiveRecord/Migration/CommandRecorder.html#method-i-inverse_of" name="method-i-inverse_of" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the inverse of the given command. For example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">recorder</span>.<span class="ruby-identifier">inverse_of</span>(:<span class="ruby-identifier">rename_table</span>, [:<span class="ruby-identifier">old</span>, :<span class="ruby-identifier">new</span>])
+<span class="ruby-comment"># =&gt; [:rename_table, [:new, :old]]</span>
+</pre>
+
+<p>This method will raise an <code>IrreversibleMigration</code> exception if
+it cannot invert the <code>command</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inverse_of_source')" id="l_method-i-inverse_of_source">show</a>
+                
+              </p>
+              <div id="method-i-inverse_of_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inverse_of</span>(<span class="ruby-identifier">command</span>, <span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">method</span> = <span class="ruby-value">:&quot;invert_#{command}&quot;</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">IrreversibleMigration</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">method</span>, <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">send</span>(<span class="ruby-identifier">method</span>, <span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-record">
+            
+              <b>record</b>(*command, &amp;block)
+            
+            <a href="../../../classes/ActiveRecord/Migration/CommandRecorder.html#method-i-record" name="method-i-record" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>record <code>command</code>. <code>command</code> should be a method name
+and arguments. For example:</p>
+
+<pre>recorder.record(:method_name, [:arg1, :arg2])</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-record_source')" id="l_method-i-record_source">show</a>
+                
+              </p>
+              <div id="method-i-record_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb, line 48</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">record</span>(*<span class="ruby-identifier">command</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@reverting</span>
+    <span class="ruby-ivar">@commands</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">inverse_of</span>(*<span class="ruby-identifier">command</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@commands</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">command</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-revert">
+            
+              <b>revert</b>()
+            
+            <a href="../../../classes/ActiveRecord/Migration/CommandRecorder.html#method-i-revert" name="method-i-revert" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>While executing the given block, the recorded will be in reverting mode.
+All commands recorded will end up being recorded reverted and in reverse
+order. For example:</p>
+
+<pre>recorder.revert{ recorder.record(:rename_table, [:old, :new]) }
+# same effect as recorder.record(:rename_table, [:new, :old])</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-revert_source')" id="l_method-i-revert_source">show</a>
+                
+              </p>
+              <div id="method-i-revert_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">revert</span>
+  <span class="ruby-ivar">@reverting</span> = <span class="ruby-operator">!</span><span class="ruby-ivar">@reverting</span>
+  <span class="ruby-identifier">previous</span> = <span class="ruby-ivar">@commands</span>
+  <span class="ruby-ivar">@commands</span> = []
+  <span class="ruby-keyword">yield</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-ivar">@commands</span> = <span class="ruby-identifier">previous</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-ivar">@commands</span>.<span class="ruby-identifier">reverse</span>)
+  <span class="ruby-ivar">@reverting</span> = <span class="ruby-operator">!</span><span class="ruby-ivar">@reverting</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

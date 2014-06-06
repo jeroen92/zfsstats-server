@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Http::Cache::Response</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Http::Cache::Response 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/http/cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-date">date</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-date-3D">date=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-date-3F">date?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-etag-3D">etag=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-last_modified">last_modified</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-last_modified-3D">last_modified=</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-last_modified-3F">last_modified?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">LAST_MODIFIED</td>
+            <td>=</td>
+            <td class="attr-value">&quot;Last-Modified&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">ETAG</td>
+            <td>=</td>
+            <td class="attr-value">&quot;ETag&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">CACHE_CONTROL</td>
+            <td>=</td>
+            <td class="attr-value">&quot;Cache-Control&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">SPECIAL_KEYS</td>
+            <td>=</td>
+            <td class="attr-value">%w[extras no-cache max-age public must-revalidate]</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">DEFAULT_CACHE_CONTROL</td>
+            <td>=</td>
+            <td class="attr-value">&quot;max-age=0, private, must-revalidate&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">NO_CACHE</td>
+            <td>=</td>
+            <td class="attr-value">&quot;no-cache&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">PUBLIC</td>
+            <td>=</td>
+            <td class="attr-value">&quot;public&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">PRIVATE</td>
+            <td>=</td>
+            <td class="attr-value">&quot;private&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">MUST_REVALIDATE</td>
+            <td>=</td>
+            <td class="attr-value">&quot;must-revalidate&quot;.freeze</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>cache_control</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>etag</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>etag?</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-date">
+            
+              <b>date</b>()
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-date" name="method-i-date" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-date_source')" id="l_method-i-date_source">show</a>
+                
+              </p>
+              <div id="method-i-date_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">date</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">date_header</span> = <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Date&#39;</span>]
+    <span class="ruby-constant">Time</span>.<span class="ruby-identifier">httpdate</span>(<span class="ruby-identifier">date_header</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-date-3D">
+            
+              <b>date=</b>(utc_time)
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-date-3D" name="method-i-date-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-date-3D_source')" id="l_method-i-date-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-date-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 81</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">date=</span>(<span class="ruby-identifier">utc_time</span>)
+  <span class="ruby-identifier">headers</span>[<span class="ruby-string">&#39;Date&#39;</span>] = <span class="ruby-identifier">utc_time</span>.<span class="ruby-identifier">httpdate</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-date-3F">
+            
+              <b>date?</b>()
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-date-3F" name="method-i-date-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-date-3F_source')" id="l_method-i-date-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-date-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">date?</span>
+  <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">&#39;Date&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-etag-3D">
+            
+              <b>etag=</b>(etag)
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-etag-3D" name="method-i-etag-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-etag-3D_source')" id="l_method-i-etag-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-etag-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">etag=</span>(<span class="ruby-identifier">etag</span>)
+  <span class="ruby-identifier">key</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Cache</span>.<span class="ruby-identifier">expand_cache_key</span>(<span class="ruby-identifier">etag</span>)
+  <span class="ruby-ivar">@etag</span> = <span class="ruby-keyword">self</span>[<span class="ruby-constant">ETAG</span>] = <span class="ruby-node">%Q(&quot;#{Digest::MD5.hexdigest(key)}&quot;)</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_modified">
+            
+              <b>last_modified</b>()
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-last_modified" name="method-i-last_modified" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last_modified_source')" id="l_method-i-last_modified_source">show</a>
+                
+              </p>
+              <div id="method-i-last_modified_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last_modified</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">last</span> = <span class="ruby-identifier">headers</span>[<span class="ruby-constant">LAST_MODIFIED</span>]
+    <span class="ruby-constant">Time</span>.<span class="ruby-identifier">httpdate</span>(<span class="ruby-identifier">last</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_modified-3D">
+            
+              <b>last_modified=</b>(utc_time)
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-last_modified-3D" name="method-i-last_modified-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last_modified-3D_source')" id="l_method-i-last_modified-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-last_modified-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last_modified=</span>(<span class="ruby-identifier">utc_time</span>)
+  <span class="ruby-identifier">headers</span>[<span class="ruby-constant">LAST_MODIFIED</span>] = <span class="ruby-identifier">utc_time</span>.<span class="ruby-identifier">httpdate</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-last_modified-3F">
+            
+              <b>last_modified?</b>()
+            
+            <a href="../../../../classes/ActionDispatch/Http/Cache/Response.html#method-i-last_modified-3F" name="method-i-last_modified-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-last_modified-3F_source')" id="l_method-i-last_modified-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-last_modified-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/http/cache.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">last_modified?</span>
+  <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">LAST_MODIFIED</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

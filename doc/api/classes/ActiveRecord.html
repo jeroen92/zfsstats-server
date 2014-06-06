@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../css/github.css" type="text/css" media="screen" />
+<script src="../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/aggregations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/aggregations.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/alias_tracker_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/alias_tracker.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/association_scope_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/association_scope.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/belongs_to_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/belongs_to_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/belongs_to_polymorphic_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/belongs_to_polymorphic_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/collection_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/collection_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/collection_proxy_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/collection_proxy.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/has_and_belongs_to_many_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/has_and_belongs_to_many_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/has_many_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/has_many_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/has_many_through_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/has_many_through_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/has_one_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/has_one_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/has_one_through_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/has_one_through_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/join_dependency_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/join_dependency.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/join_dependency/join_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/join_dependency/join_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/join_dependency/join_base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/join_dependency/join_base.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/join_dependency/join_part_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/join_dependency/join_part.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/join_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/join_helper.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/belongs_to_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/belongs_to.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/collection_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/collection_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/has_and_belongs_to_many_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/has_and_belongs_to_many.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/has_many_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/has_many.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/has_many_through_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/has_many_through.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/has_one_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/has_one.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/has_one_through_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/has_one_through.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/singular_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/singular_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/preloader/through_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/preloader/through_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/singular_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/singular_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/associations/through_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/associations/through_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_assignment_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_assignment.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/before_type_cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/before_type_cast.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/dirty_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/dirty.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/primary_key_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/primary_key.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/query_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/query.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/read_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/read.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/serialization_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/serialization.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/time_zone_conversion_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/time_zone_conversion.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/write_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/write.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/autosave_association_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/autosave_association.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/base_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/base.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/callbacks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/callbacks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/coders/yaml_column_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/coders/yaml_column.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/connection_pool_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/database_limits_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_limits.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/database_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/database_statements.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/query_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/query_cache.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/quoting_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/quoting.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_definitions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_definitions.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_dumper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_dumper.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/schema_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/schema_statements.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/transaction_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/transaction.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract_adapter.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract_mysql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract_mysql_adapter.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/column_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/column.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/connection_specification_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/connection_specification.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql2_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql2_adapter.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/mysql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/mysql_adapter.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/array_parser_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/array_parser.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/cast.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/database_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/database_statements.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/oid_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/oid.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/quoting_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/quoting.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/referential_integrity_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/referential_integrity.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql/schema_statements_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql/schema_statements.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/postgresql_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/postgresql_adapter.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/schema_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/schema_cache.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/sqlite3_adapter_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/sqlite3_adapter.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/statement_pool_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/statement_pool.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_handling_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_handling.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/core_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/core.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/counter_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/counter_cache.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/dynamic_matchers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/dynamic_matchers.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/errors_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/errors.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/explain_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/explain.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/explain_registry_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/explain_registry.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/explain_subscriber_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/explain_subscriber.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/fixture_set/file_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixture_set/file.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/fixtures_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/fixtures.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/inheritance_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/inheritance.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/integration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/integration.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/locking/optimistic_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/locking/optimistic.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/locking/pessimistic_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/locking/pessimistic.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/log_subscriber_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/log_subscriber.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/migration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/migration/command_recorder_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/command_recorder.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/migration/join_table_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/migration/join_table.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/model_schema_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/model_schema.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/nested_attributes_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/nested_attributes.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/null_relation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/null_relation.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/persistence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/persistence.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/query_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/query_cache.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/querying_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/querying.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/railtie_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/railtie.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/railties/controller_runtime_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/railties/controller_runtime.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/readonly_attributes_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/readonly_attributes.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/reflection_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/reflection.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/batches_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/batches.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/calculations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/calculations.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/delegation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/delegation.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/finder_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/finder_methods.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/merger_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/merger.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/predicate_builder_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/predicate_builder.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/query_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/query_methods.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/relation/spawn_methods_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/relation/spawn_methods.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/result_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/result.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/runtime_registry_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/runtime_registry.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/sanitization_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/sanitization.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/schema_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/schema.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/schema_dumper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/schema_dumper.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/schema_migration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/schema_migration.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/scoping_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/scoping.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/scoping/default_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/scoping/default.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/scoping/named_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/scoping/named.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/serialization_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/serialization.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/serializers/xml_serializer_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/serializers/xml_serializer.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/statement_cache_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/statement_cache.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/store_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/store.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/firebird_database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/firebird_database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/mysql_database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/mysql_database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/oracle_database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/oracle_database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/postgresql_database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/postgresql_database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/sqlite_database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/sqlite_database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/tasks/sqlserver_database_tasks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/tasks/sqlserver_database_tasks.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/test_case_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/test_case.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/timestamp_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/timestamp.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/transactions_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/transactions.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/translation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/translation.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/associated_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/associated.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/presence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/presence.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/validations/uniqueness_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/validations/uniqueness.rb</a></li>
+            
+            <li><a href="../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/version_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/version.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Aggregations.html">ActiveRecord::Aggregations</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Associations.html">ActiveRecord::Associations</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/AttributeAssignment.html">ActiveRecord::AttributeAssignment</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/AttributeMethods.html">ActiveRecord::AttributeMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/AutosaveAssociation.html">ActiveRecord::AutosaveAssociation</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Batches.html">ActiveRecord::Batches</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Calculations.html">ActiveRecord::Calculations</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Callbacks.html">ActiveRecord::Callbacks</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/ConnectionAdapters.html">ActiveRecord::ConnectionAdapters</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/ConnectionHandling.html">ActiveRecord::ConnectionHandling</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Core.html">ActiveRecord::Core</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/CounterCache.html">ActiveRecord::CounterCache</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/DynamicMatchers.html">ActiveRecord::DynamicMatchers</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Explain.html">ActiveRecord::Explain</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/FinderMethods.html">ActiveRecord::FinderMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Inheritance.html">ActiveRecord::Inheritance</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Integration.html">ActiveRecord::Integration</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Locking.html">ActiveRecord::Locking</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/ModelSchema.html">ActiveRecord::ModelSchema</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/NestedAttributes.html">ActiveRecord::NestedAttributes</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Persistence.html">ActiveRecord::Persistence</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/QueryMethods.html">ActiveRecord::QueryMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Querying.html">ActiveRecord::Querying</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/ReadonlyAttributes.html">ActiveRecord::ReadonlyAttributes</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Reflection.html">ActiveRecord::Reflection</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Sanitization.html">ActiveRecord::Sanitization</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Scoping.html">ActiveRecord::Scoping</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Serialization.html">ActiveRecord::Serialization</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/SpawnMethods.html">ActiveRecord::SpawnMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Store.html">ActiveRecord::Store</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Tasks.html">ActiveRecord::Tasks</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/TestFixtures.html">ActiveRecord::TestFixtures</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Timestamp.html">ActiveRecord::Timestamp</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Transactions.html">ActiveRecord::Transactions</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Translation.html">ActiveRecord::Translation</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ActiveRecord/Validations.html">ActiveRecord::Validations</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ActiveRecordError.html">ActiveRecord::ActiveRecordError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/AdapterNotFound.html">ActiveRecord::AdapterNotFound</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/AdapterNotSpecified.html">ActiveRecord::AdapterNotSpecified</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/AssociationTypeMismatch.html">ActiveRecord::AssociationTypeMismatch</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/AttributeAssignmentError.html">ActiveRecord::AttributeAssignmentError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/Base.html">ActiveRecord::Base</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ConfigurationError.html">ActiveRecord::ConfigurationError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ConnectionNotEstablished.html">ActiveRecord::ConnectionNotEstablished</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ConnectionTimeoutError.html">ActiveRecord::ConnectionTimeoutError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/DangerousAttributeError.html">ActiveRecord::DangerousAttributeError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/FixtureSet.html">ActiveRecord::FixtureSet</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ImmutableRelation.html">ActiveRecord::ImmutableRelation</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/InvalidForeignKey.html">ActiveRecord::InvalidForeignKey</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/IrreversibleMigration.html">ActiveRecord::IrreversibleMigration</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/LogSubscriber.html">ActiveRecord::LogSubscriber</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/Migration.html">ActiveRecord::Migration</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/MigrationProxy.html">ActiveRecord::MigrationProxy</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/MultiparameterAssignmentErrors.html">ActiveRecord::MultiparameterAssignmentErrors</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/PreparedStatementInvalid.html">ActiveRecord::PreparedStatementInvalid</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/QueryCache.html">ActiveRecord::QueryCache</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ReadOnlyRecord.html">ActiveRecord::ReadOnlyRecord</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/RecordInvalid.html">ActiveRecord::RecordInvalid</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/RecordNotDestroyed.html">ActiveRecord::RecordNotDestroyed</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/RecordNotFound.html">ActiveRecord::RecordNotFound</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/RecordNotSaved.html">ActiveRecord::RecordNotSaved</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/RecordNotUnique.html">ActiveRecord::RecordNotUnique</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/Relation.html">ActiveRecord::Relation</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/Result.html">ActiveRecord::Result</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/Rollback.html">ActiveRecord::Rollback</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/SQLCounter.html">ActiveRecord::SQLCounter</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/Schema.html">ActiveRecord::Schema</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/SchemaMigration.html">ActiveRecord::SchemaMigration</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/SerializationTypeMismatch.html">ActiveRecord::SerializationTypeMismatch</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/StaleObjectError.html">ActiveRecord::StaleObjectError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/StatementCache.html">ActiveRecord::StatementCache</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/StatementInvalid.html">ActiveRecord::StatementInvalid</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/ThrowResult.html">ActiveRecord::ThrowResult</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/TransactionIsolationError.html">ActiveRecord::TransactionIsolationError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/UnknownAttributeError.html">ActiveRecord::UnknownAttributeError</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/UnknownPrimaryKey.html">ActiveRecord::UnknownPrimaryKey</a>
+        </li>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="ActiveRecord/WrappedDatabaseException.html">ActiveRecord::WrappedDatabaseException</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-version">version</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-version">
+            
+              <b>version</b>()
+            
+            <a href="../classes/ActiveRecord.html#method-c-version" name="method-c-version" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the version of the currently loaded <a
+href="ActiveRecord.html">ActiveRecord</a> as a Gem::Version</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-version_source')" id="l_method-c-version_source">show</a>
+                
+              </p>
+              <div id="method-c-version_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/version.rb, line 3</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">version</span>
+  <span class="ruby-constant">Gem</span><span class="ruby-operator">::</span><span class="ruby-constant">Version</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;4.0.0&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                        </div>
+
+    </div>
+  </body>
+</html>    

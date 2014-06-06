@@ -1,0 +1,1502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::TimeZone</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::TimeZone 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/values/time_zone_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>The <a href="TimeZone.html">TimeZone</a> class serves as a wrapper around
+TZInfo::Timezone instances. It allows us to do the following:</p>
+<ul><li>
+<p>Limit the set of zones provided by TZInfo to a meaningful subset of 146
+zones.</p>
+</li><li>
+<p>Retrieve and display zones with a friendlier name (e.g., “Eastern <a
+href="../Time.html">Time</a> (US &amp; Canada)” instead of
+“America/New_York”).</p>
+</li><li>
+<p>Lazily load TZInfo::Timezone instances only when they&#39;re needed.</p>
+</li><li>
+<p>Create <a href="TimeWithZone.html">ActiveSupport::TimeWithZone</a>
+instances via TimeZone&#39;s <code>local</code>, <code>parse</code>,
+<code>at</code> and <code>now</code> methods.</p>
+</li></ul>
+
+<p>If you set <code>config.time_zone</code> in the <a
+href="../Rails.html">Rails</a> Application, you can access this <a
+href="TimeZone.html">TimeZone</a> object via <code>Time.zone</code>:</p>
+
+<pre class="ruby"><span class="ruby-comment"># application.rb:</span>
+<span class="ruby-keyword">class</span> <span class="ruby-constant">Application</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Application</span>
+  <span class="ruby-identifier">config</span>.<span class="ruby-identifier">time_zone</span> = <span class="ruby-string">&#39;Eastern Time (US &amp; Canada)&#39;</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>      <span class="ruby-comment"># =&gt; #&lt;TimeZone:0x514834...&gt;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">name</span> <span class="ruby-comment"># =&gt; &quot;Eastern Time (US &amp; Canada)&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>  <span class="ruby-comment"># =&gt; Sun, 18 May 2008 14:30:44 EDT -04:00</span>
+</pre>
+
+<p>The version of TZInfo bundled with Active Support only includes the
+definitions necessary to support the zones defined by the <a
+href="TimeZone.html">TimeZone</a> class. If you need to use zones that
+aren&#39;t defined by <a href="TimeZone.html">TimeZone</a>, you&#39;ll need
+to install the TZInfo gem (if a recent version of the gem is installed
+locally, this will be used instead of the bundled version.)</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-3C-3D-3E">&lt;=&gt;</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-3D-7E">=~</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-5B-5D">[]</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-all">all</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-at">at</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-create">create</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-find_tzinfo">find_tzinfo</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-formatted_offset">formatted_offset</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-local">local</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-local_to_utc">local_to_utc</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-now">now</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-parse">parse</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-period_for_local">period_for_local</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-period_for_utc">period_for_utc</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-require_tzinfo">require_tzinfo</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-seconds_to_utc_offset">seconds_to_utc_offset</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-today">today</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-us_zones">us_zones</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-utc_offset">utc_offset</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-utc_to_local">utc_to_local</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Z</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-zones_map">zones_map</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            Comparable
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">MAPPING</td>
+            <td>=</td>
+            <td class="attr-value">{
+&quot;International Date Line West&quot; =&gt; &quot;Pacific/Midway&quot;,
+&quot;Midway Island&quot;                =&gt; &quot;Pacific/Midway&quot;,
+&quot;American Samoa&quot;               =&gt; &quot;Pacific/Pago_Pago&quot;,
+&quot;Hawaii&quot;                       =&gt; &quot;Pacific/Honolulu&quot;,
+&quot;Alaska&quot;                       =&gt; &quot;America/Juneau&quot;,
+&quot;Pacific Time (US &amp; Canada)&quot;   =&gt; &quot;America/Los_Angeles&quot;,
+&quot;Tijuana&quot;                      =&gt; &quot;America/Tijuana&quot;,
+&quot;Mountain Time (US &amp; Canada)&quot;  =&gt; &quot;America/Denver&quot;,
+&quot;Arizona&quot;                      =&gt; &quot;America/Phoenix&quot;,
+&quot;Chihuahua&quot;                    =&gt; &quot;America/Chihuahua&quot;,
+&quot;Mazatlan&quot;                     =&gt; &quot;America/Mazatlan&quot;,
+&quot;Central Time (US &amp; Canada)&quot;   =&gt; &quot;America/Chicago&quot;,
+&quot;Saskatchewan&quot;                 =&gt; &quot;America/Regina&quot;,
+&quot;Guadalajara&quot;                  =&gt; &quot;America/Mexico_City&quot;,
+&quot;Mexico City&quot;                  =&gt; &quot;America/Mexico_City&quot;,
+&quot;Monterrey&quot;                    =&gt; &quot;America/Monterrey&quot;,
+&quot;Central America&quot;              =&gt; &quot;America/Guatemala&quot;,
+&quot;Eastern Time (US &amp; Canada)&quot;   =&gt; &quot;America/New_York&quot;,
+&quot;Indiana (East)&quot;               =&gt; &quot;America/Indiana/Indianapolis&quot;,
+&quot;Bogota&quot;                       =&gt; &quot;America/Bogota&quot;,
+&quot;Lima&quot;                         =&gt; &quot;America/Lima&quot;,
+&quot;Quito&quot;                        =&gt; &quot;America/Lima&quot;,
+&quot;Atlantic Time (Canada)&quot;       =&gt; &quot;America/Halifax&quot;,
+&quot;Caracas&quot;                      =&gt; &quot;America/Caracas&quot;,
+&quot;La Paz&quot;                       =&gt; &quot;America/La_Paz&quot;,
+&quot;Santiago&quot;                     =&gt; &quot;America/Santiago&quot;,
+&quot;Newfoundland&quot;                 =&gt; &quot;America/St_Johns&quot;,
+&quot;Brasilia&quot;                     =&gt; &quot;America/Sao_Paulo&quot;,
+&quot;Buenos Aires&quot;                 =&gt; &quot;America/Argentina/Buenos_Aires&quot;,
+&quot;Montevideo&quot;                   =&gt; &quot;America/Montevideo&quot;,
+&quot;Georgetown&quot;                   =&gt; &quot;America/Guyana&quot;,
+&quot;Greenland&quot;                    =&gt; &quot;America/Godthab&quot;,
+&quot;Mid-Atlantic&quot;                 =&gt; &quot;Atlantic/South_Georgia&quot;,
+&quot;Azores&quot;                       =&gt; &quot;Atlantic/Azores&quot;,
+&quot;Cape Verde Is.&quot;               =&gt; &quot;Atlantic/Cape_Verde&quot;,
+&quot;Dublin&quot;                       =&gt; &quot;Europe/Dublin&quot;,
+&quot;Edinburgh&quot;                    =&gt; &quot;Europe/London&quot;,
+&quot;Lisbon&quot;                       =&gt; &quot;Europe/Lisbon&quot;,
+&quot;London&quot;                       =&gt; &quot;Europe/London&quot;,
+&quot;Casablanca&quot;                   =&gt; &quot;Africa/Casablanca&quot;,
+&quot;Monrovia&quot;                     =&gt; &quot;Africa/Monrovia&quot;,
+&quot;UTC&quot;                          =&gt; &quot;Etc/UTC&quot;,
+&quot;Belgrade&quot;                     =&gt; &quot;Europe/Belgrade&quot;,
+&quot;Bratislava&quot;                   =&gt; &quot;Europe/Bratislava&quot;,
+&quot;Budapest&quot;                     =&gt; &quot;Europe/Budapest&quot;,
+&quot;Ljubljana&quot;                    =&gt; &quot;Europe/Ljubljana&quot;,
+&quot;Prague&quot;                       =&gt; &quot;Europe/Prague&quot;,
+&quot;Sarajevo&quot;                     =&gt; &quot;Europe/Sarajevo&quot;,
+&quot;Skopje&quot;                       =&gt; &quot;Europe/Skopje&quot;,
+&quot;Warsaw&quot;                       =&gt; &quot;Europe/Warsaw&quot;,
+&quot;Zagreb&quot;                       =&gt; &quot;Europe/Zagreb&quot;,
+&quot;Brussels&quot;                     =&gt; &quot;Europe/Brussels&quot;,
+&quot;Copenhagen&quot;                   =&gt; &quot;Europe/Copenhagen&quot;,
+&quot;Madrid&quot;                       =&gt; &quot;Europe/Madrid&quot;,
+&quot;Paris&quot;                        =&gt; &quot;Europe/Paris&quot;,
+&quot;Amsterdam&quot;                    =&gt; &quot;Europe/Amsterdam&quot;,
+&quot;Berlin&quot;                       =&gt; &quot;Europe/Berlin&quot;,
+&quot;Bern&quot;                         =&gt; &quot;Europe/Berlin&quot;,
+&quot;Rome&quot;                         =&gt; &quot;Europe/Rome&quot;,
+&quot;Stockholm&quot;                    =&gt; &quot;Europe/Stockholm&quot;,
+&quot;Vienna&quot;                       =&gt; &quot;Europe/Vienna&quot;,
+&quot;West Central Africa&quot;          =&gt; &quot;Africa/Algiers&quot;,
+&quot;Bucharest&quot;                    =&gt; &quot;Europe/Bucharest&quot;,
+&quot;Cairo&quot;                        =&gt; &quot;Africa/Cairo&quot;,
+&quot;Helsinki&quot;                     =&gt; &quot;Europe/Helsinki&quot;,
+&quot;Kyiv&quot;                         =&gt; &quot;Europe/Kiev&quot;,
+&quot;Riga&quot;                         =&gt; &quot;Europe/Riga&quot;,
+&quot;Sofia&quot;                        =&gt; &quot;Europe/Sofia&quot;,
+&quot;Tallinn&quot;                      =&gt; &quot;Europe/Tallinn&quot;,
+&quot;Vilnius&quot;                      =&gt; &quot;Europe/Vilnius&quot;,
+&quot;Athens&quot;                       =&gt; &quot;Europe/Athens&quot;,
+&quot;Istanbul&quot;                     =&gt; &quot;Europe/Istanbul&quot;,
+&quot;Minsk&quot;                        =&gt; &quot;Europe/Minsk&quot;,
+&quot;Jerusalem&quot;                    =&gt; &quot;Asia/Jerusalem&quot;,
+&quot;Harare&quot;                       =&gt; &quot;Africa/Harare&quot;,
+&quot;Pretoria&quot;                     =&gt; &quot;Africa/Johannesburg&quot;,
+&quot;Moscow&quot;                       =&gt; &quot;Europe/Moscow&quot;,
+&quot;St. Petersburg&quot;               =&gt; &quot;Europe/Moscow&quot;,
+&quot;Volgograd&quot;                    =&gt; &quot;Europe/Moscow&quot;,
+&quot;Kuwait&quot;                       =&gt; &quot;Asia/Kuwait&quot;,
+&quot;Riyadh&quot;                       =&gt; &quot;Asia/Riyadh&quot;,
+&quot;Nairobi&quot;                      =&gt; &quot;Africa/Nairobi&quot;,
+&quot;Baghdad&quot;                      =&gt; &quot;Asia/Baghdad&quot;,
+&quot;Tehran&quot;                       =&gt; &quot;Asia/Tehran&quot;,
+&quot;Abu Dhabi&quot;                    =&gt; &quot;Asia/Muscat&quot;,
+&quot;Muscat&quot;                       =&gt; &quot;Asia/Muscat&quot;,
+&quot;Baku&quot;                         =&gt; &quot;Asia/Baku&quot;,
+&quot;Tbilisi&quot;                      =&gt; &quot;Asia/Tbilisi&quot;,
+&quot;Yerevan&quot;                      =&gt; &quot;Asia/Yerevan&quot;,
+&quot;Kabul&quot;                        =&gt; &quot;Asia/Kabul&quot;,
+&quot;Ekaterinburg&quot;                 =&gt; &quot;Asia/Yekaterinburg&quot;,
+&quot;Islamabad&quot;                    =&gt; &quot;Asia/Karachi&quot;,
+&quot;Karachi&quot;                      =&gt; &quot;Asia/Karachi&quot;,
+&quot;Tashkent&quot;                     =&gt; &quot;Asia/Tashkent&quot;,
+&quot;Chennai&quot;                      =&gt; &quot;Asia/Kolkata&quot;,
+&quot;Kolkata&quot;                      =&gt; &quot;Asia/Kolkata&quot;,
+&quot;Mumbai&quot;                       =&gt; &quot;Asia/Kolkata&quot;,
+&quot;New Delhi&quot;                    =&gt; &quot;Asia/Kolkata&quot;,
+&quot;Kathmandu&quot;                    =&gt; &quot;Asia/Kathmandu&quot;,
+&quot;Astana&quot;                       =&gt; &quot;Asia/Dhaka&quot;,
+&quot;Dhaka&quot;                        =&gt; &quot;Asia/Dhaka&quot;,
+&quot;Sri Jayawardenepura&quot;          =&gt; &quot;Asia/Colombo&quot;,
+&quot;Almaty&quot;                       =&gt; &quot;Asia/Almaty&quot;,
+&quot;Novosibirsk&quot;                  =&gt; &quot;Asia/Novosibirsk&quot;,
+&quot;Rangoon&quot;                      =&gt; &quot;Asia/Rangoon&quot;,
+&quot;Bangkok&quot;                      =&gt; &quot;Asia/Bangkok&quot;,
+&quot;Hanoi&quot;                        =&gt; &quot;Asia/Bangkok&quot;,
+&quot;Jakarta&quot;                      =&gt; &quot;Asia/Jakarta&quot;,
+&quot;Krasnoyarsk&quot;                  =&gt; &quot;Asia/Krasnoyarsk&quot;,
+&quot;Beijing&quot;                      =&gt; &quot;Asia/Shanghai&quot;,
+&quot;Chongqing&quot;                    =&gt; &quot;Asia/Chongqing&quot;,
+&quot;Hong Kong&quot;                    =&gt; &quot;Asia/Hong_Kong&quot;,
+&quot;Urumqi&quot;                       =&gt; &quot;Asia/Urumqi&quot;,
+&quot;Kuala Lumpur&quot;                 =&gt; &quot;Asia/Kuala_Lumpur&quot;,
+&quot;Singapore&quot;                    =&gt; &quot;Asia/Singapore&quot;,
+&quot;Taipei&quot;                       =&gt; &quot;Asia/Taipei&quot;,
+&quot;Perth&quot;                        =&gt; &quot;Australia/Perth&quot;,
+&quot;Irkutsk&quot;                      =&gt; &quot;Asia/Irkutsk&quot;,
+&quot;Ulaanbaatar&quot;                  =&gt; &quot;Asia/Ulaanbaatar&quot;,
+&quot;Seoul&quot;                        =&gt; &quot;Asia/Seoul&quot;,
+&quot;Osaka&quot;                        =&gt; &quot;Asia/Tokyo&quot;,
+&quot;Sapporo&quot;                      =&gt; &quot;Asia/Tokyo&quot;,
+&quot;Tokyo&quot;                        =&gt; &quot;Asia/Tokyo&quot;,
+&quot;Yakutsk&quot;                      =&gt; &quot;Asia/Yakutsk&quot;,
+&quot;Darwin&quot;                       =&gt; &quot;Australia/Darwin&quot;,
+&quot;Adelaide&quot;                     =&gt; &quot;Australia/Adelaide&quot;,
+&quot;Canberra&quot;                     =&gt; &quot;Australia/Melbourne&quot;,
+&quot;Melbourne&quot;                    =&gt; &quot;Australia/Melbourne&quot;,
+&quot;Sydney&quot;                       =&gt; &quot;Australia/Sydney&quot;,
+&quot;Brisbane&quot;                     =&gt; &quot;Australia/Brisbane&quot;,
+&quot;Hobart&quot;                       =&gt; &quot;Australia/Hobart&quot;,
+&quot;Vladivostok&quot;                  =&gt; &quot;Asia/Vladivostok&quot;,
+&quot;Guam&quot;                         =&gt; &quot;Pacific/Guam&quot;,
+&quot;Port Moresby&quot;                 =&gt; &quot;Pacific/Port_Moresby&quot;,
+&quot;Magadan&quot;                      =&gt; &quot;Asia/Magadan&quot;,
+&quot;Solomon Is.&quot;                  =&gt; &quot;Pacific/Guadalcanal&quot;,
+&quot;New Caledonia&quot;                =&gt; &quot;Pacific/Noumea&quot;,
+&quot;Fiji&quot;                         =&gt; &quot;Pacific/Fiji&quot;,
+&quot;Kamchatka&quot;                    =&gt; &quot;Asia/Kamchatka&quot;,
+&quot;Marshall Is.&quot;                 =&gt; &quot;Pacific/Majuro&quot;,
+&quot;Auckland&quot;                     =&gt; &quot;Pacific/Auckland&quot;,
+&quot;Wellington&quot;                   =&gt; &quot;Pacific/Auckland&quot;,
+&quot;Nuku&#39;alofa&quot;                   =&gt; &quot;Pacific/Tongatapu&quot;,
+&quot;Tokelau Is.&quot;                  =&gt; &quot;Pacific/Fakaofo&quot;,
+&quot;Chatham Is.&quot;                  =&gt; &quot;Pacific/Chatham&quot;,
+&quot;Samoa&quot;                        =&gt; &quot;Pacific/Apia&quot;
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p>Keys are <a href="../Rails.html">Rails</a> <a
+href="TimeZone.html">TimeZone</a> names, values are TZInfo identifiers.</p></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">UTC_OFFSET_WITH_COLON</td>
+            <td>=</td>
+            <td class="attr-value">&#39;%s%02d:%02d&#39;</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+          <tr valign='top'>
+            <td class="attr-name">UTC_OFFSET_WITHOUT_COLON</td>
+            <td>=</td>
+            <td class="attr-value">UTC_OFFSET_WITH_COLON.sub(&#39;:&#39;, &#39;&#39;)</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>name</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>tzinfo</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-5B-5D">
+            
+              <b>[]</b>(arg)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-5B-5D" name="method-c-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Locate a specific time zone object. If the argument is a string, it is
+interpreted to mean the name of the timezone to locate. If it is a numeric
+value it is either the hour offset, or the second offset, of the timezone
+to find. (The first one with that offset will be returned.) Returns
+<code>nil</code> if no such time zone is known to the system.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-5B-5D_source')" id="l_method-c-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-c-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 377</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">arg</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">arg</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">String</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">lazy_zones_map</span>[<span class="ruby-identifier">arg</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">lookup</span>(<span class="ruby-identifier">arg</span>).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">tz</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tz</span>.<span class="ruby-identifier">utc_offset</span> }
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">TZInfo</span><span class="ruby-operator">::</span><span class="ruby-constant">InvalidTimezoneIdentifier</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">Numeric</span>, <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Duration</span>
+      <span class="ruby-identifier">arg</span> <span class="ruby-operator">*=</span> <span class="ruby-number">3600</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-number">13</span>
+      <span class="ruby-identifier">all</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">z</span><span class="ruby-operator">|</span> <span class="ruby-identifier">z</span>.<span class="ruby-identifier">utc_offset</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">to_i</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;invalid argument to TimeZone[]: #{arg.inspect}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-all">
+            
+              <b>all</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-all" name="method-c-all" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return an array of all <a href="TimeZone.html">TimeZone</a> objects. There
+are multiple <a href="TimeZone.html">TimeZone</a> objects per time zone, in
+many cases, to make it easier for users to find their own time zone.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-all_source')" id="l_method-c-all_source">show</a>
+                
+              </p>
+              <div id="method-c-all_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 359</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">all</span>
+  <span class="ruby-ivar">@zones</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">zones_map</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">sort</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-create">
+            
+              <b>create</b>(name, utc_offset = nil, tzinfo = nil)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-create" name="method-c-create" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-find_tzinfo">
+            
+              <b>find_tzinfo</b>(name)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-find_tzinfo" name="method-c-find_tzinfo" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-find_tzinfo_source')" id="l_method-c-find_tzinfo_source">show</a>
+                
+              </p>
+              <div id="method-c-find_tzinfo_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 342</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">find_tzinfo</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-constant">TZInfo</span><span class="ruby-operator">::</span><span class="ruby-constant">TimezoneProxy</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">MAPPING</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(name)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return a <a href="TimeZone.html">TimeZone</a> instance with the given name,
+or <code>nil</code> if no such <a href="TimeZone.html">TimeZone</a>
+instance exists. (This exists to support the use of this class with the
+<code>composed_of</code> macro.)</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 352</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">new</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-keyword">self</span>[<span class="ruby-identifier">name</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(name, utc_offset = nil, tzinfo = nil)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Create a new <a href="TimeZone.html">TimeZone</a> object with the given
+name and offset. The offset is the number of seconds that this time zone is
+offset from UTC (GMT). Seconds were chosen as the offset unit because that
+is the unit that Ruby uses to represent time zone offsets (see
+Time#utc_offset).</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeZone.html#method-c-create">create</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 207</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">utc_offset</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tzinfo</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">send</span>(<span class="ruby-value">:require_tzinfo</span>)
+
+  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
+  <span class="ruby-ivar">@utc_offset</span> = <span class="ruby-identifier">utc_offset</span>
+  <span class="ruby-ivar">@tzinfo</span> = <span class="ruby-identifier">tzinfo</span> <span class="ruby-operator">||</span> <span class="ruby-constant">TimeZone</span>.<span class="ruby-identifier">find_tzinfo</span>(<span class="ruby-identifier">name</span>)
+  <span class="ruby-ivar">@current_period</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-seconds_to_utc_offset">
+            
+              <b>seconds_to_utc_offset</b>(seconds, colon = true)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-seconds_to_utc_offset" name="method-c-seconds_to_utc_offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assumes self represents an offset from UTC in seconds (as returned from
+Time#utc_offset) and turns this into an +HH:MM formatted string.</p>
+
+<pre class="ruby"><span class="ruby-constant">TimeZone</span>.<span class="ruby-identifier">seconds_to_utc_offset</span>(<span class="ruby-value">-21_600</span>) <span class="ruby-comment"># =&gt; &quot;-06:00&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-seconds_to_utc_offset_source')" id="l_method-c-seconds_to_utc_offset_source">show</a>
+                
+              </p>
+              <div id="method-c-seconds_to_utc_offset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">seconds_to_utc_offset</span>(<span class="ruby-identifier">seconds</span>, <span class="ruby-identifier">colon</span> = <span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">format</span> = <span class="ruby-identifier">colon</span> <span class="ruby-operator">?</span> <span class="ruby-constant">UTC_OFFSET_WITH_COLON</span> <span class="ruby-operator">:</span> <span class="ruby-constant">UTC_OFFSET_WITHOUT_COLON</span>
+  <span class="ruby-identifier">sign</span> = (<span class="ruby-identifier">seconds</span> <span class="ruby-operator">&lt;</span> <span class="ruby-number">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;+&#39;</span>)
+  <span class="ruby-identifier">hours</span> = <span class="ruby-identifier">seconds</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">/</span> <span class="ruby-number">3600</span>
+  <span class="ruby-identifier">minutes</span> = (<span class="ruby-identifier">seconds</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">%</span> <span class="ruby-number">3600</span>) <span class="ruby-operator">/</span> <span class="ruby-number">60</span>
+  <span class="ruby-identifier">format</span> <span class="ruby-operator">%</span> [<span class="ruby-identifier">sign</span>, <span class="ruby-identifier">hours</span>, <span class="ruby-identifier">minutes</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-us_zones">
+            
+              <b>us_zones</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-us_zones" name="method-c-us_zones" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>A convenience method for returning a collection of <a
+href="TimeZone.html">TimeZone</a> objects for time zones in the USA.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-us_zones_source')" id="l_method-c-us_zones_source">show</a>
+                
+              </p>
+              <div id="method-c-us_zones_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 395</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">us_zones</span>
+  <span class="ruby-ivar">@us_zones</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">all</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">z</span><span class="ruby-operator">|</span> <span class="ruby-identifier">z</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/US|Arizona|Indiana|Hawaii|Alaska/</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-zones_map">
+            
+              <b>zones_map</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-zones_map" name="method-c-zones_map" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-zones_map_source')" id="l_method-c-zones_map_source">show</a>
+                
+              </p>
+              <div id="method-c-zones_map_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 363</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">zones_map</span>
+  <span class="ruby-ivar">@zones_map</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">new_zones_names</span> = <span class="ruby-constant">MAPPING</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">lazy_zones_map</span>.<span class="ruby-identifier">keys</span>
+    <span class="ruby-identifier">new_zones</span>       = <span class="ruby-constant">Hash</span>[<span class="ruby-identifier">new_zones_names</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">place</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">place</span>, <span class="ruby-identifier">create</span>(<span class="ruby-identifier">place</span>)] }]
+
+    <span class="ruby-identifier">lazy_zones_map</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">new_zones</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Class Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-require_tzinfo">
+            
+              <b>require_tzinfo</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-c-require_tzinfo" name="method-c-require_tzinfo" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-require_tzinfo_source')" id="l_method-c-require_tzinfo_source">show</a>
+                
+              </p>
+              <div id="method-c-require_tzinfo_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 401</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">require_tzinfo</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;tzinfo&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-operator">::</span><span class="ruby-constant">TZInfo</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">LoadError</span>
+  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;You don&#39;t have tzinfo installed in your application. Please add it to your Gemfile and run bundle install&quot;</span>
+  <span class="ruby-identifier">raise</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-3C-3D-3E">
+            
+              <b>&lt;=&gt;</b>(zone)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-3C-3D-3E" name="method-i-3C-3D-3E" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compare this time zone to the parameter. The two are compared first on
+their offsets, and then by name.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3C-3D-3E_source')" id="l_method-i-3C-3D-3E_source">show</a>
+                
+              </p>
+              <div id="method-i-3C-3D-3E_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 234</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-keyword ruby-title">zone</span>)
+  <span class="ruby-identifier">result</span> = (<span class="ruby-identifier">utc_offset</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">utc_offset</span>)
+  <span class="ruby-identifier">result</span> = (<span class="ruby-identifier">name</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">zone</span>.<span class="ruby-identifier">name</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">result</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span>
+  <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-3D-7E">
+            
+              <b>=~</b>(re)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-3D-7E" name="method-i-3D-7E" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Compare <a href="TimeZone.html#attribute-i-name">name</a> and TZInfo
+identifier to a supplied regexp, returning <code>true</code> if a match is
+found.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3D-7E_source')" id="l_method-i-3D-7E_source">show</a>
+                
+              </p>
+              <div id="method-i-3D-7E_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 242</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">=~</span>(<span class="ruby-keyword ruby-title">re</span>)
+  <span class="ruby-identifier">re</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">re</span> <span class="ruby-operator">===</span> <span class="ruby-constant">MAPPING</span>[<span class="ruby-identifier">name</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-at">
+            
+              <b>at</b>(secs)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-at" name="method-i-at" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Method for creating new <a
+href="TimeWithZone.html">ActiveSupport::TimeWithZone</a> instance in time
+zone of <code>self</code> from number of seconds since the Unix epoch.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Hawaii&#39;</span>        <span class="ruby-comment"># =&gt; &quot;Hawaii&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(<span class="ruby-value">2000</span>).<span class="ruby-identifier">to_f</span>         <span class="ruby-comment"># =&gt; 946684800.0</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">at</span>(<span class="ruby-value">946684800.0</span>)   <span class="ruby-comment"># =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-at_source')" id="l_method-i-at_source">show</a>
+                
+              </p>
+              <div id="method-i-at_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 267</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">at</span>(<span class="ruby-identifier">secs</span>)
+  <span class="ruby-constant">Time</span>.<span class="ruby-identifier">at</span>(<span class="ruby-identifier">secs</span>).<span class="ruby-identifier">utc</span>.<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-formatted_offset">
+            
+              <b>formatted_offset</b>(colon=true, alternate_utc_string = nil)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-formatted_offset" name="method-i-formatted_offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the offset of this time zone as a formatted string, of the format
+“+HH:MM”.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-formatted_offset_source')" id="l_method-i-formatted_offset_source">show</a>
+                
+              </p>
+              <div id="method-i-formatted_offset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">formatted_offset</span>(<span class="ruby-identifier">colon</span>=<span class="ruby-keyword">true</span>, <span class="ruby-identifier">alternate_utc_string</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">utc_offset</span> <span class="ruby-operator">==</span> <span class="ruby-number">0</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">alternate_utc_string</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">seconds_to_utc_offset</span>(<span class="ruby-identifier">utc_offset</span>, <span class="ruby-identifier">colon</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-local">
+            
+              <b>local</b>(*args)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-local" name="method-i-local" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Method for creating new <a
+href="TimeWithZone.html">ActiveSupport::TimeWithZone</a> instance in time
+zone of <code>self</code> from given values.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Hawaii&#39;</span>                    <span class="ruby-comment"># =&gt; &quot;Hawaii&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">local</span>(<span class="ruby-value">2007</span>, <span class="ruby-value">2</span>, <span class="ruby-value">1</span>, <span class="ruby-value">15</span>, <span class="ruby-value">30</span>, <span class="ruby-value">45</span>) <span class="ruby-comment"># =&gt; Thu, 01 Feb 2007 15:30:45 HST -10:00</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-local_source')" id="l_method-i-local_source">show</a>
+                
+              </p>
+              <div id="method-i-local_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 256</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">local</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeWithZone</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">time</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-local_to_utc">
+            
+              <b>local_to_utc</b>(time, dst=true)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-local_to_utc" name="method-i-local_to_utc" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adjust the given time to the simultaneous time in UTC. Returns a Time.utc()
+instance.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-local_to_utc_source')" id="l_method-i-local_to_utc_source">show</a>
+                
+              </p>
+              <div id="method-i-local_to_utc_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 326</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">local_to_utc</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">dst</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">tzinfo</span>.<span class="ruby-identifier">local_to_utc</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">dst</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-now">
+            
+              <b>now</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-now" name="method-i-now" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an <a href="TimeWithZone.html">ActiveSupport::TimeWithZone</a>
+instance representing the current time in the time zone represented by
+<code>self</code>.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Hawaii&#39;</span>  <span class="ruby-comment"># =&gt; &quot;Hawaii&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>         <span class="ruby-comment"># =&gt; Wed, 23 Jan 2008 20:24:27 HST -10:00</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-now_source')" id="l_method-i-now_source">show</a>
+                
+              </p>
+              <div id="method-i-now_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 308</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">now</span>
+  <span class="ruby-identifier">time_now</span>.<span class="ruby-identifier">utc</span>.<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-parse">
+            
+              <b>parse</b>(str, now=now)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-parse" name="method-i-parse" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Method for creating new <a
+href="TimeWithZone.html">ActiveSupport::TimeWithZone</a> instance in time
+zone of <code>self</code> from parsed string.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Hawaii&#39;</span>                   <span class="ruby-comment"># =&gt; &quot;Hawaii&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&#39;1999-12-31 14:00:00&#39;</span>) <span class="ruby-comment"># =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+</pre>
+
+<p>If upper components are missing from the string, they are supplied from <a
+href="TimeZone.html#method-i-now">#now</a>:</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>               <span class="ruby-comment"># =&gt; Fri, 31 Dec 1999 14:00:00 HST -10:00</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&#39;22:30:00&#39;</span>) <span class="ruby-comment"># =&gt; Fri, 31 Dec 1999 22:30:00 HST -10:00</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-parse_source')" id="l_method-i-parse_source">show</a>
+                
+              </p>
+              <div id="method-i-parse_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 282</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">now</span>=<span class="ruby-identifier">now</span>)
+  <span class="ruby-identifier">parts</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">_parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">new</span>(
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:year</span>, <span class="ruby-identifier">now</span>.<span class="ruby-identifier">year</span>),
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:mon</span>, <span class="ruby-identifier">now</span>.<span class="ruby-identifier">month</span>),
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:mday</span>, <span class="ruby-identifier">now</span>.<span class="ruby-identifier">day</span>),
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:hour</span>, <span class="ruby-number">0</span>),
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:min</span>, <span class="ruby-number">0</span>),
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:sec</span>, <span class="ruby-number">0</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:sec_fraction</span>, <span class="ruby-number">0</span>),
+    <span class="ruby-identifier">parts</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:offset</span>, <span class="ruby-number">0</span>)
+  )
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parts</span>[<span class="ruby-value">:offset</span>]
+    <span class="ruby-constant">TimeWithZone</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">utc</span>, <span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-constant">TimeWithZone</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">self</span>, <span class="ruby-identifier">time</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-period_for_local">
+            
+              <b>period_for_local</b>(time, dst=true)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-period_for_local" name="method-i-period_for_local" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Available so that <a href="TimeZone.html">TimeZone</a> instances respond
+like TZInfo::Timezone instances.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-period_for_local_source')" id="l_method-i-period_for_local_source">show</a>
+                
+              </p>
+              <div id="method-i-period_for_local_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 338</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">period_for_local</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">dst</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">tzinfo</span>.<span class="ruby-identifier">period_for_local</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">dst</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-period_for_utc">
+            
+              <b>period_for_utc</b>(time)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-period_for_utc" name="method-i-period_for_utc" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Available so that <a href="TimeZone.html">TimeZone</a> instances respond
+like TZInfo::Timezone instances.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-period_for_utc_source')" id="l_method-i-period_for_utc_source">show</a>
+                
+              </p>
+              <div id="method-i-period_for_utc_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 332</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">period_for_utc</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-identifier">tzinfo</span>.<span class="ruby-identifier">period_for_utc</span>(<span class="ruby-identifier">time</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a textual representation of this time zone.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_s_source')" id="l_method-i-to_s_source">show</a>
+                
+              </p>
+              <div id="method-i-to_s_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_s</span>
+  <span class="ruby-node">&quot;(GMT#{formatted_offset}) #{name}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-today">
+            
+              <b>today</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-today" name="method-i-today" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return the current date in this time zone.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-today_source')" id="l_method-i-today_source">show</a>
+                
+              </p>
+              <div id="method-i-today_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 313</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">today</span>
+  <span class="ruby-identifier">tzinfo</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_date</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-utc_offset">
+            
+              <b>utc_offset</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-utc_offset" name="method-i-utc_offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the offset of this time zone from UTC in seconds.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-utc_offset_source')" id="l_method-i-utc_offset_source">show</a>
+                
+              </p>
+              <div id="method-i-utc_offset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">utc_offset</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@utc_offset</span>
+    <span class="ruby-ivar">@utc_offset</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@current_period</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">tzinfo</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:current_period</span>)
+    <span class="ruby-ivar">@current_period</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:utc_offset</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-utc_to_local">
+            
+              <b>utc_to_local</b>(time)
+            
+            <a href="../../classes/ActiveSupport/TimeZone.html#method-i-utc_to_local" name="method-i-utc_to_local" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adjust the given time to the simultaneous time in the time zone represented
+by <code>self</code>. Returns a Time.utc() instance – if you want an <a
+href="TimeWithZone.html">ActiveSupport::TimeWithZone</a> instance, use <a
+href="../Time.html#method-i-in_time_zone">Time#in_time_zone</a> instead.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-utc_to_local_source')" id="l_method-i-utc_to_local_source">show</a>
+                
+              </p>
+              <div id="method-i-utc_to_local_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/values/time_zone.rb, line 320</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">utc_to_local</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-identifier">tzinfo</span>.<span class="ruby-identifier">utc_to_local</span>(<span class="ruby-identifier">time</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

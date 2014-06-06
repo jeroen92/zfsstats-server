@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::ConditionalGet</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::ConditionalGet 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/conditional_get_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="ConditionalGet/ClassMethods.html">ActionController::ConditionalGet::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-expires_in">expires_in</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-expires_now">expires_now</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fresh_when">fresh_when</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-stale-3F">stale?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="RackDelegation.html">
+              ActionController::RackDelegation
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Head.html">
+              ActionController::Head
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-expires_in">
+            
+              <b>expires_in</b>(seconds, options = {})
+            
+            <a href="../../classes/ActionController/ConditionalGet.html#method-i-expires_in" name="method-i-expires_in" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets a HTTP 1.1 Cache-Control header. Defaults to issuing a
+<code>private</code> instruction, so that intermediate caches must not
+cache the response.</p>
+
+<pre>expires_in 20.minutes
+expires_in 3.hours, public: true
+expires_in 3.hours, public: true, must_revalidate: true</pre>
+
+<p>This method will overwrite an existing Cache-Control header. See <a
+href="http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html">www.w3.org/Protocols/rfc2616/rfc2616-sec14.html</a>
+for more possibilities.</p>
+
+<p>The method will also ensure a HTTP <a href="../Date.html">Date</a> header
+for client compatibility.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-expires_in_source')" id="l_method-i-expires_in_source">show</a>
+                
+              </p>
+              <div id="method-i-expires_in_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">expires_in</span>(<span class="ruby-identifier">seconds</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">cache_control</span>.<span class="ruby-identifier">merge!</span>(
+    <span class="ruby-value">:max_age</span>         =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">seconds</span>,
+    <span class="ruby-value">:public</span>          =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:public</span>),
+    <span class="ruby-value">:must_revalidate</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:must_revalidate</span>)
+  )
+  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">:private</span>)
+
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">cache_control</span>[<span class="ruby-value">:extras</span>] = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{k}=#{v}&quot;</span>}
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">date</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">response</span>.<span class="ruby-identifier">date?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-expires_now">
+            
+              <b>expires_now</b>()
+            
+            <a href="../../classes/ActionController/ConditionalGet.html#method-i-expires_now" name="method-i-expires_now" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets a HTTP 1.1 Cache-Control header of <code>no-cache</code> so no caching
+should occur by the browser or intermediate caches (like caching proxy
+servers).</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-expires_now_source')" id="l_method-i-expires_now_source">show</a>
+                
+              </p>
+              <div id="method-i-expires_now_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">expires_now</span>
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">cache_control</span>.<span class="ruby-identifier">replace</span>(<span class="ruby-value">:no_cache</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-fresh_when">
+            
+              <b>fresh_when</b>(record_or_options, additional_options = {})
+            
+            <a href="../../classes/ActionController/ConditionalGet.html#method-i-fresh_when" name="method-i-fresh_when" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the etag, <code>last_modified</code>, or both on the response and
+renders a <code>304 Not Modified</code> response if the request is already
+fresh.</p>
+
+<h3 id="method-i-fresh_when-label-Parameters%3A">Parameters:</h3>
+<ul><li>
+<p><code>:etag</code>.</p>
+</li><li>
+<p><code>:last_modified</code>.</p>
+</li><li>
+<p><code>:public</code> By default the Cache-Control header is private, set
+this to <code>true</code> if you want your application to be cachable by
+other devices (proxy caches).</p>
+</li></ul>
+
+<h3 id="method-i-fresh_when-label-Example%3A">Example:</h3>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+  <span class="ruby-identifier">fresh_when</span>(<span class="ruby-identifier">etag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@article</span>, <span class="ruby-identifier">last_modified</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">created_at</span>, <span class="ruby-identifier">public</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>This will render the show template if the request isn&#39;t sending a
+matching etag or If-Modified-Since header and just a <code>304 Not
+Modified</code> response if there&#39;s a match.</p>
+
+<p>You can also just pass a record where <code>last_modified</code> will be
+set by calling <code>updated_at</code> and the etag by passing the object
+itself.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+  <span class="ruby-identifier">fresh_when</span>(<span class="ruby-ivar">@article</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>When passing a record, you can still set whether the public header:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+  <span class="ruby-identifier">fresh_when</span>(<span class="ruby-ivar">@article</span>, <span class="ruby-identifier">public</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-fresh_when_source')" id="l_method-i-fresh_when_source">show</a>
+                
+              </p>
+              <div id="method-i-fresh_when_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb, line 69</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fresh_when</span>(<span class="ruby-identifier">record_or_options</span>, <span class="ruby-identifier">additional_options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">record_or_options</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">record_or_options</span>
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">assert_valid_keys</span>(<span class="ruby-value">:etag</span>, <span class="ruby-value">:last_modified</span>, <span class="ruby-value">:public</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">record</span>  = <span class="ruby-identifier">record_or_options</span>
+    <span class="ruby-identifier">options</span> = { <span class="ruby-identifier">etag</span><span class="ruby-operator">:</span> <span class="ruby-identifier">record</span>, <span class="ruby-identifier">last_modified</span><span class="ruby-operator">:</span> <span class="ruby-identifier">record</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:updated_at</span>) }.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">additional_options</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">etag</span>          = <span class="ruby-identifier">combine_etags</span>(<span class="ruby-identifier">options</span>[<span class="ruby-value">:etag</span>]) <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:etag</span>]
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">last_modified</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:last_modified</span>]       <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:last_modified</span>]
+  <span class="ruby-identifier">response</span>.<span class="ruby-identifier">cache_control</span>[<span class="ruby-value">:public</span>] = <span class="ruby-keyword">true</span>                 <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:public</span>]
+
+  <span class="ruby-identifier">head</span> <span class="ruby-value">:not_modified</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">fresh?</span>(<span class="ruby-identifier">response</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-stale-3F">
+            
+              <b>stale?</b>(record_or_options, additional_options = {})
+            
+            <a href="../../classes/ActionController/ConditionalGet.html#method-i-stale-3F" name="method-i-stale-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Sets the <code>etag</code> and/or <code>last_modified</code> on the
+response and checks it against the client request. If the request
+doesn&#39;t match the options provided, the request is considered stale and
+should be generated from scratch. Otherwise, it&#39;s fresh and we
+don&#39;t need to generate anything and a reply of <code>304 Not
+Modified</code> is sent.</p>
+
+<h3 id="method-i-stale-3F-label-Parameters%3A">Parameters:</h3>
+<ul><li>
+<p><code>:etag</code>.</p>
+</li><li>
+<p><code>:last_modified</code>.</p>
+</li><li>
+<p><code>:public</code> By default the Cache-Control header is private, set
+this to <code>true</code> if you want your application to be cachable by
+other devices (proxy caches).</p>
+</li></ul>
+
+<h3 id="method-i-stale-3F-label-Example%3A">Example:</h3>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">stale?</span>(<span class="ruby-identifier">etag</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@article</span>, <span class="ruby-identifier">last_modified</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">created_at</span>)
+    <span class="ruby-ivar">@statistics</span> = <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">really_expensive_call</span>
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># all the supported formats</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>You can also just pass a record where <code>last_modified</code> will be
+set by calling updated_at and the etag by passing the object itself.</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">stale?</span>(<span class="ruby-ivar">@article</span>)
+    <span class="ruby-ivar">@statistics</span> = <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">really_expensive_call</span>
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># all the supported formats</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>When passing a record, you can still set whether the public header:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@article</span> = <span class="ruby-constant">Article</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">stale?</span>(<span class="ruby-ivar">@article</span>, <span class="ruby-identifier">public</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>)
+    <span class="ruby-ivar">@statistics</span> = <span class="ruby-ivar">@article</span>.<span class="ruby-identifier">really_expensive_call</span>
+    <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># all the supported formats</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-stale-3F_source')" id="l_method-i-stale-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-stale-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/conditional_get.rb, line 136</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">stale?</span>(<span class="ruby-identifier">record_or_options</span>, <span class="ruby-identifier">additional_options</span> = {})
+  <span class="ruby-identifier">fresh_when</span>(<span class="ruby-identifier">record_or_options</span>, <span class="ruby-identifier">additional_options</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">request</span>.<span class="ruby-identifier">fresh?</span>(<span class="ruby-identifier">response</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::IntegrationTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionDispatch::IntegrationTest 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../ActiveSupport/TestCase.html">ActiveSupport::TestCase</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/testing/integration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/test_help_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/test_help.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>An integration test spans multiple controllers and actions, tying them all
+together to ensure they work together as expected. It tests more completely
+than either unit or functional tests do, exercising the entire stack, from
+the dispatcher to the database.</p>
+
+<p>At its simplest, you simply extend <code>IntegrationTest</code> and write
+your tests using the get/post methods:</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;test_helper&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">ExampleTest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>
+  <span class="ruby-identifier">fixtures</span> :<span class="ruby-identifier">people</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_login</span>
+    <span class="ruby-comment"># get the login page</span>
+    <span class="ruby-identifier">get</span> <span class="ruby-string">&quot;/login&quot;</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">status</span>
+
+    <span class="ruby-comment"># post the login and follow through to the home page</span>
+    <span class="ruby-identifier">post</span> <span class="ruby-string">&quot;/login&quot;</span>, <span class="ruby-identifier">username</span><span class="ruby-operator">:</span> <span class="ruby-identifier">people</span>(:<span class="ruby-identifier">jamis</span>).<span class="ruby-identifier">username</span>,
+      <span class="ruby-identifier">password</span><span class="ruby-operator">:</span> <span class="ruby-identifier">people</span>(:<span class="ruby-identifier">jamis</span>).<span class="ruby-identifier">password</span>
+    <span class="ruby-identifier">follow_redirect!</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-value">200</span>, <span class="ruby-identifier">status</span>
+    <span class="ruby-identifier">assert_equal</span> <span class="ruby-string">&quot;/home&quot;</span>, <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>However, you can also have multiple session instances open per test, and
+even extend those instances with assertions and methods to create a very
+powerful testing DSL that is specific for your application. You can even
+reference any named routes you happen to have defined.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&quot;test_helper&quot;</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">AdvancedTest</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionDispatch</span><span class="ruby-operator">::</span><span class="ruby-constant">IntegrationTest</span>
+  <span class="ruby-identifier">fixtures</span> :<span class="ruby-identifier">people</span>, :<span class="ruby-identifier">rooms</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">test_login_and_speak</span>
+    <span class="ruby-identifier">jamis</span>, <span class="ruby-identifier">david</span> = <span class="ruby-identifier">login</span>(:<span class="ruby-identifier">jamis</span>), <span class="ruby-identifier">login</span>(:<span class="ruby-identifier">david</span>)
+    <span class="ruby-identifier">room</span> = <span class="ruby-identifier">rooms</span>(:<span class="ruby-identifier">office</span>)
+
+    <span class="ruby-identifier">jamis</span>.<span class="ruby-identifier">enter</span>(<span class="ruby-identifier">room</span>)
+    <span class="ruby-identifier">jamis</span>.<span class="ruby-identifier">speak</span>(<span class="ruby-identifier">room</span>, <span class="ruby-string">&quot;anybody home?&quot;</span>)
+
+    <span class="ruby-identifier">david</span>.<span class="ruby-identifier">enter</span>(<span class="ruby-identifier">room</span>)
+    <span class="ruby-identifier">david</span>.<span class="ruby-identifier">speak</span>(<span class="ruby-identifier">room</span>, <span class="ruby-string">&quot;hello!&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+
+    <span class="ruby-keyword">module</span> <span class="ruby-constant">CustomAssertions</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">enter</span>(<span class="ruby-identifier">room</span>)
+        <span class="ruby-comment"># reference a named route, for maximum internal consistency!</span>
+        <span class="ruby-identifier">get</span>(<span class="ruby-identifier">room_url</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">room</span>.<span class="ruby-identifier">id</span>))
+        <span class="ruby-identifier">assert</span>(<span class="ruby-operator">...</span>)
+        <span class="ruby-operator">...</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">def</span> <span class="ruby-identifier">speak</span>(<span class="ruby-identifier">room</span>, <span class="ruby-identifier">message</span>)
+        <span class="ruby-identifier">xml_http_request</span> <span class="ruby-node">&quot;/say/#{room.id}&quot;</span>, <span class="ruby-identifier">message</span><span class="ruby-operator">:</span> <span class="ruby-identifier">message</span>
+        <span class="ruby-identifier">assert</span>(<span class="ruby-operator">...</span>)
+        <span class="ruby-operator">...</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">login</span>(<span class="ruby-identifier">who</span>)
+      <span class="ruby-identifier">open_session</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sess</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">CustomAssertions</span>)
+        <span class="ruby-identifier">who</span> = <span class="ruby-identifier">people</span>(<span class="ruby-identifier">who</span>)
+        <span class="ruby-identifier">sess</span>.<span class="ruby-identifier">post</span> <span class="ruby-string">&quot;/login&quot;</span>, <span class="ruby-identifier">username</span><span class="ruby-operator">:</span> <span class="ruby-identifier">who</span>.<span class="ruby-identifier">username</span>,
+          <span class="ruby-identifier">password</span><span class="ruby-operator">:</span> <span class="ruby-identifier">who</span>.<span class="ruby-identifier">password</span>
+        <span class="ruby-identifier">assert</span>(<span class="ruby-operator">...</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-app">app</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-app">app</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-app-3D">app=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-url_options">url_options</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Integration/Runner.html">
+              ActionDispatch::Integration::Runner
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="../ActionController/TemplateAssertions.html">
+              ActionController::TemplateAssertions
+            </a>
+          
+        </li>
+      
+        <li>
+          
+            <a href="Routing/UrlFor.html">
+              ActionDispatch::Routing::UrlFor
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-app">
+            
+              <b>app</b>()
+            
+            <a href="../../classes/ActionDispatch/IntegrationTest.html#method-c-app" name="method-c-app" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-app_source')" id="l_method-c-app_source">show</a>
+                
+              </p>
+              <div id="method-c-app_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 491</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">app</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">@@app</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-constant">ActionDispatch</span>.<span class="ruby-identifier">test_app</span>
+    <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Rails application fallback is deprecated and no longer works, please set ActionDispatch.test_app&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">@@app</span> <span class="ruby-operator">||</span> <span class="ruby-constant">ActionDispatch</span>.<span class="ruby-identifier">test_app</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-app-3D">
+            
+              <b>app=</b>(app)
+            
+            <a href="../../classes/ActionDispatch/IntegrationTest.html#method-c-app-3D" name="method-c-app-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-app-3D_source')" id="l_method-c-app-3D_source">show</a>
+                
+              </p>
+              <div id="method-c-app-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 499</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">app=</span>(<span class="ruby-identifier">app</span>)
+  <span class="ruby-identifier">@@app</span> = <span class="ruby-identifier">app</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-app">
+            
+              <b>app</b>()
+            
+            <a href="../../classes/ActionDispatch/IntegrationTest.html#method-i-app" name="method-i-app" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-app_source')" id="l_method-i-app_source">show</a>
+                
+              </p>
+              <div id="method-i-app_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 503</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">app</span>
+  <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">app</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-url_options">
+            
+              <b>url_options</b>()
+            
+            <a href="../../classes/ActionDispatch/IntegrationTest.html#method-i-url_options" name="method-i-url_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-url_options_source')" id="l_method-i-url_options_source">show</a>
+                
+              </p>
+              <div id="method-i-url_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 507</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">url_options</span>
+  <span class="ruby-identifier">reset!</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">integration_session</span>
+  <span class="ruby-identifier">integration_session</span>.<span class="ruby-identifier">url_options</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

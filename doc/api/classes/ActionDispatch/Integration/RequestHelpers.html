@@ -1,0 +1,771 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Integration::RequestHelpers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Integration::RequestHelpers 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/testing/integration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-delete_via_redirect">delete_via_redirect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-follow_redirect-21">follow_redirect!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-get">get</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-get_via_redirect">get_via_redirect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-head">head</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-patch">patch</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-patch_via_redirect">patch_via_redirect</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-post">post</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-post_via_redirect">post_via_redirect</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-put">put</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-put_via_redirect">put_via_redirect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-request_via_redirect">request_via_redirect</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>X</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-xhr">xhr</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-xml_http_request">xml_http_request</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a DELETE request with the given parameters. See <code>#get</code>
+for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span> <span class="ruby-value">:delete</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete_via_redirect">
+            
+              <b>delete_via_redirect</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-delete_via_redirect" name="method-i-delete_via_redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a DELETE request, following any subsequent redirect. See
+<code>request_via_redirect</code> for more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_via_redirect_source')" id="l_method-i-delete_via_redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_via_redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete_via_redirect</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">request_via_redirect</span>(<span class="ruby-value">:delete</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-follow_redirect-21">
+            
+              <b>follow_redirect!</b>()
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-follow_redirect-21" name="method-i-follow_redirect-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Follow a single redirect response. If the last response was not a redirect,
+an exception will be raised. Otherwise, the redirect is performed on the
+location header.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-follow_redirect-21_source')" id="l_method-i-follow_redirect-21_source">show</a>
+                
+              </p>
+              <div id="method-i-follow_redirect-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">follow_redirect!</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;not a redirect! #{status} #{status_message}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">redirect?</span>
+  <span class="ruby-identifier">get</span>(<span class="ruby-identifier">response</span>.<span class="ruby-identifier">location</span>)
+  <span class="ruby-identifier">status</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get">
+            
+              <b>get</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-get" name="method-i-get" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a GET request with the given parameters.</p>
+<ul><li>
+<p><code>path</code>: The <a href="../../URI.html">URI</a> (as a <a
+href="../../String.html">String</a>) on which you want to perform a GET
+request.</p>
+</li><li>
+<p><code>parameters</code>: The HTTP parameters that you want to pass. This
+may be <code>nil</code>, a <a href="../../Hash.html">Hash</a>, or a <a
+href="../../String.html">String</a> that is appropriately encoded
+(<code>application/x-www-form-urlencoded</code> or
+<code>multipart/form-data</code>).</p>
+</li><li>
+<p><code>headers_or_env</code>: Additional headers to pass, as a <a
+href="../../Hash.html">Hash</a>. The headers will be merged into the Rack
+env hash.</p>
+</li></ul>
+
+<p>This method returns a <a href="../Response.html">Response</a> object, which
+one can use to inspect the details of the response. Furthermore, if this
+method was called from an <a
+href="../IntegrationTest.html">ActionDispatch::IntegrationTest</a> object,
+then that object&#39;s <code>@response</code> instance variable will point
+to the same response object.</p>
+
+<p>You can also perform POST, PATCH, PUT, DELETE, and HEAD requests with
+<code>#post</code>, <code>#patch</code>, <code>#put</code>,
+<code>#delete</code>, and <code>#head</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-get_source')" id="l_method-i-get_source">show</a>
+                
+              </p>
+              <div id="method-i-get_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span> <span class="ruby-value">:get</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-get_via_redirect">
+            
+              <b>get_via_redirect</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-get_via_redirect" name="method-i-get_via_redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a GET request, following any subsequent redirect. See
+<code>request_via_redirect</code> for more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-get_via_redirect_source')" id="l_method-i-get_via_redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-get_via_redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">get_via_redirect</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">request_via_redirect</span>(<span class="ruby-value">:get</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-head">
+            
+              <b>head</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-head" name="method-i-head" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a HEAD request with the given parameters. See <code>#get</code>
+for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-head_source')" id="l_method-i-head_source">show</a>
+                
+              </p>
+              <div id="method-i-head_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">head</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span> <span class="ruby-value">:head</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-patch">
+            
+              <b>patch</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-patch" name="method-i-patch" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a PATCH request with the given parameters. See <code>#get</code>
+for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-patch_source')" id="l_method-i-patch_source">show</a>
+                
+              </p>
+              <div id="method-i-patch_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">patch</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span> <span class="ruby-value">:patch</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-patch_via_redirect">
+            
+              <b>patch_via_redirect</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-patch_via_redirect" name="method-i-patch_via_redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a PATCH request, following any subsequent redirect. See
+<code>request_via_redirect</code> for more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-patch_via_redirect_source')" id="l_method-i-patch_via_redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-patch_via_redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">patch_via_redirect</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">request_via_redirect</span>(<span class="ruby-value">:patch</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-post">
+            
+              <b>post</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-post" name="method-i-post" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a POST request with the given parameters. See <code>#get</code>
+for more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-post_source')" id="l_method-i-post_source">show</a>
+                
+              </p>
+              <div id="method-i-post_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">post</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span> <span class="ruby-value">:post</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-post_via_redirect">
+            
+              <b>post_via_redirect</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-post_via_redirect" name="method-i-post_via_redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a POST request, following any subsequent redirect. See
+<code>request_via_redirect</code> for more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-post_via_redirect_source')" id="l_method-i-post_via_redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-post_via_redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">post_via_redirect</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">request_via_redirect</span>(<span class="ruby-value">:post</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-put">
+            
+              <b>put</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-put" name="method-i-put" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a PUT request with the given parameters. See <code>#get</code> for
+more details.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-put_source')" id="l_method-i-put_source">show</a>
+                
+              </p>
+              <div id="method-i-put_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">put</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span> <span class="ruby-value">:put</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-put_via_redirect">
+            
+              <b>put_via_redirect</b>(path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-put_via_redirect" name="method-i-put_via_redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a PUT request, following any subsequent redirect. See
+<code>request_via_redirect</code> for more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-put_via_redirect_source')" id="l_method-i-put_via_redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-put_via_redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">put_via_redirect</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">request_via_redirect</span>(<span class="ruby-value">:put</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-request_via_redirect">
+            
+              <b>request_via_redirect</b>(http_method, path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-request_via_redirect" name="method-i-request_via_redirect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs a request using the specified method, following any subsequent
+redirect. Note that the redirects are followed until the response is not a
+redirect–this means you may run into an infinite loop if your redirect
+loops back to itself.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-request_via_redirect_source')" id="l_method-i-request_via_redirect_source">show</a>
+                
+              </p>
+              <div id="method-i-request_via_redirect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 92</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">request_via_redirect</span>(<span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">http_method</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+  <span class="ruby-identifier">follow_redirect!</span> <span class="ruby-keyword">while</span> <span class="ruby-identifier">redirect?</span>
+  <span class="ruby-identifier">status</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xhr">
+            
+              <b>xhr</b>(request_method, path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-xhr" name="method-i-xhr" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xml_http_request">
+            
+              <b>xml_http_request</b>(request_method, path, parameters = nil, headers_or_env = nil)
+            
+            <a href="../../../classes/ActionDispatch/Integration/RequestHelpers.html#method-i-xml_http_request" name="method-i-xml_http_request" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs an XMLHttpRequest request with the given parameters, mirroring a
+request from the Prototype library.</p>
+
+<p>The request_method is <code>:get</code>, <code>:post</code>,
+<code>:patch</code>, <code>:put</code>, <code>:delete</code> or
+<code>:head</code>; the parameters are <code>nil</code>, a hash, or a
+url-encoded or multipart string; the headers are a hash.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="RequestHelpers.html#method-i-xhr">xhr</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-xml_http_request_source')" id="l_method-i-xml_http_request_source">show</a>
+                
+              </p>
+              <div id="method-i-xml_http_request_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/integration.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">xml_http_request</span>(<span class="ruby-identifier">request_method</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">headers_or_env</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">headers_or_env</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-identifier">headers_or_env</span>[<span class="ruby-string">&#39;HTTP_X_REQUESTED_WITH&#39;</span>] = <span class="ruby-string">&#39;XMLHttpRequest&#39;</span>
+  <span class="ruby-identifier">headers_or_env</span>[<span class="ruby-string">&#39;HTTP_ACCEPT&#39;</span>] <span class="ruby-operator">||=</span> [<span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">JS</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">HTML</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span>, <span class="ruby-string">&#39;text/xml&#39;</span>, <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">ALL</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">request_method</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">headers_or_env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

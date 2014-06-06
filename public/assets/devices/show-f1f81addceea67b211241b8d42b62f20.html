@@ -1,0 +1,40 @@
+<div class="row">
+	<div class="col-md-4">
+		<div class="device-information">
+			<div id="device-description">
+				<legend ng-show="device.name">{{device.type}} - {{device.name}}</legend>
+				<legend ng-show="!device.name">{{device.type}}</legend>
+				<span>
+					<a class="navigation-link" style="float: left" href="../servers/{{device.server.name}}"><i class="fa fa-arrow-left"></i> {{device.server.name}}</a>
+					<a class="navigation-link" style="float: right" href="#"><i class="fa fa-edit"></i> Edit</a>
+				</span>
+
+			</div>
+			<table class="table table-striped table-bordered" style="font-size:12px;">
+			  <tbody>
+			  	<tr ng-show="device.name">
+			      <td>Poolname</td><td>{{ device.name }}</td>
+			    </tr>
+			    <tr>
+			      <td>GUID</td><td>{{ device.guid }}</td>
+			    </tr>
+			    <tr>
+			      <td>Type</td><td>{{ device.type }}</td>
+			    </tr>
+			    <tr>
+			      <td>Server</td><td>{{ device.server.name }}</td>
+			    </tr>
+			  </tbody>
+			</table>
+		</div>
+	</div>
+	<div class="col-md-8" >
+		<div ng-include="partialUrl"></div>
+	</div>
+</div>
+	<div class="device-unit" id="device-measurement-data">
+		<h2>Measurements</h2>
+		<p>Select one or more measurements represented in the tiles above. If you do so, the measurement data will be loaded and a chart with the data will be shown below.</p>
+		<div id="device-chart" ng-show="chartCreated"></div>
+	</div>
+</div>

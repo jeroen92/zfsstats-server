@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Renderers</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Renderers 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/renderers_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/renderers.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Renderers/All.html">ActionController::Renderers::All</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Renderers/ClassMethods.html">ActionController::Renderers::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-_handle_render_options">_handle_render_options</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-add">add</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-render_to_body">render_to_body</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">RENDERERS</td>
+            <td>=</td>
+            <td class="attr-value">Set.new</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"><p><a href="../Hash.html">Hash</a> of available renderers, mapping a renderer
+name to its proc. Default keys are :json, :js, :xml.</p></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-add">
+            
+              <b>add</b>(key, &amp;block)
+            
+            <a href="../../classes/ActionController/Renderers.html#method-c-add" name="method-c-add" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Adds a new renderer to call within controller actions. A renderer is
+invoked by passing its name as an option to
+<code>AbstractController::Rendering#render</code>. To create a renderer
+pass it a name and a block. The block takes two arguments, the first is the
+value paired with its key and the second is the remaining hash of options
+passed to <code>render</code>.</p>
+
+<p>Create a csv renderer:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Renderers</span>.<span class="ruby-identifier">add</span> :<span class="ruby-identifier">csv</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">obj</span>, <span class="ruby-identifier">options</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">options</span>[:<span class="ruby-identifier">filename</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;data&#39;</span>
+  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">respond_to?</span>(:<span class="ruby-identifier">to_csv</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_csv</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">send_data</span> <span class="ruby-identifier">str</span>, <span class="ruby-identifier">type</span><span class="ruby-operator">:</span> <span class="ruby-constant">Mime</span><span class="ruby-operator">::</span><span class="ruby-constant">CSV</span>,
+    <span class="ruby-identifier">disposition</span><span class="ruby-operator">:</span> <span class="ruby-node">&quot;attachment; filename=#{filename}.csv&quot;</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Note that we used Mime::CSV for the csv mime type as it comes with <a
+href="../Rails.html">Rails</a>. For a custom renderer, you&#39;ll need to
+register a mime type with <code>Mime::Type.register</code>.</p>
+
+<p>To use the csv renderer in a controller action:</p>
+
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+  <span class="ruby-ivar">@csvable</span> = <span class="ruby-constant">Csvable</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>])
+  <span class="ruby-identifier">respond_to</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">format</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">html</span>
+    <span class="ruby-identifier">format</span>.<span class="ruby-identifier">csv</span> { <span class="ruby-identifier">render</span> <span class="ruby-identifier">csv</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@csvable</span>, <span class="ruby-identifier">filename</span><span class="ruby-operator">:</span> <span class="ruby-ivar">@csvable</span>.<span class="ruby-identifier">name</span> }
+  }
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>To use renderers and their mime types in more concise ways, see
+<code>ActionController::MimeResponds::ClassMethods.respond_to</code> and
+<code>ActionController::MimeResponds#respond_with</code></p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-add_source')" id="l_method-c-add_source">show</a>
+                
+              </p>
+              <div id="method-c-add_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/renderers.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">key</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">define_method</span>(<span class="ruby-node">&quot;_render_option_#{key}&quot;</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-constant">RENDERERS</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_sym</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-_handle_render_options">
+            
+              <b>_handle_render_options</b>(options)
+            
+            <a href="../../classes/ActionController/Renderers.html#method-i-_handle_render_options" name="method-i-_handle_render_options" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-_handle_render_options_source')" id="l_method-i-_handle_render_options_source">show</a>
+                
+              </p>
+              <div id="method-i-_handle_render_options_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/renderers.rb, line 29</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">_handle_render_options</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">_renderers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-identifier">name</span>)
+      <span class="ruby-identifier">_process_options</span>(<span class="ruby-identifier">options</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">send</span>(<span class="ruby-node">&quot;_render_option_#{name}&quot;</span>, <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">name</span>), <span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render_to_body">
+            
+              <b>render_to_body</b>(options)
+            
+            <a href="../../classes/ActionController/Renderers.html#method-i-render_to_body" name="method-i-render_to_body" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_to_body_source')" id="l_method-i-render_to_body_source">show</a>
+                
+              </p>
+              <div id="method-i-render_to_body_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/renderers.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render_to_body</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">_handle_render_options</span>(<span class="ruby-identifier">options</span>) <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

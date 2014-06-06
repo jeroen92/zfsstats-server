@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::FileHandler</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActionDispatch::FileHandler 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/middleware/static_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-call">call</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-escape_glob_chars">escape_glob_chars</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-ext">ext</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-match-3F">match?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-unescape_path">unescape_path</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(root, cache_control)
+            
+            <a href="../../classes/ActionDispatch/FileHandler.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb, line 6</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">root</span>, <span class="ruby-identifier">cache_control</span>)
+  <span class="ruby-ivar">@root</span>          = <span class="ruby-identifier">root</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;/&#39;</span>)
+  <span class="ruby-ivar">@compiled_root</span> = <span class="ruby-node">/^#{Regexp.escape(root)}/</span>
+  <span class="ruby-identifier">headers</span> = <span class="ruby-identifier">cache_control</span> <span class="ruby-operator">&amp;&amp;</span> { <span class="ruby-string">&#39;Cache-Control&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">cache_control</span> }
+  <span class="ruby-ivar">@file_server</span>   = <span class="ruby-operator">::</span><span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@root</span>, <span class="ruby-identifier">headers</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-call">
+            
+              <b>call</b>(env)
+            
+            <a href="../../classes/ActionDispatch/FileHandler.html#method-i-call" name="method-i-call" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-call_source')" id="l_method-i-call_source">show</a>
+                
+              </p>
+              <div id="method-i-call_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb, line 27</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">call</span>(<span class="ruby-identifier">env</span>)
+  <span class="ruby-ivar">@file_server</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">env</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-escape_glob_chars">
+            
+              <b>escape_glob_chars</b>(path)
+            
+            <a href="../../classes/ActionDispatch/FileHandler.html#method-i-escape_glob_chars" name="method-i-escape_glob_chars" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-escape_glob_chars_source')" id="l_method-i-escape_glob_chars_source">show</a>
+                
+              </p>
+              <div id="method-i-escape_glob_chars_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">escape_glob_chars</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">path</span>.<span class="ruby-identifier">force_encoding</span>(<span class="ruby-string">&#39;binary&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-value">:force_encoding</span>
+  <span class="ruby-identifier">path</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[*?{}\[\]]/</span>, <span class="ruby-string">&quot;\\\\\\&amp;&quot;</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ext">
+            
+              <b>ext</b>()
+            
+            <a href="../../classes/ActionDispatch/FileHandler.html#method-i-ext" name="method-i-ext" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ext_source')" id="l_method-i-ext_source">show</a>
+                
+              </p>
+              <div id="method-i-ext_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ext</span>
+  <span class="ruby-ivar">@ext</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">ext</span> = <span class="ruby-operator">::</span><span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>.<span class="ruby-identifier">default_static_extension</span>
+    <span class="ruby-node">&quot;{,#{ext},/index#{ext}}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-match-3F">
+            
+              <b>match?</b>(path)
+            
+            <a href="../../classes/ActionDispatch/FileHandler.html#method-i-match-3F" name="method-i-match-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-match-3F_source')" id="l_method-i-match-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-match-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb, line 13</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">match?</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">dup</span>
+
+  <span class="ruby-identifier">full_path</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@root</span> <span class="ruby-operator">:</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@root</span>, <span class="ruby-identifier">escape_glob_chars</span>(<span class="ruby-identifier">unescape_path</span>(<span class="ruby-identifier">path</span>)))
+  <span class="ruby-identifier">paths</span> = <span class="ruby-node">&quot;#{full_path}#{ext}&quot;</span>
+
+  <span class="ruby-identifier">matches</span> = <span class="ruby-constant">Dir</span>[<span class="ruby-identifier">paths</span>]
+  <span class="ruby-identifier">match</span> = <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">file?</span>(<span class="ruby-identifier">m</span>) }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span>
+    <span class="ruby-identifier">match</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-ivar">@compiled_root</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-operator">::</span><span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Utils</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">match</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-unescape_path">
+            
+              <b>unescape_path</b>(path)
+            
+            <a href="../../classes/ActionDispatch/FileHandler.html#method-i-unescape_path" name="method-i-unescape_path" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-unescape_path_source')" id="l_method-i-unescape_path_source">show</a>
+                
+              </p>
+              <div id="method-i-unescape_path_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/middleware/static.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">unescape_path</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parser</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

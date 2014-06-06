@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::StrongParameters</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::StrongParameters 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/strong_parameters_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Strong+Parameters">Strong Parameters</h2>
+
+<p>It provides an interface for protecting attributes from end-user
+assignment. This makes Action Controller parameters forbidden to be used in
+Active Model mass assignment until they have been whitelisted.</p>
+
+<p>In addition, parameters can be marked as required and flow through a
+predefined raise/rescue flow to end up as a 400 Bad Request with no effort.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-comment"># Using &quot;Person.create(params[:person])&quot; would raise an</span>
+  <span class="ruby-comment"># ActiveModel::ForbiddenAttributes exception because it&#39;d</span>
+  <span class="ruby-comment"># be using mass assignment without an explicit permit step.</span>
+  <span class="ruby-comment"># This is the recommended form:</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+    <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">person_params</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># This will pass with flying colors as long as there&#39;s a person key in the</span>
+  <span class="ruby-comment"># parameters, otherwise it&#39;ll raise an ActionController::MissingParameter</span>
+  <span class="ruby-comment"># exception, which will get caught by ActionController::Base and turned</span>
+  <span class="ruby-comment"># into a 400 Bad Request reply.</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">update</span>
+    <span class="ruby-identifier">redirect_to</span> <span class="ruby-identifier">current_account</span>.<span class="ruby-identifier">people</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">params</span>[:<span class="ruby-identifier">id</span>]).<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">person</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">person</span>.<span class="ruby-identifier">update!</span>(<span class="ruby-identifier">person_params</span>)
+    }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">private</span>
+    <span class="ruby-comment"># Using a private method to encapsulate the permissible parameters is</span>
+    <span class="ruby-comment"># just a good pattern since you&#39;ll be able to reuse the same permit</span>
+    <span class="ruby-comment"># list between create and update. Also, you can specialize this method</span>
+    <span class="ruby-comment"># with per-user checking of permissible attributes.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">person_params</span>
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>).<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">age</span>)
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>In order to use <code>accepts_nested_attribute_for</code> with Strong
+Parameters, you will need to specify which nested attributes should be
+whitelisted.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">has_many</span> :<span class="ruby-identifier">pets</span>
+  <span class="ruby-identifier">accepts_nested_attributes_for</span> :<span class="ruby-identifier">pets</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">class</span> <span class="ruby-constant">PeopleController</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActionController</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">create</span>
+    <span class="ruby-constant">Person</span>.<span class="ruby-identifier">create</span>(<span class="ruby-identifier">person_params</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-operator">...</span>
+
+  <span class="ruby-identifier">private</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-identifier">person_params</span>
+      <span class="ruby-comment"># It&#39;s mandatory to specify the nested attributes that should be whitelisted.</span>
+      <span class="ruby-comment"># If you use `permit` with just the key that points to the nested attributes hash,</span>
+      <span class="ruby-comment"># it will return an empty hash.</span>
+      <span class="ruby-identifier">params</span>.<span class="ruby-identifier">require</span>(:<span class="ruby-identifier">person</span>).<span class="ruby-identifier">permit</span>(:<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">age</span>, <span class="ruby-identifier">pets_attributes</span><span class="ruby-operator">:</span> [ :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">category</span> ])
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>See <a
+href="Parameters.html#method-i-require">ActionController::Parameters#require</a>
+and <a
+href="Parameters.html#method-i-permit">ActionController::Parameters#permit</a>
+for more information.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-params">params</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-params-3D">params=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="../ActiveSupport/Rescuable.html">
+              ActiveSupport::Rescuable
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-params">
+            
+              <b>params</b>()
+            
+            <a href="../../classes/ActionController/StrongParameters.html#method-i-params" name="method-i-params" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a new <a href="Parameters.html">ActionController::Parameters</a>
+object that has been instantiated with the <code>request.parameters</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-params_source')" id="l_method-i-params_source">show</a>
+                
+              </p>
+              <div id="method-i-params_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 509</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">params</span>
+  <span class="ruby-ivar">@_params</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">request</span>.<span class="ruby-identifier">parameters</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-params-3D">
+            
+              <b>params=</b>(value)
+            
+            <a href="../../classes/ActionController/StrongParameters.html#method-i-params-3D" name="method-i-params-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assigns the given <code>value</code> to the <code>params</code> hash. If
+<code>value</code> is a <a href="../Hash.html">Hash</a>, this will create
+an <a href="Parameters.html">ActionController::Parameters</a> object that
+has been instantiated with the given <code>value</code> hash.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-params-3D_source')" id="l_method-i-params-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-params-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/strong_parameters.rb, line 516</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">params=</span>(<span class="ruby-identifier">value</span>)
+  <span class="ruby-ivar">@_params</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Parameters</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">value</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionView::Helpers::JavaScriptHelper</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionView::Helpers::JavaScriptHelper 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_view/helpers/javascript_helper_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/javascript_helper.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-button_to_function">button_to_function</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-escape_javascript">escape_javascript</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>J</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-j">j</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-javascript_tag">javascript_tag</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-link_to_function">link_to_function</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">JS_ESCAPE_MAP</td>
+            <td>=</td>
+            <td class="attr-value">{
+&#39;\\&#39;    =&gt; &#39;\\\\&#39;,
+&#39;&lt;/&#39;    =&gt; &#39;&lt;\/&#39;,
+&quot;\r\n&quot;  =&gt; &#39;\n&#39;,
+&quot;\n&quot;    =&gt; &#39;\n&#39;,
+&quot;\r&quot;    =&gt; &#39;\n&#39;,
+&#39;&quot;&#39;     =&gt; &#39;\\&quot;&#39;,
+&quot;&#39;&quot;     =&gt; &quot;\\&#39;&quot;
+}</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-button_to_function">
+            
+              <b>button_to_function</b>(name, function=nil, html_options={})
+            
+            <a href="../../../classes/ActionView/Helpers/JavaScriptHelper.html#method-i-button_to_function" name="method-i-button_to_function" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a button whose <code>onclick</code> handler triggers the passed
+JavaScript.</p>
+
+<p>The helper receives a name, JavaScript code, and an optional hash of <a
+href="../../HTML.html">HTML</a> options. The name is used as button label
+and the JavaScript code goes into its <code>onclick</code> attribute. If
+<code>html_options</code> has an <code>:onclick</code>, that one is put
+before <code>function</code>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">button_to_function</span> <span class="ruby-string">&quot;Greeting&quot;</span>, <span class="ruby-string">&quot;alert(&#39;Hello world!&#39;)&quot;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;ok&quot;</span>
+<span class="ruby-comment"># =&gt; &lt;input class=&quot;ok&quot; onclick=&quot;alert(&#39;Hello world!&#39;);&quot; type=&quot;button&quot; value=&quot;Greeting&quot; /&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-button_to_function_source')" id="l_method-i-button_to_function_source">show</a>
+                
+              </p>
+              <div id="method-i-button_to_function_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/javascript_helper.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">button_to_function</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">function</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">html_options</span>={})
+  <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;button_to_function is deprecated and will be removed from Rails 4.1. We recommend using Unobtrusive JavaScript instead. &quot;</span> <span class="ruby-operator">+</span>
+    <span class="ruby-node">&quot;See http://guides.rubyonrails.org/working_with_javascript_in_rails.html#unobtrusive-javascript&quot;</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+
+  <span class="ruby-identifier">onclick</span> = <span class="ruby-node">&quot;#{&quot;#{html_options[:onclick]}; &quot; if html_options[:onclick]}#{function};&quot;</span>
+
+  <span class="ruby-identifier">tag</span>(<span class="ruby-value">:input</span>, <span class="ruby-identifier">html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;button&#39;</span>, <span class="ruby-value">:value</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">name</span>, <span class="ruby-value">:onclick</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">onclick</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-escape_javascript">
+            
+              <b>escape_javascript</b>(javascript)
+            
+            <a href="../../../classes/ActionView/Helpers/JavaScriptHelper.html#method-i-escape_javascript" name="method-i-escape_javascript" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Escapes carriage returns and single and double quotes for JavaScript
+segments.</p>
+
+<p>Also available through the alias j(). This is particularly helpful in
+JavaScript responses, like:</p>
+
+<pre>$(&#39;some_element&#39;).replaceWith(&#39;&lt;%=j render &#39;some/element_template&#39; %&gt;&#39;);</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="JavaScriptHelper.html#method-i-j">j</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-escape_javascript_source')" id="l_method-i-escape_javascript_source">show</a>
+                
+              </p>
+              <div id="method-i-escape_javascript_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/javascript_helper.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">escape_javascript</span>(<span class="ruby-identifier">javascript</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">javascript</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">javascript</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/(\|&lt;\/|\r\n|\342\200\250|\342\200\251|[\n\r&quot;&#39;])/</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span> <span class="ruby-constant">JS_ESCAPE_MAP</span>[<span class="ruby-identifier">match</span>] }
+    <span class="ruby-identifier">javascript</span>.<span class="ruby-identifier">html_safe?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">result</span>.<span class="ruby-identifier">html_safe</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-string">&#39;&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-j">
+            
+              <b>j</b>(javascript)
+            
+            <a href="../../../classes/ActionView/Helpers/JavaScriptHelper.html#method-i-j" name="method-i-j" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-javascript_tag">
+            
+              <b>javascript_tag</b>(content_or_options_with_block = nil, html_options = {}, &amp;block)
+            
+            <a href="../../../classes/ActionView/Helpers/JavaScriptHelper.html#method-i-javascript_tag" name="method-i-javascript_tag" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a JavaScript tag with the <code>content</code> inside. Example:</p>
+
+<pre>javascript_tag &quot;alert(&#39;All is good&#39;)&quot;</pre>
+
+<p>Returns:</p>
+
+<pre>&lt;script&gt;
+//&lt;![CDATA[
+alert(&#39;All is good&#39;)
+//]]&gt;
+&lt;/script&gt;</pre>
+
+<p><code>html_options</code> may be a hash of attributes for the
+<code>&lt;script&gt;</code> tag.</p>
+
+<pre class="ruby"><span class="ruby-identifier">javascript_tag</span> <span class="ruby-string">&quot;alert(&#39;All is good&#39;)&quot;</span>, <span class="ruby-identifier">defer</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;defer&#39;</span>
+<span class="ruby-comment"># =&gt; &lt;script defer=&quot;defer&quot;&gt;alert(&#39;All is good&#39;)&lt;/script&gt;</span>
+</pre>
+
+<p>Instead of passing the content as an argument, you can also use a block in
+which case, you pass your <code>html_options</code> as the first parameter.</p>
+
+<pre>&lt;%= javascript_tag defer: &#39;defer&#39; do -%&gt;
+  alert(&#39;All is good&#39;)
+&lt;% end -%&gt;</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-javascript_tag_source')" id="l_method-i-javascript_tag_source">show</a>
+                
+              </p>
+              <div id="method-i-javascript_tag_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/javascript_helper.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">javascript_tag</span>(<span class="ruby-identifier">content_or_options_with_block</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">html_options</span> = {}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">content</span> =
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+      <span class="ruby-identifier">html_options</span> = <span class="ruby-identifier">content_or_options_with_block</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">content_or_options_with_block</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+      <span class="ruby-identifier">capture</span>(&amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">content_or_options_with_block</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:script</span>, <span class="ruby-identifier">javascript_cdata_section</span>(<span class="ruby-identifier">content</span>), <span class="ruby-identifier">html_options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-link_to_function">
+            
+              <b>link_to_function</b>(name, function, html_options={})
+            
+            <a href="../../../classes/ActionView/Helpers/JavaScriptHelper.html#method-i-link_to_function" name="method-i-link_to_function" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a link whose <code>onclick</code> handler triggers the passed
+JavaScript.</p>
+
+<p>The helper receives a name, JavaScript code, and an optional hash of <a
+href="../../HTML.html">HTML</a> options. The name is used as the link text
+and the JavaScript code goes into the <code>onclick</code> attribute. If
+<code>html_options</code> has an <code>:onclick</code>, that one is put
+before <code>function</code>. Once all the JavaScript is set, the helper
+appends “; return false;”.</p>
+
+<p>The <code>href</code> attribute of the tag is set to “#” unless
+<code>html_options</code> has one.</p>
+
+<pre class="ruby"><span class="ruby-identifier">link_to_function</span> <span class="ruby-string">&quot;Greeting&quot;</span>, <span class="ruby-string">&quot;alert(&#39;Hello world!&#39;)&quot;</span>, <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;nav_link&quot;</span>
+<span class="ruby-comment"># =&gt; &lt;a class=&quot;nav_link&quot; href=&quot;#&quot; onclick=&quot;alert(&#39;Hello world!&#39;); return false;&quot;&gt;Greeting&lt;/a&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-link_to_function_source')" id="l_method-i-link_to_function_source">show</a>
+                
+              </p>
+              <div id="method-i-link_to_function_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_view/helpers/javascript_helper.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">link_to_function</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">function</span>, <span class="ruby-identifier">html_options</span>={})
+  <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;link_to_function is deprecated and will be removed from Rails 4.1. We recommend using Unobtrusive JavaScript instead. &quot;</span> <span class="ruby-operator">+</span>
+    <span class="ruby-node">&quot;See http://guides.rubyonrails.org/working_with_javascript_in_rails.html#unobtrusive-javascript&quot;</span>
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Deprecation</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">message</span>
+
+  <span class="ruby-identifier">onclick</span> = <span class="ruby-node">&quot;#{&quot;#{html_options[:onclick]}; &quot; if html_options[:onclick]}#{function}; return false;&quot;</span>
+  <span class="ruby-identifier">href</span> = <span class="ruby-identifier">html_options</span>[<span class="ruby-value">:href</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;#&#39;</span>
+
+  <span class="ruby-identifier">content_tag</span>(<span class="ruby-value">:a</span>, <span class="ruby-identifier">name</span>, <span class="ruby-identifier">html_options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:href</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">href</span>, <span class="ruby-value">:onclick</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">onclick</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

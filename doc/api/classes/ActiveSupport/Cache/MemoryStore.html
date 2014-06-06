@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::Cache::MemoryStore</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::Cache::MemoryStore 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Store.html">ActiveSupport::Cache::Store</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/cache/memory_store_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A cache store implementation which stores everything into memory in the
+same process. If you&#39;re running multiple Ruby on <a
+href="../../Rails.html">Rails</a> server processes (which is the case if
+you&#39;re using mongrel_cluster or Phusion Passenger), then this means
+that <a href="../../Rails.html">Rails</a> server process instances
+won&#39;t be able to share cache data with each other and this may not be
+the most appropriate cache in that scenario.</p>
+
+<p>This cache has a bounded size specified by the :size options to the
+initializer (default is 32Mb). When the cache exceeds the allotted size, a
+cleanup will occur which tries to prune the cache down to three quarters of
+the maximum size by removing the least recently used entries.</p>
+
+<p><a href="MemoryStore.html">MemoryStore</a> is thread-safe.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-cleanup">cleanup</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-clear">clear</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-decrement">decrement</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-delete_matched">delete_matched</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-increment">increment</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-prune">prune</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-pruning-3F">pruning?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(options = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">options</span> <span class="ruby-operator">||=</span> {}
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-ivar">@data</span> = {}
+  <span class="ruby-ivar">@key_access</span> = {}
+  <span class="ruby-ivar">@max_size</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:size</span>] <span class="ruby-operator">||</span> <span class="ruby-number">32</span>.<span class="ruby-identifier">megabytes</span>
+  <span class="ruby-ivar">@max_prune_time</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:max_prune_time</span>] <span class="ruby-operator">||</span> <span class="ruby-number">2</span>
+  <span class="ruby-ivar">@cache_size</span> = <span class="ruby-number">0</span>
+  <span class="ruby-ivar">@monitor</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@pruning</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-cleanup">
+            
+              <b>cleanup</b>(options = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-cleanup" name="method-i-cleanup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-cleanup_source')" id="l_method-i-cleanup_source">show</a>
+                
+              </p>
+              <div id="method-i-cleanup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">cleanup</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">merged_options</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:cleanup</span>, <span class="ruby-value">:size</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">size</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">synchronize</span>{ <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">keys</span> }
+    <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">entry</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">key</span>]
+      <span class="ruby-identifier">delete_entry</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">expired?</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear">
+            
+              <b>clear</b>(options = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-clear" name="method-i-clear" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_source')" id="l_method-i-clear_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-ivar">@key_access</span>.<span class="ruby-identifier">clear</span>
+    <span class="ruby-ivar">@cache_size</span> = <span class="ruby-number">0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-decrement">
+            
+              <b>decrement</b>(name, amount = 1, options = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-decrement" name="method-i-decrement" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Decrement an integer value in the cache.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-decrement_source')" id="l_method-i-decrement_source">show</a>
+                
+              </p>
+              <div id="method-i-decrement_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">decrement</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-number">1</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">merged_options</span>(<span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">num</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">num</span> = <span class="ruby-identifier">num</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">amount</span>
+      <span class="ruby-identifier">write</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">num</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">num</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete_matched">
+            
+              <b>delete_matched</b>(matcher, options = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-delete_matched" name="method-i-delete_matched" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_matched_source')" id="l_method-i-delete_matched_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_matched_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete_matched</span>(<span class="ruby-identifier">matcher</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">merged_options</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:delete_matched</span>, <span class="ruby-identifier">matcher</span>.<span class="ruby-identifier">inspect</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">matcher</span> = <span class="ruby-identifier">key_matcher</span>(<span class="ruby-identifier">matcher</span>, <span class="ruby-identifier">options</span>)
+    <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">synchronize</span> { <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">keys</span> }
+    <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">delete_entry</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">matcher</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-increment">
+            
+              <b>increment</b>(name, amount = 1, options = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-increment" name="method-i-increment" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Increment an integer value in the cache.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-increment_source')" id="l_method-i-increment_source">show</a>
+                
+              </p>
+              <div id="method-i-increment_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">increment</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">amount</span> = <span class="ruby-number">1</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">merged_options</span>(<span class="ruby-identifier">options</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">num</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">num</span> = <span class="ruby-identifier">num</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">amount</span>
+      <span class="ruby-identifier">write</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">num</span>, <span class="ruby-identifier">options</span>)
+      <span class="ruby-identifier">num</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-prune">
+            
+              <b>prune</b>(target_size, max_time = nil)
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-prune" name="method-i-prune" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>To ensure entries fit within the specified memory prune the cache by
+removing the least recently accessed entries.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-prune_source')" id="l_method-i-prune_source">show</a>
+                
+              </p>
+              <div id="method-i-prune_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">prune</span>(<span class="ruby-identifier">target_size</span>, <span class="ruby-identifier">max_time</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pruning?</span>
+  <span class="ruby-ivar">@pruning</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">start_time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+    <span class="ruby-identifier">cleanup</span>
+    <span class="ruby-identifier">instrument</span>(<span class="ruby-value">:prune</span>, <span class="ruby-identifier">target_size</span>, <span class="ruby-value">:from</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@cache_size</span>) <span class="ruby-keyword">do</span>
+      <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">synchronize</span>{ <span class="ruby-ivar">@key_access</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@key_access</span>[<span class="ruby-identifier">a</span>].<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-ivar">@key_access</span>[<span class="ruby-identifier">b</span>].<span class="ruby-identifier">to_f</span>} }
+      <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">delete_entry</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">options</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cache_size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">target_size</span> <span class="ruby-operator">||</span> (<span class="ruby-identifier">max_time</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">start_time</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">max_time</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-ivar">@pruning</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-pruning-3F">
+            
+              <b>pruning?</b>()
+            
+            <a href="../../../classes/ActiveSupport/Cache/MemoryStore.html#method-i-pruning-3F" name="method-i-pruning-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the cache is currently being pruned.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-pruning-3F_source')" id="l_method-i-pruning-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-pruning-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/cache/memory_store.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">pruning?</span>
+  <span class="ruby-ivar">@pruning</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

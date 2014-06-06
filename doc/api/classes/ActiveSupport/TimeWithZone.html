@@ -1,0 +1,2637 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::TimeWithZone</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::TimeWithZone 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/time_with_zone_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>A Time-like class that can represent a time in any time zone. Necessary
+because standard Ruby <a href="../Time.html">Time</a> instances are limited
+to UTC and the system&#39;s <code>ENV['TZ']</code> zone.</p>
+
+<p>You shouldn&#39;t ever need to create a <a
+href="TimeWithZone.html">TimeWithZone</a> instance directly via
+<code>new</code>. Instead use methods <code>local</code>,
+<code>parse</code>, <code>at</code> and <code>now</code> on <a
+href="TimeZone.html">TimeZone</a> instances, and <code>in_time_zone</code>
+on <a href="../Time.html">Time</a> and <a
+href="../DateTime.html">DateTime</a> instances.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Eastern Time (US &amp; Canada)&#39;</span>        <span class="ruby-comment"># =&gt; &#39;Eastern Time (US &amp; Canada)&#39;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">local</span>(<span class="ruby-value">2007</span>, <span class="ruby-value">2</span>, <span class="ruby-value">10</span>, <span class="ruby-value">15</span>, <span class="ruby-value">30</span>, <span class="ruby-value">45</span>)        <span class="ruby-comment"># =&gt; Sat, 10 Feb 2007 15:30:45 EST -05:00</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&#39;2007-02-10 15:30:45&#39;</span>)          <span class="ruby-comment"># =&gt; Sat, 10 Feb 2007 15:30:45 EST -05:00</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">at</span>(<span class="ruby-value">1170361845</span>)                        <span class="ruby-comment"># =&gt; Sat, 10 Feb 2007 15:30:45 EST -05:00</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>                                   <span class="ruby-comment"># =&gt; Sun, 18 May 2008 13:07:55 EDT -04:00</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(<span class="ruby-value">2007</span>, <span class="ruby-value">2</span>, <span class="ruby-value">10</span>, <span class="ruby-value">20</span>, <span class="ruby-value">30</span>, <span class="ruby-value">45</span>).<span class="ruby-identifier">in_time_zone</span>  <span class="ruby-comment"># =&gt; Sat, 10 Feb 2007 15:30:45 EST -05:00</span>
+</pre>
+
+<p>See <a href="../Time.html">Time</a> and <a
+href="TimeZone.html">TimeZone</a> for further documentation of these
+methods.</p>
+
+<p><a href="TimeWithZone.html">TimeWithZone</a> instances implement the same
+API as Ruby <a href="../Time.html">Time</a> instances, so that <a
+href="../Time.html">Time</a> and <a
+href="TimeWithZone.html">TimeWithZone</a> instances are interchangeable.</p>
+
+<pre class="ruby"><span class="ruby-identifier">t</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>                     <span class="ruby-comment"># =&gt; Sun, 18 May 2008 13:27:25 EDT -04:00</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">hour</span>                                <span class="ruby-comment"># =&gt; 13</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">dst?</span>                                <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">utc_offset</span>                          <span class="ruby-comment"># =&gt; -14400</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">zone</span>                                <span class="ruby-comment"># =&gt; &quot;EDT&quot;</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">to_s</span>(:<span class="ruby-identifier">rfc822</span>)                       <span class="ruby-comment"># =&gt; &quot;Sun, 18 May 2008 13:27:25 -0400&quot;</span>
+<span class="ruby-identifier">t</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>.<span class="ruby-identifier">day</span>                             <span class="ruby-comment"># =&gt; Mon, 19 May 2008 13:27:25 EDT -04:00</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">beginning_of_year</span>                   <span class="ruby-comment"># =&gt; Tue, 01 Jan 2008 00:00:00 EST -05:00</span>
+<span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(<span class="ruby-value">1999</span>)                    <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Time</span>)                         <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">t</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">TimeWithZone</span>)  <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-2B">+</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-2D">-</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-3C-3D-3E">&lt;=&gt;</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-acts_like_time-3F">acts_like_time?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-advance">advance</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-ago">ago</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-as_json">as_json</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>B</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-between-3F">between?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-comparable_time">comparable_time</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-dst-3F">dst?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-encode_with">encode_with</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-eql-3F">eql?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-formatted_offset">formatted_offset</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-freeze">freeze</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-future-3F">future?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>G</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-getgm">getgm</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-getlocal">getlocal</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-getutc">getutc</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gmt-3F">gmt?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gmt_offset">gmt_offset</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gmtime">gmtime</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-gmtoff">gmtoff</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-hash">hash</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-httpdate">httpdate</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-in_time_zone">in_time_zone</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-inspect">inspect</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-is_a-3F">is_a?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-isdst">isdst</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-iso8601">iso8601</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>K</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-kind_of-3F">kind_of?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-localtime">localtime</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-marshal_dump">marshal_dump</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-marshal_load">marshal_load</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-method_missing">method_missing</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-name">name</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-past-3F">past?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-period">period</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-respond_to_missing-3F">respond_to_missing?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-rfc2822">rfc2822</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-rfc822">rfc822</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-since">since</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-strftime">strftime</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-time">time</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_a">to_a</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_datetime">to_datetime</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_f">to_f</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_formatted_s">to_formatted_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_i">to_i</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_r">to_r</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_s">to_s</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_time">to_time</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-today-3F">today?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-tv_sec">tv_sec</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-usec">usec</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-utc">utc</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-utc-3F">utc?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-utc_offset">utc_offset</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>X</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-xmlschema">xmlschema</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>Z</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-zone">zone</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            Comparable
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [R]
+            </td>
+            <td class='attr-name'>time_zone</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-name">
+            
+              <b>name</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-c-name" name="method-c-name" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Report class name as &#39;Time&#39; to thwart type checking.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-name_source')" id="l_method-c-name_source">show</a>
+                
+              </p>
+              <div id="method-c-name_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-string">&#39;Time&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(utc_time, time_zone, local_time = nil, period = nil)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">utc_time</span>, <span class="ruby-identifier">time_zone</span>, <span class="ruby-identifier">local_time</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">period</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@utc</span>, <span class="ruby-ivar">@time_zone</span>, <span class="ruby-ivar">@time</span> = <span class="ruby-identifier">utc_time</span>, <span class="ruby-identifier">time_zone</span>, <span class="ruby-identifier">local_time</span>
+  <span class="ruby-ivar">@period</span> = <span class="ruby-ivar">@utc</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">period</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">get_period_and_ensure_valid_local_time</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-2B">
+            
+              <b>+</b>(other)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-2B" name="method-i-2B" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-2B_source')" id="l_method-i-2B_source">show</a>
+                
+              </p>
+              <div id="method-i-2B_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">+</span>(<span class="ruby-keyword ruby-title">other</span>)
+  <span class="ruby-comment"># If we&#39;re adding a Duration of variable length (i.e., years, months, days), move forward from #time,</span>
+  <span class="ruby-comment"># otherwise move forward from #utc, for accuracy when moving across DST boundaries</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">duration_of_variable_length?</span>(<span class="ruby-identifier">other</span>)
+    <span class="ruby-identifier">method_missing</span>(<span class="ruby-value">:+</span>, <span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">acts_like?</span>(<span class="ruby-value">:date</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">since</span>(<span class="ruby-identifier">other</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">utc</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">other</span> <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">since</span>(<span class="ruby-identifier">other</span>)
+    <span class="ruby-identifier">result</span>.<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-identifier">time_zone</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-2D">
+            
+              <b>-</b>(other)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-2D" name="method-i-2D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-2D_source')" id="l_method-i-2D_source">show</a>
+                
+              </p>
+              <div id="method-i-2D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">-</span>(<span class="ruby-keyword ruby-title">other</span>)
+  <span class="ruby-comment"># If we&#39;re subtracting a Duration of variable length (i.e., years, months, days), move backwards from #time,</span>
+  <span class="ruby-comment"># otherwise move backwards #utc, for accuracy when moving across DST boundaries</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">acts_like?</span>(<span class="ruby-value">:time</span>)
+    <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to_f</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">duration_of_variable_length?</span>(<span class="ruby-identifier">other</span>)
+    <span class="ruby-identifier">method_missing</span>(<span class="ruby-value">:-</span>, <span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">acts_like?</span>(<span class="ruby-value">:date</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">ago</span>(<span class="ruby-identifier">other</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">utc</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">other</span> <span class="ruby-keyword">rescue</span> <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">ago</span>(<span class="ruby-identifier">other</span>)
+    <span class="ruby-identifier">result</span>.<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-identifier">time_zone</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-3C-3D-3E">
+            
+              <b>&lt;=&gt;</b>(other)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-3C-3D-3E" name="method-i-3C-3D-3E" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Use the time in UTC for comparisons.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-3C-3D-3E_source')" id="l_method-i-3C-3D-3E_source">show</a>
+                
+              </p>
+              <div id="method-i-3C-3D-3E_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;=&gt;</span>(<span class="ruby-keyword ruby-title">other</span>)
+  <span class="ruby-identifier">utc</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">other</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-acts_like_time-3F">
+            
+              <b>acts_like_time?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-acts_like_time-3F" name="method-i-acts_like_time-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>So that <code>self</code> <code>acts_like?(:time)</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-acts_like_time-3F_source')" id="l_method-i-acts_like_time-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-acts_like_time-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 334</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">acts_like_time?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-advance">
+            
+              <b>advance</b>(options)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-advance" name="method-i-advance" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-advance_source')" id="l_method-i-advance_source">show</a>
+                
+              </p>
+              <div id="method-i-advance_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 285</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">advance</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-comment"># If we&#39;re advancing a value of variable length (i.e., years, weeks, months, days), advance from #time,</span>
+  <span class="ruby-comment"># otherwise advance from #utc, for accuracy when moving across DST boundaries</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-value">:years</span>, <span class="ruby-value">:weeks</span>, <span class="ruby-value">:months</span>, <span class="ruby-value">:days</span>).<span class="ruby-identifier">any?</span>
+    <span class="ruby-identifier">method_missing</span>(<span class="ruby-value">:advance</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">advance</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-identifier">time_zone</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-ago">
+            
+              <b>ago</b>(other)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-ago" name="method-i-ago" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-ago_source')" id="l_method-i-ago_source">show</a>
+                
+              </p>
+              <div id="method-i-ago_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 281</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">ago</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">since</span>(<span class="ruby-operator">-</span><span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-as_json">
+            
+              <b>as_json</b>(options = nil)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-as_json" name="method-i-as_json" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Coerces time to a string for <a href="JSON.html">JSON</a> encoding. The
+default format is ISO 8601. You can get %Y/%m/%d %H:%M:%S +offset style by
+setting
+<code>ActiveSupport::JSON::Encoding.use_standard_json_time_format</code> to
+<code>false</code>.</p>
+
+<pre class="ruby"><span class="ruby-comment"># With ActiveSupport::JSON::Encoding.use_standard_json_time_format = true</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(<span class="ruby-value">2005</span>,<span class="ruby-value">2</span>,<span class="ruby-value">1</span>,<span class="ruby-value">15</span>,<span class="ruby-value">15</span>,<span class="ruby-value">10</span>).<span class="ruby-identifier">in_time_zone</span>.<span class="ruby-identifier">to_json</span>
+<span class="ruby-comment"># =&gt; &quot;2005-02-01T15:15:10Z&quot;</span>
+
+<span class="ruby-comment"># With ActiveSupport::JSON::Encoding.use_standard_json_time_format = false</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">utc</span>(<span class="ruby-value">2005</span>,<span class="ruby-value">2</span>,<span class="ruby-value">1</span>,<span class="ruby-value">15</span>,<span class="ruby-value">15</span>,<span class="ruby-value">10</span>).<span class="ruby-identifier">in_time_zone</span>.<span class="ruby-identifier">to_json</span>
+<span class="ruby-comment"># =&gt; &quot;2005/02/01 15:15:10 +0000&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-as_json_source')" id="l_method-i-as_json_source">show</a>
+                
+              </p>
+              <div id="method-i-as_json_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">as_json</span>(<span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">JSON</span><span class="ruby-operator">::</span><span class="ruby-constant">Encoding</span>.<span class="ruby-identifier">use_standard_json_time_format</span>
+    <span class="ruby-identifier">xmlschema</span>(<span class="ruby-number">3</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-node">%Q(#{time.strftime(&quot;%Y/%m/%d %H:%M:%S&quot;)} #{formatted_offset(false)})</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-between-3F">
+            
+              <b>between?</b>(min, max)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-between-3F" name="method-i-between-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the current object&#39;s time is within the specified
+<code>min</code> and <code>max</code> time.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-between-3F_source')" id="l_method-i-between-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-between-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">between?</span>(<span class="ruby-identifier">min</span>, <span class="ruby-identifier">max</span>)
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">between?</span>(<span class="ruby-identifier">min</span>, <span class="ruby-identifier">max</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-comparable_time">
+            
+              <b>comparable_time</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-comparable_time" name="method-i-comparable_time" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-dst-3F">
+            
+              <b>dst?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-dst-3F" name="method-i-dst-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the current time is within Daylight Savings <a
+href="../Time.html">Time</a> for the specified time zone.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Eastern Time (US &amp; Canada)&#39;</span>    <span class="ruby-comment"># =&gt; &#39;Eastern Time (US &amp; Canada)&#39;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;2012-5-30&quot;</span>).<span class="ruby-identifier">dst?</span>           <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-string">&quot;2012-11-30&quot;</span>).<span class="ruby-identifier">dst?</span>          <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-isdst">isdst</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dst-3F_source')" id="l_method-i-dst-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-dst-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dst?</span>
+  <span class="ruby-identifier">period</span>.<span class="ruby-identifier">dst?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-encode_with">
+            
+              <b>encode_with</b>(coder)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-encode_with" name="method-i-encode_with" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-encode_with_source')" id="l_method-i-encode_with_source">show</a>
+                
+              </p>
+              <div id="method-i-encode_with_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">encode_with</span>(<span class="ruby-identifier">coder</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">coder</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:represent_object</span>)
+    <span class="ruby-identifier">coder</span>.<span class="ruby-identifier">represent_object</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">utc</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">coder</span>.<span class="ruby-identifier">represent_scalar</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&quot;%Y-%m-%d %H:%M:%S.%9NZ&quot;</span>))
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-eql-3F">
+            
+              <b>eql?</b>(other)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-eql-3F" name="method-i-eql-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-eql-3F_source')" id="l_method-i-eql-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-eql-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 239</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eql?</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">eql?</span>(<span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-formatted_offset">
+            
+              <b>formatted_offset</b>(colon = true, alternate_utc_string = nil)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-formatted_offset" name="method-i-formatted_offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a formatted string of the offset from UTC, or an alternative string
+if the time zone is already UTC.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Eastern Time (US &amp; Canada)&#39;</span>   <span class="ruby-comment"># =&gt; &quot;Eastern Time (US &amp; Canada)&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">formatted_offset</span>(<span class="ruby-keyword">true</span>)       <span class="ruby-comment"># =&gt; &quot;-05:00&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">formatted_offset</span>(<span class="ruby-keyword">false</span>)      <span class="ruby-comment"># =&gt; &quot;-0500&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;UTC&#39;</span>                          <span class="ruby-comment"># =&gt; &quot;UTC&quot;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">formatted_offset</span>(<span class="ruby-keyword">true</span>, <span class="ruby-string">&quot;0&quot;</span>)  <span class="ruby-comment"># =&gt; &quot;0&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-formatted_offset_source')" id="l_method-i-formatted_offset_source">show</a>
+                
+              </p>
+              <div id="method-i-formatted_offset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">formatted_offset</span>(<span class="ruby-identifier">colon</span> = <span class="ruby-keyword">true</span>, <span class="ruby-identifier">alternate_utc_string</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">utc?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">alternate_utc_string</span> <span class="ruby-operator">||</span> <span class="ruby-constant">TimeZone</span>.<span class="ruby-identifier">seconds_to_utc_offset</span>(<span class="ruby-identifier">utc_offset</span>, <span class="ruby-identifier">colon</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-freeze">
+            
+              <b>freeze</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-freeze" name="method-i-freeze" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-freeze_source')" id="l_method-i-freeze_source">show</a>
+                
+              </p>
+              <div id="method-i-freeze_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 344</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">freeze</span>
+  <span class="ruby-identifier">period</span>; <span class="ruby-identifier">utc</span>; <span class="ruby-identifier">time</span> <span class="ruby-comment"># preload instance variables before freezing</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-future-3F">
+            
+              <b>future?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-future-3F" name="method-i-future-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the current object&#39;s time is in the future.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-future-3F_source')" id="l_method-i-future-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-future-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 235</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">future?</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">future?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-getgm">
+            
+              <b>getgm</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-getgm" name="method-i-getgm" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-getlocal">
+            
+              <b>getlocal</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-getlocal" name="method-i-getlocal" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-getutc">
+            
+              <b>getutc</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-getutc" name="method-i-getutc" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gmt-3F">
+            
+              <b>gmt?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-gmt-3F" name="method-i-gmt-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gmt_offset">
+            
+              <b>gmt_offset</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-gmt_offset" name="method-i-gmt_offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gmtime">
+            
+              <b>gmtime</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-gmtime" name="method-i-gmtime" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-gmtoff">
+            
+              <b>gmtoff</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-gmtoff" name="method-i-gmtoff" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-hash">
+            
+              <b>hash</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-hash" name="method-i-hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-hash_source')" id="l_method-i-hash_source">show</a>
+                
+              </p>
+              <div id="method-i-hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 243</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">hash</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">hash</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-httpdate">
+            
+              <b>httpdate</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-httpdate" name="method-i-httpdate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string of the object&#39;s date and time in the format used by
+HTTP requests.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">httpdate</span>  <span class="ruby-comment"># =&gt; &quot;Tue, 01 Jan 2013 04:39:43 GMT&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-httpdate_source')" id="l_method-i-httpdate_source">show</a>
+                
+              </p>
+              <div id="method-i-httpdate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">httpdate</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">httpdate</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-in_time_zone">
+            
+              <b>in_time_zone</b>(new_zone = ::Time.zone)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-in_time_zone" name="method-i-in_time_zone" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the simultaneous time in <code>Time.zone</code>, or the specified
+zone.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-in_time_zone_source')" id="l_method-i-in_time_zone_source">show</a>
+                
+              </p>
+              <div id="method-i-in_time_zone_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">in_time_zone</span>(<span class="ruby-identifier">new_zone</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_zone</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">new_zone</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-identifier">new_zone</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inspect">
+            
+              <b>inspect</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-inspect" name="method-i-inspect" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inspect_source')" id="l_method-i-inspect_source">show</a>
+                
+              </p>
+              <div id="method-i-inspect_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inspect</span>
+  <span class="ruby-node">&quot;#{time.strftime(&#39;%a, %d %b %Y %H:%M:%S&#39;)} #{zone} #{formatted_offset}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-is_a-3F">
+            
+              <b>is_a?</b>(klass)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-is_a-3F" name="method-i-is_a-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Say we&#39;re a <a href="../Time.html">Time</a> to thwart type checking.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-kind_of-3F">kind_of?</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-is_a-3F_source')" id="l_method-i-is_a-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-is_a-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 339</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">is_a?</span>(<span class="ruby-identifier">klass</span>)
+  <span class="ruby-identifier">klass</span> <span class="ruby-operator">==</span> <span class="ruby-operator">::</span><span class="ruby-constant">Time</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-isdst">
+            
+              <b>isdst</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-isdst" name="method-i-isdst" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-iso8601">
+            
+              <b>iso8601</b>(fraction_digits = 0)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-iso8601" name="method-i-iso8601" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-kind_of-3F">
+            
+              <b>kind_of?</b>(klass)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-kind_of-3F" name="method-i-kind_of-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-localtime">
+            
+              <b>localtime</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-localtime" name="method-i-localtime" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <code>Time.local()</code> instance of the simultaneous time in
+your system&#39;s <code>ENV['TZ']</code> zone.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-getlocal">getlocal</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-localtime_source')" id="l_method-i-localtime_source">show</a>
+                
+              </p>
+              <div id="method-i-localtime_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">localtime</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:getlocal</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">getlocal</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_time</span>.<span class="ruby-identifier">getlocal</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-marshal_dump">
+            
+              <b>marshal_dump</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-marshal_dump" name="method-i-marshal_dump" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-marshal_dump_source')" id="l_method-i-marshal_dump_source">show</a>
+                
+              </p>
+              <div id="method-i-marshal_dump_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 349</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">marshal_dump</span>
+  [<span class="ruby-identifier">utc</span>, <span class="ruby-identifier">time_zone</span>.<span class="ruby-identifier">name</span>, <span class="ruby-identifier">time</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-marshal_load">
+            
+              <b>marshal_load</b>(variables)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-marshal_load" name="method-i-marshal_load" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-marshal_load_source')" id="l_method-i-marshal_load_source">show</a>
+                
+              </p>
+              <div id="method-i-marshal_load_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 353</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">marshal_load</span>(<span class="ruby-identifier">variables</span>)
+  <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">variables</span>[<span class="ruby-number">0</span>].<span class="ruby-identifier">utc</span>, <span class="ruby-operator">::</span><span class="ruby-constant">Time</span>.<span class="ruby-identifier">find_zone</span>(<span class="ruby-identifier">variables</span>[<span class="ruby-number">1</span>]), <span class="ruby-identifier">variables</span>[<span class="ruby-number">2</span>].<span class="ruby-identifier">utc</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-method_missing">
+            
+              <b>method_missing</b>(sym, *args, &amp;block)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-method_missing" name="method-i-method_missing" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Send the missing method to <code>time</code> instance, and wrap result in a
+new <a href="TimeWithZone.html">TimeWithZone</a> with the existing
+<code>time_zone</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-method_missing_source')" id="l_method-i-method_missing_source">show</a>
+                
+              </p>
+              <div id="method-i-method_missing_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 367</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">method_missing</span>(<span class="ruby-identifier">sym</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">wrap_with_time_zone</span> <span class="ruby-identifier">time</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">sym</span>, *<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">e</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-identifier">e</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">message</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">time</span>.<span class="ruby-identifier">inspect</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">inspect</span>), <span class="ruby-identifier">e</span>.<span class="ruby-identifier">backtrace</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-past-3F">
+            
+              <b>past?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-past-3F" name="method-i-past-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the current object&#39;s time is in the past.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-past-3F_source')" id="l_method-i-past-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-past-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 224</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">past?</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">past?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-period">
+            
+              <b>period</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-period" name="method-i-period" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the underlying TZInfo::TimezonePeriod.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-period_source')" id="l_method-i-period_source">show</a>
+                
+              </p>
+              <div id="method-i-period_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">period</span>
+  <span class="ruby-ivar">@period</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">time_zone</span>.<span class="ruby-identifier">period_for_utc</span>(<span class="ruby-ivar">@utc</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-respond_to_missing-3F">
+            
+              <b>respond_to_missing?</b>(sym, include_priv)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-respond_to_missing-3F" name="method-i-respond_to_missing-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Ensure proxy class responds to all methods that underlying time instance
+responds to.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-respond_to_missing-3F_source')" id="l_method-i-respond_to_missing-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-respond_to_missing-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 359</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">respond_to_missing?</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">include_priv</span>)
+  <span class="ruby-comment"># consistently respond false to acts_like?(:date), regardless of whether #time is a Time or DateTime</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">sym</span>.<span class="ruby-identifier">to_sym</span> <span class="ruby-operator">==</span> <span class="ruby-value">:acts_like_date?</span>
+  <span class="ruby-identifier">time</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-identifier">sym</span>, <span class="ruby-identifier">include_priv</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rfc2822">
+            
+              <b>rfc2822</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-rfc2822" name="method-i-rfc2822" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a string of the object&#39;s date and time in the RFC 2822 standard
+format.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">rfc2822</span>  <span class="ruby-comment"># =&gt; &quot;Tue, 01 Jan 2013 04:51:39 +0000&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-rfc822">rfc822</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-rfc2822_source')" id="l_method-i-rfc2822_source">show</a>
+                
+              </p>
+              <div id="method-i-rfc2822_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 183</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">rfc2822</span>
+  <span class="ruby-identifier">to_s</span>(<span class="ruby-value">:rfc822</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-rfc822">
+            
+              <b>rfc822</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-rfc822" name="method-i-rfc822" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-since">
+            
+              <b>since</b>(other)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-since" name="method-i-since" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-since_source')" id="l_method-i-since_source">show</a>
+                
+              </p>
+              <div id="method-i-since_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 271</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">since</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-comment"># If we&#39;re adding a Duration of variable length (i.e., years, months, days), move forward from #time,</span>
+  <span class="ruby-comment"># otherwise move forward from #utc, for accuracy when moving across DST boundaries</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">duration_of_variable_length?</span>(<span class="ruby-identifier">other</span>)
+    <span class="ruby-identifier">method_missing</span>(<span class="ruby-value">:since</span>, <span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">since</span>(<span class="ruby-identifier">other</span>).<span class="ruby-identifier">in_time_zone</span>(<span class="ruby-identifier">time_zone</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-strftime">
+            
+              <b>strftime</b>(format)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-strftime" name="method-i-strftime" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Replaces <code>%Z</code> and <code>%z</code> directives with
+<code>zone</code> and <code>formatted_offset</code>, respectively, before
+passing to Time#strftime, so that zone information is correct</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-strftime_source')" id="l_method-i-strftime_source">show</a>
+                
+              </p>
+              <div id="method-i-strftime_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">strftime</span>(<span class="ruby-identifier">format</span>)
+  <span class="ruby-identifier">format</span> = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;%Z&#39;</span>, <span class="ruby-identifier">zone</span>)
+                 .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;%z&#39;</span>,   <span class="ruby-identifier">formatted_offset</span>(<span class="ruby-keyword">false</span>))
+                 .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;%:z&#39;</span>,  <span class="ruby-identifier">formatted_offset</span>(<span class="ruby-keyword">true</span>))
+                 .<span class="ruby-identifier">gsub</span>(<span class="ruby-string">&#39;%::z&#39;</span>, <span class="ruby-identifier">formatted_offset</span>(<span class="ruby-keyword">true</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;:00&quot;</span>)
+  <span class="ruby-identifier">time</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-identifier">format</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-time">
+            
+              <b>time</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-time" name="method-i-time" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <a href="../Time.html">Time</a> or <a
+href="../DateTime.html">DateTime</a> instance that represents the time in
+<code>time_zone</code>.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-time_source')" id="l_method-i-time_source">show</a>
+                
+              </p>
+              <div id="method-i-time_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">time</span>
+  <span class="ruby-ivar">@time</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">period</span>.<span class="ruby-identifier">to_local</span>(<span class="ruby-ivar">@utc</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_a">
+            
+              <b>to_a</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_a" name="method-i-to_a" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_a_source')" id="l_method-i-to_a_source">show</a>
+                
+              </p>
+              <div id="method-i-to_a_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 307</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_a</span>
+  [<span class="ruby-identifier">time</span>.<span class="ruby-identifier">sec</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">min</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">hour</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">day</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">mon</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">year</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">wday</span>, <span class="ruby-identifier">time</span>.<span class="ruby-identifier">yday</span>, <span class="ruby-identifier">dst?</span>, <span class="ruby-identifier">zone</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_datetime">
+            
+              <b>to_datetime</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_datetime" name="method-i-to_datetime" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_datetime_source')" id="l_method-i-to_datetime_source">show</a>
+                
+              </p>
+              <div id="method-i-to_datetime_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 329</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_datetime</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_datetime</span>.<span class="ruby-identifier">new_offset</span>(<span class="ruby-constant">Rational</span>(<span class="ruby-identifier">utc_offset</span>, <span class="ruby-number">86_400</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_f">
+            
+              <b>to_f</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_f" name="method-i-to_f" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_f_source')" id="l_method-i-to_f_source">show</a>
+                
+              </p>
+              <div id="method-i-to_f_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 311</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_f</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_f</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_formatted_s">
+            
+              <b>to_formatted_s</b>(format = :default)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_formatted_s" name="method-i-to_formatted_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_i">
+            
+              <b>to_i</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_i" name="method-i-to_i" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-tv_sec">tv_sec</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_i_source')" id="l_method-i-to_i_source">show</a>
+                
+              </p>
+              <div id="method-i-to_i_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 315</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_i</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_r">
+            
+              <b>to_r</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_r" name="method-i-to_r" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_r_source')" id="l_method-i-to_r_source">show</a>
+                
+              </p>
+              <div id="method-i-to_r_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 320</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_r</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_r</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_s">
+            
+              <b>to_s</b>(format = :default)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_s" name="method-i-to_s" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><code>:db</code> format outputs time in UTC; all others output time in
+local. Uses TimeWithZone&#39;s <code>strftime</code>, so <code>%Z</code>
+and <code>%z</code> work correctly.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-to_formatted_s">to_formatted_s</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_s_source')" id="l_method-i-to_s_source">show</a>
+                
+              </p>
+              <div id="method-i-to_s_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 190</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_s</span>(<span class="ruby-identifier">format</span> = <span class="ruby-value">:default</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">format</span> <span class="ruby-operator">==</span> <span class="ruby-value">:db</span>
+    <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">format</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">formatter</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Time</span><span class="ruby-operator">::</span><span class="ruby-constant">DATE_FORMATS</span>[<span class="ruby-identifier">format</span>]
+    <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:call</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">formatter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">strftime</span>(<span class="ruby-identifier">formatter</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-node">&quot;#{time.strftime(&quot;%Y-%m-%d %H:%M:%S&quot;)} #{formatted_offset(false, &#39;UTC&#39;)}&quot;</span> <span class="ruby-comment"># mimicking Ruby 1.9 Time#to_s format</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_time">
+            
+              <b>to_time</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-to_time" name="method-i-to_time" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return an instance of <a href="../Time.html">Time</a> in the system
+timezone.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_time_source')" id="l_method-i-to_time_source">show</a>
+                
+              </p>
+              <div id="method-i-to_time_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 325</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_time</span>
+  <span class="ruby-identifier">utc</span>.<span class="ruby-identifier">to_time</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-today-3F">
+            
+              <b>today?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-today-3F" name="method-i-today-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the current object&#39;s time falls within the current day.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-today-3F_source')" id="l_method-i-today-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-today-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 230</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">today?</span>
+  <span class="ruby-identifier">time</span>.<span class="ruby-identifier">today?</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-tv_sec">
+            
+              <b>tv_sec</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-tv_sec" name="method-i-tv_sec" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-usec">
+            
+              <b>usec</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-usec" name="method-i-usec" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-usec_source')" id="l_method-i-usec_source">show</a>
+                
+              </p>
+              <div id="method-i-usec_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 303</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">usec</span>
+  <span class="ruby-identifier">time</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:usec</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">time</span>.<span class="ruby-identifier">usec</span> <span class="ruby-operator">:</span> <span class="ruby-number">0</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-utc">
+            
+              <b>utc</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-utc" name="method-i-utc" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a <a href="../Time.html">Time</a> or <a
+href="../DateTime.html">DateTime</a> instance that represents the time in
+UTC.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-comparable_time">comparable_time</a>, <a href="TimeWithZone.html#method-i-getgm">getgm</a>, <a href="TimeWithZone.html#method-i-getutc">getutc</a>, <a href="TimeWithZone.html#method-i-gmtime">gmtime</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-utc_source')" id="l_method-i-utc_source">show</a>
+                
+              </p>
+              <div id="method-i-utc_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">utc</span>
+  <span class="ruby-ivar">@utc</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">period</span>.<span class="ruby-identifier">to_utc</span>(<span class="ruby-ivar">@time</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-utc-3F">
+            
+              <b>utc?</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-utc-3F" name="method-i-utc-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns true if the current time zone is set to UTC.</p>
+
+<pre class="ruby"><span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;UTC&#39;</span>                           <span class="ruby-comment"># =&gt; &#39;UTC&#39;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc?</span>                          <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span> = <span class="ruby-string">&#39;Eastern Time (US &amp; Canada)&#39;</span>    <span class="ruby-comment"># =&gt; &#39;Eastern Time (US &amp; Canada)&#39;</span>
+<span class="ruby-constant">Time</span>.<span class="ruby-identifier">zone</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc?</span>                          <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-gmt-3F">gmt?</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-utc-3F_source')" id="l_method-i-utc-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-utc-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 100</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">utc?</span>
+  <span class="ruby-identifier">time_zone</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;UTC&#39;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-utc_offset">
+            
+              <b>utc_offset</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-utc_offset" name="method-i-utc_offset" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the offset from current time to UTC time in seconds.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-gmt_offset">gmt_offset</a>, <a href="TimeWithZone.html#method-i-gmtoff">gmtoff</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-utc_offset_source')" id="l_method-i-utc_offset_source">show</a>
+                
+              </p>
+              <div id="method-i-utc_offset_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">utc_offset</span>
+  <span class="ruby-identifier">period</span>.<span class="ruby-identifier">utc_total_offset</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-xmlschema">
+            
+              <b>xmlschema</b>(fraction_digits = 0)
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-xmlschema" name="method-i-xmlschema" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="TimeWithZone.html#method-i-iso8601">iso8601</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-xmlschema_source')" id="l_method-i-xmlschema_source">show</a>
+                
+              </p>
+              <div id="method-i-xmlschema_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">xmlschema</span>(<span class="ruby-identifier">fraction_digits</span> = <span class="ruby-number">0</span>)
+  <span class="ruby-identifier">fraction</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">fraction_digits</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span>
+    (<span class="ruby-string">&quot;.%06i&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-identifier">time</span>.<span class="ruby-identifier">usec</span>)[<span class="ruby-number">0</span>, <span class="ruby-identifier">fraction_digits</span> <span class="ruby-operator">+</span> <span class="ruby-number">1</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-node">&quot;#{time.strftime(&quot;%Y-%m-%dT%H:%M:%S&quot;)}#{fraction}#{formatted_offset(true, &#39;Z&#39;)}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-zone">
+            
+              <b>zone</b>()
+            
+            <a href="../../classes/ActiveSupport/TimeWithZone.html#method-i-zone" name="method-i-zone" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p><a href="../Time.html">Time</a> uses <code>zone</code> to display the time
+zone abbreviation, so we&#39;re duck-typing it.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-zone_source')" id="l_method-i-zone_source">show</a>
+                
+              </p>
+              <div id="method-i-zone_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/time_with_zone.rb, line 126</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">zone</span>
+  <span class="ruby-identifier">period</span>.<span class="ruby-identifier">zone_identifier</span>.<span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::Schema</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::Schema 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="Migration.html">ActiveRecord::Migration</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/schema_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/schema.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+Schema">Active Record <a href="Schema.html">Schema</a></h1>
+
+<p>Allows programmers to programmatically define a schema in a portable DSL.
+This means you can define tables, indexes, etc. without using SQL directly,
+so your applications can more easily support multiple databases.</p>
+
+<p>Usage:</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-identifier">define</span> <span class="ruby-keyword">do</span>
+  <span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">authors</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> :<span class="ruby-identifier">name</span>, <span class="ruby-identifier">null</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">add_index</span> :<span class="ruby-identifier">authors</span>, :<span class="ruby-identifier">name</span>, :<span class="ruby-identifier">unique</span>
+
+  <span class="ruby-identifier">create_table</span> :<span class="ruby-identifier">posts</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">integer</span> :<span class="ruby-identifier">author_id</span>, <span class="ruby-identifier">null</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">string</span> :<span class="ruby-identifier">subject</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">text</span> :<span class="ruby-identifier">body</span>
+    <span class="ruby-identifier">t</span>.<span class="ruby-identifier">boolean</span> :<span class="ruby-identifier">private</span>, <span class="ruby-identifier">default</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">add_index</span> :<span class="ruby-identifier">posts</span>, :<span class="ruby-identifier">author_id</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p><a href="Schema.html">ActiveRecord::Schema</a> is only supported by
+database adapters that also support migrations, the two features being very
+similar.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-define">define</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-migrations_paths">migrations_paths</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-define">
+            
+              <b>define</b>(info={}, &amp;block)
+            
+            <a href="../../classes/ActiveRecord/Schema.html#method-c-define" name="method-c-define" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Eval the given block. All methods available to the current connection
+adapter are available within the block, so you can easily use the database
+definition DSL to build up your schema (<code>create_table</code>,
+<code>add_index</code>, etc.).</p>
+
+<p>The <code>info</code> hash is optional, and if given is used to define
+metadata about the current schema (currently, only the schema&#39;s
+version):</p>
+
+<pre>ActiveRecord::Schema.define(version: 20380119000001) do
+  ...
+end</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-define_source')" id="l_method-c-define_source">show</a>
+                
+              </p>
+              <div id="method-c-define_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/schema.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">define</span>(<span class="ruby-identifier">info</span>={}, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">new</span>.<span class="ruby-identifier">define</span>(<span class="ruby-identifier">info</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-migrations_paths">
+            
+              <b>migrations_paths</b>()
+            
+            <a href="../../classes/ActiveRecord/Schema.html#method-i-migrations_paths" name="method-i-migrations_paths" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the migrations paths.</p>
+
+<pre class="ruby"><span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Schema</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">migrations_paths</span>
+<span class="ruby-comment"># =&gt; [&quot;db/migrate&quot;] # Rails migration path by default.</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-migrations_paths_source')" id="l_method-i-migrations_paths_source">show</a>
+                
+              </p>
+              <div id="method-i-migrations_paths_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/schema.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">migrations_paths</span>
+  <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Migrator</span>.<span class="ruby-identifier">migrations_paths</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

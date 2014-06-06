@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::AttributeMethods::BeforeTypeCast</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveRecord::AttributeMethods::BeforeTypeCast 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/attribute_methods/before_type_cast_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/before_type_cast.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h1 id="label-Active+Record+Attribute+Methods+Before+Type+Cast">Active Record Attribute Methods Before Type Cast</h1>
+
+<p><code>ActiveRecord::AttributeMethods::BeforeTypeCast</code> provides a way
+to read the value of the attributes before typecasting and deserialization.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Task</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">task</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-identifier">completed_on</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;2012-10-21&#39;</span>)
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">id</span>           <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">completed_on</span> <span class="ruby-comment"># =&gt; Sun, 21 Oct 2012</span>
+
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">attributes_before_type_cast</span>
+<span class="ruby-comment"># =&gt; {&quot;id&quot;=&gt;&quot;1&quot;, &quot;completed_on&quot;=&gt;&quot;2012-10-21&quot;, ... }</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-string">&#39;id&#39;</span>)           <span class="ruby-comment"># =&gt; &quot;1&quot;</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-string">&#39;completed_on&#39;</span>) <span class="ruby-comment"># =&gt; &quot;2012-10-21&quot;</span>
+</pre>
+
+<p>In addition to <a
+href="BeforeTypeCast.html#method-i-read_attribute_before_type_cast">read_attribute_before_type_cast</a>
+and <a
+href="BeforeTypeCast.html#method-i-attributes_before_type_cast">attributes_before_type_cast</a>,
+it declares a method for all attributes with the
+<code>*_before_type_cast</code> suffix.</p>
+
+<pre class="ruby"><span class="ruby-identifier">task</span>.<span class="ruby-identifier">id_before_type_cast</span>           <span class="ruby-comment"># =&gt; &quot;1&quot;</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">completed_on_before_type_cast</span> <span class="ruby-comment"># =&gt; &quot;2012-10-21&quot;</span>
+</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-attributes_before_type_cast">attributes_before_type_cast</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-read_attribute_before_type_cast">read_attribute_before_type_cast</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-attributes_before_type_cast">
+            
+              <b>attributes_before_type_cast</b>()
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/BeforeTypeCast.html#method-i-attributes_before_type_cast" name="method-i-attributes_before_type_cast" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns a hash of attributes before typecasting and deserialization.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Task</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">task</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">title</span><span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">is_done</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>, <span class="ruby-identifier">completed_on</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;2012-10-21&#39;</span>)
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">attributes</span>
+<span class="ruby-comment"># =&gt; {&quot;id&quot;=&gt;nil, &quot;title&quot;=&gt;nil, &quot;is_done&quot;=&gt;true, &quot;completed_on&quot;=&gt;Sun, 21 Oct 2012, &quot;created_at&quot;=&gt;nil, &quot;updated_at&quot;=&gt;nil}</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">attributes_before_type_cast</span>
+<span class="ruby-comment"># =&gt; {&quot;id&quot;=&gt;nil, &quot;title&quot;=&gt;nil, &quot;is_done&quot;=&gt;true, &quot;completed_on&quot;=&gt;&quot;2012-10-21&quot;, &quot;created_at&quot;=&gt;nil, &quot;updated_at&quot;=&gt;nil}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-attributes_before_type_cast_source')" id="l_method-i-attributes_before_type_cast_source">show</a>
+                
+              </p>
+              <div id="method-i-attributes_before_type_cast_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/before_type_cast.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">attributes_before_type_cast</span>
+  <span class="ruby-ivar">@attributes</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-read_attribute_before_type_cast">
+            
+              <b>read_attribute_before_type_cast</b>(attr_name)
+            
+            <a href="../../../classes/ActiveRecord/AttributeMethods/BeforeTypeCast.html#method-i-read_attribute_before_type_cast" name="method-i-read_attribute_before_type_cast" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the value of the attribute identified by <code>attr_name</code>
+before typecasting and deserialization.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Task</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">ActiveRecord</span><span class="ruby-operator">::</span><span class="ruby-constant">Base</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">task</span> = <span class="ruby-constant">Task</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;1&#39;</span>, <span class="ruby-identifier">completed_on</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;2012-10-21&#39;</span>)
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute</span>(<span class="ruby-string">&#39;id&#39;</span>)                            <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-string">&#39;id&#39;</span>)           <span class="ruby-comment"># =&gt; &#39;1&#39;</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute</span>(<span class="ruby-string">&#39;completed_on&#39;</span>)                  <span class="ruby-comment"># =&gt; Sun, 21 Oct 2012</span>
+<span class="ruby-identifier">task</span>.<span class="ruby-identifier">read_attribute_before_type_cast</span>(<span class="ruby-string">&#39;completed_on&#39;</span>) <span class="ruby-comment"># =&gt; &quot;2012-10-21&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-read_attribute_before_type_cast_source')" id="l_method-i-read_attribute_before_type_cast_source">show</a>
+                
+              </p>
+              <div id="method-i-read_attribute_before_type_cast_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/attribute_methods/before_type_cast.rb, line 44</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">read_attribute_before_type_cast</span>(<span class="ruby-identifier">attr_name</span>)
+  <span class="ruby-ivar">@attributes</span>[<span class="ruby-identifier">attr_name</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::DescendantsTracker</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveSupport::DescendantsTracker 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/descendants_tracker_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>This module provides an internal implementation to track descendants which
+is faster than iterating through ObjectSpace.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-clear">clear</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-descendants">descendants</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-descendants">descendants</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-direct_descendants">direct_descendants</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-direct_descendants">direct_descendants</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-inherited">inherited</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-store_inherited">store_inherited</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-clear">
+            
+              <b>clear</b>()
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-c-clear" name="method-c-clear" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-clear_source')" id="l_method-c-clear_source">show</a>
+                
+              </p>
+              <div id="method-c-clear_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Dependencies</span>
+    <span class="ruby-identifier">@@direct_descendants</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span>, <span class="ruby-identifier">descendants</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Dependencies</span>.<span class="ruby-identifier">autoloaded?</span>(<span class="ruby-identifier">klass</span>)
+        <span class="ruby-identifier">@@direct_descendants</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">klass</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">descendants</span>.<span class="ruby-identifier">reject!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Dependencies</span>.<span class="ruby-identifier">autoloaded?</span>(<span class="ruby-identifier">v</span>) }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">@@direct_descendants</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-descendants">
+            
+              <b>descendants</b>(klass)
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-c-descendants" name="method-c-descendants" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-descendants_source')" id="l_method-c-descendants_source">show</a>
+                
+              </p>
+              <div id="method-c-descendants_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">descendants</span>(<span class="ruby-identifier">klass</span>)
+  <span class="ruby-identifier">arr</span> = []
+  <span class="ruby-identifier">accumulate_descendants</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">arr</span>)
+  <span class="ruby-identifier">arr</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-direct_descendants">
+            
+              <b>direct_descendants</b>(klass)
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-c-direct_descendants" name="method-c-direct_descendants" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-direct_descendants_source')" id="l_method-c-direct_descendants_source">show</a>
+                
+              </p>
+              <div id="method-c-direct_descendants_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 8</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">direct_descendants</span>(<span class="ruby-identifier">klass</span>)
+  <span class="ruby-identifier">@@direct_descendants</span>[<span class="ruby-identifier">klass</span>] <span class="ruby-operator">||</span> []
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-store_inherited">
+            
+              <b>store_inherited</b>(klass, descendant)
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-c-store_inherited" name="method-c-store_inherited" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This is the only method that is not thread safe, but is only ever called
+during the eager loading phase.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-store_inherited_source')" id="l_method-c-store_inherited_source">show</a>
+                
+              </p>
+              <div id="method-c-store_inherited_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 34</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">store_inherited</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">descendant</span>)
+  (<span class="ruby-identifier">@@direct_descendants</span>[<span class="ruby-identifier">klass</span>] <span class="ruby-operator">||=</span> []) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">descendant</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-descendants">
+            
+              <b>descendants</b>()
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-i-descendants" name="method-i-descendants" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-descendants_source')" id="l_method-i-descendants_source">show</a>
+                
+              </p>
+              <div id="method-i-descendants_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">descendants</span>
+  <span class="ruby-constant">DescendantsTracker</span>.<span class="ruby-identifier">descendants</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-direct_descendants">
+            
+              <b>direct_descendants</b>()
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-i-direct_descendants" name="method-i-direct_descendants" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-direct_descendants_source')" id="l_method-i-direct_descendants_source">show</a>
+                
+              </p>
+              <div id="method-i-direct_descendants_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">direct_descendants</span>
+  <span class="ruby-constant">DescendantsTracker</span>.<span class="ruby-identifier">direct_descendants</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-inherited">
+            
+              <b>inherited</b>(base)
+            
+            <a href="../../classes/ActiveSupport/DescendantsTracker.html#method-i-inherited" name="method-i-inherited" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-inherited_source')" id="l_method-i-inherited_source">show</a>
+                
+              </p>
+              <div id="method-i-inherited_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/descendants_tracker.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">inherited</span>(<span class="ruby-identifier">base</span>)
+  <span class="ruby-constant">DescendantsTracker</span>.<span class="ruby-identifier">store_inherited</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">base</span>)
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

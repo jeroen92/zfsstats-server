@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveRecord::ConnectionAdapters::ConnectionPool::Queue</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveRecord::ConnectionAdapters::ConnectionPool::Queue 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activerecord-4_0_0/lib/active_record/connection_adapters/abstract/connection_pool_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Threadsafe, fair, FIFO queue.  Meant to be used by <a
+href="../ConnectionPool.html">ConnectionPool</a> with which it shares a
+Monitor.  But could be a generic <a href="Queue.html">Queue</a>.</p>
+
+<p>The <a href="Queue.html">Queue</a> in stdlib&#39;s &#39;thread&#39; could
+replace this class except stdlib&#39;s doesn&#39;t support waiting with a
+timeout.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add">add</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-any_waiting-3F">any_waiting?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-clear">clear</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-num_waiting">num_waiting</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-poll">poll</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(lock = Monitor.new)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">lock</span> = <span class="ruby-constant">Monitor</span>.<span class="ruby-identifier">new</span>)
+  <span class="ruby-ivar">@lock</span> = <span class="ruby-identifier">lock</span>
+  <span class="ruby-ivar">@cond</span> = <span class="ruby-ivar">@lock</span>.<span class="ruby-identifier">new_cond</span>
+  <span class="ruby-ivar">@num_waiting</span> = <span class="ruby-number">0</span>
+  <span class="ruby-ivar">@queue</span> = []
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-add">
+            
+              <b>add</b>(element)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-i-add" name="method-i-add" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Add <code>element</code> to the queue.  Never blocks.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_source')" id="l_method-i-add_source">show</a>
+                
+              </p>
+              <div id="method-i-add_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add</span>(<span class="ruby-identifier">element</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">element</span>
+    <span class="ruby-ivar">@cond</span>.<span class="ruby-identifier">signal</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-any_waiting-3F">
+            
+              <b>any_waiting?</b>()
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-i-any_waiting-3F" name="method-i-any_waiting-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Test if any threads are currently waiting on the queue.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-any_waiting-3F_source')" id="l_method-i-any_waiting-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-any_waiting-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">any_waiting?</span>
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@num_waiting</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">0</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-clear">
+            
+              <b>clear</b>()
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-i-clear" name="method-i-clear" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Remove all elements from the queue.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-clear_source')" id="l_method-i-clear_source">show</a>
+                
+              </p>
+              <div id="method-i-clear_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 113</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">clear</span>
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(element)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>If <code>element</code> is in the queue, remove and return it, or nil.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">element</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">element</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-num_waiting">
+            
+              <b>num_waiting</b>()
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-i-num_waiting" name="method-i-num_waiting" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Return the number of threads currently waiting on this queue.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-num_waiting_source')" id="l_method-i-num_waiting_source">show</a>
+                
+              </p>
+              <div id="method-i-num_waiting_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">num_waiting</span>
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@num_waiting</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-poll">
+            
+              <b>poll</b>(timeout = nil)
+            
+            <a href="../../../../classes/ActiveRecord/ConnectionAdapters/ConnectionPool/Queue.html#method-i-poll" name="method-i-poll" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Remove the head of the queue.</p>
+
+<p>If <code>timeout</code> is not given, remove and return the head the queue
+if the number of available elements is strictly greater than the number of
+threads currently waiting (that is, don&#39;t jump ahead in line). 
+Otherwise, return nil.</p>
+
+<p>If <code>timeout</code> is given, block if it there is no element
+available, waiting up to <code>timeout</code> seconds for an element to
+become available.</p>
+
+<p>Raises:</p>
+<ul><li>
+<p><a href="../../ConnectionTimeoutError.html">ConnectionTimeoutError</a> if
+<code>timeout</code> is given and no element</p>
+</li></ul>
+
+<p>becomes available after <code>timeout</code> seconds,</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-poll_source')" id="l_method-i-poll_source">show</a>
+                
+              </p>
+              <div id="method-i-poll_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activerecord-4.0.0/lib/active_record/connection_adapters/abstract/connection_pool.rb, line 133</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">poll</span>(<span class="ruby-identifier">timeout</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">timeout</span>
+      <span class="ruby-identifier">no_wait_poll</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">wait_poll</span>(<span class="ruby-identifier">timeout</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">no_wait_poll</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -25,7 +25,7 @@ The following software should be installed:
 	
 2. Install required Ruby gems
 
-	`cd zfsstats-server && bundle install --deployment`
+	`cd zfsstats-server && bundle install`
 	
 3. Review production database configuration
 
@@ -33,16 +33,10 @@ The following software should be installed:
 	
 4. Seed the database
 
-	`RAILS_ENV=production rake db:seed`
+	`rake db:seed`
 	
-5. Install a webserver to server static content. Best way to do this is by installing Passenger
+5. Install a webserver to `server` static content. Best way to do this is by installing Passenger
 
-	Install prerequisites
-	
-	`apt-get install libcurl4-openssl-dev apache2-mpm-worker apache2-threaded-dev libapr1-dev libaprutil1-dev`
-	
-	Start Passenger installation
-	
 	`sudo gem install passenger && sudo passenger-install-apache2-module`
 
 	Then, follow the instructions shown.

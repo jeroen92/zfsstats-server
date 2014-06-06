@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Configuration::MiddlewareStackProxy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Configuration::MiddlewareStackProxy 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/configuration_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p><a href="MiddlewareStackProxy.html">MiddlewareStackProxy</a> is a proxy for
+the <a href="../../Rails.html">Rails</a> middleware stack that allows you
+to configure middlewares in your application. It works basically as a
+command recorder, saving each command to be applied after initialization
+over the default middleware stack, so you can add, swap, or remove any
+middleware in <a href="../../Rails.html">Rails</a>.</p>
+
+<p>You can add your own middlewares by using the
+<code>config.middleware.use</code> method:</p>
+
+<pre>config.middleware.use Magical::Unicorns</pre>
+
+<p>This will put the <code>Magical::Unicorns</code> middleware on the end of
+the stack. You can use <code>insert_before</code> if you wish to add a
+middleware before another:</p>
+
+<pre>config.middleware.insert_before ActionDispatch::Head, Magical::Unicorns</pre>
+
+<p>There&#39;s also <code>insert_after</code> which will insert a middleware
+after another:</p>
+
+<pre>config.middleware.insert_after ActionDispatch::Head, Magical::Unicorns</pre>
+
+<p>Middlewares can also be completely swapped out and replaced with others:</p>
+
+<pre>config.middleware.swap ActionDispatch::Flash, Magical::Unicorns</pre>
+
+<p>And finally they can also be removed from the stack completely:</p>
+
+<pre>config.middleware.delete ActionDispatch::Flash</pre>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-insert">insert</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-insert_after">insert_after</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-insert_before">insert_before</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-swap">swap</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-use">use</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>()
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>
+  <span class="ruby-ivar">@operations</span> = []
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(*args, &amp;block)
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@operations</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert">
+            
+              <b>insert</b>(*args, &amp;block)
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-i-insert" name="method-i-insert" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert_after">
+            
+              <b>insert_after</b>(*args, &amp;block)
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-i-insert_after" name="method-i-insert_after" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-insert_after_source')" id="l_method-i-insert_after_source">show</a>
+                
+              </p>
+              <div id="method-i-insert_after_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">insert_after</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@operations</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-insert_before">
+            
+              <b>insert_before</b>(*args, &amp;block)
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-i-insert_before" name="method-i-insert_before" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="MiddlewareStackProxy.html#method-i-insert">insert</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-insert_before_source')" id="l_method-i-insert_before_source">show</a>
+                
+              </p>
+              <div id="method-i-insert_before_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">insert_before</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@operations</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-swap">
+            
+              <b>swap</b>(*args, &amp;block)
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-i-swap" name="method-i-swap" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-swap_source')" id="l_method-i-swap_source">show</a>
+                
+              </p>
+              <div id="method-i-swap_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">swap</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@operations</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-use">
+            
+              <b>use</b>(*args, &amp;block)
+            
+            <a href="../../../classes/Rails/Configuration/MiddlewareStackProxy.html#method-i-use" name="method-i-use" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-use_source')" id="l_method-i-use_source">show</a>
+                
+              </p>
+              <div id="method-i-use_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/configuration.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">use</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-ivar">@operations</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">__method__</span>, <span class="ruby-identifier">args</span>, <span class="ruby-identifier">block</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

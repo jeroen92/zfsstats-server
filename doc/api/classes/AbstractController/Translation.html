@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>AbstractController::Translation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            AbstractController::Translation 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/abstract_controller/translation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/translation.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-l">l</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-localize">localize</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-t">t</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-translate">translate</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-l">
+            
+              <b>l</b>(*args)
+            
+            <a href="../../classes/AbstractController/Translation.html#method-i-l" name="method-i-l" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-localize">
+            
+              <b>localize</b>(*args)
+            
+            <a href="../../classes/AbstractController/Translation.html#method-i-localize" name="method-i-localize" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Delegates to <code>I18n.localize</code>. Also aliased as <code>l</code>.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Translation.html#method-i-l">l</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-localize_source')" id="l_method-i-localize_source">show</a>
+                
+              </p>
+              <div id="method-i-localize_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/translation.rb, line 23</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">localize</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">localize</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-t">
+            
+              <b>t</b>(*args)
+            
+            <a href="../../classes/AbstractController/Translation.html#method-i-t" name="method-i-t" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-translate">
+            
+              <b>translate</b>(*args)
+            
+            <a href="../../classes/AbstractController/Translation.html#method-i-translate" name="method-i-translate" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Delegates to <code>I18n.translate</code>. Also aliased as <code>t</code>.</p>
+
+<p>When the given key starts with a period, it will be scoped by the current
+controller and action. So if you call
+<code>translate(&quot;.foo&quot;)</code> from
+<code>PeopleController#index</code>, it will convert the call to
+<code>I18n.translate(&quot;people.index.foo&quot;)</code>. This makes it
+less repetitive to translate many keys within the same controller / action
+and gives you a simple framework for scoping them consistently.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="Translation.html#method-i-t">t</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-translate_source')" id="l_method-i-translate_source">show</a>
+                
+              </p>
+              <div id="method-i-translate_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/abstract_controller/translation.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">translate</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">key</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">key</span>[<span class="ruby-number">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;.&#39;</span>)
+    <span class="ruby-identifier">key</span> = <span class="ruby-node">&quot;#{ controller_path.tr(&#39;/&#39;, &#39;.&#39;) }.#{ action_name }#{ key }&quot;</span>
+    <span class="ruby-identifier">args</span>[<span class="ruby-number">0</span>] = <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">I18n</span>.<span class="ruby-identifier">translate</span>(*<span class="ruby-identifier">args</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionController::Instrumentation</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionController::Instrumentation 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_controller/metal/instrumentation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Adds instrumentation to several ends in <a
+href="Base.html">ActionController::Base</a>. It also provides some hooks
+related with <a
+href="Instrumentation.html#method-i-process_action">#process_action</a>,
+this allows an ORM like Active Record and/or DataMapper to plug in <a
+href="ActionController.html">ActionController</a> and show related
+information.</p>
+
+<p>Check ActiveRecord::Railties::ControllerRuntime for an example.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Instrumentation/ClassMethods.html">ActionController::Instrumentation::ClassMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>P</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-process_action">process_action</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-redirect_to">redirect_to</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-render">render</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-send_data">send_data</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-send_file">send_file</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="RackDelegation.html">
+              ActionController::RackDelegation
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-process_action">
+            
+              <b>process_action</b>(*args)
+            
+            <a href="../../classes/ActionController/Instrumentation.html#method-i-process_action" name="method-i-process_action" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-process_action_source')" id="l_method-i-process_action_source">show</a>
+                
+              </p>
+              <div id="method-i-process_action_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">process_action</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">raw_payload</span> = {
+    <span class="ruby-value">:controller</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">name</span>,
+    <span class="ruby-value">:action</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">action_name</span>,
+    <span class="ruby-value">:params</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">filtered_parameters</span>,
+    <span class="ruby-value">:format</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">format</span>.<span class="ruby-identifier">try</span>(<span class="ruby-value">:ref</span>),
+    <span class="ruby-value">:method</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">request</span>.<span class="ruby-identifier">method</span>,
+    <span class="ruby-value">:path</span>       =<span class="ruby-operator">&gt;</span> (<span class="ruby-identifier">request</span>.<span class="ruby-identifier">fullpath</span> <span class="ruby-keyword">rescue</span> <span class="ruby-string">&quot;unknown&quot;</span>)
+  }
+
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-string">&quot;start_processing.action_controller&quot;</span>, <span class="ruby-identifier">raw_payload</span>.<span class="ruby-identifier">dup</span>)
+
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-string">&quot;process_action.action_controller&quot;</span>, <span class="ruby-identifier">raw_payload</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-keyword">super</span>
+    <span class="ruby-identifier">payload</span>[<span class="ruby-value">:status</span>] = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span>
+    <span class="ruby-identifier">append_info_to_payload</span>(<span class="ruby-identifier">payload</span>)
+    <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-redirect_to">
+            
+              <b>redirect_to</b>(*args)
+            
+            <a href="../../classes/ActionController/Instrumentation.html#method-i-redirect_to" name="method-i-redirect_to" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-redirect_to_source')" id="l_method-i-redirect_to_source">show</a>
+                
+              </p>
+              <div id="method-i-redirect_to_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">redirect_to</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-string">&quot;redirect_to.action_controller&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">payload</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-keyword">super</span>
+    <span class="ruby-identifier">payload</span>[<span class="ruby-value">:status</span>]   = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">status</span>
+    <span class="ruby-identifier">payload</span>[<span class="ruby-value">:location</span>] = <span class="ruby-identifier">response</span>.<span class="ruby-identifier">filtered_location</span>
+    <span class="ruby-identifier">result</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-render">
+            
+              <b>render</b>(*args)
+            
+            <a href="../../classes/ActionController/Instrumentation.html#method-i-render" name="method-i-render" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-render_source')" id="l_method-i-render_source">show</a>
+                
+              </p>
+              <div id="method-i-render_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb, line 38</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">render</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">render_output</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">view_runtime</span> = <span class="ruby-identifier">cleanup_view_runtime</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-constant">Benchmark</span>.<span class="ruby-identifier">ms</span> { <span class="ruby-identifier">render_output</span> = <span class="ruby-keyword">super</span> }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">render_output</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_data">
+            
+              <b>send_data</b>(data, options = {})
+            
+            <a href="../../classes/ActionController/Instrumentation.html#method-i-send_data" name="method-i-send_data" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-send_data_source')" id="l_method-i-send_data_source">show</a>
+                
+              </p>
+              <div id="method-i-send_data_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">send_data</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-string">&quot;send_data.action_controller&quot;</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-send_file">
+            
+              <b>send_file</b>(path, options={})
+            
+            <a href="../../classes/ActionController/Instrumentation.html#method-i-send_file" name="method-i-send_file" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-send_file_source')" id="l_method-i-send_file_source">show</a>
+                
+              </p>
+              <div id="method-i-send_file_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_controller/metal/instrumentation.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">send_file</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span>={})
+  <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">Notifications</span>.<span class="ruby-identifier">instrument</span>(<span class="ruby-string">&quot;send_file.action_controller&quot;</span>,
+    <span class="ruby-identifier">options</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-value">:path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">path</span>)) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

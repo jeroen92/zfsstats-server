@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Assertions::DomAssertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Assertions::DomAssertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/testing/assertions/dom_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/dom.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_dom_equal">assert_dom_equal</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_dom_not_equal">assert_dom_not_equal</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_dom_equal">
+            
+              <b>assert_dom_equal</b>(expected, actual, message = &quot;&quot;)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/DomAssertions.html#method-i-assert_dom_equal" name="method-i-assert_dom_equal" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Test two <a href="../../HTML.html">HTML</a> strings for equivalency (e.g.,
+identical up to reordering of attributes)</p>
+
+<pre># assert that the referenced method generates the appropriate HTML string
+assert_dom_equal &#39;&lt;a href=&quot;http://www.example.com&quot;&gt;Apples&lt;/a&gt;&#39;, link_to(&quot;Apples&quot;, &quot;http://www.example.com&quot;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_dom_equal_source')" id="l_method-i-assert_dom_equal_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_dom_equal_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/dom.rb, line 10</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_dom_equal</span>(<span class="ruby-identifier">expected</span>, <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-identifier">expected_dom</span> = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">expected</span>).<span class="ruby-identifier">root</span>
+  <span class="ruby-identifier">actual_dom</span>   = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">actual</span>).<span class="ruby-identifier">root</span>
+  <span class="ruby-identifier">assert_equal</span> <span class="ruby-identifier">expected_dom</span>, <span class="ruby-identifier">actual_dom</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_dom_not_equal">
+            
+              <b>assert_dom_not_equal</b>(expected, actual, message = &quot;&quot;)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/DomAssertions.html#method-i-assert_dom_not_equal" name="method-i-assert_dom_not_equal" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>The negated form of <code>assert_dom_equivalent</code>.</p>
+
+<pre># assert that the referenced method does not generate the specified HTML string
+assert_dom_not_equal &#39;&lt;a href=&quot;http://www.example.com&quot;&gt;Apples&lt;/a&gt;&#39;, link_to(&quot;Oranges&quot;, &quot;http://www.example.com&quot;)</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_dom_not_equal_source')" id="l_method-i-assert_dom_not_equal_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_dom_not_equal_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/dom.rb, line 20</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_dom_not_equal</span>(<span class="ruby-identifier">expected</span>, <span class="ruby-identifier">actual</span>, <span class="ruby-identifier">message</span> = <span class="ruby-string">&quot;&quot;</span>)
+  <span class="ruby-identifier">expected_dom</span> = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">expected</span>).<span class="ruby-identifier">root</span>
+  <span class="ruby-identifier">actual_dom</span>   = <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">actual</span>).<span class="ruby-identifier">root</span>
+  <span class="ruby-identifier">assert_not_equal</span> <span class="ruby-identifier">expected_dom</span>, <span class="ruby-identifier">actual_dom</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

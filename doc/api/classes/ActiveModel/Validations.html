@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveModel::Validations</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActiveModel::Validations 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/absence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/absence.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/acceptance_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/acceptance.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/callbacks_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/callbacks.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/clusivity_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/clusivity.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/confirmation_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/confirmation.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/exclusion_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/exclusion.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/format_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/format.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/inclusion_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/inclusion.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/length_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/length.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/numericality_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/numericality.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/presence_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/presence.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/validates_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/validates.rb</a></li>
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activemodel-4_0_0/lib/active_model/validations/with_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/with.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<h2 id="label-Active+Model+Validations">Active Model <a href="Validations.html">Validations</a></h2>
+
+<p>Provides a full validation framework to your objects.</p>
+
+<p>A minimal implementation could be:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">first_name</span>, :<span class="ruby-identifier">last_name</span>
+
+  <span class="ruby-identifier">validates_each</span> :<span class="ruby-identifier">first_name</span>, :<span class="ruby-identifier">last_name</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">record</span>, <span class="ruby-identifier">attr</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">record</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">add</span> <span class="ruby-identifier">attr</span>, <span class="ruby-string">&#39;starts with z.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">z</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Which provides you with the full standard validation stack that you know
+from Active Record:</p>
+
+<pre class="ruby"><span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span>                   <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">invalid?</span>                 <span class="ruby-comment"># =&gt; false</span>
+
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">first_name</span> = <span class="ruby-string">&#39;zoolander&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span>                   <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">invalid?</span>                 <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span>.<span class="ruby-identifier">messages</span>          <span class="ruby-comment"># =&gt; {first_name:[&quot;starts with z.&quot;]}</span>
+</pre>
+
+<p>Note that <code>ActiveModel::Validations</code> automatically adds an
+<code>errors</code> method to your instances initialized with a new
+<code>ActiveModel::Errors</code> object, so there is no need for you to do
+this manually.</p>
+
+<h2 id="label-Active+Model+Length+Validator">Active Model Length Validator</h2>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Validations/Callbacks.html">ActiveModel::Validations::Callbacks</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Validations/ClassMethods.html">ActiveModel::Validations::ClassMethods</a>
+        </li>
+      
+        <li>
+          <span class="type">MODULE</span>
+          <a href="Validations/HelperMethods.html">ActiveModel::Validations::HelperMethods</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-errors">errors</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>I</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-invalid-3F">invalid?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-valid-3F">valid?</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-validates_with">validates_with</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+    <!-- Includes -->
+    <div class="sectiontitle">Included Modules</div>
+    <ul>
+      
+        <li>
+          
+            <a href="Validations/HelperMethods.html">
+              ActiveModel::Validations::HelperMethods
+            </a>
+          
+        </li>
+      
+    </ul>
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-errors">
+            
+              <b>errors</b>()
+            
+            <a href="../../classes/ActiveModel/Validations.html#method-i-errors" name="method-i-errors" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns the <code>Errors</code> object that holds all information about
+attribute error messages.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span> <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">errors</span> <span class="ruby-comment"># =&gt; #&lt;ActiveModel::Errors:0x007fe603816640 @messages={name:[&quot;can&#39;t be blank&quot;]}&gt;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-errors_source')" id="l_method-i-errors_source">show</a>
+                
+              </p>
+              <div id="method-i-errors_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">errors</span>
+  <span class="ruby-ivar">@errors</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Errors</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-invalid-3F">
+            
+              <b>invalid?</b>(context = nil)
+            
+            <a href="../../classes/ActiveModel/Validations.html#method-i-invalid-3F" name="method-i-invalid-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Performs the opposite of <code>valid?</code>. Returns <code>true</code> if
+errors were added, <code>false</code> otherwise.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">invalid?</span> <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;david&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">invalid?</span> <span class="ruby-comment"># =&gt; false</span>
+</pre>
+
+<p>Context can optionally be supplied to define which callbacks to test
+against (the context is defined on the validations using <code>:on</code>).</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>, <span class="ruby-identifier">on</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">invalid?</span>       <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">invalid?</span>(:<span class="ruby-identifier">new</span>) <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-invalid-3F_source')" id="l_method-i-invalid-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-invalid-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations.rb, line 348</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">invalid?</span>(<span class="ruby-identifier">context</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-operator">!</span><span class="ruby-identifier">valid?</span>(<span class="ruby-identifier">context</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-valid-3F">
+            
+              <b>valid?</b>(context = nil)
+            
+            <a href="../../classes/ActiveModel/Validations.html#method-i-valid-3F" name="method-i-valid-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Runs all the specified validations and returns <code>true</code> if no
+errors were added otherwise <code>false</code>.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span> <span class="ruby-comment"># =&gt; false</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">name</span> = <span class="ruby-string">&#39;david&#39;</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span> <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>Context can optionally be supplied to define which callbacks to test
+against (the context is defined on the validations using <code>:on</code>).</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">validates_presence_of</span> :<span class="ruby-identifier">name</span>, <span class="ruby-identifier">on</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">person</span> = <span class="ruby-constant">Person</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span>       <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">person</span>.<span class="ruby-identifier">valid?</span>(:<span class="ruby-identifier">new</span>) <span class="ruby-comment"># =&gt; false</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-valid-3F_source')" id="l_method-i-valid-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-valid-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations.rb, line 311</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">valid?</span>(<span class="ruby-identifier">context</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">current_context</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validation_context</span> = <span class="ruby-identifier">validation_context</span>, <span class="ruby-identifier">context</span>
+  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">clear</span>
+  <span class="ruby-identifier">run_validations!</span>
+<span class="ruby-keyword">ensure</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">validation_context</span> = <span class="ruby-identifier">current_context</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-validates_with">
+            
+              <b>validates_with</b>(*args, &amp;block)
+            
+            <a href="../../classes/ActiveModel/Validations.html#method-i-validates_with" name="method-i-validates_with" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Passes the record off to the class or classes specified and allows them to
+add errors based on more complex conditions.</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">validate</span> :<span class="ruby-identifier">instance_validations</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">instance_validations</span>
+    <span class="ruby-identifier">validates_with</span> <span class="ruby-constant">MyValidator</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Please consult the class method documentation for more information on
+creating your own validator.</p>
+
+<p>You may also pass it multiple classes, like so:</p>
+
+<pre class="ruby"><span class="ruby-keyword">class</span> <span class="ruby-constant">Person</span>
+  <span class="ruby-identifier">include</span> <span class="ruby-constant">ActiveModel</span><span class="ruby-operator">::</span><span class="ruby-constant">Validations</span>
+
+  <span class="ruby-identifier">validate</span> :<span class="ruby-identifier">instance_validations</span>, <span class="ruby-identifier">on</span><span class="ruby-operator">:</span> :<span class="ruby-identifier">create</span>
+
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier">instance_validations</span>
+    <span class="ruby-identifier">validates_with</span> <span class="ruby-constant">MyValidator</span>, <span class="ruby-constant">MyOtherValidator</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<p>Standard configuration options (<code>:on</code>, <code>:if</code> and
+<code>:unless</code>), which are available on the class version of
+<code>validates_with</code>, should instead be placed on the
+<code>validates</code> method as these are applied and tested in the
+callback.</p>
+
+<p>If you pass any additional configuration options, they will be passed to
+the class and available as <code>options</code>, please refer to the class
+version of this method for more information.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-validates_with_source')" id="l_method-i-validates_with_source">show</a>
+                
+              </p>
+              <div id="method-i-validates_with_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activemodel-4.0.0/lib/active_model/validations/with.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">validates_with</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">options</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">extract_options!</span>
+  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">klass</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">validator</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">options</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-identifier">validator</span>.<span class="ruby-identifier">validate</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

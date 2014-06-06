@@ -1,0 +1,750 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>Rails::Paths::Root</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            Rails::Paths::Root 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../../Object.html">Object</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/railties-4_0_0/lib/rails/paths_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>This object is an extended hash that behaves as root of the
+<code>Rails::Paths</code> system. It allows you to collect information
+about how you want to structure your application paths by a <a
+href="../../Hash.html">Hash</a> like <a href="../API.html">API</a>. It
+requires you to give a physical path on initialization.</p>
+
+<pre>root = Root.new &quot;/rails&quot;
+root.add &quot;app/controllers&quot;, eager_load: true</pre>
+
+<p>The command above creates a new root object and add “app/controllers” as a
+path. This means we can get a <code>Rails::Paths::Path</code> object back
+like below:</p>
+
+<pre class="ruby"><span class="ruby-identifier">path</span> = <span class="ruby-identifier">root</span>[<span class="ruby-string">&quot;app/controllers&quot;</span>]
+<span class="ruby-identifier">path</span>.<span class="ruby-identifier">eager_load?</span>               <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">path</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Rails</span><span class="ruby-operator">::</span><span class="ruby-constant">Paths</span><span class="ruby-operator">::</span><span class="ruby-constant">Path</span>) <span class="ruby-comment"># =&gt; true</span>
+</pre>
+
+<p>The <code>Path</code> object is simply an enumerable and allows you to
+easily add extra paths:</p>
+
+<pre class="ruby"><span class="ruby-identifier">path</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Enumerable</span>) <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_ary</span>.<span class="ruby-identifier">inspect</span>    <span class="ruby-comment"># =&gt; [&quot;app/controllers&quot;]</span>
+
+<span class="ruby-identifier">path</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;lib/controllers&quot;</span>
+<span class="ruby-identifier">path</span>.<span class="ruby-identifier">to_ary</span>.<span class="ruby-identifier">inspect</span>    <span class="ruby-comment"># =&gt; [&quot;app/controllers&quot;, &quot;lib/controllers&quot;]</span>
+</pre>
+
+<p>Notice that when you add a path using <code>add</code>, the path object
+created already contains the path with the same path value given to
+<code>add</code>. In some situations, you may not want this behavior, so
+you can give :with as option.</p>
+
+<pre class="ruby"><span class="ruby-identifier">root</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;config/routes&quot;</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;config/routes.rb&quot;</span>
+<span class="ruby-identifier">root</span>[<span class="ruby-string">&quot;config/routes&quot;</span>].<span class="ruby-identifier">inspect</span> <span class="ruby-comment"># =&gt; [&quot;config/routes.rb&quot;]</span>
+</pre>
+
+<p>The <code>add</code> method accepts the following options as arguments: <a
+href="Root.html#method-i-eager_load">#eager_load</a>, autoload, <a
+href="Root.html#method-i-autoload_once">#autoload_once</a> and glob.</p>
+
+<p>Finally, the <code>Path</code> object also provides a few helpers:</p>
+
+<pre class="ruby"><span class="ruby-identifier">root</span> = <span class="ruby-constant">Root</span>.<span class="ruby-identifier">new</span> <span class="ruby-string">&quot;/rails&quot;</span>
+<span class="ruby-identifier">root</span>.<span class="ruby-identifier">add</span> <span class="ruby-string">&quot;app/controllers&quot;</span>
+
+<span class="ruby-identifier">root</span>[<span class="ruby-string">&quot;app/controllers&quot;</span>].<span class="ruby-identifier">expanded</span> <span class="ruby-comment"># =&gt; [&quot;/rails/app/controllers&quot;]</span>
+<span class="ruby-identifier">root</span>[<span class="ruby-string">&quot;app/controllers&quot;</span>].<span class="ruby-identifier">existent</span> <span class="ruby-comment"># =&gt; [&quot;/rails/app/controllers&quot;]</span>
+</pre>
+
+<p>Check the <code>Rails::Paths::Path</code> documentation for more
+information.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D">[]</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D-3D">[]=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-add">add</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-all_paths">all_paths</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-autoload_once">autoload_once</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-autoload_paths">autoload_paths</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-eager_load">eager_load</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-filter_by">filter_by</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>K</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-keys">keys</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>L</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-load_paths">load_paths</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-values">values</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-values_at">values_at</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+      <!-- Section attributes -->
+      <div class="sectiontitle">Attributes</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class='attr-rw'>
+              [RW]
+            </td>
+            <td class='attr-name'>path</td>
+            <td class='attr-desc'></td>
+          </tr>
+        
+      </table>
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(path)
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-ivar">@current</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+  <span class="ruby-ivar">@root</span> = {}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D">
+            
+              <b>[]</b>(path)
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-5B-5D" name="method-i-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D_source')" id="l_method-i-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 63</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-keyword ruby-title">path</span>)
+  <span class="ruby-ivar">@root</span>[<span class="ruby-identifier">path</span>]
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D-3D">
+            
+              <b>[]=</b>(path, value)
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-5B-5D-3D" name="method-i-5B-5D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D-3D_source')" id="l_method-i-5B-5D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-keyword ruby-title">path</span>, <span class="ruby-identifier">value</span>)
+  <span class="ruby-identifier">glob</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">path</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">path</span>].<span class="ruby-identifier">glob</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">add</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">with</span><span class="ruby-operator">:</span> <span class="ruby-identifier">value</span>, <span class="ruby-identifier">glob</span><span class="ruby-operator">:</span> <span class="ruby-identifier">glob</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-add">
+            
+              <b>add</b>(path, options = {})
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-add" name="method-i-add" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-add_source')" id="l_method-i-add_source">show</a>
+                
+              </p>
+              <div id="method-i-add_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">add</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">with</span> = <span class="ruby-constant">Array</span>(<span class="ruby-identifier">options</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-value">:with</span>, <span class="ruby-identifier">path</span>))
+  <span class="ruby-ivar">@root</span>[<span class="ruby-identifier">path</span>] = <span class="ruby-constant">Path</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">with</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-all_paths">
+            
+              <b>all_paths</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-all_paths" name="method-i-all_paths" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-all_paths_source')" id="l_method-i-all_paths_source">show</a>
+                
+              </p>
+              <div id="method-i-all_paths_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">all_paths</span>
+  <span class="ruby-identifier">values</span>.<span class="ruby-identifier">tap</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">uniq!</span> }
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-autoload_once">
+            
+              <b>autoload_once</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-autoload_once" name="method-i-autoload_once" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-autoload_once_source')" id="l_method-i-autoload_once_source">show</a>
+                
+              </p>
+              <div id="method-i-autoload_once_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">autoload_once</span>
+  <span class="ruby-identifier">filter_by</span>(<span class="ruby-value">:autoload_once?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-autoload_paths">
+            
+              <b>autoload_paths</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-autoload_paths" name="method-i-autoload_paths" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-autoload_paths_source')" id="l_method-i-autoload_paths_source">show</a>
+                
+              </p>
+              <div id="method-i-autoload_paths_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">autoload_paths</span>
+  <span class="ruby-identifier">filter_by</span>(<span class="ruby-value">:autoload?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-eager_load">
+            
+              <b>eager_load</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-eager_load" name="method-i-eager_load" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-eager_load_source')" id="l_method-i-eager_load_source">show</a>
+                
+              </p>
+              <div id="method-i-eager_load_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 87</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">eager_load</span>
+  <span class="ruby-identifier">filter_by</span>(<span class="ruby-value">:eager_load?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-keys">
+            
+              <b>keys</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-keys" name="method-i-keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-keys_source')" id="l_method-i-keys_source">show</a>
+                
+              </p>
+              <div id="method-i-keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">keys</span>
+  <span class="ruby-ivar">@root</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-load_paths">
+            
+              <b>load_paths</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-load_paths" name="method-i-load_paths" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-load_paths_source')" id="l_method-i-load_paths_source">show</a>
+                
+              </p>
+              <div id="method-i-load_paths_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 95</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">load_paths</span>
+  <span class="ruby-identifier">filter_by</span>(<span class="ruby-value">:load_path?</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-values">
+            
+              <b>values</b>()
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-values" name="method-i-values" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-values_source')" id="l_method-i-values_source">show</a>
+                
+              </p>
+              <div id="method-i-values_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">values</span>
+  <span class="ruby-ivar">@root</span>.<span class="ruby-identifier">values</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-values_at">
+            
+              <b>values_at</b>(*list)
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-values_at" name="method-i-values_at" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-values_at_source')" id="l_method-i-values_at_source">show</a>
+                
+              </p>
+              <div id="method-i-values_at_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">values_at</span>(*<span class="ruby-identifier">list</span>)
+  <span class="ruby-ivar">@root</span>.<span class="ruby-identifier">values_at</span>(*<span class="ruby-identifier">list</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+              
+      <div class="sectiontitle">Instance Protected methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-filter_by">
+            
+              <b>filter_by</b>(constraint)
+            
+            <a href="../../../classes/Rails/Paths/Root.html#method-i-filter_by" name="method-i-filter_by" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-filter_by_source')" id="l_method-i-filter_by_source">show</a>
+                
+              </p>
+              <div id="method-i-filter_by_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/railties-4.0.0/lib/rails/paths.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">filter_by</span>(<span class="ruby-identifier">constraint</span>)
+  <span class="ruby-identifier">all</span> = []
+  <span class="ruby-identifier">all_paths</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">constraint</span>)
+      <span class="ruby-identifier">paths</span>  = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">existent</span>
+      <span class="ruby-identifier">paths</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">children</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">constraint</span>) <span class="ruby-operator">?</span> [] <span class="ruby-operator">:</span> <span class="ruby-identifier">p</span>.<span class="ruby-identifier">existent</span> }.<span class="ruby-identifier">flatten</span>
+      <span class="ruby-identifier">all</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">paths</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">all</span>.<span class="ruby-identifier">uniq!</span>
+  <span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

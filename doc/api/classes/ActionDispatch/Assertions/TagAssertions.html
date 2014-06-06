@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActionDispatch::Assertions::TagAssertions</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../../css/github.css" type="text/css" media="screen" />
+<script src="../../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Module</span> 
+            ActionDispatch::Assertions::TagAssertions 
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/actionpack-4_0_0/lib/action_dispatch/testing/assertions/tag_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/tag.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Pair of assertions to testing elements in the <a
+href="../../HTML.html">HTML</a> output of the response.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>A</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-assert_no_tag">assert_no_tag</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-assert_tag">assert_tag</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-find_all_tag">find_all_tag</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-find_tag">find_tag</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>H</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-html_document">html_document</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+
+
+    
+
+
+    <!-- Methods -->
+        
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_no_tag">
+            
+              <b>assert_no_tag</b>(*opts)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/TagAssertions.html#method-i-assert_no_tag" name="method-i-assert_no_tag" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Identical to <code>assert_tag</code>, but asserts that a matching tag does
+<em>not</em> exist. (See <code>assert_tag</code> for a full discussion of
+the syntax.)</p>
+
+<pre># Assert that there is not a &quot;div&quot; containing a &quot;p&quot;
+assert_no_tag tag: &quot;div&quot;, descendant: { tag: &quot;p&quot; }
+
+# Assert that an unordered list is empty
+assert_no_tag tag: &quot;ul&quot;, descendant: { tag: &quot;li&quot; }
+
+# Assert that there is not a &quot;p&quot; tag with between 1 to 3 &quot;img&quot; tags
+# as immediate children
+assert_no_tag tag: &quot;p&quot;,
+           children: { count: 1..3, only: { tag: &quot;img&quot; } }</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_no_tag_source')" id="l_method-i-assert_no_tag_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_no_tag_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/tag.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_no_tag</span>(*<span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">opts</span> = <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-value">:tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span> }) <span class="ruby-operator">:</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">find_tag</span>(<span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">assert</span> <span class="ruby-operator">!</span><span class="ruby-identifier">tag</span>, <span class="ruby-node">&quot;expected no tag, but found tag matching #{opts.inspect} in:\n#{@response.body.inspect}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-assert_tag">
+            
+              <b>assert_tag</b>(*opts)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/TagAssertions.html#method-i-assert_tag" name="method-i-assert_tag" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Asserts that there is a tag/node/element in the body of the response that
+meets all of the given conditions. The <code>conditions</code> parameter
+must be a hash of any of the following keys (all are optional):</p>
+<ul><li>
+<p><code>:tag</code>: the node type must match the corresponding value</p>
+</li><li>
+<p><code>:attributes</code>: a hash. The node&#39;s attributes must match the
+corresponding values in the hash.</p>
+</li><li>
+<p><code>:parent</code>: a hash. The node&#39;s parent must match the
+corresponding hash.</p>
+</li><li>
+<p><code>:child</code>: a hash. At least one of the node&#39;s immediate
+children must meet the criteria described by the hash.</p>
+</li><li>
+<p><code>:ancestor</code>: a hash. At least one of the node&#39;s ancestors
+must meet the criteria described by the hash.</p>
+</li><li>
+<p><code>:descendant</code>: a hash. At least one of the node&#39;s
+descendants must meet the criteria described by the hash.</p>
+</li><li>
+<p><code>:sibling</code>: a hash. At least one of the node&#39;s siblings must
+meet the criteria described by the hash.</p>
+</li><li>
+<p><code>:after</code>: a hash. The node must be after any sibling meeting the
+criteria described by the hash, and at least one sibling must match.</p>
+</li><li>
+<p><code>:before</code>: a hash. The node must be before any sibling meeting
+the criteria described by the hash, and at least one sibling must match.</p>
+</li><li>
+<p><code>:children</code>: a hash, for counting children of a node. Accepts
+the keys:</p>
+<ul><li>
+<p><code>:count</code>: either a number or a range which must equal (or
+include) the number of children that match.</p>
+</li><li>
+<p><code>:less_than</code>: the number of matching children must be less than
+this number.</p>
+</li><li>
+<p><code>:greater_than</code>: the number of matching children must be greater
+than this number.</p>
+</li><li>
+<p><code>:only</code>: another hash consisting of the keys to use to match on
+the children, and only matching children will be counted.</p>
+</li></ul>
+</li><li>
+<p><code>:content</code>: the textual content of the node must match the given
+value. This will not match <a href="../../HTML.html">HTML</a> tags in the
+body of a tag–only text.</p>
+</li></ul>
+
+<p>Conditions are matched using the following algorithm:</p>
+<ul><li>
+<p>if the condition is a string, it must be a substring of the value.</p>
+</li><li>
+<p>if the condition is a regexp, it must match the value.</p>
+</li><li>
+<p>if the condition is a number, the value must match number.to_s.</p>
+</li><li>
+<p>if the condition is <code>true</code>, the value must not be
+<code>nil</code>.</p>
+</li><li>
+<p>if the condition is <code>false</code> or <code>nil</code>, the value must
+be <code>nil</code>.</p>
+
+<p># Assert that there is a “span” tag <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “span”</p>
+
+<p># Assert that there is a “span” tag with id=“x” <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “span”,
+attributes: { id: “x” }</p>
+
+<p># Assert that there is a “span” tag using the short-hand <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> :span</p>
+
+<p># Assert that there is a “span” tag with id=“x” using the short-hand <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> :span,
+attributes: { id: “x” }</p>
+
+<p># Assert that there is a “span” inside of a “div” <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “span”,
+parent: { tag: “div” }</p>
+
+<p># Assert that there is a “span” somewhere inside a table <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “span”,
+ancestor: { tag: “table” }</p>
+
+<p># Assert that there is a “span” with at least one “em” child <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “span”,
+child: { tag: “em” }</p>
+
+<p># Assert that there is a “span” containing a (possibly nested) # “strong”
+tag. <a href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag:
+“span”, descendant: { tag: “strong” }</p>
+
+<p># Assert that there is a “span” containing between 2 and 4 “em” tags # as
+immediate children <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “span”,</p>
+
+<pre>children: { count: 2..4, only: { tag: &quot;em&quot; } }</pre>
+
+<p># Get funky: assert that there is a “div”, with an “ul” ancestor # and an
+“li” parent (with “class” = “enum”), and containing a # “span” descendant
+that contains text matching /hello world/ <a
+href="TagAssertions.html#method-i-assert_tag">#assert_tag</a> tag: “div”,</p>
+
+<pre class="ruby"><span class="ruby-identifier">ancestor</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;ul&quot;</span> },
+<span class="ruby-identifier">parent</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;li&quot;</span>,
+             <span class="ruby-identifier">attributes</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">class</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;enum&quot;</span> } },
+<span class="ruby-identifier">descendant</span><span class="ruby-operator">:</span> { <span class="ruby-identifier">tag</span><span class="ruby-operator">:</span> <span class="ruby-string">&quot;span&quot;</span>,
+                 <span class="ruby-identifier">child</span><span class="ruby-operator">:</span> <span class="ruby-regexp">/hello world/</span> }
+</pre>
+</li></ul>
+
+<p><strong>Please note</strong>: <code>assert_tag</code> and
+<code>assert_no_tag</code> only work with well-formed XHTML. They recognize
+a few tags as implicitly self-closing (like br and hr and such) but will
+not work correctly with tags that allow optional closing tags (p, li, td).
+<em>You must explicitly close all of your tags to use these
+assertions.</em></p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-assert_tag_source')" id="l_method-i-assert_tag_source">show</a>
+                
+              </p>
+              <div id="method-i-assert_tag_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/tag.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">assert_tag</span>(*<span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">opts</span> = <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-number">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">merge</span>({ <span class="ruby-value">:tag</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span> }) <span class="ruby-operator">:</span> <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">find_tag</span>(<span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">assert</span> <span class="ruby-identifier">tag</span>, <span class="ruby-node">&quot;expected tag, but no tag found matching #{opts.inspect} in:\n#{@response.body.inspect}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_all_tag">
+            
+              <b>find_all_tag</b>(conditions)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/TagAssertions.html#method-i-find_all_tag" name="method-i-find_all_tag" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_all_tag_source')" id="l_method-i-find_all_tag_source">show</a>
+                
+              </p>
+              <div id="method-i-find_all_tag_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/tag.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_all_tag</span>(<span class="ruby-identifier">conditions</span>)
+  <span class="ruby-identifier">html_document</span>.<span class="ruby-identifier">find_all</span>(<span class="ruby-identifier">conditions</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-find_tag">
+            
+              <b>find_tag</b>(conditions)
+            
+            <a href="../../../classes/ActionDispatch/Assertions/TagAssertions.html#method-i-find_tag" name="method-i-find_tag" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-find_tag_source')" id="l_method-i-find_tag_source">show</a>
+                
+              </p>
+              <div id="method-i-find_tag_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/tag.rb, line 121</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">find_tag</span>(<span class="ruby-identifier">conditions</span>)
+  <span class="ruby-identifier">html_document</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">conditions</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-html_document">
+            
+              <b>html_document</b>()
+            
+            <a href="../../../classes/ActionDispatch/Assertions/TagAssertions.html#method-i-html_document" name="method-i-html_document" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-html_document_source')" id="l_method-i-html_document_source">show</a>
+                
+              </p>
+              <div id="method-i-html_document_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/actionpack-4.0.0/lib/action_dispatch/testing/assertions/tag.rb, line 129</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">html_document</span>
+  <span class="ruby-identifier">xml</span> = <span class="ruby-ivar">@response</span>.<span class="ruby-identifier">content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/xml$/</span>
+  <span class="ruby-ivar">@html_document</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">HTML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@response</span>.<span class="ruby-identifier">body</span>, <span class="ruby-keyword">false</span>, <span class="ruby-identifier">xml</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    

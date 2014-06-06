@@ -1,0 +1,1723 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <title>ActiveSupport::HashWithIndifferentAccess::HashWithIndifferentAccess</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="../../css/reset.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/main.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="../../css/github.css" type="text/css" media="screen" />
+<script src="../../js/jquery-1.3.2.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/jquery-effect.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/main.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../js/highlight.pack.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+
+<body>     
+    <div class="banner">
+        
+            <span>Ruby on Rails 4.0.0</span><br />
+        
+        <h1>
+            <span class="type">Class</span> 
+            ActiveSupport::HashWithIndifferentAccess::HashWithIndifferentAccess 
+            
+                <span class="parent">&lt; 
+                    
+                    <a href="../Hash.html">Hash</a>
+                    
+                </span>
+            
+        </h1>
+        <ul class="files">
+            
+            <li><a href="../../files/usr/local/rvm/gems/ruby-2_0_0-p0/gems/activesupport-4_0_0/lib/active_support/hash_with_indifferent_access_rb.html">/usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb</a></li>
+            
+        </ul>
+    </div>
+    <div id="bodyContent">
+        <div id="content">
+  
+    <div class="description">
+      
+<p>Implements a hash where keys <code>:foo</code> and
+<code>&quot;foo&quot;</code> are considered to be the same.</p>
+
+<pre class="ruby"><span class="ruby-identifier">rgb</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+
+<span class="ruby-identifier">rgb</span>[:<span class="ruby-identifier">black</span>] = <span class="ruby-string">&#39;#000000&#39;</span>
+<span class="ruby-identifier">rgb</span>[:<span class="ruby-identifier">black</span>]  <span class="ruby-comment"># =&gt; &#39;#000000&#39;</span>
+<span class="ruby-identifier">rgb</span>[<span class="ruby-string">&#39;black&#39;</span>] <span class="ruby-comment"># =&gt; &#39;#000000&#39;</span>
+
+<span class="ruby-identifier">rgb</span>[<span class="ruby-string">&#39;white&#39;</span>] = <span class="ruby-string">&#39;#FFFFFF&#39;</span>
+<span class="ruby-identifier">rgb</span>[:<span class="ruby-identifier">white</span>]  <span class="ruby-comment"># =&gt; &#39;#FFFFFF&#39;</span>
+<span class="ruby-identifier">rgb</span>[<span class="ruby-string">&#39;white&#39;</span>] <span class="ruby-comment"># =&gt; &#39;#FFFFFF&#39;</span>
+</pre>
+
+<p>Internally symbols are mapped to strings when used as keys in the entire
+writing interface (calling <code>[]=</code>, <code>merge</code>, etc). This
+mapping belongs to the public interface. For example, given:</p>
+
+<pre>hash = ActiveSupport::HashWithIndifferentAccess.new(a: 1)</pre>
+
+<p>You are guaranteed that the key is returned as a string:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span> <span class="ruby-comment"># =&gt; [&quot;a&quot;]</span>
+</pre>
+
+<p>Technically other types of keys are accepted:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
+<span class="ruby-identifier">hash</span>[<span class="ruby-value">0</span>] = <span class="ruby-value">0</span>
+<span class="ruby-identifier">hash</span> <span class="ruby-comment"># =&gt; {&quot;a&quot;=&gt;1, 0=&gt;0}</span>
+</pre>
+
+<p>but this class is intended for use cases where strings or symbols are the
+expected keys and it is convenient to understand both as the same. For
+example the <code>params</code> hash in Ruby on <a
+href="../Rails.html">Rails</a>.</p>
+
+<p>Note that core extensions define <code>Hash#with_indifferent_access</code>:</p>
+
+<pre>rgb = { black: &#39;#000000&#39;, white: &#39;#FFFFFF&#39; }.with_indifferent_access</pre>
+
+<p>which may be handy.</p>
+
+    </div>
+  
+
+
+  
+
+
+  
+  
+
+
+  
+    <!-- Namespace -->
+    <div class="sectiontitle">Namespace</div>
+    <ul>
+      
+        <li>
+          <span class="type">CLASS</span>
+          <a href="HashWithIndifferentAccess.html">ActiveSupport::HashWithIndifferentAccess::HashWithIndifferentAccess</a>
+        </li>
+      
+    </ul>
+  
+
+
+  
+    <!-- Method ref -->
+    <div class="sectiontitle">Methods</div>
+    <dl class="methods">
+      
+        <dt>#</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-c-5B-5D">[]</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-5B-5D-3D">[]=</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>C</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-convert_key">convert_key</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-convert_value">convert_value</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>D</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-deep_stringify_keys">deep_stringify_keys</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-deep_stringify_keys-21">deep_stringify_keys!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-deep_symbolize_keys">deep_symbolize_keys</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-default">default</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-delete">delete</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-dup">dup</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>E</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-extractable_options-3F">extractable_options?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>F</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-fetch">fetch</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>K</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-key-3F">key?</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>M</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-merge">merge</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>N</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-nested_under_indifferent_access">nested_under_indifferent_access</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new">new</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-c-new_from_hash_copying_default">new_from_hash_copying_default</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>R</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-regular_update">regular_update</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-regular_writer">regular_writer</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-replace">replace</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reverse_merge">reverse_merge</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-reverse_merge-21">reverse_merge!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>S</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-stringify_keys">stringify_keys</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-stringify_keys-21">stringify_keys!</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-symbolize_keys">symbolize_keys</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>T</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-to_hash">to_hash</a>,
+              </li>
+            
+              
+              <li>
+                <a href="#method-i-to_options-21">to_options!</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>U</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-update">update</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>V</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-values_at">values_at</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+        <dt>W</dt>
+        <dd>
+          <ul>
+            
+              
+              <li>
+                <a href="#method-i-with_indifferent_access">with_indifferent_access</a>
+              </li>
+            
+          </ul>
+        </dd>
+      
+    </dl>
+  
+
+  
+
+
+
+  
+
+    
+
+    
+
+    
+      <!-- Section constants -->
+      <div class="sectiontitle">Constants</div>
+      <table border='0' cellpadding='5'>
+        
+          <tr valign='top'>
+            <td class="attr-name">HashWithIndifferentAccess</td>
+            <td>=</td>
+            <td class="attr-value">ActiveSupport::HashWithIndifferentAccess</td>
+          </tr>
+          
+            <tr valign='top'>
+              <td>&nbsp;</td>
+              <td colspan="2" class="attr-desc"></td>
+            </tr>
+          
+        
+      </table>
+    
+
+
+    
+
+
+    <!-- Methods -->
+    
+      <div class="sectiontitle">Class Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-c-5B-5D">
+            
+              <b>[]</b>(*args)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-c-5B-5D" name="method-c-5B-5D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-5B-5D_source')" id="l_method-c-5B-5D_source">show</a>
+                
+              </p>
+              <div id="method-c-5B-5D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-operator">[]</span>(*<span class="ruby-identifier">args</span>)
+  <span class="ruby-identifier">new</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-constant">Hash</span>[*<span class="ruby-identifier">args</span>])
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new">
+            
+              <b>new</b>(constructor = {})
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-c-new" name="method-c-new" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_source')" id="l_method-c-new_source">show</a>
+                
+              </p>
+              <div id="method-c-new_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">initialize</span>(<span class="ruby-identifier">constructor</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">constructor</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+    <span class="ruby-keyword">super</span>()
+    <span class="ruby-identifier">update</span>(<span class="ruby-identifier">constructor</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">constructor</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-c-new_from_hash_copying_default">
+            
+              <b>new_from_hash_copying_default</b>(hash)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-c-new_from_hash_copying_default" name="method-c-new_from_hash_copying_default" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-c-new_from_hash_copying_default_source')" id="l_method-c-new_from_hash_copying_default_source">show</a>
+                
+              </p>
+              <div id="method-c-new_from_hash_copying_default_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 74</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">self</span>.<span class="ruby-identifier">new_from_hash_copying_default</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">new_hash</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new_hash</span>.<span class="ruby-identifier">default</span> = <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">default</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                  
+      <div class="sectiontitle">Instance Public methods</div>
+      
+        <div class="method">
+          <div class="title method-title" id="method-i-5B-5D-3D">
+            
+              <b>[]=</b>(key, value)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-5B-5D-3D" name="method-i-5B-5D-3D" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Assigns a new value to the hash:</p>
+
+<pre>hash = ActiveSupport::HashWithIndifferentAccess.new
+hash[:key] = &#39;value&#39;</pre>
+
+<p>This value can be later fetched using either <code>:key</code> or
++&#39;key&#39;+.</p>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="HashWithIndifferentAccess.html#method-i-regular_writer">regular_writer</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-5B-5D-3D_source')" id="l_method-i-5B-5D-3D_source">show</a>
+                
+              </p>
+              <div id="method-i-5B-5D-3D_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 93</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-keyword ruby-title">key</span>, <span class="ruby-identifier">value</span>)
+      <span class="ruby-identifier">regular_writer</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-keyword">for</span><span class="ruby-operator">:</span> <span class="ruby-value">:assignment</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:store</span>, <span class="ruby-value">:[]=</span>
+
+    <span class="ruby-comment"># Updates the receiver in-place, merging in the hash passed as argument:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash_1 = ActiveSupport::HashWithIndifferentAccess.new</span>
+    <span class="ruby-comment">#   hash_1[:key] = &#39;value&#39;</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash_2 = ActiveSupport::HashWithIndifferentAccess.new</span>
+    <span class="ruby-comment">#   hash_2[:key] = &#39;New Value!&#39;</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash_1.update(hash_2) # =&gt; {&quot;key&quot;=&gt;&quot;New Value!&quot;}</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># The argument can be either an</span>
+    <span class="ruby-comment"># &lt;tt&gt;ActiveSupport::HashWithIndifferentAccess&lt;/tt&gt; or a regular +Hash+.</span>
+    <span class="ruby-comment"># In either case the merge respects the semantics of indifferent access.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># If the argument is a regular hash with keys +:key+ and +&quot;key&quot;+ only one</span>
+    <span class="ruby-comment"># of the values end up in the receiver, but which one is unspecified.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment"># When given a block, the value for duplicated keys will be determined</span>
+    <span class="ruby-comment"># by the result of invoking the block with the duplicated key, the value</span>
+    <span class="ruby-comment"># in the receiver, and the value in +other_hash+. The rules for duplicated</span>
+    <span class="ruby-comment"># keys follow the semantics of indifferent access:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash_1[:key] = 10</span>
+    <span class="ruby-comment">#   hash_2[&#39;key&#39;] = 12</span>
+    <span class="ruby-comment">#   hash_1.update(hash_2) { |key, old, new| old + new } # =&gt; {&quot;key&quot;=&gt;22}</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update</span>(<span class="ruby-identifier">other_hash</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">HashWithIndifferentAccess</span>
+        <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other_hash</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+            <span class="ruby-identifier">value</span> = <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>], <span class="ruby-identifier">value</span>)
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">regular_writer</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">value</span>))
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">self</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:merge!</span>, <span class="ruby-value">:update</span>
+
+    <span class="ruby-comment"># Checks the hash for a key matching the argument passed in:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash = ActiveSupport::HashWithIndifferentAccess.new</span>
+    <span class="ruby-comment">#   hash[&#39;key&#39;] = &#39;value&#39;</span>
+    <span class="ruby-comment">#   hash.key?(:key)  # =&gt; true</span>
+    <span class="ruby-comment">#   hash.key?(&#39;key&#39;) # =&gt; true</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">key?</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-keyword">super</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:include?</span>, <span class="ruby-value">:key?</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:has_key?</span>, <span class="ruby-value">:key?</span>
+    <span class="ruby-identifier">alias_method</span> <span class="ruby-value">:member?</span>, <span class="ruby-value">:key?</span>
+
+    <span class="ruby-comment"># Same as &lt;tt&gt;Hash#fetch&lt;/tt&gt; where the key passed as argument can be</span>
+    <span class="ruby-comment"># either a string or a symbol:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   counters = ActiveSupport::HashWithIndifferentAccess.new</span>
+    <span class="ruby-comment">#   counters[:foo] = 1</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   counters.fetch(&#39;foo&#39;)          # =&gt; 1</span>
+    <span class="ruby-comment">#   counters.fetch(:bar, 0)        # =&gt; 0</span>
+    <span class="ruby-comment">#   counters.fetch(:bar) {|key| 0} # =&gt; 0</span>
+    <span class="ruby-comment">#   counters.fetch(:zoo)           # =&gt; KeyError: key not found: &quot;zoo&quot;</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fetch</span>(<span class="ruby-identifier">key</span>, *<span class="ruby-identifier">extras</span>)
+      <span class="ruby-keyword">super</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), *<span class="ruby-identifier">extras</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Returns an array of the values at the specified indices:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash = ActiveSupport::HashWithIndifferentAccess.new</span>
+    <span class="ruby-comment">#   hash[:a] = &#39;x&#39;</span>
+    <span class="ruby-comment">#   hash[:b] = &#39;y&#39;</span>
+    <span class="ruby-comment">#   hash.values_at(&#39;a&#39;, &#39;b&#39;) # =&gt; [&quot;x&quot;, &quot;y&quot;]</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">values_at</span>(*<span class="ruby-identifier">indices</span>)
+      <span class="ruby-identifier">indices</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>)]}
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Returns an exact copy of the hash.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dup</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">new_hash</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">new_hash</span>.<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># This method has the same semantics of +update+, except it does not</span>
+    <span class="ruby-comment"># modify the receiver but rather returns a new hash with indifferent</span>
+    <span class="ruby-comment"># access with the result of the merge.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">merge</span>(<span class="ruby-identifier">hash</span>, &amp;<span class="ruby-identifier">block</span>)
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>, &amp;<span class="ruby-identifier">block</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Like +merge+ but the other way around: Merges the receiver into the</span>
+    <span class="ruby-comment"># argument and returns a new hash with indifferent access as result:</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   hash = ActiveSupport::HashWithIndifferentAccess.new</span>
+    <span class="ruby-comment">#   hash[&#39;a&#39;] = nil</span>
+    <span class="ruby-comment">#   hash.reverse_merge(a: 0, b: 1) # =&gt; {&quot;a&quot;=&gt;nil, &quot;b&quot;=&gt;1}</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reverse_merge</span>(<span class="ruby-identifier">other_hash</span>)
+      <span class="ruby-keyword">super</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new_from_hash_copying_default</span>(<span class="ruby-identifier">other_hash</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Same semantics as +reverse_merge+ but modifies the receiver in-place.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reverse_merge!</span>(<span class="ruby-identifier">other_hash</span>)
+      <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">reverse_merge</span>( <span class="ruby-identifier">other_hash</span> ))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Replaces the contents of this hash with other_hash.</span>
+    <span class="ruby-comment">#</span>
+    <span class="ruby-comment">#   h = { &quot;a&quot; =&gt; 100, &quot;b&quot; =&gt; 200 }</span>
+    <span class="ruby-comment">#   h.replace({ &quot;c&quot; =&gt; 300, &quot;d&quot; =&gt; 400 }) #=&gt; {&quot;c&quot;=&gt;300, &quot;d&quot;=&gt;400}</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">replace</span>(<span class="ruby-identifier">other_hash</span>)
+      <span class="ruby-keyword">super</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new_from_hash_copying_default</span>(<span class="ruby-identifier">other_hash</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Removes the specified key from the hash.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-keyword">super</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>))
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">stringify_keys!</span>; <span class="ruby-keyword">self</span> <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deep_stringify_keys!</span>; <span class="ruby-keyword">self</span> <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">stringify_keys</span>; <span class="ruby-identifier">dup</span> <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deep_stringify_keys</span>; <span class="ruby-identifier">dup</span> <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">undef</span> <span class="ruby-value">:symbolize_keys!</span>
+    <span class="ruby-keyword">undef</span> <span class="ruby-value">:deep_symbolize_keys!</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">symbolize_keys</span>; <span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">symbolize_keys!</span> <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deep_symbolize_keys</span>; <span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">deep_symbolize_keys</span> <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_options!</span>; <span class="ruby-keyword">self</span> <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Convert to a regular hash with string keys.</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_hash</span>
+      <span class="ruby-identifier">_new_hash</span>= {}
+      <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">_new_hash</span>[<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>)] = <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-keyword">for</span><span class="ruby-operator">:</span> <span class="ruby-value">:to_hash</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">default</span>).<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">_new_hash</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">protected</span>
+      <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_key</span>(<span class="ruby-identifier">key</span>)
+        <span class="ruby-identifier">key</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = {})
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:for</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:to_hash</span>
+            <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_hash</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nested_under_indifferent_access</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+          <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:for</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:assignment</span>
+            <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">value</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">options</span>) }
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-convert_key">
+            
+              <b>convert_key</b>(key)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-convert_key" name="method-i-convert_key" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-convert_key_source')" id="l_method-i-convert_key_source">show</a>
+                
+              </p>
+              <div id="method-i-convert_key_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 240</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_key</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">key</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-convert_value">
+            
+              <b>convert_value</b>(value, options = {})
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-convert_value" name="method-i-convert_value" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-convert_value_source')" id="l_method-i-convert_value_source">show</a>
+                
+              </p>
+              <div id="method-i-convert_value_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 244</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = {})
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:for</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:to_hash</span>
+      <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_hash</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nested_under_indifferent_access</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:for</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:assignment</span>
+      <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">value</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">options</span>) }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">value</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-deep_stringify_keys">
+            
+              <b>deep_stringify_keys</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-deep_stringify_keys" name="method-i-deep_stringify_keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-deep_stringify_keys_source')" id="l_method-i-deep_stringify_keys_source">show</a>
+                
+              </p>
+              <div id="method-i-deep_stringify_keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 223</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deep_stringify_keys</span>; <span class="ruby-identifier">dup</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-deep_stringify_keys-21">
+            
+              <b>deep_stringify_keys!</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-deep_stringify_keys-21" name="method-i-deep_stringify_keys-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-deep_stringify_keys-21_source')" id="l_method-i-deep_stringify_keys-21_source">show</a>
+                
+              </p>
+              <div id="method-i-deep_stringify_keys-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 221</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deep_stringify_keys!</span>; <span class="ruby-keyword">self</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-deep_symbolize_keys">
+            
+              <b>deep_symbolize_keys</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-deep_symbolize_keys" name="method-i-deep_symbolize_keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-deep_symbolize_keys_source')" id="l_method-i-deep_symbolize_keys_source">show</a>
+                
+              </p>
+              <div id="method-i-deep_symbolize_keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">deep_symbolize_keys</span>; <span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">deep_symbolize_keys</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-default">
+            
+              <b>default</b>(key = nil)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-default" name="method-i-default" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-default_source')" id="l_method-i-default_source">show</a>
+                
+              </p>
+              <div id="method-i-default_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 66</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">default</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span> = <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>)
+    <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-delete">
+            
+              <b>delete</b>(key)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-delete" name="method-i-delete" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Removes the specified key from the hash.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-delete_source')" id="l_method-i-delete_source">show</a>
+                
+              </p>
+              <div id="method-i-delete_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 216</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">delete</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-dup">
+            
+              <b>dup</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-dup" name="method-i-dup" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an exact copy of the hash.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-dup_source')" id="l_method-i-dup_source">show</a>
+                
+              </p>
+              <div id="method-i-dup_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 179</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">dup</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>).<span class="ruby-identifier">tap</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">new_hash</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">new_hash</span>.<span class="ruby-identifier">default</span> = <span class="ruby-identifier">default</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-extractable_options-3F">
+            
+              <b>extractable_options?</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-extractable_options-3F" name="method-i-extractable_options-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns <code>true</code> so that <code>Array#extract_options!</code> finds
+members of this class.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-extractable_options-3F_source')" id="l_method-i-extractable_options-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-extractable_options-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">extractable_options?</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-fetch">
+            
+              <b>fetch</b>(key, *extras)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-fetch" name="method-i-fetch" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Same as <code>Hash#fetch</code> where the key passed as argument can be
+either a string or a symbol:</p>
+
+<pre class="ruby"><span class="ruby-identifier">counters</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">counters</span>[:<span class="ruby-identifier">foo</span>] = <span class="ruby-value">1</span>
+
+<span class="ruby-identifier">counters</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;foo&#39;</span>)          <span class="ruby-comment"># =&gt; 1</span>
+<span class="ruby-identifier">counters</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">bar</span>, <span class="ruby-value">0</span>)        <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">counters</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">bar</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-value">0</span>} <span class="ruby-comment"># =&gt; 0</span>
+<span class="ruby-identifier">counters</span>.<span class="ruby-identifier">fetch</span>(:<span class="ruby-identifier">zoo</span>)           <span class="ruby-comment"># =&gt; KeyError: key not found: &quot;zoo&quot;</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-fetch_source')" id="l_method-i-fetch_source">show</a>
+                
+              </p>
+              <div id="method-i-fetch_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">fetch</span>(<span class="ruby-identifier">key</span>, *<span class="ruby-identifier">extras</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), *<span class="ruby-identifier">extras</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-key-3F">
+            
+              <b>key?</b>(key)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-key-3F" name="method-i-key-3F" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Checks the hash for a key matching the argument passed in:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;key&#39;</span>] = <span class="ruby-string">&#39;value&#39;</span>
+<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(:<span class="ruby-identifier">key</span>)  <span class="ruby-comment"># =&gt; true</span>
+<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">key?</span>(<span class="ruby-string">&#39;key&#39;</span>) <span class="ruby-comment"># =&gt; true</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-key-3F_source')" id="l_method-i-key-3F_source">show</a>
+                
+              </p>
+              <div id="method-i-key-3F_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">key?</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-merge">
+            
+              <b>merge</b>(hash, &amp;block)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-merge" name="method-i-merge" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>This method has the same semantics of <code>update</code>, except it does
+not modify the receiver but rather returns a new hash with indifferent
+access with the result of the merge.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-merge_source')" id="l_method-i-merge_source">show</a>
+                
+              </p>
+              <div id="method-i-merge_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">merge</span>(<span class="ruby-identifier">hash</span>, &amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>, &amp;<span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-nested_under_indifferent_access">
+            
+              <b>nested_under_indifferent_access</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-nested_under_indifferent_access" name="method-i-nested_under_indifferent_access" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-nested_under_indifferent_access_source')" id="l_method-i-nested_under_indifferent_access_source">show</a>
+                
+              </p>
+              <div id="method-i-nested_under_indifferent_access_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">nested_under_indifferent_access</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-regular_update">
+            
+              <b>regular_update</b>(other_hash)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-regular_update" name="method-i-regular_update" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-regular_writer">
+            
+              <b>regular_writer</b>(key, value)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-regular_writer" name="method-i-regular_writer" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-replace">
+            
+              <b>replace</b>(other_hash)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-replace" name="method-i-replace" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Replaces the contents of this hash with other_hash.</p>
+
+<pre class="ruby"><span class="ruby-identifier">h</span> = { <span class="ruby-string">&quot;a&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">100</span>, <span class="ruby-string">&quot;b&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">200</span> }
+<span class="ruby-identifier">h</span>.<span class="ruby-identifier">replace</span>({ <span class="ruby-string">&quot;c&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">300</span>, <span class="ruby-string">&quot;d&quot;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">400</span> }) <span class="ruby-comment">#=&gt; {&quot;c&quot;=&gt;300, &quot;d&quot;=&gt;400}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-replace_source')" id="l_method-i-replace_source">show</a>
+                
+              </p>
+              <div id="method-i-replace_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 211</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">replace</span>(<span class="ruby-identifier">other_hash</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new_from_hash_copying_default</span>(<span class="ruby-identifier">other_hash</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reverse_merge">
+            
+              <b>reverse_merge</b>(other_hash)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-reverse_merge" name="method-i-reverse_merge" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Like <code>merge</code> but the other way around: Merges the receiver into
+the argument and returns a new hash with indifferent access as result:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;a&#39;</span>] = <span class="ruby-keyword">nil</span>
+<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">reverse_merge</span>(<span class="ruby-identifier">a</span><span class="ruby-operator">:</span> <span class="ruby-value">0</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">:</span> <span class="ruby-value">1</span>) <span class="ruby-comment"># =&gt; {&quot;a&quot;=&gt;nil, &quot;b&quot;=&gt;1}</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reverse_merge_source')" id="l_method-i-reverse_merge_source">show</a>
+                
+              </p>
+              <div id="method-i-reverse_merge_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reverse_merge</span>(<span class="ruby-identifier">other_hash</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new_from_hash_copying_default</span>(<span class="ruby-identifier">other_hash</span>))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-reverse_merge-21">
+            
+              <b>reverse_merge!</b>(other_hash)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-reverse_merge-21" name="method-i-reverse_merge-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Same semantics as <code>reverse_merge</code> but modifies the receiver
+in-place.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-reverse_merge-21_source')" id="l_method-i-reverse_merge-21_source">show</a>
+                
+              </p>
+              <div id="method-i-reverse_merge-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">reverse_merge!</span>(<span class="ruby-identifier">other_hash</span>)
+  <span class="ruby-identifier">replace</span>(<span class="ruby-identifier">reverse_merge</span>( <span class="ruby-identifier">other_hash</span> ))
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-stringify_keys">
+            
+              <b>stringify_keys</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-stringify_keys" name="method-i-stringify_keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-stringify_keys_source')" id="l_method-i-stringify_keys_source">show</a>
+                
+              </p>
+              <div id="method-i-stringify_keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 222</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">stringify_keys</span>; <span class="ruby-identifier">dup</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-stringify_keys-21">
+            
+              <b>stringify_keys!</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-stringify_keys-21" name="method-i-stringify_keys-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-stringify_keys-21_source')" id="l_method-i-stringify_keys-21_source">show</a>
+                
+              </p>
+              <div id="method-i-stringify_keys-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">stringify_keys!</span>; <span class="ruby-keyword">self</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-symbolize_keys">
+            
+              <b>symbolize_keys</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-symbolize_keys" name="method-i-symbolize_keys" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-symbolize_keys_source')" id="l_method-i-symbolize_keys_source">show</a>
+                
+              </p>
+              <div id="method-i-symbolize_keys_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 226</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">symbolize_keys</span>; <span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">symbolize_keys!</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_hash">
+            
+              <b>to_hash</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-to_hash" name="method-i-to_hash" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Convert to a regular hash with string keys.</p>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_hash_source')" id="l_method-i-to_hash_source">show</a>
+                
+              </p>
+              <div id="method-i-to_hash_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 231</span>
+  <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_hash</span>
+    <span class="ruby-identifier">_new_hash</span>= {}
+    <span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">_new_hash</span>[<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>)] = <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-keyword">for</span><span class="ruby-operator">:</span> <span class="ruby-value">:to_hash</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">default</span>).<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">_new_hash</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">protected</span>
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_key</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-identifier">key</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Symbol</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">key</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">convert_value</span>(<span class="ruby-identifier">value</span>, <span class="ruby-identifier">options</span> = {})
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:for</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:to_hash</span>
+          <span class="ruby-identifier">value</span>.<span class="ruby-identifier">to_hash</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nested_under_indifferent_access</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>)
+        <span class="ruby-keyword">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:for</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:assignment</span>
+          <span class="ruby-identifier">value</span> = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">dup</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">value</span>.<span class="ruby-identifier">map!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">e</span>, <span class="ruby-identifier">options</span>) }
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">value</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-to_options-21">
+            
+              <b>to_options!</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-to_options-21" name="method-i-to_options-21" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-to_options-21_source')" id="l_method-i-to_options-21_source">show</a>
+                
+              </p>
+              <div id="method-i-to_options-21_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">to_options!</span>; <span class="ruby-keyword">self</span> <span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-update">
+            
+              <b>update</b>(other_hash)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-update" name="method-i-update" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Updates the receiver in-place, merging in the hash passed as argument:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash_1</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">hash_1</span>[:<span class="ruby-identifier">key</span>] = <span class="ruby-string">&#39;value&#39;</span>
+
+<span class="ruby-identifier">hash_2</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">hash_2</span>[:<span class="ruby-identifier">key</span>] = <span class="ruby-string">&#39;New Value!&#39;</span>
+
+<span class="ruby-identifier">hash_1</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash_2</span>) <span class="ruby-comment"># =&gt; {&quot;key&quot;=&gt;&quot;New Value!&quot;}</span>
+</pre>
+
+<p>The argument can be either an
+<code>ActiveSupport::HashWithIndifferentAccess</code> or a regular
+<code>Hash</code>. In either case the merge respects the semantics of
+indifferent access.</p>
+
+<p>If the argument is a regular hash with keys <code>:key</code> and +“key”+
+only one of the values end up in the receiver, but which one is
+unspecified.</p>
+
+<p>When given a block, the value for duplicated keys will be determined by the
+result of invoking the block with the duplicated key, the value in the
+receiver, and the value in <code>other_hash</code>. The rules for
+duplicated keys follow the semantics of indifferent access:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash_1</span>[:<span class="ruby-identifier">key</span>] = <span class="ruby-value">10</span>
+<span class="ruby-identifier">hash_2</span>[<span class="ruby-string">&#39;key&#39;</span>] = <span class="ruby-value">12</span>
+<span class="ruby-identifier">hash_1</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash_2</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">old</span>, <span class="ruby-identifier">new</span><span class="ruby-operator">|</span> <span class="ruby-identifier">old</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">new</span> } <span class="ruby-comment"># =&gt; {&quot;key&quot;=&gt;22}</span>
+</pre>
+            </div>
+          
+          
+          
+            <div class="aka">
+              Also aliased as: <a href="HashWithIndifferentAccess.html#method-i-regular_update">regular_update</a>
+            </div>
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-update_source')" id="l_method-i-update_source">show</a>
+                
+              </p>
+              <div id="method-i-update_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">update</span>(<span class="ruby-identifier">other_hash</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">HashWithIndifferentAccess</span>
+    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other_hash</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">other_hash</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">key?</span>(<span class="ruby-identifier">key</span>)
+        <span class="ruby-identifier">value</span> = <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>], <span class="ruby-identifier">value</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">regular_writer</span>(<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>), <span class="ruby-identifier">convert_value</span>(<span class="ruby-identifier">value</span>))
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-values_at">
+            
+              <b>values_at</b>(*indices)
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-values_at" name="method-i-values_at" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              <p>Returns an array of the values at the specified indices:</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash</span> = <span class="ruby-constant">ActiveSupport</span><span class="ruby-operator">::</span><span class="ruby-constant">HashWithIndifferentAccess</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">hash</span>[:<span class="ruby-identifier">a</span>] = <span class="ruby-string">&#39;x&#39;</span>
+<span class="ruby-identifier">hash</span>[:<span class="ruby-identifier">b</span>] = <span class="ruby-string">&#39;y&#39;</span>
+<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">values_at</span>(<span class="ruby-string">&#39;a&#39;</span>, <span class="ruby-string">&#39;b&#39;</span>) <span class="ruby-comment"># =&gt; [&quot;x&quot;, &quot;y&quot;]</span>
+</pre>
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-values_at_source')" id="l_method-i-values_at_source">show</a>
+                
+              </p>
+              <div id="method-i-values_at_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">values_at</span>(*<span class="ruby-identifier">indices</span>)
+  <span class="ruby-identifier">indices</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">convert_key</span>(<span class="ruby-identifier">key</span>)]}
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+        
+        <div class="method">
+          <div class="title method-title" id="method-i-with_indifferent_access">
+            
+              <b>with_indifferent_access</b>()
+            
+            <a href="../../classes/ActiveSupport/HashWithIndifferentAccess.html#method-i-with_indifferent_access" name="method-i-with_indifferent_access" class="permalink">Link</a>
+          </div>
+          
+          
+            <div class="description">
+              
+            </div>
+          
+          
+          
+          
+          
+            
+            <div class="sourcecode">
+              
+              <p class="source-link">
+                Source: 
+                <a href="javascript:toggleSource('method-i-with_indifferent_access_source')" id="l_method-i-with_indifferent_access_source">show</a>
+                
+              </p>
+              <div id="method-i-with_indifferent_access_source" class="dyn-source">
+                <pre><span class="ruby-comment"># File /usr/local/rvm/gems/ruby-2.0.0-p0/gems/activesupport-4.0.0/lib/active_support/hash_with_indifferent_access.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword ruby-title">with_indifferent_access</span>
+  <span class="ruby-identifier">dup</span>
+<span class="ruby-keyword">end</span></pre>
+              </div>
+            </div>
+            
+          </div>
+                    </div>
+
+    </div>
+  </body>
+</html>    
