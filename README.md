@@ -2,6 +2,11 @@
 During the last half year I incidentally worked on this project out of personal interest. First of all to learn some programming and second, because I wanted to gain insight of my ZFS SAN performance. Since everything is working pretty nice and stable so far, I would like to share this project with the community.
 
 You can try out a live demo at [zfsstats.jeroen92.nl](http://zfsstats.jeroen92.nl)
+Login credentials for a read-only accounts are:
+'''
+Username: guest@zfsstats.io
+Password: guest
+'''
 
 ## Overview
 
