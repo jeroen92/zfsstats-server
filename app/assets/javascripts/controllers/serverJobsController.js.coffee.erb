@@ -23,7 +23,7 @@
 
 	$scope.openEditMeasurementModal = ->
 		modalInstance = $modal.open (
-			templateUrl: '/assets/modals/editMeasurementJob.html',
+			templateUrl: "<%= asset_path 'modals/editMeasurementJob.html' %>",
 			controller: ($scope, $routeParams, $modalInstance, measurementJob, Job) ->
 				$scope.measurementJob = angular.copy(measurementJob)
 				$scope.measurementJob.interval /= 60
