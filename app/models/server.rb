@@ -21,6 +21,12 @@ class Server
   belongs_to :user, :inverse_of => :servers, :class_name => 'User'
 
   validates_presence_of :name
+  validate :name_not_changed
+
+  def name=(name)
+    write_attribute(:name, name)
+    write_attribute(:_id, name)
+  end
 
   def status
     status = 0
@@ -33,5 +39,11 @@ class Server
   private
     def generate_access_token
       self.apiKey = SecureRandom.hex
-  end
+    end
+
+    def name_not_changed
+      if name_changed? && self.persisted?
+        errors.add(:name, "Change of name is not allowed!")
+      end
+    end
 end

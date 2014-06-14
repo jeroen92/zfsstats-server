@@ -48,6 +48,7 @@ module Api
       # PUT /servers/1.xml
       def update
         @server = Server.find(params[:id])
+        @server.update_attributes(params[:server])
         respond_with(@server)
       end
 
